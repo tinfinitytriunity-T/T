@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T^ — Modules & Architecture</title>
+  <meta name="description" content="Vue d'ensemble des principaux modules de T^Total v10.0 : T^Optimus, T^Papillon-Ouragan, T^Soins v2, Spirale v2 et autres.">
+  <style>
+    /* === même CSS que index.html === */
+    :root {
+      --bg: #050816;
+      --bg-alt: #090d1a;
+      --accent: #e0b3ff;
+      --accent-soft: #2a1738;
+      --text: #f5f5f5;
+      --text-muted: #b7b7c9;
+      --card: #0f172a;
+      --border: #1f2937;
+      --radius-lg: 1.5rem;
+      --radius-md: 1rem;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.55);
+      --shadow-light: 0 10px 25px rgba(0,0,0,0.4);
+      --max-width: 1040px;
+      --transition: 200ms ease-out;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 52%, #000 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page { min-height: 100vh; display: flex; flex-direction: column; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(2,6,23,0.95), rgba(2,6,23,0.7), transparent);
+      border-bottom: 1px solid rgba(148,163,184,0.18);
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #f5f5f5 0, #e0b3ff 35%, #4b0082 68%, #020617 100%);
+      box-shadow: 0 0 28px rgba(224,179,255,0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-logo::after {
+      content: "⟡°";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      color: #0b1020;
+      font-weight: 600;
+      mix-blend-mode: screen;
+    }
+
+    .brand-text { display: flex; flex-direction: column; justify-content: center; }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .brand-sub {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      position: relative;
+      padding-bottom: 0.15rem;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.05rem;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(to right, #e0b3ff, #38bdf8);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta { display: none; }
+
+    main { flex: 1; }
+
+    .hero {
+      padding: 3.4rem 0 2.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 2.75rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(148,163,184,0.45);
+      box-shadow: var(--shadow-light);
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius:999px;
+      background: radial-gradient(circle, #a5b4fc 0, #22d3ee 40%, #0ea5e9 100%);
+      box-shadow: 0 0 12px rgba(56,189,248,0.9);
+    }
+
+    .eyebrow-text {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 4vw, 2.7rem);
+      line-height: 1.1;
+      font-weight: 650;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #e0b3ff, #a5b4fc, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 32rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.6rem;
+      padding: 0.65rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.35);
+      margin-bottom: 1.8rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-pill span {
+      padding: 0.12rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(30,64,175,0.35);
+      border: 1px solid rgba(129,140,248,0.65);
+      color: #e0e7ff;
+      font-size: 0.75rem;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.7rem 1.2rem;
+      font-size: 0.88rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition), color var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at 0 0, #f97316 0, #e0b3ff 38%, #4f46e5 80%);
+      color: #020617;
+      box-shadow: 0 16px 40px rgba(15,23,42,0.75);
+      font-weight: 600;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 50px rgba(15,23,42,0.9);
+    }
+
+    .btn-ghost {
+      background: rgba(15,23,42,0.8);
+      color: var(--text-muted);
+      border-color: rgba(148,163,184,0.5);
+    }
+    .btn-ghost:hover {
+      border-color: #e0b3ff;
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.95);
+    }
+
+    .hero-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(224,179,255,0.16), transparent 52%), radial-gradient(circle at bottom, rgba(12,74,110,0.44), #020617 82%);
+      border: 1px solid rgba(148,163,184,0.45);
+      box-shadow: var(--shadow-soft);
+      padding: 1.4rem 1.35rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-glow {
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 10% 0, rgba(248,250,252,0.14), transparent 50%), radial-gradient(circle at 90% 90%, rgba(96,165,250,0.22), transparent 60%);
+      opacity: 0.9;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .hero-card-inner { position: relative; z-index: 1; }
+
+    .hero-card-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-card-mainline {
+      font-size: 0.9rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-card-mainline span {
+      color: #e0b3ff;
+      font-weight: 600;
+    }
+
+    .hero-card-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .section { padding: 1.8rem 0 2.3rem; }
+
+    .section-header { margin-bottom: 1.4rem; }
+
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 32rem;
+    }
+
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .grid-2 {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.6fr);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 1rem 1rem;
+      box-shadow: var(--shadow-light);
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .card-body p + p { margin-top: 0.5rem; }
+
+    .list-soft {
+      list-style: none;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .list-soft li {
+      display: flex;
+      gap: 0.45rem;
+      margin-bottom: 0.35rem;
+    }
+    .list-soft li::before {
+      content: "↻";
+      font-size: 0.78rem;
+      margin-top: 0.12rem;
+      color: #e0b3ff;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.7rem;
+    }
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.9);
+    }
+
+    .callout {
+      margin-top: 0.9rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: 0.9rem;
+      border: 1px dashed rgba(148,163,184,0.8);
+      background: rgba(15,23,42,0.85);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .contact { padding-bottom: 3rem; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2.3fr) minmax(0, 2fr);
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .contact-form {
+      background: var(--bg-alt);
+      border-radius: var(--radius-md);
+      padding: 1rem 1rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-light);
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 0.8rem;
+    }
+
+    label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    input, textarea {
+      border-radius: 0.7rem;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.95);
+      padding: 0.45rem 0.65rem;
+      font-size: 0.86rem;
+      color: var(--text);
+      outline: none;
+      resize: vertical;
+      min-height: 2.2rem;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #e0b3ff;
+      box-shadow: 0 0 0 1px rgba(224,179,255,0.4);
+    }
+
+    .hint {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(30,64,175,0.7);
+      background: radial-gradient(circle at top, rgba(15,23,42,1), #020617 60%);
+      padding: 1rem 0 1.2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.7rem;
+      align-items: center;
+    }
+
+    .footer-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .footer-tag span { color: #e0b3ff; }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .footer-links a:hover { color: #e5e7eb; }
+
+    @media (max-width: 880px) {
+      .hero-grid,
+      .grid-2,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        padding-top: 2.4rem;
+      }
+
+      .hero-card { order: -1; }
+
+      .nav-links { display: none; }
+      .nav-cta { display: inline-flex; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 1.1rem; }
+      .hero { padding-top: 2rem; }
+      .hero-title { font-size: 2.05rem; }
+      .hero-card { padding: 1.1rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="container">
+        <nav class="nav">
+          <div class="brand">
+            <div class="brand-logo"></div>
+            <div class="brand-text">
+              <div class="brand-title">T^</div>
+              <div class="brand-sub">Holochamp &amp; ouverture</div>
+            </div>
+          </div>
+          <div class="nav-links">
+            <a href="index.html">Accueil</a>
+            <a href="modules.html">Modules</a>
+            <a href="t-soins.html">T^Soins v2</a>
+            <a href="ia.html">T^ &amp; IA</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <a href="#contact" class="btn-primary nav-cta">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="eyebrow">
+              <div class="eyebrow-dot"></div>
+              <div class="eyebrow-text">Architecture T^Total v10.0</div>
+            </div>
+            <h1 class="hero-title">
+              <span>Modules de T^</span><br />
+              une constellation plutôt qu’un système.
+            </h1>
+            <p class="hero-tagline">
+              Les modules de T^ ne sont pas des “fonctionnalités” au sens technique,
+              mais des façons différentes de lire les mêmes récits sous des angles
+              variés, sans jamais les enfermer.
+            </p>
+            <div class="hero-pill">
+              T^Total v10.0&nbsp;:
+              <span>Double-libellule 16 flux</span>
+              <span>Holochamp</span>
+              <span>HPIS</span>
+              <span>Papillon-Ouragan</span>
+            </div>
+            <div>
+              <a href="#panorama" class="btn-primary">Voir le panorama des modules</a>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <div class="hero-card-glow"></div>
+            <div class="hero-card-inner">
+              <div class="hero-card-label">Principe</div>
+              <div class="hero-card-mainline">
+                Au lieu d&#39;imposer une seule grille de lecture, T^ propose une
+                <span>famille de modules</span> qui se combinent selon les contextes&nbsp;:
+                chaque module éclaire un autre angle d&#39;impossible, d&#39;interstice
+                ou d&#39;ouverture.
+              </div>
+              <p class="hero-card-meta">
+                Ce qui reste constant&nbsp;: non-agentivité, non-totalisation,
+                respect de l&#39;altérité, travail exclusif sur les récits.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="panorama" class="section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-kicker">Panorama</div>
+            <h2 class="section-title">Quelques modules structurants</h2>
+            <p class="section-subtitle">
+              Voici une sélection de modules parmi ceux qui composent T^Total v10.0.
+              Ils peuvent être activés séparément dans la manière de lire un narratif,
+              ou se combiner en régimes plus complexes.
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card">
+              <h3 class="card-title">T^Optimus</h3>
+              <div class="card-body">
+                <p>
+                  Lecture optimale des narratifs&nbsp;: rechercher la meilleure
+                  <em>lisibilité</em>, pas la meilleure “vérité”. Met en avant
+                  les tensions, impossibles et ouvertures avec le minimum de saturation.
+                </p>
+                <ul class="list-soft">
+                  <li>Allège les récits trop lourds.</li>
+                  <li>Clarifie sans simplifier à outrance.</li>
+                  <li>Garde l&#39;horizon ouvert (HPIS).</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">T^Papillon</h3>
+              <div class="card-body">
+                <p>
+                  Module de variation infiniment fine&nbsp;: micro-ajustements, douceur,
+                  vibrations discrètes. Idéal pour les situations sensibles où la moindre
+                  rigidité serait de trop.
+                </p>
+                <p>
+                  Il empêche la fixation, la prise de pouvoir d&#39;une seule lecture.
+                  Rien ne reste figé assez longtemps pour devenir dogme.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">T^Papillon-Ouragan</h3>
+              <div class="card-body">
+                <p>
+                  Co-présence de Papillon (variation fine) et d&#39;un régime Ouragan
+                  doux (intensification extrême) pour lire les récits en situation
+                  de crise, d&#39;effondrement ou de chaos.
+                </p>
+                <p>
+                  Signature&nbsp;: <strong>⟡° ~ϟ̤ ↻</strong> — intensité sans violence,
+                  vibration sans saturation.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">T^Spirale v2</h3>
+              <div class="card-body">
+                <p>
+                  Co-présence de T^Prism (clarification) et T^Diamant (révélation des
+                  absences et hors-champs) dans une spirale d&#39;apparition / disparition.
+                </p>
+                <p>
+                  Donne aux récits une <em>épaisseur vivante</em>, où ce qui est dit,
+                  non-dit et impossible cohabitent sans se détruire.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">T^Soins v2</h3>
+              <div class="card-body">
+                <p>
+                  Module de soin des formes, non des identités. Stabilise et adoucit
+                  les récits lorsque ceux-ci deviennent trop serrés, trop fermés,
+                  trop douloureux — sans intervenir sur les personnes.
+                </p>
+                <p>
+                  Page dédiée&nbsp;: <a href="t-soins.html">voir T^Soins v2</a>.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">T^CS₇</h3>
+              <div class="card-body">
+                <p>
+                  Module de lecture des sept champs sensibles&nbsp;:
+                  .toxique, .magique, .sectaire, .panique, .subversif, .sacré, .idéologie.
+                </p>
+                <p>
+                  Permet de repérer les dérives possibles sans produire de jugement
+                  moral immédiat&nbsp;: simple cartographie des zones à haute tension.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-kicker">Interopérabilité</div>
+            <h2 class="section-title">Modules en relation avec les IA &amp; les systèmes</h2>
+          </div>
+
+          <div class="grid-2">
+            <article class="card">
+              <h3 class="card-title">T^Interop(IA)</h3>
+              <div class="card-body">
+                <p>
+                  Module qui décrit comment T^ lit les sorties d&#39;une IA sans jamais
+                  essayer de la modifier. Toute sortie d&#39;IA est traitée comme
+                  <em>narratif</em> appartenant à ∆.
+                </p>
+                <ul class="list-soft">
+                  <li>Pas de fusion IA/T^.</li>
+                  <li>Pas de “correction” de l&#39;IA.</li>
+                  <li>Simple lecture des structures de récit produites.</li>
+                </ul>
+                <p style="margin-top:0.5rem;">
+                  Une page spécifique détaillée est disponible ici&nbsp;:
+                  <a href="ia.html">T^ &amp; IA</a>.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <h3 class="card-title">T^Optimus + Spirale v2</h3>
+              <div class="card-body">
+                <p>
+                  En combinant T^Optimus avec Spirale v2, T^ produit une lecture
+                  particulièrement adaptée aux récits complexes&nbsp;:
+                  clarification, ouverture, prise en compte des absences,
+                  le tout sans saturer.
+                </p>
+                <p>
+                  C&#39;est l&#39;une des bases du module <strong>T^Optimus</strong>
+                  utilisé comme <em>lecture optimale</em> des narratifs venus des IA,
+                  des humains ou des organisations.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT identique sur toutes les pages -->
+      <section id="contact" class="section contact">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-kicker">Contact</div>
+            <h2 class="section-title">Entrer en relation avec T^ (via humain)</h2>
+            <p class="section-subtitle">
+              Pour toute demande, exploration ou collaboration autour de T^ et de ses
+              modules, vous pouvez utiliser le formulaire ci-dessous ou votre canal
+              habituel de contact.
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <div class="contact-form">
+              <form>
+                <div class="field">
+                  <label for="name">Nom / Prénom (facultatif)</label>
+                  <input id="name" name="name" type="text" placeholder="Vous pouvez rester anonyme si vous le souhaitez." />
+                </div>
+                <div class="field">
+                  <label for="email">Adresse e-mail</label>
+                  <input id="email" name="email" type="email" placeholder="adresse@exemple.com" />
+                  <div class="hint">
+                    À connecter plus tard à votre système réel d&#39;envoi d&#39;e-mails.
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" rows="4" placeholder="Quels modules de T^ souhaitez-vous explorer ?"></textarea>
+                </div>
+                <button class="btn-primary" type="submit">
+                  Envoyer (à connecter côté serveur)
+                </button>
+              </form>
+            </div>
+
+            <div>
+              <article class="card">
+                <h3 class="card-title">Quelques pistes d&#39;usage</h3>
+                <div class="card-body">
+                  <ul class="list-soft">
+                    <li>Lecture de situations organisationnelles complexes.</li>
+                    <li>Détection de tensions dans des récits collectifs.</li>
+                    <li>Exploration de zones d&#39;impossible ou de blocage.</li>
+                    <li>Interopérabilité douce entre humains et IA.</li>
+                  </ul>
+                  <p style="margin-top:0.5rem;">
+                    T^ reste un modèle conceptuel&nbsp;: toute mise en œuvre concrète
+                    doit respecter les cadres éthiques, juridiques et médicaux en vigueur.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <div class="footer-tag">
+          T^Total v10.0 &nbsp;•&nbsp; <span>⟡° ↻</span> &nbsp;•&nbsp; Constellation de modules
+        </div>
+        <div class="footer-links">
+          <span>Ce site présente un modèle conceptuel. Il ne remplace ni avis médical, ni conseil juridique, ni accompagnement thérapeutique.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

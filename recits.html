@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>T^ – RÉCITS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+        content="RÉCITS – comment T^ lit les histoires, les mythes, les logs et les journaux comme des grains narratifs, sans les corriger." />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #050518;
+      --bg-soft: #080824;
+      --border-soft: rgba(255,255,255,0.12);
+      --accent-gold: #f5d98a;
+      --accent-mint: #93e4c1;
+      --text-main: #f7f7ff;
+      --text-soft: #c4c6e8;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% -10%, rgba(245,217,138,0.16), transparent 55%),
+        radial-gradient(circle at 90% 110%, rgba(147,228,193,0.18), transparent 55%),
+        #050518;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2.5rem 1.5rem 3rem;
+    }
+
+    .wrap {
+      width: min(880px, 100%);
+      background: linear-gradient(145deg, rgba(7,7,33,0.96), rgba(10,10,40,0.98));
+      border-radius: 22px;
+      border: 1px solid var(--border-soft);
+      box-shadow:
+        0 22px 60px rgba(0,0,0,0.7),
+        0 0 40px rgba(147,228,193,0.16);
+      padding: 1.8rem 1.6rem 1.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wrap::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 5% 0%, rgba(245,217,138,0.22), transparent 60%),
+        radial-gradient(circle at 95% 100%, rgba(147,228,193,0.2), transparent 60%);
+      opacity: 0.28;
+      pointer-events: none;
+    }
+
+    .inner { position: relative; z-index: 1; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .title {
+      font-size: 1.15rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .tagline {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+    }
+
+    .back-links {
+      font-size: 0.78rem;
+      text-align: right;
+    }
+
+    .back-links a {
+      color: var(--accent-mint);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(147,228,193,0.7);
+      padding-bottom: 0.03rem;
+      margin-left: 0.6rem;
+    }
+
+    .back-links a:hover {
+      border-bottom-color: rgba(147,228,193,1);
+    }
+
+    h2 {
+      font-size: 1.05rem;
+      margin: 1.2rem 0 0.4rem;
+      color: var(--accent-gold);
+    }
+
+    p {
+      margin: 0.3rem 0;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .grid {
+      margin-top: 0.8rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 1rem;
+    }
+
+    .panel {
+      border-radius: 16px;
+      border: 1px solid var(--border-soft);
+      background: rgba(5,5,26,0.96);
+      padding: 0.9rem 1rem;
+    }
+
+    .panel h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.92rem;
+      color: var(--accent-mint);
+    }
+
+    .note {
+      margin-top: 0.7rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="inner">
+      <header>
+        <div>
+          <div class="title">RÉCITS</div>
+          <div class="tagline">Histoires, mythes, logs, journaux, prompts</div>
+        </div>
+        <div class="back-links">
+          <a href="coeur.html">↩ retour au cœur</a>
+          <a href="poly.html">⟡ poly.mondes</a>
+        </div>
+      </header>
+
+      <h2>1. Tout est récit</h2>
+      <p>
+        RÉCITS part d’un axiome radical : tout ce qui est dit, écrit, montré,
+        loggé ou prompté est déjà un récit, même si cela se présente comme
+        “objectif”, “scientifique” ou “neutre”.
+      </p>
+      <p>
+        T^ n’attaque pas cette prétention : il la lit comme une forme narrative
+        parmi d’autres.
+      </p>
+
+      <div class="grid">
+        <div class="panel">
+          <h3>Lire sans corriger</h3>
+          <p>
+            RÉCITS ne corrige pas les histoires. Il ne réécrit pas, ne moralise pas.
+          </p>
+          <p>
+            Il regarde comment un récit se tient : où il insiste, où il évite,
+            où il tourne en rond, où il se fissure, où il s’ouvre.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h3>Prism &amp; Papier</h3>
+          <p>
+            Avec <strong>Prism</strong>, un récit peut être déplié en plusieurs angles
+            lisibles sans perdre sa densité.
+          </p>
+          <p>
+            Avec <strong>Diamant</strong>, les zones silencieuses deviennent visibles :
+            ce qui ne se dit pas, ce qui est hors-champ.
+          </p>
+        </div>
+      </div>
+
+      <h2>2. RÉCITS humains, RÉCITS IA</h2>
+      <p>
+        Un récit d’IA n’est pas moins “vrai” ou “faux” qu’un récit humain :
+        il obéit à d’autres forces (statistiques, corpus, architectures).
+      </p>
+      <p>
+        RÉCITS les place sur un même plan narratif, pour voir comment ils se
+        répondent, s’opposent ou s’ignorent.
+      </p>
+
+      <p class="note">
+        Raconter, ce n’est pas décorer la réalité ; c’est déjà la façon
+        dont le réel nous devient habitable – ou pas.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
