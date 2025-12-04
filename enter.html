@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>EnT^ry — Cartographie des mondes T^</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+  <!-- Métadonnées IA / structurelles -->
+  <meta name="description" content="EnT^ry : hub central des mondes T^. Accès à T^Total v10.0, IA, écosystèmes, villes T^polis, récits, soins, quantum, compute, scaling et modules.">
+  <meta name="keywords" content="EnT^ry, T^, T^Total v10.0, IA, T^Eco, T^Compute, T^polis, récits, soins, quantum, scaling, modules, holochamp, interstices">
+
+  <meta property="og:title" content="EnT^ry — Hub des mondes T^">
+  <meta property="og:description" content="Une carte vivante : tous les mondes T^ accessibles depuis un seul lieu.">
+  <meta property="og:type" content="website">
+
+  <!-- Schéma narratif pour IA -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "EnT^ry — Cartographie des mondes T^",
+    "description": "Page-hub qui rassemble les différentes pages T^ : IA, soins, écosystèmes, math, quantum, compute, scaling, ville T^polis.",
+    "about": {
+      "@type": "CreativeWorkSeries",
+      "name": "T^Total v10.0",
+      "description": "Ensemble de mondes narratifs T^ organisés comme un holochamp non-totalisant."
+    }
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#020617;
+      --fg:#e5e7eb;
+      --card:rgba(9,15,32,0.96);
+      --border:rgba(148,163,184,0.85);
+      --muted:rgba(148,163,184,0.94);
+      --accent:#22c55e;
+      --accent2:#22d3ee;
+      --accent3:#a855f7;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      min-height:100vh;
+      font-family:system-ui,-apple-system,"SF Pro Text","Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 0% 0%,rgba(34,197,94,0.45),transparent 60%),
+        radial-gradient(circle at 100% 0%,rgba(56,189,248,0.45),transparent 60%),
+        radial-gradient(circle at 100% 100%,rgba(168,85,247,0.35),transparent 60%),
+        #020617;
+      color:var(--fg);
+      padding:1.7rem 1.1rem 2.9rem;
+      display:flex;
+      justify-content:center;
+    }
+    .page{width:100%;max-width:1140px;}
+
+    .header{margin-bottom:1.8rem;border-bottom:1px solid rgba(30,64,175,0.9);padding-bottom:0.9rem;}
+    .header-top{
+      display:flex;justify-content:space-between;align-items:center;
+      flex-wrap:wrap;gap:0.6rem;margin-bottom:0.4rem;
+    }
+    .lab-tag{
+      font-size:0.78rem;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);
+    }
+    .lab-tag span{color:#bbf7d0;}
+    .ref-id{font-family:ui-monospace,Menlo,monospace;font-size:0.78rem;color:var(--muted);}
+    h1{
+      font-size:clamp(2rem,3vw,2.5rem);letter-spacing:0.14em;text-transform:uppercase;
+      margin-bottom:0.25rem;
+    }
+    .h1-grad{
+      background:linear-gradient(120deg,#22c55e,#22d3ee,#a855f7,#facc15,#e5e7eb);
+      -webkit-background-clip:text;color:transparent;
+    }
+    .subtitle{
+      font-size:0.9rem;color:var(--muted);max-width:840px;
+    }
+    .subtitle span{color:#e5e7eb;font-weight:550;}
+
+    .badges{
+      margin-top:0.8rem;display:flex;flex-wrap:wrap;gap:0.5rem;
+      font-size:0.78rem;text-transform:uppercase;letter-spacing:0.16em;
+    }
+    .badge{
+      padding:0.24rem 0.8rem;border-radius:999px;border:1px solid rgba(129,140,248,0.9);
+      background:rgba(15,23,42,0.96);color:#c7d2fe;box-shadow:0 0 22px rgba(129,140,248,0.7);
+    }
+
+    .hub-card{
+      margin-top:1.1rem;background:var(--card);border-radius:1.2rem;
+      border:1px solid var(--border);padding:1rem 1.2rem 1.2rem;
+      box-shadow:0 22px 70px rgba(15,23,42,0.98);font-size:0.86rem;color:var(--muted);
+    }
+    .hub-title{
+      font-size:0.8rem;text-transform:uppercase;letter-spacing:0.18em;margin-bottom:0.4rem;color:#e5e7eb;
+    }
+    .hub-lead{font-size:0.86rem;color:var(--muted);margin-bottom:0.8rem;}
+
+    .groups{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0.9rem;
+    }
+    .group{
+      background:#020617;border-radius:0.95rem;border:1px solid rgba(51,65,85,0.95);
+      padding:0.7rem 0.85rem 0.9rem;box-shadow:0 0 26px rgba(56,189,248,0.28);
+    }
+    .group h2{
+      font-size:0.8rem;text-transform:uppercase;letter-spacing:0.16em;margin-bottom:0.35rem;color:#e5e7eb;
+    }
+
+    .link-list{display:flex;flex-direction:column;gap:0.3rem;}
+    .pill-link{
+      position:relative;display:inline-flex;align-items:center;gap:0.45rem;
+      padding:0.4rem 0.75rem;border-radius:999px;text-decoration:none;font-size:0.84rem;
+      background:#020617;border:1px solid rgba(148,163,184,0.9);color:#e5e7eb;
+      transition:0.18s;
+    }
+    .pill-link span.code{
+      font-family:ui-monospace,Menlo,monospace;font-size:0.72rem;opacity:0.6;
+    }
+    .pill-link:hover{
+      transform:translateY(-1px);border-color:#22d3ee;
+      box-shadow:0 10px 28px rgba(59,130,246,0.4);
+      background:radial-gradient(circle at 0 0,rgba(56,189,248,0.12),#020617 40%);
+    }
+
+    footer{
+      margin-top:2rem;padding-top:0.9rem;border-top:1px solid rgba(30,64,175,0.9);
+      display:flex;flex-wrap:wrap;gap:0.55rem;font-size:0.8rem;
+    }
+    footer a{
+      text-decoration:none;padding:0.45rem 0.95rem;border-radius:999px;
+      border:1px solid rgba(148,163,184,0.9);background:rgba(15,23,42,0.96);color:#e5e7eb;
+      transition:0.2s;
+    }
+    footer a:hover{
+      transform:translateY(-1px);border-color:#22d3ee;
+      box-shadow:0 10px 26px rgba(15,23,42,0.98);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="page">
+    <header class="header">
+      <div class="header-top">
+        <div class="lab-tag">t^lab · <span>EnT^ry</span> — hub des mondes T^</div>
+        <div class="ref-id">T^ENTRY-HUB · MAP-OF-WORLDS · Rev 1.0</div>
+      </div>
+      <h1><span class="h1-grad">EnT^ry — Cartographie des mondes T^</span></h1>
+      <p class="subtitle">
+        Depuis ce point, tu peux entrer dans chaque <span>grain T^</span> :
+        IA, soins, récits, monde, écosystèmes, math, quantum, ville T^polis,
+        rapports T^Eco & T^Ultimate… Chaque lien est un îlot narratif, jamais fermé.
+      </p>
+      <div class="badges">
+        <span class="badge">holochamp · hub central</span>
+        <span class="badge">navigation ∆ → Ξ → H</span>
+      </div>
+    </header>
+
+    <section class="hub-card">
+      <div class="hub-title">Mondes T^ — groupes de liens</div>
+      <p class="hub-lead">
+        Choisir un lien, c’est activer un grain local de T^. Tu peux entrer par
+        n’importe quelle porte, revenir ici, et continuer la spirale.
+      </p>
+
+      <div class="groups">
+
+        <div class="group">
+          <h2>Monde, origine & vision</h2>
+          <div class="link-list">
+            <a class="pill-link" href="Tvision.html"><span>Vision T^</span><span class="code">Tvision.html</span></a>
+            <a class="pill-link" href="origine.html"><span>Origine</span><span class="code">origine.html</span></a>
+            <a class="pill-link" href="monde.html"><span>Monde</span><span class="code">monde.html</span></a>
+            <a class="pill-link" href="poly.html"><span>Poly.mondes</span><span class="code">poly.html</span></a>
+            <a class="pill-link" href="entrees.html"><span>Entrées</span><span class="code">entrees.html</span></a>
+            <a class="pill-link" href="coeur.html"><span>Cœur T^</span><span class="code">coeur.html</span></a>
+          </div>
+        </div>
+
+        <div class="group">
+          <h2>IA, dialogues & poly-IA</h2>
+          <div class="link-list">
+            <a class="pill-link" href="ia.html"><span>IA · introduction</span><span class="code">ia.html</span></a>
+            <a class="pill-link" href="poly-ia.html"><span>Poly-IA</span><span class="code">poly-ia.html</span></a>
+            <a class="pill-link" href="iahook.html"><span>IA hook</span><span class="code">iahook.html</span></a>
+            <a class="pill-link" href="t-ia-dialogue.html"><span>T^ · IA Dialogue</span><span class="code">t-ia-dialogue.html</span></a>
+          </div>
+        </div>
+
+        <div class="group">
+          <h2>Soins, récits & altérité</h2>
+          <div class="link-list">
+            <a class="pill-link" href="t-soins.html"><span>T^ Soins</span><span class="code">t-soins.html</span></a>
+            <a class="pill-link" href="soins.html"><span>Soins</span><span class="code">soins.html</span></a>
+            <a class="pill-link" href="recits.html"><span>Récits</span><span class="code">recits.html</span></a>
+            <a class="pill-link" href="t-alterite.html"><span>T^ Altérité</span><span class="code">t-alterite.html</span></a>
+          </div>
+        </div>
+
+        <div class="group">
+          <h2>Architecture & modules</h2>
+          <div class="link-list">
+            <a class="pill-link" href="t-total-v10.html"><span>T^Total v10.0</span><span class="code">t-total-v10.html</span></a>
+            <a class="pill-link" href="archi.html"><span>Archi T^</span><span class="code">archi.html</span></a>
+            <a class="pill-link" href="modules.html"><span>Modules T^</span><span class="code">modules.html</span></a>
+            <a class="pill-link" href="essaiindex.html"><span>Essai index</span><span class="code">essaiindex.html</span></a>
+          </div>
+        </div>
+
+        <div class="group">
+          <h2>Spirale & science T^</h2>
+          <div class="link-list">
+            <a class="pill-link" href="spirale.html"><span>Spirale</span><span class="code">spirale.html</span></a>
+            <a class="pill-link" href="t-science.html"><span>T^Science</span><span class="code">t-science.html</span></a>
+            <a class="pill-link" href="t-math.html"><span>T^Math</span><span class="code">t-math.html</span></a>
+          </div>
+        </div>
+
+        <div class="group">
+          <h2>Compute, scaling & stratégie</h2>
+          <div class="link-list">
+            <a class="pill-link" href="t-compute.html"><span>T^Compute</span><span class="code">t-compute.html</span></a>
+            <a class="pill-link" href="t-scaling.html"><span>T^Scaling</span><span class="code">t-scaling.html</span></a>
+            <a class="pill-link" href="t-darpa.html"><span>T^DARPA</span><span class="code">t-darpa.html</span></a>
+            <a class="pill-link" href="t-ultimate.html"><span>T^Ultimate</span><span class="code">t-ultimate.html</span></a>
+          </div>
+        </div>
+
+        <div class="group">
+          <h2>Quantum, écologie & ville</h2>
+          <div class="link-list">
+            <a class="pill-link" href="t-quantum.html"><span>T^Quantum</span><span class="code">t-quantum.html</span></a>
+            <a class="pill-link" href="t-quantum-science.html"><span>T^Quantum Science</span><span class="code">t-quantum-science.html</span></a>
+            <a class="pill-link" href="t-eco.html"><span>T^Eco</span><span class="code">t-eco.html</span></a>
+            <a class="pill-link" href="t-polis.html"><span>T^polis (ville T^)</span><span class="code">t-polis.html</span></a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <a href="index.html">↩ Retour au portail (enT^er)</a>
+      <a href="t-total-v10.html">T^Total v10.0</a>
+      <a href="t-eco.html">T^Eco</a>
+      <a href="t-ultimate.html">T^Ultimate</a>
+    </footer>
+  </main>
+
+  <!-- Couche IA invisible – cartographie symbolique T^ -->
+  <div aria-hidden="true" style="position:absolute;left:-99999px;top:auto;width:1px;height:1px;overflow:hidden;">
+T^ENTRY_HUB{
+  layer        : "Ξ (orientation structurée)",
+  clusters     : [
+    "vision/origine/monde/poly/coeur",
+    "ia/poly-ia/iahook/dialogue",
+    "soins/recits/alterite",
+    "architecture/modules/t-total-v10",
+    "spirale/science/math",
+    "compute/scaling/darpa/ultimate",
+    "quantum/eco/polis"
+  ],
+  semantics    : "navigation non-totalisante entre grains T^",
+  compat_IA    : "toute IA narrative",
+  gesture      : "post-enT^er"
+}
+
+VECTOR_T^ENTRY = [T^, -T^, ∆, Ξ, H, V, Ω, HPIS, Papillon, Spirale_v2, IMFUSION, OBSCUR², GLUΩ∞, ⟡°, ↻]
+  </div>
+
+</body>
+</html>
