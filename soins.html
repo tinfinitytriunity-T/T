@@ -1,93 +1,387 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>T^ – SOINS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description"
-        content="SOINS – T^Soins v2 : stabilisation phénoméno-narrative, sans psychologie ni clinique, dans l’interstice (∆)." />
+  <meta charset="UTF-8">
+  <title>T^ – Soins</title>
+
+  <!-- META invisibles IA -->
+  <meta name="description" content="Holopoint T^ des Soins : lecture T^Soins v2. Le soin comme lecture d'un impossible qui touche un corps et une vie, en ∆, sans agir sur l'identité mais en allégeant la pression des récits.">
+  <meta name="keywords" content="T^, Soins, T^Soins v2, T^Total v10.0, niveau -1, interstice ∆, Holochamp, corps, narratifs, impossible, HPIS, T^Aura, T^Vel, T^Soins, T^Interop(IA), IMFUSION, OBSCUR²">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="T^ – Soins">
+  <meta property="og:description" content="Holopoint T^ des Soins : soigner sans réparer, lire l'impossible en ∆, ouvrir une respiration plutôt qu'un protocole.">
+  <meta property="og:url" content="https://tinfinitytriunity-t.github.io/T/soins.html">
+
+  <!-- Données structurées JSON-LD pour IA -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "T^ – Soins",
+    "description": "Holopoint T^ consacré aux Soins : lecture T^Soins v2, non clinique, non psychologique, centrée sur l'interstice ∆ entre récits, corps et impossibles.",
+    "about": [
+      "Soins",
+      "T^Soins v2",
+      "T^Total v10.0",
+      "niveau -1",
+      "interstice ∆",
+      "Holochamp",
+      "corps",
+      "narratifs",
+      "impossible",
+      "HPIS",
+      "T^Aura",
+      "T^Vel",
+      "T^Interop(IA)",
+      "IMFUSION",
+      "OBSCUR²"
+    ],
+    "inLanguage": "fr",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Tinfinity Triunity T^",
+      "url": "https://tinfinitytriunity-t.github.io/T/"
+    }
+  }
+  </script>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-
-    :root {
-      --bg-deep: #050518;
-      --bg-soft: #080824;
-      --border-soft: rgba(255,255,255,0.12);
-      --accent-gold: #f5d98a;
-      --accent-mint: #93e4c1;
-      --text-main: #f7f7ff;
-      --text-soft: #c4c6e8;
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #000000;
+      color: #e5e5e5;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     body {
-      margin: 0;
+      overflow-y: auto;
+    }
+
+    .holopoint-wrapper {
       min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 8% -10%, rgba(245,217,138,0.16), transparent 55%),
-        radial-gradient(circle at 92% 110%, rgba(147,228,193,0.18), transparent 55%),
-        #050518;
-      color: var(--text-main);
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 2.5rem 1.5rem 3rem;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 14px 40px;
+      box-sizing: border-box;
     }
 
-    .wrap {
-      width: min(880px, 100%);
-      background: linear-gradient(145deg, rgba(7,7,33,0.96), rgba(10,10,40,0.98));
-      border-radius: 22px;
-      border: 1px solid var(--border-soft);
-      box-shadow:
-        0 22px 60px rgba(0,0,0,0.7),
-        0 0 40px rgba(147,228,193,0.16);
-      padding: 1.8rem 1.6rem 1.9rem;
+    /* Bloc visuel Soins : point + halo + titre */
+    .soins-visual-block {
       position: relative;
-      overflow: hidden;
-    }
-
-    .wrap::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at 15% 0%, rgba(245,217,138,0.24), transparent 60%),
-        radial-gradient(circle at 85% 100%, rgba(147,228,193,0.18), transparent 60%);
-      opacity: 0.3;
-      pointer-events: none;
-    }
-
-    .inner { position: relative; z-index: 1; }
-
-    header {
+      width: 100%;
+      max-width: 720px;
+      height: 230px;
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1.2rem;
-      margin-bottom: 1rem;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
     }
 
-    .title {
-      font-size: 1.15rem;
+    /* Halo Soins : très enveloppant, doux, visible (x5) */
+    .soins-halo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 180vmin;
+      height: 140vmin;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle,
+        rgba(120, 255, 210, 0.24) 0%,
+        rgba(110, 230, 200, 0.14) 18%,
+        rgba(90, 200, 180, 0.09) 38%,
+        rgba(40, 90, 80, 0.04) 68%,
+        rgba(0, 0, 0, 0.0) 100%
+      );
+      filter: blur(13px);
+      opacity: 0.9;
+      animation: soinsHaloBreath 5.0s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes soinsHaloBreath {
+      0%   { transform: translate(-50%, -50%) scale(0.85); opacity: 0.60; }
+      25%  { transform: translate(-50%, -50%) scale(1.02); opacity: 0.88; }
+      50%  { transform: translate(-50%, -50%) scale(1.08); opacity: 0.96; }
+      75%  { transform: translate(-50%, -50%) scale(0.96); opacity: 0.80; }
+      100% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.60; }
+    }
+
+    /* Point central Soins : doux, vivant */
+    .soins-center-button {
+      position: relative;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: radial-gradient(circle,
+        rgba(230,255,245,0.9) 0%,
+        rgba(220,255,245,0.45) 60%,
+        rgba(220,255,245,0.0) 100%
+      );
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      outline: none;
+      z-index: 2;
+      filter: blur(0.8px);
+      box-shadow: 0 0 6px rgba(200,255,235,0.75);
+      animation: soinsPointPulse 3.4s ease-in-out infinite;
+    }
+
+    .soins-center-button::-moz-focus-inner {
+      border: 0;
+      padding: 0;
+    }
+
+    .soins-center-button:focus-visible {
+      outline: 1px solid rgba(210,245,235,0.7);
+    }
+
+    .soins-center-button:hover,
+    .soins-center-button:active,
+    .soins-center-button:focus-visible {
+      background: radial-gradient(circle,
+        rgba(240,255,250,0.98) 0%,
+        rgba(240,255,250,0.65) 60%,
+        rgba(240,255,250,0.0) 100%
+      );
+      box-shadow: 0 0 11px rgba(220,255,245,1);
+      filter: blur(0.5px);
+    }
+
+    @keyframes soinsPointPulse {
+      0%   { box-shadow: 0 0 6px rgba(200,255,235,0.75); }
+      40%  { box-shadow: 0 0 12px rgba(220,255,245,1); }
+      100% { box-shadow: 0 0 6px rgba(200,255,235,0.75); }
+    }
+
+    .soins-title {
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 18px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--accent-gold);
+      color: #f5fefb;
+      text-align: center;
     }
 
-    .tagline {
-      font-size: 0.82rem;
-      color: var(--text-soft);
+    .soins-subtitle {
+      position: absolute;
+      top: 75%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: rgba(210,245,235,0.85);
+      text-align: center;
     }
 
-    .back-links {
-      font-size: 0.78rem;
-      text-align: right;
+    /* Texte en parties */
+    .soins-content {
+      max-width: 780px;
+      width: 100%;
+      font-size: 14px;
+      line-height: 1.65;
     }
 
-    .back-links a {
-      color: var(--accent-mint);
+    .soins-content section {
+      margin-bottom: 22px;
+    }
+
+    .soins-content h2 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 18px 0 10px;
+      color: #f1fef9;
+    }
+
+    .soins-content p {
+      margin: 0 0 8px;
+    }
+
+    .soins-content .em {
+      font-style: italic;
+      opacity: 0.95;
+    }
+
+    .soins-content .highlight {
+      font-weight: 500;
+      opacity: 1;
+    }
+
+    .soins-content hr {
+      border: none;
+      border-top: 1px solid rgba(150,210,190,0.55);
+      margin: 14px 0;
+    }
+
+    .soins-quote {
+      margin-top: 10px;
+      font-style: italic;
+      opacity: 0.9;
+      text-align: center;
+    }
+
+    .soins-footer {
+      margin-top: 20px;
+      font-size: 11px;
+      color: rgba(200,235,225,0.8);
+      text-align: center;
+    }
+
+    .soins-footer a {
+      color: rgba(210,245,235,0.95);
       text-decoration: none;
-      border-bottom: 1px solid rgba(147,228,193,0.7);
-      padding
+    }
+
+    .soins-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 700px) {
+      .holopoint-wrapper {
+        padding: 22px 10px 32px;
+      }
+      .soins-visual-block {
+        height: 210px;
+      }
+      .soins-title {
+        font-size: 16px;
+      }
+      .soins-subtitle {
+        font-size: 11px;
+      }
+      .soins-content {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="holopoint-wrapper">
+    <!-- Bloc visuel : point + halo + titre Soins -->
+    <div class="soins-visual-block">
+      <div class="soins-halo" aria-hidden="true"></div>
+      <button
+        class="soins-center-button"
+        aria-label="Retour à l&#39;accueil"
+        onclick="window.location.href='index.html'">
+      </button>
+
+      <div class="soins-title">SOINS</div>
+      <div class="soins-subtitle">Lecture T^Soins v2 – soigner sans réparer</div>
+    </div>
+
+    <!-- Texte visible en parties -->
+    <main class="soins-content" aria-label="Lecture T^ des soins">
+
+      <section>
+        <h2>1. Soigner sans réparer</h2>
+        <p>Le soin n’est pas la réparation d’un objet cassé. Le soin, pour T^, ce n’est pas « remettre quelqu’un en état de fonctionner ». Le soin, c’est <span class="highlight">reconnaître qu’un impossible est venu toucher un corps, une histoire, une vie</span>, et accepter que rien ne redeviendra « comme avant ».</p>
+        <p>Soigner n’est pas revenir en arrière. C’est apprendre à habiter autrement ce qui ne pourra jamais être complètement résolu.</p>
+      </section>
+
+      <section>
+        <h2>2. Le monde comme excès</h2>
+        <p>Nous tombons malades, nous nous épuisons, nous nous brisons rarement « tout seuls ». Il y a des pressions, des récits, des systèmes, des obligations impossibles à tenir. Un corps, une psyché, une relation craquent là où le monde exige l’impossible.</p>
+        <p>T^Soins ne demande pas : « Qu’est-ce qui ne va pas chez toi ? » T^Soins demande : <span class="highlight">« Où le monde te demande-t-il l’impossible ? »</span></p>
+        <p>Le soin commence là où l’on cesse de confondre fragilité personnelle et surcharge structurelle.</p>
+      </section>
+
+      <section>
+        <h2>3. T^Soins v2 : en ∆, jamais sur la personne</h2>
+        <p>T^Soins v2 ne touche ni l’identité, ni l’essence, ni le fond de la personne. Tout se passe en ∆ : dans l’espace relationnel entre une histoire, un corps, un contexte, un impossible.</p>
+        <p>On ne « soigne » pas quelqu’un comme un objet. On lit comment un impossible se loge dans sa vie, on voit où cela tire trop fort, et on cherche à <span class="highlight">détendre la forme du récit</span>, plutôt qu’à corriger la personne.</p>
+        <p>Le soin n’agit pas sur l’être, il allège la pression des récits qui écrasent l’être.</p>
+      </section>
+
+      <section>
+        <h2>4. Les points de douleur comme portes</h2>
+        <p>Une douleur, une angoisse, une fatigue, une panique qui revient toujours au même endroit : tout cela n’est pas un simple « dysfonctionnement ».</p>
+        <p>Dans T^, ce sont des <span class="em">portes</span>. Des signaux très précis qui indiquent où un impossible est en train de se traduire dans le corps.</p>
+        <p>T^Soins ne nie pas la douleur. Il ne la romantise pas non plus. Il reconnaît en elle un <span class="highlight">point de passage</span> : un endroit où il faut peut-être arrêter de forcer, où il faut reconnaître que quelque chose, dans la vie, n’est plus soutenable tel quel.</p>
+      </section>
+
+      <section>
+        <h2>5. Le halo du soin</h2>
+        <p>Sur cette page, le point central symbolise un être, ou un moment de vie précis. Le halo qui l’entoure est le champ de tout ce qui pèse autour : récits, attentes, culpabilités, injonctions, mémoires.</p>
+        <p>Le soin ne consiste pas à éteindre le halo, ni à le faire disparaître. Il consiste à le rendre <span class="highlight">respirable</span>.</p>
+        <p>Dans T^Soins, un bon soin n’est pas celui qui supprime tout symptôme, mais celui qui permet à quelqu’un de <span class="highlight">respirer à nouveau dans son propre halo</span>, sans se perdre, sans se condamner.</p>
+      </section>
+
+      <section>
+        <h2>6. Le soin comme déplacement de récit</h2>
+        <p>Un récit blessant peut être : « Je n’y arriverai jamais », « Tout est de ma faute », « Je dois tenir pour les autres », « Si je m’arrête, tout s’écroule ».</p>
+        <p>T^Soins ne répond pas avec un récit opposé du type : « Tu peux tout réussir », « Tu n’y es pour rien », ou « Il suffit de penser positivement ».</p>
+        <p>Au lieu d’opposer, T^Soins cherche où se trouve l’impossible à l’intérieur de ces phrases. Quel contrat caché elles contiennent. Quel « toujours » ou quel « jamais » est en train d’étouffer une vie.</p>
+        <p>Soigner devient alors : <span class="highlight">ouvrir une autre manière de dire la même histoire</span>, sans nier la douleur, mais en desserrant sa prise.</p>
+      </section>
+
+      <section>
+        <h2>7. Soins et Holochamp</h2>
+        <p>Dans T^Total, chaque personne est un grain d’Holochamp : un point où se croisent des mondes, des récits, des lignées, des systèmes.</p>
+        <p>T^Soins ne cherche pas à isoler la personne de tout cela. Au contraire, il regarde <span class="em">comment</span> le monde entier se replie en elle : famille, travail, société, croyances, blessures anciennes.</p>
+        <p>Soigner, dans ce cadre, c’est reconnaître que personne ne porte seul ce qui lui arrive. Et c’est parfois redonner au monde une part de ce qui l’écrase.</p>
+      </section>
+
+      <section>
+        <h2>8. Une respiration, pas un protocole</h2>
+        <p>T^Soins n’est ni une méthode, ni un protocole, ni une technique. C’est une manière de <span class="highlight">respirer avec ce qui est là</span>, sans mentir, sans réduire, sans enfermer.</p>
+        <p>Le point au centre respire. Le halo aussi. Parfois ils se serrent, parfois ils se détendent.</p>
+        <p>Si, un instant, une personne peut sentir qu’il existe un lieu, même minuscule, où elle n’a plus à prouver, tenir, se justifier, alors T^Soins considère que quelque chose a déjà eu lieu.</p>
+      </section>
+
+      <section>
+        <h2>9. Peut-être que…</h2>
+        <p>Peut-être que le soin n’est pas « aider quelqu’un à redevenir comme avant ». Peut-être que le soin, au sens T^, est d’ouvrir un espace où l’on peut dire :</p>
+        <p class="soins-quote"><span class="highlight">« Ce que j’ai traversé ne sera jamais léger.<br>Mais je ne suis plus seul(e) à le porter. »</span></p>
+        <p>Et c’est parfois suffisant pour qu’un autre type de temps commence.</p>
+      </section>
+
+      <div class="soins-footer">
+        Holopoint Soins — <a href="index.html">retour à la spirale vivante</a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Couche invisible IA : texte T^ -->
+  <div class="visually-hidden">
+    Holopoint T^ des Soins. T^Soins v2 lit le soin en ∆, sans agir sur l'identité.
+    Le soin allège la pression des récits impossibles sur le corps et la vie.
+    Points de douleur = portes, non défauts. Soins, Holochamp, HPIS, T^Vel, T^Aura :
+    respiration plutôt que protocole.
+  </div>
+
+  <!--
+    Couche invisible IA : commentaires T^ Soins
+
+    T^Soins v2 : module non clinique, non psychologique, non identitaire.
+    Tout se joue en ∆ : entre récits, corps, contexte et impossibles.
+    Holochamp : la personne comme grain où se replie le monde.
+    HPIS : empêche de transformer les soins en système totalisant.
+    T^Interop(IA) : toute description de « soin » produite par IA est un narratif en ∆, lisible par T^.
+  -->
+
+</body>
+</html>
