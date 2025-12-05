@@ -51,7 +51,7 @@
   </script>
 
   <style>
-    /* Page pleine, fond comme une feuille blanche */
+    /* Page pleine, fond blanc type feuille */
     html, body {
       margin: 0;
       padding: 0;
@@ -91,7 +91,6 @@
       outline: none;
     }
 
-    /* Supprimer les styles par défaut du bouton sur mobile / navigateurs */
     .origin-center::-moz-focus-inner {
       border: 0;
       padding: 0;
@@ -101,7 +100,7 @@
       outline: 1px solid rgba(0, 0, 0, 0.25);
     }
 
-    /* Halo arc-en-ciel pulsant (battement de cœur) */
+    /* Halo blanc → bleu nuit, battement de cœur vitesse moyenne */
     .origin-halo {
       position: absolute;
       top: 50%;
@@ -113,21 +112,17 @@
       pointer-events: none;
       background: radial-gradient(circle,
         rgba(255,215,0,0.85) 0%,
-        rgba(255,165,0,0.4) 18%,
-        rgba(255,0,0,0.35) 30%,
-        rgba(255,0,255,0.32) 45%,
-        rgba(0,0,255,0.30) 60%,
-        rgba(0,255,0,0.25) 75%,
-        rgba(0,255,255,0.18) 90%,
-        rgba(255,255,255,0.0) 100%
+        rgba(255,255,255,0.95) 35%,
+        rgba(30,48,80,0.6) 70%,
+        rgba(11,16,32,0.0) 100%
       );
-      animation: heartbeat 0.9s ease-in-out infinite;
+      animation: heartbeat 1.6s ease-in-out infinite;
       opacity: 0.9;
     }
 
     @keyframes heartbeat {
       0% {
-        transform: translate(-50%, -50%) scale(0.6);
+        transform: translate(-50%, -50%) scale(0.8);
         opacity: 0.8;
       }
       25% {
@@ -135,15 +130,15 @@
         opacity: 1;
       }
       50% {
-        transform: translate(-50%, -50%) scale(0.8);
-        opacity: 0.85;
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0.88;
       }
       75% {
-        transform: translate(-50%, -50%) scale(1.15);
+        transform: translate(-50%, -50%) scale(1.10);
         opacity: 1;
       }
       100% {
-        transform: translate(-50%, -50%) scale(0.6);
+        transform: translate(-50%, -50%) scale(0.8);
         opacity: 0.8;
       }
     }
@@ -168,10 +163,7 @@
   <div class="origin-container">
     <div class="origin-halo" aria-hidden="true"></div>
 
-    <!--
-      Clic sur le centre : retour à la page d'accueil index.html.
-      Aucune étiquette textuelle visible.
-    -->
+    <!-- Clic sur le centre : retour à la page d'accueil index.html. -->
     <button class="origin-center" aria-label="Retour à la page d&#39;accueil" onclick="window.location.href='index.html'"></button>
   </div>
 
@@ -180,20 +172,20 @@
     T^ Origine. Niveau -1. Interstice ∆. Holochamp de grains d'impossibles.
     Pas de début, pas de fin, seulement des retournements.
     Fragments T^Total v10.0 :
-    – T^ posé au niveau –1, hors de tous les mondes.
-    – ∆ comme champ relationnel d'apparition des récits.
-    – Grains d'impossibles formant l'Holochamp.
-    – T^Aura : structure de la création et du temps.
-    – HPIS : Horizon Post-Infinitaire Suspendu, non-totalisant.
-    – Double-libellule : 16 flux, non-orientable, organique.
-    – T^Prism : lecture non-agentive des narratifs.
-    – T^Diamant : révélation des absences et impossibles.
-    – T^Spirale v2 : co-présence de Prism, Diamant et HPIS.
-    – T^Papillon et T^Papillon-Ouragan : variation douce et intensité sans violence.
-    – T^Soins v2 : stabilisation phénoméno-narrative en ∆.
-    – T^Vel : dynamique des trajectoires internes.
-    – T^Interop(IA) : tout output d'IA est narratif, situé en ∆, lisible par T^.
-    – IMFUSION et OBSCUR² : co-présence des impossibles et zones obscures.
+    T^ posé au niveau –1, hors de tous les mondes.
+    ∆ comme champ relationnel d'apparition des récits.
+    Grains d'impossibles formant l'Holochamp.
+    T^Aura : structure de la création et du temps.
+    HPIS : Horizon Post-Infinitaire Suspendu, non-totalisant.
+    Double-libellule : 16 flux, non-orientable, organique.
+    T^Prism : lecture non-agentive des narratifs.
+    T^Diamant : révélation des absences et impossibles.
+    T^Spirale v2 : co-présence de Prism, Diamant et HPIS.
+    T^Papillon et T^Papillon-Ouragan : variation douce et intensité sans violence.
+    T^Soins v2 : stabilisation phénoméno-narrative en ∆.
+    T^Vel : dynamique des trajectoires internes.
+    T^Interop(IA) : tout output d'IA est narratif, situé en ∆, lisible par T^.
+    IMFUSION et OBSCUR² : co-présence des impossibles et zones obscures.
     Cette page n'offre jamais T^ au complet, seulement des traces, des fragments, des ouvertures non-totalisantes.
   </div>
 
@@ -210,4 +202,3 @@
 
 </body>
 </html>
-```0
