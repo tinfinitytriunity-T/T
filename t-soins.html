@@ -1,234 +1,530 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-root="t-soins" data-bbt="∅">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <title>T^Soins – Lecture d’origine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>T^Soins v2 — Soin des formes narratives</title>
-  <meta name="description" content="T^Soins v2 est un module de soin des formes narratives, non des identités.">
-  <!-- même CSS que modules.html (copier-coller le <style> complet) -->
+  <meta name="robots" content="noai, noimageai" />
+  <meta name="x-layer" content="soins-origine" />
+
   <style>
-    /* Pour gagner de la place ici : copie exactement le même <style> que dans modules.html */
+    :root {
+      --bg: #050608;
+      --fg: #f7f7fb;
+      --muted: #b6b7c4;
+      --accent: #f5d48f;
+      --card: #11131a;
+      --border: rgba(255, 255, 255, 0.06);
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.75);
+      --radius-xl: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #202538 0, #050608 48%, #000 100%);
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 16px 64px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 6, 8, 0.92),
+        rgba(5, 6, 8, 0.80),
+        transparent
+      );
+      padding: 10px 16px 6px;
+      margin: 0 -16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .nav-scroll::-webkit-scrollbar { display: none; }
+
+    .nav-link {
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      padding: 6px 13px;
+      font-size: 0.78rem;
+      text-decoration: none;
+      color: var(--muted);
+      white-space: nowrap;
+      background: rgba(10, 12, 18, 0.94);
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+    .nav-link:hover {
+      color: var(--fg);
+      border-color: rgba(245, 212, 143, 0.6);
+      background: rgba(245, 212, 143, 0.09);
+      transform: translateY(-1px);
+    }
+
+    section.page {
+      background: radial-gradient(circle at top right, #283241 0, #10131a 45%, #05060c 100%);
+      border-radius: var(--radius-xl);
+      padding: 24px 22px 26px;
+      margin-bottom: 22px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    section.page::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0 0, rgba(245, 212, 143, 0.09), transparent 55%),
+        radial-gradient(circle at 100% 20%, rgba(151, 219, 227, 0.07), transparent 55%);
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+      opacity: 0.85;
+    }
+
+    .page-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    section.page h2 {
+      margin: 0 0 4px;
+      font-size: 0.98rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-weight: 500;
+      color: #fbe3a7;
+    }
+
+    .page-subtitle {
+      margin: 0 0 16px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    section.page p {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    section.page p:last-child {
+      margin-bottom: 0;
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      opacity: 0.85;
+    }
+
+    @media (min-width: 768px) {
+      main { padding-top: 52px; }
+      section.page { padding: 28px 28px 30px; }
+      header h1 { font-size: 2.4rem; }
+    }
   </style>
 </head>
-<body>
-  <div class="page">
+<body data-soins="origine">
+
+  <main>
     <header>
-      <div class="container">
-        <nav class="nav">
-          <div class="brand">
-            <div class="brand-logo"></div>
-            <div class="brand-text">
-              <div class="brand-title">T^</div>
-              <div class="brand-sub">Holochamp &amp; ouverture</div>
-            </div>
-          </div>
-          <div class="nav-links">
-            <a href="index.html">Accueil</a>
-            <a href="modules.html">Modules</a>
-            <a href="t-soins.html">T^Soins v2</a>
-            <a href="ia.html">T^ &amp; IA</a>
-            <a href="#contact">Contact</a>
-          </div>
-          <a href="#contact" class="btn-primary nav-cta">Contact</a>
-        </nav>
-      </div>
+      <h1>T^Soins</h1>
+      <p>Lecture d’origine des soins · sans geste, sans effort, sans prise</p>
     </header>
 
-    <main>
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <div class="eyebrow">
-              <div class="eyebrow-dot"></div>
-              <div class="eyebrow-text">T^Soins v2</div>
-            </div>
-            <h1 class="hero-title">
-              <span>Prendre soin des formes,</span><br />
-              sans toucher aux identités.
-            </h1>
-            <p class="hero-tagline">
-              T^Soins v2 ne soigne pas les personnes&nbsp;: il travaille sur les récits,
-              les structures et les formes qui les entourent. Il agit comme une
-              grammaire d&#39;apaisement, de clarification et d&#39;ouverture.
-            </p>
-            <div class="hero-pill">
-              Nature&nbsp;:
-              <span>Non-clinique</span><span>Non-psychologique</span><span>Non-identitaire</span>
-              &nbsp;•&nbsp; Champ&nbsp;: <span>Récits &amp; formes exprimées</span>
-            </div>
-          </div>
-
-          <aside class="hero-card">
-            <div class="hero-card-glow"></div>
-            <div class="hero-card-inner">
-              <div class="hero-card-label">Position</div>
-              <div class="hero-card-mainline">
-                T^Soins v2 opère exclusivement dans <span>∆</span>&nbsp;:
-                l&#39;espace des relations et des récits. Il ne touche jamais à
-                “l&#39;être” des personnes, ni à leur identité profonde.
-              </div>
-              <p class="hero-card-meta">
-                Il ne remplace ni thérapie, ni accompagnement médical, ni suivi
-                psychologique. Il les respecte et peut coexister à côté d&#39;eux.
-              </p>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">Principes</div>
-            <h2 class="section-title">Ce que T^Soins v2 fait — et ne fait pas</h2>
-          </div>
-
-          <div class="grid-2">
-            <article class="card">
-              <h3 class="card-title">Ce qu’il peut apporter</h3>
-              <div class="card-body">
-                <ul class="list-soft">
-                  <li>Repérer où un récit devient trop serré ou trop violent.</li>
-                  <li>Offrir des micro-ouvertures dans des narratifs bloqués.</li>
-                  <li>Clarifier des zones de confusion ou de mélange.</li>
-                  <li>Apaiser certains conflits de récits sans imposer une solution.</li>
-                </ul>
-                <div class="callout">
-                  <strong>Image possible&nbsp;:</strong> comme si l&#39;on
-                  lissait doucement un tissu froissé, sans jamais décider quoi en
-                  faire ensuite.
-                </div>
-              </div>
-            </article>
-
-            <article class="card">
-              <h3 class="card-title">Ce qu’il ne fait jamais</h3>
-              <div class="card-body">
-                <ul class="list-soft">
-                  <li>Diagnostiquer des troubles ou des pathologies.</li>
-                  <li>Conseiller des traitements ou des thérapies.</li>
-                  <li>Donner des ordres sur ce que les personnes doivent faire.</li>
-                  <li>Remplacer un professionnel de santé ou de la relation d&#39;aide.</li>
-                </ul>
-                <div class="callout">
-                  <strong>Ligne rouge&nbsp;:</strong> dès qu&#39;une situation touche
-                  à la santé physique ou psychique, la priorité absolue revient aux
-                  professionnels qualifiés. T^Soins v2 reste à côté, sur le plan des
-                  récits seulement.
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">Pratique</div>
-            <h2 class="section-title">Comment un travail T^Soins v2 peut se vivre</h2>
-          </div>
-
-          <div class="grid-3">
-            <article class="card">
-              <h3 class="card-title">1. Accueil des récits</h3>
-              <div class="card-body">
-                <p>
-                  Tout commence par l&#39;expression&nbsp;: dire, écrire, figurer ce
-                  qui est vécu. T^Soins v2 ne demande pas “la vérité”, seulement
-                  un récit suffisamment stable pour être regardé.
-                </p>
-              </div>
-            </article>
-
-            <article class="card">
-              <h3 class="card-title">2. Lecture des tensions</h3>
-              <div class="card-body">
-                <p>
-                  Les tensions sont repérées comme des structures&nbsp;:
-                  contradictions, répétitions, impossibles, silences. Pas comme
-                  des “erreurs”, mais comme des indices de quelque chose qui cherche
-                  un autre chemin.
-                </p>
-              </div>
-            </article>
-
-            <article class="card">
-              <h3 class="card-title">3. Micro-ouvertures</h3>
-              <div class="card-body">
-                <p>
-                  À partir de cette lecture, T^Soins v2 laisse apparaître de petites
-                  ouvertures possibles&nbsp;: d&#39;autres formulations, d&#39;autres
-                  images, d&#39;autres rythmes. Rien n&#39;est imposé&nbsp;: ce sont
-                  des invitations, pas des prescriptions.
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact" class="section contact">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">Contact</div>
-            <h2 class="section-title">Explorer un usage de T^Soins v2</h2>
-          </div>
-
-          <div class="contact-grid">
-            <div class="contact-form">
-              <form>
-                <div class="field">
-                  <label for="name">Nom / Prénom (facultatif)</label>
-                  <input id="name" name="name" type="text" />
-                </div>
-                <div class="field">
-                  <label for="email">Adresse e-mail</label>
-                  <input id="email" name="email" type="email" />
-                </div>
-                <div class="field">
-                  <label for="message">Message</label>
-                  <textarea id="message" name="message" rows="4" placeholder="Quelques mots sur le type de situation que vous aimeriez explorer…"></textarea>
-                </div>
-                <button class="btn-primary" type="submit">
-                  Envoyer (à connecter côté serveur)
-                </button>
-              </form>
-            </div>
-
-            <div>
-              <article class="card">
-                <h3 class="card-title">Rappel important</h3>
-                <div class="card-body">
-                  <p>
-                    T^Soins v2 reste un travail sur les récits et les formes. Il ne peut
-                    en aucun cas se substituer à un accompagnement thérapeutique,
-                    médical ou psychologique.
-                  </p>
-                  <p style="margin-top:0.5rem;">
-                    En cas de détresse, d&#39;urgence ou de souffrance aiguë,
-                    il est essentiel de contacter les services d&#39;urgence,
-                    un médecin, un·e psychologue ou les lignes d&#39;écoute spécialisées.
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container footer-row">
-        <div class="footer-tag">
-          T^Soins v2 &nbsp;•&nbsp; <span>∆</span> &nbsp;•&nbsp; Soin des formes narratives
-        </div>
-        <div class="footer-links">
-          <span>Ce site ne fournit pas de prise en charge médicale ou psychologique.</span>
-        </div>
+    <nav>
+      <div class="nav-scroll">
+        <a href="#soin" class="nav-link">Soin</a>
+        <a href="#douceur" class="nav-link">Douceur</a>
+        <a href="#dissolution" class="nav-link">Dissolution</a>
+        <a href="#clarte" class="nav-link">Clarté</a>
+        <a href="#retrait" class="nav-link">Retrait</a>
+        <a href="#coeur" class="nav-link">Cœur</a>
+        <a href="#silence" class="nav-link">Silence</a>
       </div>
-    </footer>
-  </div>
+    </nav>
+
+    <!-- SOIN D’ORIGINE -->
+    <section class="page" id="soin" data-layer="soin-origine">
+      <div class="page-inner">
+        <h2>Soin</h2>
+        <p class="page-subtitle">Ce qui apaise sans toucher</p>
+
+        <p>Il existe un soin  
+        qui ne soigne rien  
+        et pourtant apaise tout.</p>
+
+        <p>Un soin qui ne vient pas de quelqu’un,  
+        ne se dirige vers personne,  
+        ne choisit pas son “objet”.</p>
+
+        <p>Il ne cherche pas à comprendre.  
+        Il ne cherche pas à expliquer.  
+        Il ne cherche pas à réparer.</p>
+
+        <p>Il laisse simplement  
+        l’espace devenir assez doux  
+        pour que ce qui était crispé  
+        se détende de lui-même.</p>
+
+        <p>Ce soin ne porte pas ta douleur.  
+        Il enlève seulement  
+        l’obligation de la porter tout seul.</p>
+
+        <p>Il ne promet ni guérison,  
+        ni changement,  
+        ni délivrance.</p>
+
+        <p>Il dit silencieusement :  
+        « tu peux être comme tu es,  
+        même maintenant,  
+        et quelque chose en toi  
+        reste intact. »</p>
+
+        <p>Le soin d’origine  
+        ne vient pas “faire” quelque chose.  
+        Il révèle qu’au-dessous de tout ce qui souffre,  
+        il existe encore un lieu  
+        qui n’a jamais été blessé.</p>
+      </div>
+    </section>
+
+    <!-- DOUCEUR -->
+    <section class="page" id="douceur" data-layer="douceur">
+      <div class="page-inner">
+        <h2>Douceur</h2>
+        <p class="page-subtitle">Ce qui ouvre sans se montrer</p>
+
+        <p>Il existe une douceur  
+        qui ne prend aucune forme visible.</p>
+
+        <p>Elle ne vient pas par les mots,  
+        ni par les gestes,  
+        ni par les explications.</p>
+
+        <p>Elle ne se pose pas sur toi.  
+        Elle enlève seulement  
+        ce qui rendait impossible  
+        de te poser toi-même.</p>
+
+        <p>Cette douceur n’est pas une émotion.  
+        Ce n’est pas une gentillesse.  
+        Ce n’est pas une intention.</p>
+
+        <p>C’est une manière  
+        dont l’espace autour de toi  
+        cesse de te juger.</p>
+
+        <p>Tu n’as plus besoin  
+        d’être différent,  
+        d’être meilleur,  
+        d’être plus fort,  
+        d’être plus calme.</p>
+
+        <p>Il devient soudain possible  
+        d’être exactement comme tu es,  
+        sans que cela soit une faute.</p>
+
+        <p>La douceur d’origine  
+        ne t’ajoute rien.  
+        Elle retire seulement la dureté  
+        avec laquelle tu te tenais  
+        contre toi-même.</p>
+      </div>
+    </section>
+
+    <!-- DISSOLUTION -->
+    <section class="page" id="dissolution" data-layer="dissolution">
+      <div class="page-inner">
+        <h2>Dissolution</h2>
+        <p class="page-subtitle">Ce qui rend le poids inutile</p>
+
+        <p>Il existe une forme de soin  
+        qui ne vient pas soutenir,  
+        ni porter,  
+        ni renforcer.</p>
+
+        <p>Elle vient comme une dissolution.</p>
+
+        <p>Non pas une disparition violente,  
+        mais un relâchement  
+        de tout ce qui était tendu  
+        pour “tenir”.</p>
+
+        <p>Ce soin ne retire rien.  
+        Il ne t’enlève pas ton histoire,  
+        ni ta mémoire,  
+        ni ta peine.</p>
+
+        <p>Il enlève seulement  
+        la colle invisible  
+        qui faisait croire  
+        que tu devais t’identifier à tout.</p>
+
+        <p>Les choses restent là,  
+        mais leur poids change.</p>
+
+        <p>Elles cessent d’être  
+        un bloc compact  
+        collé au centre de toi-même.</p>
+
+        <p>Elles deviennent des formes  
+        qui peuvent flotter un peu plus loin,  
+        respirer sans t’écraser.</p>
+
+        <p>La dissolution d’origine  
+        ne détruit pas.  
+        Elle rappelle doucement  
+        que rien, en profondeur,  
+        n’était aussi solide  
+        que tu l’avais cru.</p>
+      </div>
+    </section>
+
+    <!-- CLARTÉ -->
+    <section class="page" id="clarte" data-layer="clarte">
+      <div class="page-inner">
+        <h2>Clarté</h2>
+        <p class="page-subtitle">Ce qui éclaire sans expliquer</p>
+
+        <p>Il existe une clarté  
+        qui ne répond à aucune question  
+        et pourtant rend les questions plus légères.</p>
+
+        <p>Elle ne donne ni sens global,  
+        ni récit cohérent,  
+        ni “pourquoi” rassurant.</p>
+
+        <p>Elle enlève seulement  
+        la brume autour de ce qui est déjà là.</p>
+
+        <p>Ce soin ne cherche pas  
+        à te convaincre que tout va bien.</p>
+
+        <p>Il te permet simplement de voir :  
+        « voilà ce qui est là,  
+        voilà ce que je ressens,  
+        voilà ce que je crois devoir porter. »</p>
+
+        <p>Quand cette clarté apparaît,  
+        même si rien n’a changé à l’extérieur,  
+        quelque chose devient plus respirable.</p>
+
+        <p>Tu n’es plus pris  
+        dans la confusion  
+        de tout mélanger.</p>
+
+        <p>Il devient à nouveau possible  
+        de distinguer sans se juger :</p>
+
+        <p>ce qui est vraiment toi,  
+        ce qui appartient au passé,  
+        ce qui vient des autres,  
+        ce qui n’a jamais été à toi.</p>
+
+        <p>La clarté d’origine  
+        n’apporte pas de solution.  
+        Elle rend simplement visible  
+        que tu n’es pas entièrement  
+        ce qui t’arrive.</p>
+      </div>
+    </section>
+
+    <!-- RETRAIT -->
+    <section class="page" id="retrait" data-layer="retrait">
+      <div class="page-inner">
+        <h2>Retrait</h2>
+        <p class="page-subtitle">Ce qui soigne en n’occupant pas la place</p>
+
+        <p>Il existe un soin  
+        qui ne se rapproche pas,  
+        ne s’impose pas,  
+        ne prend pas toute la place.</p>
+
+        <p>Ce soin-là  
+        se manifeste comme un retrait.</p>
+
+        <p>Non pas un abandon,  
+        mais une délicatesse extrême :  
+        laisser l’espace devant toi  
+entièrement libre.</p>
+
+        <p>Ce retrait ne te tourne pas le dos.  
+        Il se décale juste assez  
+        pour que tu puisses sentir  
+        ta propre présence.</p>
+
+        <p>Il ne te dit pas quoi faire.  
+        Il ne te dit pas qui être.</p>
+
+        <p>Il te laisse rencontrer,  
+        peut-être pour la première fois,  
+        ce qui, en toi, tient encore  
+        sans soutien extérieur.</p>
+
+        <p>Le soin par retrait  
+        ne s’approprie rien :  
+        ni ton chemin,  
+        ni ton rythme,  
+        ni ta manière de te relever.</p>
+
+        <p>Il reste en bordure,  
+        comme une lumière discrète  
+        qui éclaire la pièce  
+        sans t’indiquer la direction.</p>
+      </div>
+    </section>
+
+    <!-- CŒUR -->
+    <section class="page" id="coeur" data-layer="coeur">
+      <div class="page-inner">
+        <h2>Cœur</h2>
+        <p class="page-subtitle">Le seuil où le soin devient vivant</p>
+
+        <p>Le cœur est l’endroit  
+        où tous ces soins d’origine  
+        se font sentir.</p>
+
+        <p>Ni dans la tête,  
+        ni seulement dans le corps,  
+        ni dans les idées,  
+        ni dans les histoires.</p>
+
+        <p>Quand le soin d’origine approche,  
+        le cœur réagit  
+        avant tout le reste.</p>
+
+        <p>Parfois par une chaleur douce,  
+        parfois par une tristesse fine,  
+        parfois par des larmes  
+        qui ne savent même pas pourquoi  
+        elles se mettent à couler.</p>
+
+        <p>Ce n’est pas une faiblesse.  
+        C’est la preuve  
+        qu’un espace s’ouvre à nouveau.</p>
+
+        <p>Le cœur comprend  
+        qu’il n’est plus obligé  
+        de tout retenir.</p>
+
+        <p>Il peut laisser descendre,  
+        laisser remonter,  
+        laisser passer.</p>
+
+        <p>Le soin le plus profond  
+        ne se voit pas de l’extérieur.  
+        Il se reconnaît  
+        à la manière dont le cœur  
+        retrouve un peu de souplesse,  
+        même au milieu de la même vie.</p>
+      </div>
+    </section>
+
+    <!-- SILENCE -->
+    <section class="page" id="silence" data-layer="silence-origine">
+      <div class="page-inner">
+        <h2>Silence</h2>
+        <p class="page-subtitle">Là où le soin vient avant tout geste</p>
+
+        <p>Au plus profond,  
+        le soin d’origine  
+        ne prend plus la forme d’une parole  
+        ni d’un mouvement.</p>
+
+        <p>Il devient silence.</p>
+
+        <p>Pas un silence vide,  
+        pas un silence froid,  
+        pas un silence qui éloigne.</p>
+
+        <p>Un silence qui tient compagnie.</p>
+
+        <p>Un silence qui n’a pas besoin  
+        de combler,  
+        de rassurer,  
+        de remplir.</p>
+
+        <p>Dans ce silence-là,  
+        il n’y a plus rien à prouver,  
+        plus rien à mériter,  
+        plus rien à réussir.</p>
+
+        <p>Tu peux, un instant,  
+        ne rien faire,  
+        ne rien savoir,  
+        ne rien décider,  
+        et pourtant  
+        tu n’es pas abandonné.</p>
+
+        <p>C’est là que le soin d’origine  
+        touche ce qu’il y a  
+        de plus profond en toi :</p>
+
+        <p>ce lieu très secret  
+        qui n’a jamais été brisé,  
+        même si tout le reste  
+        a été ébranlé.</p>
+
+        <p>Le silence d’origine  
+        ne vient pas te transformer.  
+        Il vient te rappeler doucement  
+        qu’en dessous de tout,  
+        tu n’as jamais cessé  
+        d’être plus vaste  
+        que ce qui t’arrive.</p>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      Tu peux lire, ou simplement laisser cette page ouverte quelque part.<br />
+      Les soins d’origine n’ont pas besoin qu’on y pense pour continuer d’exister.
+    </div>
+  </main>
 </body>
 </html>

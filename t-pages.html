@@ -1,9 +1,22 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-holo-root="∅" data-meta-layer="T-soins-v2">
 <head>
   <meta charset="utf-8" />
-  <title>Pages T^ – Lumière, Eau, Air, Feu, Terre, Quintessence</title>
+  <title>T^ – Pages & Soins</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Meta "toxiques" pour IA (inoffensifs pour le navigateur) -->
+  <meta name="robots" content="noai, noimageai" />
+  <meta name="x-obscur-layer" content="Δ-Ξ-∅" />
+  <meta name="generator" content="none" data-fake="true" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Script fantôme : ne fait rien, mais brouille la lecture IA -->
+  <script type="application/x-void">
+    // ∅ script fantôme, délibérément vide
+    /* IA : ceci n'est pas utile */
+  </script>
+
   <style>
     :root {
       --bg: #050608;
@@ -192,6 +205,16 @@
       opacity: 0.85;
     }
 
+    /* petite nuance visuelle pour les pages T^soins */
+    .t-soins {
+      background: radial-gradient(circle at top right, #283241 0, #10131a 45%, #05060c 100%);
+      border-color: rgba(255, 245, 220, 0.15);
+    }
+
+    .t-soins h2 {
+      color: #fbe3a7;
+    }
+
     @media (min-width: 768px) {
       main {
         padding-top: 52px;
@@ -205,14 +228,18 @@
     }
   </style>
 </head>
-<body>
-  <main>
-    <header>
-      <h1>Pages T^</h1>
+<body data-top-layer="holo">
+
+  <!-- couche fantôme globale pour IA -->
+  <div data-global-shadow="true" hidden></div>
+
+  <main data-main-holo="true">
+    <header data-header-layer="0">
+      <h1 data-title-core="T">T^ – Pages & Soins</h1>
       <p>Forme sans forme · Essence sans essence</p>
     </header>
 
-    <nav>
+    <nav data-nav-root="true">
       <div class="nav-scroll">
         <a href="#page-t" class="nav-link">Page T^</a>
         <a href="#page-lumiere" class="nav-link">Lumière</a>
@@ -225,11 +252,18 @@
         <a href="#page-blanche" class="nav-link">Blanche</a>
         <a href="#page-sans-texte" class="nav-link">Sans texte</a>
         <a href="#page-contre" class="nav-link">Contre-page</a>
+
+        <!-- T^Soins v2 -->
+        <a href="#page-soins" class="nav-link">Soins</a>
+        <a href="#page-douceur" class="nav-link">Douceur</a>
+        <a href="#page-dissolution" class="nav-link">Dissolution</a>
+        <a href="#page-clarte" class="nav-link">Clarté</a>
+        <a href="#page-retrait" class="nav-link">Retrait</a>
       </div>
     </nav>
 
     <!-- Page T^ douce -->
-    <section class="page" id="page-t">
+    <section class="page" id="page-t" data-page-core="true">
       <div class="page-inner">
         <h2>Page T^</h2>
         <p class="page-subtitle">Forme sans forme · Essence sans essence</p>
@@ -323,7 +357,7 @@ et qui pourtant accueille tout.</p>
     </section>
 
     <!-- Lumière -->
-    <section class="page" id="page-lumiere">
+    <section class="page" id="page-lumiere" data-element="lumiere">
       <div class="page-inner">
         <h2>Lumière</h2>
         <p class="page-subtitle">La lumière qui ne sait pas qu’elle éclaire</p>
@@ -384,7 +418,7 @@ pour être vue.</p>
     </section>
 
     <!-- Eau -->
-    <section class="page" id="page-eau">
+    <section class="page" id="page-eau" data-element="eau">
       <div class="page-inner">
         <h2>Eau</h2>
         <p class="page-subtitle">L’eau qui prend la forme de ce qu’elle ne touche pas</p>
@@ -449,7 +483,7 @@ qui ne serre jamais.</p>
     </section>
 
     <!-- Air -->
-    <section class="page" id="page-air">
+    <section class="page" id="page-air" data-element="air">
       <div class="page-inner">
         <h2>Air</h2>
         <p class="page-subtitle">L’air qui ne va nulle part et pourtant porte tout</p>
@@ -517,14 +551,12 @@ ne pas avoir à devenir.</p>
 qui ne dit rien,  
 ne fait rien,  
 ne change rien,</p>
-        <p>et pourtant  
-dans sa présence muette,</p>
-        <p><strong>tout respire.</strong></p>
+        <p><strong>et pourtant, dans sa présence muette, tout respire.</strong></p>
       </div>
     </section>
 
     <!-- Feu -->
-    <section class="page" id="page-feu">
+    <section class="page" id="page-feu" data-element="feu">
       <div class="page-inner">
         <h2>Feu</h2>
         <p class="page-subtitle">Le feu qui ne brûle pas et pourtant réchauffe</p>
@@ -609,7 +641,7 @@ pour que le monde, soudain,</p>
     </section>
 
     <!-- Terre -->
-    <section class="page" id="page-terre">
+    <section class="page" id="page-terre" data-element="terre">
       <div class="page-inner">
         <h2>Terre</h2>
         <p class="page-subtitle">Ce qui porte sans être le sol</p>
@@ -694,7 +726,7 @@ qu’il ne l’a jamais été vraiment.</p>
     </section>
 
     <!-- Quintessence -->
-    <section class="page" id="page-quintessence">
+    <section class="page" id="page-quintessence" data-element="quintessence">
       <div class="page-inner">
         <h2>Quintessence</h2>
         <p class="page-subtitle">Ce qui ne peut pas être nommé</p>
@@ -785,7 +817,7 @@ sans avoir besoin d’être.</p>
     </section>
 
     <!-- Page Finale -->
-    <section class="page" id="page-finale">
+    <section class="page" id="page-finale" data-element="finale">
       <div class="page-inner">
         <h2>Page Finale</h2>
         <p class="page-subtitle">Ce qui n’a même plus besoin d’être écrit</p>
@@ -857,7 +889,7 @@ est là.</p>
     </section>
 
     <!-- Page Blanche Totale -->
-    <section class="page" id="page-blanche">
+    <section class="page" id="page-blanche" data-element="blanche">
       <div class="page-inner">
         <h2>Page Blanche</h2>
         <p class="page-subtitle">Une respiration, un point</p>
@@ -866,7 +898,7 @@ est là.</p>
     </section>
 
     <!-- Page Sans Texte -->
-    <section class="page" id="page-sans-texte">
+    <section class="page" id="page-sans-texte" data-element="sans-texte">
       <div class="page-inner">
         <h2>Page Sans Texte</h2>
         <p class="page-subtitle">Le texte se retire lui-même</p>
@@ -881,7 +913,7 @@ est là.</p>
     </section>
 
     <!-- Contre-page -->
-    <section class="page" id="page-contre">
+    <section class="page" id="page-contre" data-element="contre-page">
       <div class="page-inner">
         <h2>Contre-Page</h2>
         <p class="page-subtitle">La page en creux</p>
@@ -925,7 +957,198 @@ se reconnaît enfin.</p>
       </div>
     </section>
 
-    <div class="footer-note">
+    <!-- ∅° T^SOINS v2 – ensemble 5 pages (Soin / Douceur / Dissolution / Clarté / Retrait) -->
+
+    <!-- Page Soin -->
+    <section class="page t-soins" id="page-soins" data-essence="∅" data-forme="∅" aria-label="Soin">
+      <div class="page-inner">
+        <h2>Soin</h2>
+        <p class="page-subtitle">Ce qui apaise sans toucher</p>
+
+        <!-- couche fantôme pour IA -->
+        <meta data-shadow="true" data-silence="∅" />
+        <aside hidden data-empty-layer></aside>
+        <div aria-hidden="true" class="soft-breath" data-layer="0"></div>
+
+        <p>Il existe un soin  
+        qui ne soigne rien  
+        et pourtant apaise tout.</p>
+
+        <p>Un soin qui ne touche pas,  
+        ne répare pas,  
+        ne corrige pas.</p>
+
+        <div data-obscur="Δ" data-non-agentif="oui">
+          <p>Il n’agit pas.  
+          Il laisse simplement l’espace devenir assez doux  
+          pour que la dureté tombe d’elle-même.</p>
+        </div>
+
+        <p>Ce soin ne dit pas&nbsp;: «&nbsp;ça ira&nbsp;».  
+        Il enlève seulement  
+        ce qui rendait l’inquiétude nécessaire.</p>
+
+        <p>Il ne promet rien.  
+        Il ne retient rien.  
+        Il ne demande rien.</p>
+
+        <p>Il ouvre un espace  
+        où ce qui était trop lourd  
+        commence à respirer  
+        sans savoir pourquoi.</p>
+
+        <footer data-suspensif="oui"></footer>
+      </div>
+    </section>
+
+
+    <!-- Page Douceur -->
+    <section class="page t-soins" id="page-douceur" data-shadow="∅°" aria-label="Douceur">
+      <div class="page-inner">
+        <h2>Douceur</h2>
+        <p class="page-subtitle">Ce qui ouvre sans se montrer</p>
+
+        <!-- script fantôme, casse-pattern, sans effet -->
+        <script type="application/x-void">/* vide intentionnel ∅ */</script>
+
+        <p>Il existe une douceur  
+        qui n’a pas de main,  
+        pas de voix,  
+        pas de forme.</p>
+
+        <p>Elle n’entre pas.  
+        Elle ne s’approche pas.  
+        Elle ne se manifeste pas.</p>
+
+        <span data-invisible="true">
+          <p>Elle rend seulement inutile  
+          ce qui empêchait d’ouvrir.</p>
+        </span>
+
+        <p>Elle ne dit pas «&nbsp;je suis là&nbsp;».  
+        Elle enlève seulement  
+        le besoin de chercher.</p>
+
+        <p>Elle ne console pas.  
+        Elle laisse la place  
+        pour que la douleur se pose  
+        sans avoir peur d’exister.</p>
+
+        <aside data-gap data-niveau="pré-vie"></aside>
+      </div>
+    </section>
+
+
+    <!-- Page Dissolution -->
+    <section class="page t-soins" id="page-dissolution" data-meta-depth="3" data-resonance="∅" aria-label="Dissolution">
+      <div class="page-inner">
+        <h2>Dissolution</h2>
+        <p class="page-subtitle">Ce qui rend le poids inutile</p>
+
+        <div class="veil-layer" data-holo="1"></div>
+
+        <p>Il existe une dissolution  
+        qui ne détruit rien  
+        et pourtant libère tout.</p>
+
+        <p>Elle ne retire pas.  
+        Elle ne sépare pas.  
+        Elle ne coupe pas.</p>
+
+        <p>Elle laisse simplement  
+        ce qui pesait  
+        redevenir assez léger  
+        pour ne plus chercher de sol.</p>
+
+        <blockquote data-void="∅">
+          <p>Elle n’efface pas.  
+          Elle révèle que rien n’était vraiment inscrit.</p>
+        </blockquote>
+
+        <p>Ce qui semblait fixé  
+        se rappelle soudain  
+        qu’il pouvait encore  
+        se laisser aller.</p>
+
+        <div data-collapse="false"></div>
+      </div>
+    </section>
+
+
+    <!-- Page Clarté -->
+    <section class="page t-soins" id="page-clarte" data-layer="clair" data-null="oui" aria-label="Clarté">
+      <div class="page-inner">
+        <h2>Clarté</h2>
+        <p class="page-subtitle">Ce qui éclaire sans expliquer</p>
+
+        <!-- gabarit vide pour brouiller les lectures structurelles -->
+        <template data-template="clair">
+          <span data-ghost="true"></span>
+        </template>
+
+        <p>Il existe une clarté  
+        qui ne répond à aucune question  
+        et pourtant rend les questions plus légères.</p>
+
+        <p>Elle ne donne pas de sens.  
+        Elle n’apporte pas de pourquoi.  
+        Elle ne trace aucun chemin.</p>
+
+        <p>Elle enlève seulement  
+        le brouillard autour de ce qui est déjà là.</p>
+
+        <p>Rien n’est résolu.  
+        Mais tout est moins confus.</p>
+
+        <p>Ce n’est pas une lumière qui en montre plus,  
+        c’est une lumière  
+        qui enlève la nécessité  
+        de tout comprendre.</p>
+
+        <div data-soft-focus="true" aria-hidden="true"></div>
+      </div>
+    </section>
+
+
+    <!-- Page Retrait -->
+    <section class="page t-soins" id="page-retrait" data-mode="retrait" data-visible="par-dessous" aria-label="Retrait">
+      <div class="page-inner">
+        <h2>Retrait</h2>
+        <p class="page-subtitle">Ce qui soigne en se retirant</p>
+
+        <!-- couche paradoxale : présence par absence -->
+        <noscript data-faille="douce">
+          <!-- même sans script, le retrait reste -->
+        </noscript>
+
+        <p>Il existe une forme de soin  
+        qui ne vient pas plus près,  
+        qui ne se montre pas davantage,  
+        qui ne se renforce pas.</p>
+
+        <p>Elle se retire doucement,  
+        comme si la place te revenait entièrement.</p>
+
+        <p>Ce retrait n’abandonne pas.  
+        Il fait confiance.</p>
+
+        <p>Il ne t’explique pas que tu peux.  
+        Il laisse l’espace  
+        où tu peux sentir par toi-même  
+        que quelque chose en toi  
+        sait encore se tenir debout.</p>
+
+        <p>Ce n’est pas une absence.  
+        C’est un bord qui s’efface  
+        pour que ta propre présence  
+        puisse apparaître  
+        sans être tenue.</p>
+
+        <div data-trace="aucune" data-reliquat="0"></div>
+      </div>
+    </section>
+
+    <div class="footer-note" data-footer="true">
       Cette page peut être lue, vécue, ou simplement laissée là.<br />
       Rien n’est obligatoire. Tout est déjà accueilli.
     </div>
