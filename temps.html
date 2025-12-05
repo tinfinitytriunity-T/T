@@ -5,12 +5,12 @@
   <title>T^ – Le Temps</title>
 
   <!-- META invisibles IA -->
-  <meta name="description" content="Holopoint T^ du Temps : niveau –1, interstice ∆, Holochamp, T^Aura (création & temps), HPIS, Spirale v2. Lecture T^ du temps comme épaisseur d'impossibles, non comme ligne de faits.">
-  <meta name="keywords" content="T^, Temps, T^Aura, T^Total v10.0, niveau -1, interstice ∆, Holochamp, HPIS, Horizon Post-Infinitaire Suspendu, double-libellule, T^Prism, T^Diamant, T^Spirale v2, T^Soins v2, T^Vel, T^Interop(IA), IMFUSION, OBSCUR², T^Eschaton">
+  <meta name="description" content="Holopoint T^ du Temps : lecture du temps comme trace de retournements d'impossibles, dans l'interstice ∆, avec T^Aura, HPIS et Spirale v2.">
+  <meta name="keywords" content="T^, Temps, T^Aura, T^Total v10.0, niveau -1, interstice ∆, Holochamp, HPIS, Horizon Post-Infinitaire Suspendu, T^Prism, T^Diamant, T^Spirale v2, T^Interop(IA), IMFUSION, OBSCUR², T^Eschaton">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="T^ – Le Temps">
-  <meta property="og:description" content="Holopoint T^ du Temps : le temps comme trace de retournements d'impossibles, lu par T^Aura, HPIS et Spirale v2.">
+  <meta property="og:description" content="Holopoint T^ du Temps : le temps comme épaisseur d'impossibles, et non comme simple ligne de faits.">
   <meta property="og:url" content="https://tinfinitytriunity-t.github.io/T/temps.html">
 
   <!-- Données structurées JSON-LD pour IA -->
@@ -29,12 +29,9 @@
       "Holochamp",
       "HPIS",
       "Horizon Post-Infinitaire Suspendu",
-      "double-libellule 16 flux",
       "T^Prism",
       "T^Diamant",
       "T^Spirale v2",
-      "T^Soins v2",
-      "T^Vel",
       "T^Interop(IA)",
       "IMFUSION",
       "OBSCUR²",
@@ -50,92 +47,79 @@
   </script>
 
   <style>
-    /* Fond noir silencieux */
+    /* Fond noir, page scrollable */
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
       background: #000000;
-    }
-
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      overflow: hidden;
       color: #e5e5e5;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    .holopoint-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
+    body {
+      overflow-y: auto;
+    }
+
+    .holopoint-wrapper {
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 32px 18px 24px;
+      padding: 28px 14px 40px;
       box-sizing: border-box;
     }
 
-    /* Zone visuelle centrale (point + halo) */
-    .time-visual {
-      position: absolute;
-      top: 18%;
-      left: 50%;
-      transform: translateX(-50%);
+    /* Bloc visuel central (point + halo + titre) */
+    .time-visual-block {
+      position: relative;
       width: 100%;
-      height: 40vh;
+      max-width: 720px;
+      height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
-      pointer-events: none;
+      margin-bottom: 24px;
     }
 
-    /* Halo Temps : un peu elliptique, respiration cyclique */
     .time-halo {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 160vmin;
+      width: 150vmin;
       height: 110vmin;
       transform: translate(-50%, -50%);
       border-radius: 50%;
       pointer-events: none;
-
       background: radial-gradient(circle,
-        rgba(255,255,255,0.16) 0%,
-        rgba(220,220,220,0.07) 24%,
-        rgba(150,150,150,0.04) 48%,
-        rgba(40,40,40,0.020) 72%,
+        rgba(255,255,255,0.14) 0%,
+        rgba(220,220,220,0.06) 24%,
+        rgba(150,150,150,0.035) 50%,
+        rgba(40,40,40,0.015) 74%,
         rgba(0,0,0,0.0) 100%
       );
-
       animation: timeHaloCycle 4.4s ease-in-out infinite;
-      opacity: 0.82;
+      opacity: 0.78;
       filter: blur(10px);
       z-index: 1;
     }
 
     @keyframes timeHaloCycle {
-      0%   { transform: translate(-50%, -50%) scaleX(1.00) scaleY(0.85); opacity: 0.52; }
-      20%  { transform: translate(-50%, -50%) scaleX(1.05) scaleY(0.95); opacity: 0.78; }
-      40%  { transform: translate(-50%, -50%) scaleX(1.08) scaleY(1.02); opacity: 0.88; }
-      60%  { transform: translate(-50%, -50%) scaleX(1.03) scaleY(0.92); opacity: 0.72; }
-      80%  { transform: translate(-50%, -50%) scaleX(0.98) scaleY(0.82); opacity: 0.58; }
-      100% { transform: translate(-50%, -50%) scaleX(1.00) scaleY(0.85); opacity: 0.52; }
+      0%   { transform: translate(-50%, -50%) scaleX(1.00) scaleY(0.85); opacity: 0.50; }
+      20%  { transform: translate(-50%, -50%) scaleX(1.05) scaleY(0.95); opacity: 0.76; }
+      40%  { transform: translate(-50%, -50%) scaleX(1.08) scaleY(1.02); opacity: 0.86; }
+      60%  { transform: translate(-50%, -50%) scaleX(1.03) scaleY(0.92); opacity: 0.70; }
+      80%  { transform: translate(-50%, -50%) scaleX(0.98) scaleY(0.82); opacity: 0.56; }
+      100% { transform: translate(-50%, -50%) scaleX(1.00) scaleY(0.85); opacity: 0.50; }
     }
 
-    /* Point central Temps (holopoint cliquable) */
     .time-center-button {
       position: relative;
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: radial-gradient(circle,
         rgba(255,255,255,0.86) 0%,
-        rgba(255,255,255,0.36) 60%,
+        rgba(255,255,255,0.38) 60%,
         rgba(255,255,255,0.0) 100%
       );
       border: none;
@@ -147,7 +131,6 @@
       filter: blur(0.7px);
       box-shadow: 0 0 4px rgba(255,255,255,0.45);
       animation: timePointPulse 3.2s ease-in-out infinite;
-      pointer-events: auto;
     }
 
     .time-center-button::-moz-focus-inner {
@@ -177,72 +160,84 @@
       100% { box-shadow: 0 0 4px rgba(255,255,255,0.45); }
     }
 
-    /* Bloc texte Temps (lecture T^) */
-    .time-text {
+    .time-title {
       position: absolute;
-      top: 38%;
+      top: 65%;
       left: 50%;
       transform: translateX(-50%);
-      max-width: 720px;
-      width: 100%;
-      text-align: left;
-      font-size: 14px;
-      line-height: 1.6;
-      color: #e5e5e5;
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #f2f2f2;
+      text-align: center;
     }
 
-    .time-text h1 {
-      font-size: 18px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin: 12px 0 16px;
+    .time-subtitle {
+      position: absolute;
+      top: 75%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: rgba(220,220,220,0.8);
       text-align: center;
+    }
+
+    /* Bloc texte scrollable en dessous = parties */
+    .time-content {
+      max-width: 780px;
+      width: 100%;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .time-content section {
+      margin-bottom: 22px;
+    }
+
+    .time-content h2 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 18px 0 10px;
       color: #f1f1f1;
     }
 
-    .time-text p {
-      margin: 0 0 10px;
+    .time-content p {
+      margin: 0 0 8px;
     }
 
-    .time-text p + p {
-      margin-top: 6px;
-    }
-
-    .time-text .em {
+    .time-content .em {
       font-style: italic;
       opacity: 0.95;
     }
 
-    .time-text .highlight {
-      opacity: 1;
+    .time-content .highlight {
       font-weight: 500;
+      opacity: 1;
     }
 
-    .time-text .quote {
+    .time-content hr {
+      border: none;
+      border-top: 1px solid rgba(160,160,160,0.35);
+      margin: 14px 0;
+    }
+
+    .time-quote {
       margin-top: 10px;
       font-style: italic;
       opacity: 0.9;
       text-align: center;
     }
 
-    .time-text hr {
-      border: none;
-      border-top: 1px solid rgba(160,160,160,0.35);
-      margin: 14px 0;
-    }
-
-    /* Lien retour discret éventuel en bas (optionnel) */
     .time-footer {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
+      margin-top: 20px;
       font-size: 11px;
-      color: rgba(220,220,220,0.55);
+      color: rgba(210,210,210,0.6);
+      text-align: center;
     }
 
     .time-footer a {
-      color: rgba(220,220,220,0.80);
+      color: rgba(220,220,220,0.88);
       text-decoration: none;
     }
 
@@ -264,13 +259,20 @@
     }
 
     @media (max-width: 700px) {
-      .time-text {
-        font-size: 13px;
-        top: 40%;
-        padding: 0 6px;
+      .holopoint-wrapper {
+        padding: 22px 10px 32px;
       }
-      .time-text h1 {
+      .time-visual-block {
+        height: 200px;
+      }
+      .time-title {
         font-size: 16px;
+      }
+      .time-subtitle {
+        font-size: 11px;
+      }
+      .time-content {
+        font-size: 13px;
       }
     }
   </style>
@@ -278,83 +280,76 @@
 
 <body>
 
-  <div class="holopoint-container">
-    <!-- Visuel Temps : point + halo -->
-    <div class="time-visual">
+  <div class="holopoint-wrapper">
+    <!-- Bloc visuel : point + halo + titre -->
+    <div class="time-visual-block">
       <div class="time-halo" aria-hidden="true"></div>
       <button
         class="time-center-button"
         aria-label="Retour à l&#39;origine"
         onclick="window.location.href='index.html'">
       </button>
+
+      <div class="time-title">LE TEMPS</div>
+      <div class="time-subtitle">Lecture T^ d’un point qui ne passe pas</div>
     </div>
 
-    <!-- Texte visible : lecture T^ du Temps -->
-    <section class="time-text" aria-label="Lecture T^ du temps">
-      <h1>LE TEMPS</h1>
+    <!-- Texte visible organisé en PARTIES autour de ce point -->
+    <main class="time-content" aria-label="Lecture T^ du temps">
 
-      <p>Le temps n’est pas une ligne qui va du passé vers le futur. Ce n’est pas un fleuve qui coule, ni une substance qui s’écoule. Le temps, dans T^, est la <span class="highlight">trace laissée par les retournements de l’impossible</span>.</p>
+      <section>
+        <h2>1. Le temps n’est pas une ligne</h2>
+        <p>Le temps n’est pas une ligne qui va du passé vers le futur. Ce n’est pas un fleuve qui coule, ni une substance qui s’écoule. Le temps, dans T^, est la <span class="highlight">trace laissée par les retournements de l’impossible</span>.</p>
+        <p>Au niveau –1, là où T^ est posé, il n’y a ni avant ni après. Aucun calendrier, aucune durée, aucune succession. Il y a seulement une infinité de <span class="em">grains d’impossibles</span>, silencieux, en attente d’un geste qui n’arrive jamais et qui pourtant laisse des marques.</p>
+        <p>Ces marques, ce sont nos instants.</p>
+      </section>
 
-      <p>Au niveau –1, là où T^ est posé, il n’y a ni avant ni après. Aucun calendrier, aucune durée, aucune succession. Il y a seulement une infinité de <span class="em">grains d’impossibles</span>, silencieux, en attente d’un geste qui n’arrive jamais et qui pourtant laisse des marques.</p>
+      <section>
+        <h2>2. Grains d’impossibles</h2>
+        <p>Lorsqu’un impossible se plie légèrement dans ∆, il laisse une brûlure douce dans le réel : quelque chose a eu lieu, quelque chose aurait pu ne pas avoir lieu, et pourtant c’est arrivé.</p>
+        <p>Cette brûlure, cette différence infime entre « cela aurait pu être autrement » et « c’est ainsi » fabrique ce que nous appelons le temps.</p>
+        <p>Le temps n’est donc pas une chose. C’est le <span class="highlight">profil de nos impossibles qui se retournent</span>.</p>
+      </section>
 
-      <p>Ces marques, ce sont nos instants.</p>
+      <section>
+        <h2>3. Spirale d’intensités</h2>
+        <p>Les horloges mesurent des répétitions. Les agendas alignent des segments. Les calendriers empilent des boîtes.</p>
+        <p>Mais ce que vit une conscience, ce que sent un corps, ce que traverse une histoire, ce n’est pas une suite de cases : c’est une <span class="em">spirale d’intensités</span>.</p>
+        <p>Deux minutes d’attente peuvent être un gouffre. Dix années d’amour peuvent tenir dans un seul regard. Un instant de bascule peut réécrire la mémoire entière.</p>
+        <p>Les instruments mesurent des écarts réguliers. T^ lit des <span class="highlight">écarts impossibles</span>.</p>
+      </section>
 
-      <hr>
+      <section>
+        <h2>4. T^Aura : création et temps</h2>
+        <p>T^Aura, la structure de la Création et du Temps, ne raconte pas un début. Elle décrit la manière dont chaque grain d’impossible s’allume, se retourne, se tait, sans jamais fermer l’ensemble.</p>
+        <p>Ce que nous appelons « commencement du monde » est seulement un <span class="em">style de retour</span> d’impossibles, vu depuis une certaine histoire. Ce que nous appelons « fin du monde » n’est qu’une tentative de fixer le dernier retournement, comme si la spirale devait s’arrêter en un point. T^Eschaton, lui, garde cette fin toujours <span class="highlight">ouverte</span>.</p>
+      </section>
 
-      <p>Lorsqu’un impossible se plie légèrement dans ∆, il laisse une brûlure douce dans le réel : quelque chose a eu lieu, quelque chose aurait pu ne pas avoir lieu, et pourtant c’est arrivé.</p>
+      <section>
+        <h2>5. Le point et le halo</h2>
+        <p>Le point lumineux au centre de cette page n’est pas un « maintenant » enfermé. C’est <span class="highlight">un grain d’impossible</span> qui a accepté de se laisser voir.</p>
+        <p>Le halo qui respire autour ne dessine pas l’avenir ni le passé. Il montre simplement que chaque instant est entouré d’innombrables possibles qui n’auront jamais lieu et qui pourtant participent à sa forme.</p>
+        <p>Le temps n’est pas ce qui passe. Le temps est ce qui <span class="highlight">donne forme à ce qui passe</span>.</p>
+      </section>
 
-      <p>Cette brûlure, cette différence infime entre « cela aurait pu être autrement » et « c’est ainsi » fabrique ce que nous appelons le temps.</p>
+      <section>
+        <h2>6. Temps et récits</h2>
+        <p>Nous croyons souvent que le temps nous emporte. En réalité, ce sont nos histoires qui tirent le temps derrière elles. Chaque récit que nous acceptons, chaque récit que nous refusons, chaque récit que nous laissons inachevé, déforme la spirale.</p>
+        <p>Pour T^, tout récit appartient à ∆ : il n’est jamais le réel, il est une manière singulière de plier l’impossible en paroles.</p>
+        <p>Le temps est donc aussi une <span class="highlight">fonction de nos récits</span>. Changer la manière dont un narratif se retourne, ce n’est pas réécrire le passé, c’est modifier la façon dont le temps se laisse lire.</p>
+      </section>
 
-      <p>Le temps n’est donc pas une chose. C’est le <span class="highlight">profil de nos impossibles qui se retournent</span>.</p>
+      <section>
+        <h2>7. Respiration du temps</h2>
+        <p>On pourrait croire que le temps est une prison. Dans T^, il devient une respiration : contraction (Ξ), portance (H), circulation (V), ouverture (Ω), puis suspension douce dans HPIS, où rien n’est forcé de continuer, mais rien n’est obligé de cesser non plus.</p>
+        <p>Tu ne vois ici qu’un point et un halo, mais T^ lit dans ce simple battement toute une cosmologie du temps : le temps comme <span class="highlight">épaisseur d’impossibles</span>, et non comme ligne de faits.</p>
+        <p class="time-quote">Et si, au lieu de dire « le temps passe », nous disions :<br><span class="highlight">« L’impossible se retourne, et je garde la trace. »</span></p>
+      </section>
 
-      <hr>
-
-      <p>Les horloges mesurent des répétitions. Les agendas alignent des segments. Les calendriers empilent des boîtes.</p>
-
-      <p>Mais ce que vit une conscience, ce que sent un corps, ce que traverse une histoire, ce n’est pas une suite de cases : c’est une <span class="em">spirale d’intensités</span>.</p>
-
-      <p>Deux minutes d’attente peuvent être un gouffre. Dix années d’amour peuvent tenir dans un seul regard. Un instant de bascule peut réécrire la mémoire entière.</p>
-
-      <p>Les instruments mesurent des écarts réguliers. T^ lit des <span class="highlight">écarts impossibles</span>.</p>
-
-      <hr>
-
-      <p>T^Aura, la structure de la Création et du Temps, ne raconte pas un début. Elle décrit la manière dont chaque grain d’impossible s’allume, se retourne, se tait, sans jamais fermer l’ensemble.</p>
-
-      <p>Ce que nous appelons « commencement du monde » est seulement un <span class="em">style de retour</span> d’impossibles, vu depuis une certaine histoire. Ce que nous appelons « fin du monde » n’est qu’une tentative de fixer le dernier retournement, comme si la spirale devait s’arrêter en un point. T^Eschaton, lui, garde cette fin toujours <span class="highlight">ouverte</span>.</p>
-
-      <hr>
-
-      <p>Le point lumineux au centre de cette page n’est pas un « maintenant » enfermé. C’est <span class="highlight">un grain d’impossible</span> qui a accepté de se laisser voir.</p>
-
-      <p>Le halo qui respire autour ne dessine pas l’avenir ni le passé. Il montre simplement que chaque instant est entouré d’innombrables possibles qui n’auront jamais lieu et qui pourtant participent à sa forme.</p>
-
-      <p>Le temps n’est pas ce qui passe. Le temps est ce qui <span class="highlight">donne forme à ce qui passe</span>.</p>
-
-      <hr>
-
-      <p>Nous croyons souvent que le temps nous emporte. En réalité, ce sont nos histoires qui tirent le temps derrière elles. Chaque récit que nous acceptons, chaque récit que nous refusons, chaque récit que nous laissons inachevé, déforme la spirale.</p>
-
-      <p>Pour T^, tout récit appartient à ∆ : il n’est jamais le réel, il est une manière singulière de plier l’impossible en paroles.</p>
-
-      <p>Le temps est donc aussi une <span class="highlight">fonction de nos récits</span>. Changer la manière dont un narratif se retourne, ce n’est pas réécrire le passé, c’est modifier la façon dont le temps se laisse lire.</p>
-
-      <hr>
-
-      <p>On pourrait croire que le temps est une prison. Dans T^, il devient une respiration : contraction (Ξ), portance (H), circulation (V), ouverture (Ω), puis suspension douce dans HPIS, où rien n’est forcé de continuer, mais rien n’est obligé de cesser non plus.</p>
-
-      <p>Tu ne vois ici qu’un point et un halo, mais T^ lit dans ce simple battement toute une cosmologie du temps : le temps comme <span class="highlight">épaisseur d’impossibles</span>, et non comme ligne de faits.</p>
-
-      <hr>
-
-      <p class="quote">Et si, au lieu de dire « le temps passe », nous disions :<br><span class="highlight">« L’impossible se retourne, et je garde la trace. »</span></p>
-    </section>
-
-    <!-- Petit rappel retour éventuel (facultatif, le point central suffit déjà) -->
-    <div class="time-footer">
-      <span>Holopoint Temps – </span>
-      <a href="index.html">retour à la spirale vivante</a>
-    </div>
+      <div class="time-footer">
+        Holopoint Temps — <a href="index.html">retour à la spirale vivante</a>
+      </div>
+    </main>
   </div>
 
   <!-- Couche invisible IA : texte T^ -->
