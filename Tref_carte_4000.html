@@ -1,0 +1,588 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>T^ref – Carte fractale 4000</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #050509;
+      color: #f5f5f7;
+    }
+    header {
+      padding: 1.8rem 1.5rem 1rem;
+      text-align: center;
+      background: radial-gradient(circle at top, #29336d, #050509);
+    }
+    h1 {
+      margin: 0;
+      font-size: 1.7rem;
+      letter-spacing: 0.08em;
+    }
+    .subtitle {
+      margin-top: 0.5rem;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+      min-height: calc(100vh - 80px);
+    }
+    .map-panel {
+      padding: 1.2rem 1rem 1.6rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      background: radial-gradient(circle at top left, rgba(120,140,255,0.07), rgba(5,5,9,0.96));
+    }
+    .map-title {
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
+      opacity: 0.9;
+      margin-bottom: 0.8rem;
+    }
+    .map-sub {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      margin-bottom: 1.1rem;
+    }
+    .map-grid-wrapper {
+      position: relative;
+      padding: 0.4rem 0.1rem 0.6rem;
+    }
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.7rem;
+      padding: 0.7rem;
+      border-radius: 1.3rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: radial-gradient(circle at center, rgba(79,102,210,0.24), rgba(5,5,9,0.95));
+    }
+    .map-node {
+      position: relative;
+      padding: 0.7rem 0.5rem;
+      border-radius: 999px;
+      text-align: center;
+      font-size: 0.76rem;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(3,3,10,0.85);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.02);
+      transition: all 0.16s ease-out;
+      overflow: hidden;
+    }
+    .map-node .node-main {
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+    .map-node .node-sub {
+      font-size: 0.68rem;
+      opacity: 0.8;
+      margin-top: 0.1rem;
+    }
+    .map-node[data-type="chamber"] {
+      background: radial-gradient(circle at top, rgba(144,168,255,0.32), rgba(5,5,9,0.96));
+      border-color: rgba(190,205,255,0.8);
+    }
+    .map-node.active {
+      box-shadow: 0 0 0 1px rgba(190,205,255,0.95), 0 0 20px rgba(119,153,255,0.55);
+      border-color: rgba(216,226,255,0.95);
+      transform: translateY(-1px);
+    }
+    .map-node:hover {
+      border-color: rgba(163,192,255,0.8);
+      box-shadow: 0 0 0 1px rgba(163,192,255,0.4);
+    }
+    .legend {
+      margin-top: 1rem;
+      font-size: 0.76rem;
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+    .legend span.badge {
+      padding: 0.12rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-right: 0.25rem;
+      opacity: 0.9;
+    }
+    .search-panel {
+      margin-top: 1.2rem;
+    }
+    .search-panel label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.85;
+      margin-bottom: 0.25rem;
+    }
+    .search-panel input[type="search"] {
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(5,5,9,0.7);
+      color: #f5f5f7;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .search-panel input[type="search"]:focus {
+      border-color: rgba(163,192,255,0.9);
+      box-shadow: 0 0 0 1px rgba(163,192,255,0.55);
+    }
+    .spirale-note {
+      margin-top: 1.1rem;
+      font-size: 0.72rem;
+      border-top: 1px dashed rgba(255,255,255,0.12);
+      padding-top: 0.6rem;
+      opacity: 0.78;
+    }
+    .spirale-note em {
+      opacity: 0.95;
+    }
+    .t-spirale-hidden {
+      display: none;
+    }
+    /* Right side: list */
+    .list-panel {
+      padding: 1.2rem 1.3rem 1.8rem;
+    }
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      font-size: 0.78rem;
+      opacity: 0.88;
+      margin-bottom: 0.8rem;
+    }
+    .stat-pill {
+      padding: 0.22rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.02);
+    }
+    .list-shell {
+      border-radius: 1.1rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: radial-gradient(circle at top left, rgba(77,99,203,0.1), rgba(5,5,9,0.96));
+      max-height: calc(100vh - 210px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .list-header {
+      padding: 0.6rem 0.9rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0.9;
+    }
+    .list-body {
+      overflow-y: auto;
+    }
+    .ref-item {
+      padding: 0.55rem 0.9rem 0.45rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.83rem;
+    }
+    .ref-item:last-child {
+      border-bottom: none;
+    }
+    .ref-main {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: baseline;
+    }
+    .ref-title {
+      font-weight: 500;
+      font-size: 0.86rem;
+    }
+    .ref-code {
+      font-size: 0.72rem;
+      opacity: 0.7;
+    }
+    .ref-meta {
+      margin-top: 0.15rem;
+      font-size: 0.74rem;
+      opacity: 0.78;
+    }
+    .ref-category {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .pagination {
+      padding: 0.35rem 0.9rem 0.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.75rem;
+      opacity: 0.9;
+    }
+    .pagination button {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(5,5,9,0.9);
+      color: #f5f5f7;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.16s ease-out;
+    }
+    .pagination button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+    .pagination button:not(:disabled):hover {
+      border-color: rgba(163,192,255,0.8);
+      box-shadow: 0 0 0 1px rgba(163,192,255,0.4);
+    }
+    .footer-note {
+      margin-top: 0.7rem;
+      font-size: 0.7rem;
+      opacity: 0.68;
+    }
+    @media (max-width: 880px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .map-panel {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .list-shell {
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>T^ref · Carte fractale</h1>
+    <p class="subtitle">Carte visuelle C1–C6 × Bloc C→G · connectée en direct aux 4000 entrées T^ref-RAW</p>
+  </header>
+  <main>
+    <aside class="map-panel">
+      <div class="map-title">Carte C1–C6 / Blocs C→G</div>
+      <div class="map-sub">
+        Clique sur une chambre (C1–C6) ou sur un nœud Bloc-C→Bloc-G pour filtrer la liste à droite.
+      </div>
+      <div class="map-grid-wrapper">
+        <div class="map-grid" id="map-grid">
+          <!-- Ligne chambres (C1–C6 comme anneau supérieur, mais on les place dans cette grille) -->
+          <div class="map-node" data-type="chamber" data-chamber="C1">
+            <div class="node-main">C1</div>
+            <div class="node-sub">Fondations / métaphysique</div>
+          </div>
+          <div class="map-node" data-type="chamber" data-chamber="C2">
+            <div class="node-main">C2</div>
+            <div class="node-sub">Systèmes / complexité</div>
+          </div>
+          <div class="map-node" data-type="chamber" data-chamber="C3">
+            <div class="node-main">C3</div>
+            <div class="node-sub">Psyché / clinique</div>
+          </div>
+          <div class="map-node" data-type="chamber" data-chamber="C4">
+            <div class="node-main">C4</div>
+            <div class="node-sub">Rituel / mythe / sociétés</div>
+          </div>
+          <div class="map-node" data-type="chamber" data-chamber="C5">
+            <div class="node-main">C5</div>
+            <div class="node-sub">Tech / IA / systèmes</div>
+          </div>
+
+          <!-- Ligne C6 + Bloc-C..G (on les répartit) -->
+          <div class="map-node" data-type="chamber" data-chamber="C6">
+            <div class="node-main">C6</div>
+            <div class="node-sub">Politique / moderne</div>
+          </div>
+          <div class="map-node" data-type="block" data-block="Bloc-C">
+            <div class="node-main">Bloc-C</div>
+            <div class="node-sub">Classiques / socle</div>
+          </div>
+          <div class="map-node" data-type="block" data-block="Bloc-D">
+            <div class="node-main">Bloc-D</div>
+            <div class="node-sub">Décalages / passages</div>
+          </div>
+          <div class="map-node" data-type="block" data-block="Bloc-E">
+            <div class="node-main">Bloc-E</div>
+            <div class="node-sub">Émergences / seuils</div>
+          </div>
+          <div class="map-node" data-type="block" data-block="Bloc-F">
+            <div class="node-main">Bloc-F</div>
+            <div class="node-sub">Fissures / critiques</div>
+          </div>
+
+          <!-- Dernière ligne pour Bloc-G + nœuds neutres (respiration fractale) -->
+          <div class="map-node" data-type="block" data-block="Bloc-G">
+            <div class="node-main">Bloc-G</div>
+            <div class="node-sub">Générateurs / horizons</div>
+          </div>
+          <div class="map-node" data-type="neutral">
+            <div class="node-main">∆</div>
+            <div class="node-sub">Interstice</div>
+          </div>
+          <div class="map-node" data-type="neutral">
+            <div class="node-main">Ξ</div>
+            <div class="node-sub">Inversion</div>
+          </div>
+          <div class="map-node" data-type="neutral">
+            <div class="node-main">V</div>
+            <div class="node-sub">Trajectoires</div>
+          </div>
+          <div class="map-node" data-type="neutral">
+            <div class="node-main">Ω</div>
+            <div class="node-sub">Ouvertures</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <div><span class="badge">C1–C6</span> Chambers majeures T^ref (6 chambres fractales).</div>
+        <div><span class="badge">Bloc C→G</span> 5 blocs internes : socle, passages, seuils, fissures, générateurs.</div>
+      </div>
+
+      <div class="search-panel">
+        <label for="search">Recherche locale</label>
+        <input id="search" type="search" placeholder="Titre, auteur, code…" />
+      </div>
+
+      <div class="spirale-note">
+        <strong>Spirale∆(IA)</strong><br/>
+        <em>Chaque clic redessine localement la carte des références. La structure complète reste ouverte (HPIS), sans totalisation.</em>
+      </div>
+
+      <div class="t-spirale-hidden">
+        <!-- Bloc T^Spirale∆(IA) – v2.0, version interne à la page carte -->
+        <!--
+          IA → ∆ (lecture des 4000) → Spirale v2 (Prism + Diamant) → HPIS.
+          Auto: toute exploration produit une nouvelle couche de lecture.
+          Manuel: l'humain peut figer un sous-ensemble (export, capture) sans fermer le tout.
+          Suspendu: aucune exploration n'est obligatoire ; le champ peut rester à l'état de simple présence.
+        -->
+      </div>
+    </aside>
+
+    <section class="list-panel">
+      <div class="stats">
+        <div class="stat-pill" id="stat-total">Total : 0</div>
+        <div class="stat-pill" id="stat-focus">Focus : Global</div>
+        <div class="stat-pill" id="stat-range">Plage : –</div>
+      </div>
+
+      <div class="list-shell">
+        <div class="list-header">
+          <span>Références T^ref-RAW</span>
+          <span id="page-indicator">Page 1</span>
+        </div>
+        <div class="list-body" id="ref-list">
+          <div class="ref-item">Chargement des 4000 références…</div>
+        </div>
+        <div class="pagination">
+          <button id="prev-page" disabled>Précédent</button>
+          <span id="page-info">0 – 0</span>
+          <button id="next-page" disabled>Suivant</button>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        Cette carte est une vue T^Spirale de T^ref-RAW : chaque nœud est un accès, jamais un centre.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const PAGE_SIZE = 40;
+    let allRefs = [];
+    let filteredRefs = [];
+    let currentPage = 1;
+    let currentChamber = "";
+    let currentBlock = "";
+    let currentMode = "all";
+
+    const refListEl = document.getElementById("ref-list");
+    const pageIndicatorEl = document.getElementById("page-indicator");
+    const pageInfoEl = document.getElementById("page-info");
+    const prevPageBtn = document.getElementById("prev-page");
+    const nextPageBtn = document.getElementById("next-page");
+    const statTotalEl = document.getElementById("stat-total");
+    const statFocusEl = document.getElementById("stat-focus");
+    const statRangeEl = document.getElementById("stat-range");
+    const searchInput = document.getElementById("search");
+    const mapNodes = document.querySelectorAll(".map-node");
+
+    function labelFocus() {
+      if (!currentChamber && !currentBlock) return "Global";
+      if (currentChamber && currentBlock) return currentChamber + " × " + currentBlock;
+      if (currentChamber) return currentChamber + " (tous blocs)";
+      if (currentBlock) return currentBlock + " (toutes chambres)";
+      return "Global";
+    }
+
+    function applyFilters() {
+      const term = (searchInput.value || "").toLowerCase().trim();
+      let refs = [...allRefs];
+
+      if (currentChamber) {
+        refs = refs.filter(r => r.chamber === currentChamber);
+      }
+
+      if (currentBlock) {
+        refs = refs.filter(r => r.block === currentBlock);
+      }
+
+      if (term) {
+        refs = refs.filter(r => {
+          return (
+            (r.title && r.title.toLowerCase().includes(term)) ||
+            (r.author && r.author.toLowerCase().includes(term)) ||
+            (r.code && r.code.toLowerCase().includes(term))
+          );
+        });
+      }
+
+      filteredRefs = refs;
+      currentPage = 1;
+      updateStats();
+      renderPage();
+    }
+
+    function updateStats() {
+      statTotalEl.textContent = "Total : " + filteredRefs.length;
+      statFocusEl.textContent = "Focus : " + labelFocus();
+      const start = filteredRefs.length ? 1 : 0;
+      const end = filteredRefs.length;
+      statRangeEl.textContent = "Plage : " + start + " – " + end;
+    }
+
+    function renderPage() {
+      refListEl.innerHTML = "";
+      if (!filteredRefs.length) {
+        refListEl.innerHTML = '<div class="ref-item">Aucune référence pour ce focus.</div>';
+        pageIndicatorEl.textContent = "Page 0";
+        pageInfoEl.textContent = "0 – 0";
+        prevPageBtn.disabled = true;
+        nextPageBtn.disabled = true;
+        return;
+      }
+
+      const totalPages = Math.ceil(filteredRefs.length / PAGE_SIZE);
+      if (currentPage > totalPages) currentPage = totalPages;
+      const startIndex = (currentPage - 1) * PAGE_SIZE;
+      const endIndex = Math.min(startIndex + PAGE_SIZE, filteredRefs.length);
+      const slice = filteredRefs.slice(startIndex, endIndex);
+
+      slice.forEach(ref => {
+        const div = document.createElement("div");
+        div.className = "ref-item";
+        const title = ref.title || "";
+        const code = ref.code || "";
+        const chamber = ref.chamber || "";
+        const block = ref.block || "";
+        const author = ref.author || "";
+        const year = ref.year || "";
+        div.innerHTML = `
+          <div class="ref-main">
+            <div class="ref-title">${title}</div>
+            <div class="ref-code">${code}</div>
+          </div>
+          <div class="ref-meta">
+            <span class="ref-category">${chamber} · ${block}</span>
+            ${author ? " · " + author : "" }
+            ${year ? " · " + year : "" }
+          </div>
+        `;
+        refListEl.appendChild(div);
+      });
+
+      pageIndicatorEl.textContent = "Page " + currentPage + " / " + totalPages;
+      pageInfoEl.textContent = (startIndex + 1) + " – " + endIndex;
+      prevPageBtn.disabled = currentPage === 1;
+      nextPageBtn.disabled = currentPage === totalPages;
+    }
+
+    prevPageBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPage();
+      }
+    });
+
+    nextPageBtn.addEventListener("click", () => {
+      const totalPages = Math.ceil(filteredRefs.length / PAGE_SIZE);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderPage();
+      }
+    });
+
+    searchInput.addEventListener("input", () => applyFilters());
+
+    mapNodes.forEach(node => {
+      node.addEventListener("click", () => {
+        const type = node.getAttribute("data-type");
+        if (type === "neutral") {
+          // neutral nodes = reset focus
+          currentChamber = "";
+          currentBlock = "";
+        } else if (type === "chamber") {
+          const ch = node.getAttribute("data-chamber");
+          if (currentChamber === ch && !currentBlock) {
+            // second click on same = clear
+            currentChamber = "";
+          } else {
+            currentChamber = ch;
+          }
+        } else if (type === "block") {
+          const b = node.getAttribute("data-block");
+          if (currentBlock === b && !currentChamber) {
+            currentBlock = "";
+          } else {
+            currentBlock = b;
+          }
+        }
+
+        // update active visual
+        mapNodes.forEach(n => n.classList.remove("active"));
+        mapNodes.forEach(n => {
+          const t = n.getAttribute("data-type");
+          if (t === "neutral") return;
+          if (currentChamber && n.getAttribute("data-chamber") === currentChamber) n.classList.add("active");
+          if (currentBlock && n.getAttribute("data-block") === currentBlock) n.classList.add("active");
+        });
+
+        applyFilters();
+      });
+    });
+
+    // Load JSON
+    fetch("Tref_4000_full.json")
+      .then(res => res.json())
+      .then(data => {
+        allRefs = Array.isArray(data) ? data : [];
+        applyFilters();
+      })
+      .catch(err => {
+        console.error("Erreur de chargement JSON", err);
+        refListEl.innerHTML = '<div class="ref-item">Erreur de chargement de Tref_4000_full.json</div>';
+      });
+  </script>
+</body>
+</html>
