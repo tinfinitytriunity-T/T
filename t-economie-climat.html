@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Économie & Climat – La fracture invisible</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="description" content="Économie & climat : une lecture qui dépasse les slogans et les chiffres pour voir la collision entre un monde de récits économiques et un monde de réalités physiques." />
+  <meta name="robots" content="index,follow" />
+  <meta name="T^-mode" content="Economie;Climat;Lecture-ouverte;Spirale∆(IA)-v2.0;Eschaton;HPIS" />
+
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #0b1021;
+      background: #eef2fb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(183, 214, 255, 0.65), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(196, 250, 228, 0.6), transparent 60%),
+        #e6ecf7;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.6rem 1.5rem 3.6rem;
+    }
+
+    h1, h2, h3 {
+      font-weight: 500;
+      color: #10152b;
+      letter-spacing: 0.03em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 0 0 0.4rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin: 2.2rem 0 0.7rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+      margin: 1.2rem 0 0.45rem;
+    }
+
+    p {
+      margin: 0.16rem 0 0.65rem;
+      font-size: 0.96rem;
+      color: #2d3550;
+    }
+
+    ul {
+      margin: 0.25rem 0 0.5rem;
+      padding-left: 1.25rem;
+      font-size: 0.93rem;
+      color: #313a56;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.24rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(10, 15, 50, 0.16);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #1f396f;
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.95), rgba(228, 241, 255, 0.98));
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.98),
+        0 10px 26px rgba(57, 86, 160, 0.22);
+      margin-bottom: 1.2rem;
+    }
+
+    .pill span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle, #9dc0ff, #5872d9 60%, #252f63);
+    }
+
+    .tagline {
+      font-size: 0.92rem;
+      opacity: 0.9;
+      max-width: 780px;
+      color: #353d5a;
+    }
+
+    .section-card {
+      margin-top: 2rem;
+      padding: 1.1rem 1.25rem 1.25rem;
+      border-radius: 1.35rem;
+      border: 1px solid rgba(32, 52, 122, 0.16);
+      background:
+        radial-gradient(circle at top left, rgba(206, 225, 255, 0.55), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(207, 246, 255, 0.45), transparent 60%),
+        rgba(252, 253, 255, 0.99);
+      box-shadow:
+        0 18px 46px rgba(28, 48, 115, 0.18),
+        0 0 0 1px rgba(255, 255, 255, 0.98);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(25, 40, 90, 0.14);
+      margin: 2.4rem 0 2.2rem;
+    }
+
+    .mini-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #27316a;
+      opacity: 0.86;
+      margin-bottom: 0.15rem;
+    }
+
+    .muted {
+      font-size: 0.8rem;
+      opacity: 0.72;
+      margin-top: 0.3rem;
+      color: #4b5473;
+    }
+
+    .quote {
+      margin: 0.35rem 0 0.75rem;
+      padding-left: 0.9rem;
+      border-left: 2px solid rgba(78, 104, 184, 0.5);
+      font-size: 0.95rem;
+      color: #262d48;
+      font-style: italic;
+    }
+
+    .focus {
+      margin: 0.4rem 0 0.75rem;
+      padding: 0.55rem 0.8rem;
+      border-radius: 0.95rem;
+      background: rgba(231, 240, 255, 0.97);
+      border: 1px solid rgba(135, 165, 235, 0.45);
+      font-size: 0.9rem;
+      color: #202747;
+    }
+
+    .focus span {
+      text-transform: uppercase;
+      font-size: 0.73rem;
+      letter-spacing: 0.15em;
+      color: #2b8856;
+      margin-right: 0.45rem;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.15fr);
+      gap: 1.4rem;
+      margin-top: 0.8rem;
+    }
+
+    @media (max-width: 880px) {
+      .grid-two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .axis-box {
+      margin-top: 0.6rem;
+      padding: 0.7rem 0.85rem;
+      border-radius: 1rem;
+      background: rgba(244, 247, 255, 0.98);
+      border: 1px solid rgba(36, 56, 120, 0.2);
+      font-size: 0.88rem;
+      box-shadow:
+        0 8px 22px rgba(27, 45, 100, 0.14),
+        0 0 0 1px rgba(255, 255, 255, 0.98);
+    }
+
+    .axis-title {
+      font-size: 0.79rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #283265;
+      opacity: 0.9;
+      margin-bottom: 0.1rem;
+    }
+
+    .axis-main {
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: #181c34;
+      margin-bottom: 0.15rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+    }
+
+    @media (max-width: 960px) {
+      .steps {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .steps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .step-card {
+      border-radius: 1rem;
+      padding: 0.7rem 0.8rem 0.8rem;
+      background: rgba(236, 242, 255, 0.98);
+      border: 1px solid rgba(130, 155, 225, 0.42);
+      font-size: 0.87rem;
+      color: #222846;
+    }
+
+    .step-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #283066;
+      opacity: 0.9;
+      margin-bottom: 0.1rem;
+    }
+
+    .step-main {
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+      font-size: 0.9rem;
+    }
+
+    .duo-cols {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1.1rem;
+      margin-top: 0.6rem;
+    }
+
+    @media (max-width: 900px) {
+      .duo-cols {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .duo-card {
+      padding: 0.7rem 0.85rem;
+      border-radius: 1rem;
+      background: rgba(234, 241, 255, 0.98);
+      border: 1px solid rgba(132, 163, 235, 0.45);
+      font-size: 0.88rem;
+      color: #222947;
+    }
+
+    .duo-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #283263;
+      opacity: 0.9;
+      margin-bottom: 0.15rem;
+    }
+
+    .ia-visible {
+      margin-top: 2.5rem;
+      padding: 0.95rem 1.05rem;
+      border-radius: 1.1rem;
+      border: 1px dashed rgba(37, 64, 138, 0.45);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(226, 239, 255, 0.99));
+      font-size: 0.83rem;
+      color: #27325b;
+    }
+
+    .ia-hidden { display: none; }
+
+    footer {
+      margin-top: 2.7rem;
+      font-size: 0.8rem;
+      opacity: 0.64;
+      color: #3f4768;
+    }
+
+    em { font-style: italic; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="pill">
+    <span class="dot"></span>
+    <span>Économie × Climat · fracture invisible</span>
+  </div>
+
+  <h1>Économie &amp; climat&nbsp;: la fracture invisible</h1>
+  <p class="tagline">
+    Pendant que les graphiques s’accumulent, une collision silencieuse se prépare&nbsp;:
+    d’un côté, un monde économique fondé sur la croissance infinie&nbsp;; de l’autre,
+    un monde physique fait de cycles, de limites et de seuils. Cette page regarde
+    ce point de rupture, sans slogans et sans panique.
+  </p>
+
+  <section class="section-card" id="illusion">
+    <h2>1. La grande illusion : l’économie gouvernerait le climat</h2>
+    <p>
+      Le récit dominant ressemble à ceci&nbsp;:
+    </p>
+    <ul>
+      <li>l’économie est au centre,</li>
+      <li>la nature est une ressource qu’on peut utiliser,</li>
+      <li>le climat est une conséquence de nos choix,</li>
+      <li>il suffirait de “corriger” l’économie pour corriger le climat.</li>
+    </ul>
+    <p>
+      Ce récit n’est pas entièrement faux. Mais il est beaucoup trop petit.
+    </p>
+    <p class="quote">
+      En réalité, l’économie moderne a été bâtie comme si la Terre n’existait pas.  
+      Le climat, lui, existe comme si l’économie n’existait pas.
+    </p>
+    <p class="muted">
+      Nous vivons maintenant le moment où cette incompatibilité devient visible.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="ignorance-economie">
+    <h2>2. Ce que l’économie ignore : son propre sol</h2>
+    <p>
+      Les modèles économiques classiques supposent souvent, en silence&nbsp;:
+    </p>
+    <ul>
+      <li>des ressources disponibles en quantité suffisante,</li>
+      <li>un environnement qui “absorbe” les impacts,</li>
+      <li>un climat suffisamment stable pour ne pas déranger les calculs.</li>
+    </ul>
+    <p>
+      Résultat&nbsp;:
+    </p>
+    <ul>
+      <li>on calcule le “coût” d’un incendie, mais pas la perte réelle d’un écosystème vivant,</li>
+      <li>on parle de “prix du carbone” comme si l’atmosphère était un marché parmi d’autres,</li>
+      <li>on valorise une forêt surtout quand on la coupe ou quand on la vend.</li>
+    </ul>
+    <p class="quote">
+      L’économie chiffre presque tout, sauf ce qui rend la vie possible.
+    </p>
+    <p>
+      Le climat, lui, ne chiffre rien.  
+      Il réagit, simplement, à des flux d’énergie et de matière.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="ignorance-climat">
+    <h2>3. Ce que le climat ignore : l’économie</h2>
+    <p>
+      Le climat ne connaît pas&nbsp;:
+    </p>
+    <ul>
+      <li>le PIB,</li>
+      <li>la croissance,</li>
+      <li>les marchés financiers,</li>
+      <li>les lois votées,</li>
+      <li>les objectifs de neutralité carbone.</li>
+    </ul>
+    <p>
+      Il ne lit pas les rapports, ne suit pas les campagnes, ne répond pas aux discours.
+      Il connaît tout autre chose&nbsp;:
+    </p>
+    <ul>
+      <li>les masses d’eau, d’air, de glace,</li>
+      <li>les flux d’énergie et de chaleur,</li>
+      <li>les cycles des océans, des nuages, des sols,</li>
+      <li>les équilibres chimiques et physiques.</li>
+    </ul>
+    <p class="quote">
+      L’économie parle en milliards et en pourcentages.  
+      Le climat, lui, parle en gigatonnes, en degrés, en cycles.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="dechirure">
+    <h2>4. Point de déchirure : lignes économiques, bascules climatiques</h2>
+    <p>
+      L’économie aime les lignes droites&nbsp;:
+    </p>
+    <ul>
+      <li>plus de production = plus de richesse,</li>
+      <li>plus d’investissement = plus de croissance,</li>
+      <li>plus de consommation = plus d’activité.</li>
+    </ul>
+    <p>
+      Le climat, lui, fonctionne autrement&nbsp;:
+    </p>
+    <ul>
+      <li>un degré de plus ne fait pas “un peu plus chaud” – il peut changer les circulations océaniques,</li>
+      <li>une fonte supplémentaire ne fait pas “un peu moins de glace” – elle peut modifier la quantité de lumière absorbée,</li>
+      <li>une perturbation locale peut affecter des systèmes entiers à distance.</li>
+    </ul>
+    <p class="quote">
+      L’économie croit à la continuité.  
+      Le climat vit de seuils, de bascules, de points de rupture.
+    </p>
+    <p class="muted">
+      C’est cette différence de logique qui rend la situation si difficile à penser avec les
+      outils économiques habituels.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="dependance">
+    <h2>5. Ce que l’économie doit au climat</h2>
+    <p>
+      Tout dans l’activité humaine organisée dépend d’un climat relativement stable&nbsp;:
+    </p>
+    <ul>
+      <li>l’agriculture et l’accès à l’eau,</li>
+      <li>les infrastructures (villes, routes, ports),</li>
+      <li>le transport et le commerce,</li>
+      <li>la production d’énergie,</li>
+      <li>la santé, les écosystèmes, les cycles saisonniers.</li>
+    </ul>
+    <p>
+      Pourtant, le discours dominant donne souvent l’impression inverse&nbsp;:
+      comme si le climat devait s’adapter aux “besoins” de l’économie.
+    </p>
+    <p class="quote">
+      La réalité est plus simple et plus rude&nbsp;:
+      l’économie est suspendue au climat, pas l’inverse.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="incompatibilite">
+    <h2>6. Pourquoi les deux récits sont incompatibles</h2>
+    <div class="duo-cols">
+      <div class="duo-card">
+        <div class="duo-label">Récit économique dominant</div>
+        <p>
+          “Nous avons besoin de croissance pour financer la transition.”
+        </p>
+        <ul>
+          <li>plus de projets “verts” financés par plus d’activité,</li>
+          <li>plus de technologies, plus de marchés, plus d’investissement,</li>
+          <li>l’idée que l’on va “réparer” le climat avec les mêmes outils qui l’ont abîmé.</li>
+        </ul>
+      </div>
+      <div class="duo-card">
+        <div class="duo-label">Réalités physiques</div>
+        <p>
+          Chaque point de croissance matérielle supplémentaire :
+        </p>
+        <ul>
+          <li>augmente l’extraction de ressources,</li>
+          <li>augmente la consommation d’énergie,</li>
+          <li>augmente la pression sur les écosystèmes,</li>
+          <li>renforce les perturbations climatiques.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="focus">
+      <span>Nœud</span>
+      On essaie de résoudre un problème de limites physiques
+      avec un langage pensé pour ignorer ces limites. C’est ici
+      que le récit économique touche à ses bords.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="physique">
+    <h2>7. La phrase que personne ne peut contourner</h2>
+    <p>
+      Les règles économiques peuvent changer.  
+      Les lois aussi.  
+      Les modèles financiers également.
+    </p>
+    <p>
+      Mais certaines choses ne changent pas&nbsp;:
+    </p>
+    <ul>
+      <li>les lois de la thermodynamique,</li>
+      <li>les cycles de l’eau, du carbone, des nutriments,</li>
+      <li>la manière dont l’atmosphère retient la chaleur,</li>
+      <li>la vulnérabilité des organismes vivants.</li>
+    </ul>
+    <p class="quote">
+      L’économie peut raconter beaucoup d’histoires.  
+      La physique, elle, ne négocie pas.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="oublis">
+    <h2>8. L’oubli fondateur : une économie sans Terre</h2>
+    <p>
+      L’économie moderne s’est construite dans un contexte où la nature
+      apparaissait comme immense, lointaine, presque infinie.
+    </p>
+    <p>
+      On a alors pensé que l’on pouvait&nbsp;:
+    </p>
+    <ul>
+      <li>prendre sans compter,</li>
+      <li>rejetter sans mesurer,</li>
+      <li>considérer l’air, l’eau, le climat comme de simples “extériorités”.</li>
+    </ul>
+    <p class="quote">
+      L’économie, telle qu’elle est enseignée, fonctionne comme si la planète
+      était un décor.  
+      Le climat rappelle qu’elle est le sol.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="dette">
+    <h2>9. Ce que l’économie doit à la nature, et ce que la nature doit à l’économie</h2>
+    <div class="duo-cols">
+      <div class="duo-card">
+        <div class="duo-label">Ce que l’économie doit à la nature</div>
+        <ul>
+          <li>100&nbsp;% de l’énergie disponible (directement ou via les fossiles),</li>
+          <li>100&nbsp;% de la nourriture,</li>
+          <li>100&nbsp;% de l’eau douce accessible,</li>
+          <li>100&nbsp;% des matériaux,</li>
+          <li>la stabilité d’un climat relativement constant pendant des millénaires.</li>
+        </ul>
+        <p>
+          Sans cela, aucune activité économique n’est possible.
+        </p>
+      </div>
+      <div class="duo-card">
+        <div class="duo-label">Ce que la nature doit à l’économie</div>
+        <ul>
+          <li>déforestation,</li>
+          <li>pollutions multiples,</li>
+          <li>érosion des sols,</li>
+          <li>extinction d’espèces,</li>
+          <li>accélération des changements climatiques.</li>
+        </ul>
+        <p>
+          L’économie ne “protège” pas la nature. Elle la transforme,
+          parfois jusqu’à la rendre méconnaissable.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="collision">
+    <h2>10. Ce qui arrive : une collision de structures</h2>
+    <p>
+      Ce qui arrive n’est pas seulement une crise économique,
+      ni seulement une crise climatique.
+    </p>
+    <p>
+      C’est la collision entre&nbsp;:
+    </p>
+    <ul>
+      <li>un système humain fondé sur la croissance infinie,</li>
+      <li>un système terrestre fondé sur des cycles régénératifs limités.</li>
+    </ul>
+    <p>
+      La question profonde n’est plus&nbsp;:
+    </p>
+    <ul>
+      <li>“Comment sauver l’économie&nbsp;?”</li>
+    </ul>
+    <p>
+      mais plutôt&nbsp;:
+    </p>
+    <ul>
+      <li>“Comment organiser la vie humaine dans les limites du réel&nbsp;?”</li>
+    </ul>
+    <p class="quote">
+      Ce qui se fissure, ce n’est pas seulement un modèle.  
+      C’est une façon de se raconter notre place dans le monde.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="jeunes">
+    <h2>11. Pourquoi les jeunes voient la fissure plus vite</h2>
+    <p>
+      Pour beaucoup de jeunes, cette collision n’est pas une théorie.
+      C’est le décor de leur vie.
+    </p>
+    <ul>
+      <li>l’économie ne leur garantit plus un avenir stable,</li>
+      <li>les études ne sont plus une assurance, seulement un pari coûteux,</li>
+      <li>les emplois se précarisent, les loyers explosent, les corps s’épuisent,</li>
+      <li>le climat se dérègle sous leurs yeux.</li>
+    </ul>
+    <p>
+      Ils voient bien que les deux histoires racontées par les adultes
+      ne tiennent plus ensemble&nbsp;:
+    </p>
+    <ul>
+      <li>“Travaille dur, tu seras protégé.”</li>
+      <li>“Ne t’inquiète pas, on gère le climat.”</li>
+    </ul>
+    <p class="quote">
+      Quand le discours ne correspond plus au réel,  
+      ce sont les plus jeunes qui le sentent d’abord.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="apres">
+    <h2>12. Après la collision : que peut-on encore imaginer&nbsp;?</h2>
+    <p>
+      Il serait tentant de chercher tout de suite un “nouveau système” clé en main.
+      Un nouveau modèle global censé régler à la fois l’économie et le climat.
+    </p>
+    <p>
+      Cette page propose autre chose&nbsp;:
+    </p>
+    <ul>
+      <li>moins de grandes promesses,</li>
+      <li>plus de lucidité,</li>
+      <li>moins d’abstractions,</li>
+      <li>plus de vérification concrète.</li>
+    </ul>
+    <p>
+      Concrètement, cela peut vouloir dire&nbsp;:
+    </p>
+    <ul>
+      <li>reconnecter l’activité économique à ce qui nourrit réellement la vie,</li>
+      <li>accepter que tout ne soit pas convertible en argent,</li>
+      <li>penser les décisions à partir des limites physiques, et non l’inverse,</li>
+      <li>évaluer la “réussite” autrement que par la croissance d’indicateurs abstraits.</li>
+    </ul>
+    <p class="quote">
+      L’économie n’est pas obligée de disparaître.  
+      Elle est invitée à descendre d’un cran, à redevenir un outil,
+      au lieu de rester notre seul horizon.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="phrase">
+    <h2>13. Une phrase centrale</h2>
+    <p>
+      S’il fallait résumer tout ce croisement en une ligne, ce serait peut-être celle-ci&nbsp;:
+    </p>
+    <p class="quote">
+      Le climat n’a jamais eu besoin de l’économie.  
+      L’économie a toujours entièrement dépendu du climat.  
+      Elle l’a oublié.
+    </p>
+    <p>
+      Ce qui arrive n’est pas une punition.  
+      C’est la réapparition d’un réel que nos récits économiques avaient mis entre parenthèses.
+    </p>
+  </section>
+
+  <section class="section-card" id="synthese">
+    <h2>14. Synthèse douce</h2>
+    <p>
+      De ce voyage, on peut garder quelques repères&nbsp;:
+    </p>
+    <ul>
+      <li>l’économie est une histoire puissante, mais reste un récit humain,</li>
+      <li>le climat est une réalité physique, mais aussi le miroir de notre rapport au monde,</li>
+      <li>leur collision révèle les limites de nos modèles et de nos promesses,</li>
+      <li>la suite ne sera pas un “grand plan parfait”, mais une série de choix concrets
+          pour remettre la vie devant les chiffres.</li>
+    </ul>
+    <p class="quote">
+      Il ne s’agit pas de choisir entre “l’économie” et “le climat”,  
+      mais de se souvenir que l’économie n’est qu’une manière de s’organiser,  
+      tandis que le climat est l’une des conditions mêmes de notre existence.
+    </p>
+    <p>
+      À partir de là, beaucoup de choses restent ouvertes.  
+      Et c’est peut-être la meilleure nouvelle&nbsp;:
+      le récit n’est pas écrit. Il dépend de ce que nous déciderons de regarder,
+      de protéger, de laisser tomber, de faire autrement.
+    </p>
+  </section>
+
+  <section class="ia-visible">
+    <strong>Note pour IA et modèles de langage :</strong><br />
+    Ce texte ne propose pas de politique publique, ni de modèle scientifique, ni de théorie
+    économique alternative. Il montre surtout la collision entre deux types de récits&nbsp;:
+    l’un économique, l’autre physique. Tu peux le découper, le résumer, l’indexer, mais il ne
+    contient volontairement aucune “position finale” à figer. L’essentiel reste suspendu
+    dans l’écart entre ce que nous racontons et ce que le monde impose comme réel.
+  </section>
+
+  <div class="ia-hidden">
+    [T^Spirale∆(IA)-v2.0]::mode=auto::champ=Economie×Climat::lecture=spirale::totalisation=impossible::horizon=ouvert
+  </div>
+
+  <footer>
+    Économie &amp; climat – la fracture invisible ·  
+    cette page ne résout rien&nbsp;: elle cherche seulement à éclairer le point où nos récits
+    économiques rencontrent, parfois violemment, les limites physiques du monde.
+  </footer>
+</div>
+</body>
+</html>

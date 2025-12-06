@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>T^ref — Cartographie brute des références</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="T^ref — cartographie brute des références, champs et nuages, sans synthèse ni théorie." />
+
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-alt: #0b0d14;
+      --fg: #f4f4f7;
+      --muted: #a5abb8;
+      --accent: #e2b3ff;
+      --accent-soft: rgba(226,179,255,0.08);
+      --border: #272b3b;
+      --tag-bg: rgba(255,255,255,0.04);
+      --tag-fg: #d0d5e6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #191b2b 0, #05060a 50%);
+      color: var(--fg);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    header {
+      margin-bottom: 2.5rem;
+    }
+
+    .title {
+      font-size: 2.3rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0;
+      padding: 0;
+    }
+
+    .title span {
+      opacity: 0.6;
+      font-weight: 300;
+    }
+
+    .subtitle {
+      margin-top: 0.75rem;
+      max-width: 46rem;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.35);
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.6rem;
+    }
+
+    .badge-dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px rgba(226,179,255,0.8);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.1fr);
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 880px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.65));
+      border-radius: 1.25rem;
+      border: 1px solid var(--border);
+      padding: 1.4rem 1.5rem 1.6rem;
+      box-shadow:
+        0 22px 50px rgba(0,0,0,0.65),
+        0 0 0 1px rgba(255,255,255,0.01);
+    }
+
+    .panel + .panel {
+      margin-top: 1rem;
+    }
+
+    .panel-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 0.9rem;
+    }
+
+    .panel-title span {
+      color: var(--accent);
+      margin-right: 0.35rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .chip {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: var(--tag-bg);
+      color: var(--tag-fg);
+      font-size: 0.74rem;
+      border: 1px solid rgba(255,255,255,0.03);
+      white-space: nowrap;
+    }
+
+    h2 {
+      font-size: 1.05rem;
+      margin: 0 0 0.3rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h3 {
+      font-size: 0.98rem;
+      margin: 1rem 0 0.25rem;
+      color: var(--fg);
+    }
+
+    h3 span {
+      color: var(--accent);
+      font-weight: 500;
+      margin-right: 0.3rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0.15rem 0 0.4rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.25rem 0 0.7rem;
+    }
+
+    li {
+      font-size: 0.88rem;
+      color: var(--fg);
+      padding: 0.1rem 0;
+      opacity: 0.92;
+    }
+
+    li span {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-left: 0.25rem;
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      opacity: 0.85;
+      border-top: 1px dashed var(--border);
+      margin-top: 0.8rem;
+      padding-top: 0.55rem;
+    }
+
+    .tagline {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+
+    code {
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.78rem;
+      background: rgba(255,255,255,0.03);
+      padding: 0.08rem 0.3rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="badge">
+        <span class="badge-dot"></span>
+        <span>T^ref · version brute</span>
+      </div>
+      <h1 class="title">T^<span>ref</span></h1>
+      <p class="subtitle">
+        Cartographie brute des références. Champs, nuages, noms, fragments. 
+        Ici, pas de théorie et pas de synthèse : seulement des ensembles de points
+        où le mot « réalité » se fissure, se déplace, se reconfigure.
+      </p>
+      <p class="tagline">
+        T^ref n’est ni doctrine ni système : c’est un champ de repères.
+        Toute lecture reste en ∆.
+      </p>
+    </header>
+
+    <main>
+      <!-- Colonne principale : Champs -->
+      <section>
+        <!-- C1 -->
+        <article class="panel">
+          <h2>Champ C1 · Réel / Voilement / Ontologie</h2>
+          <p>
+            Références où le « réel » apparaît comme voilé, retiré, filtré.
+            Métaphysiques, traditions, cosmologies.
+          </p>
+
+          <h3><span>01</span>Métaphysiques du retrait</h3>
+          <ul>
+            <li>Heidegger (Être / voilement)</li>
+            <li>Jean-Luc Marion (phénomène saturé)</li>
+            <li>Quentin Meillassoux (contingence absolue)</li>
+            <li>Nishida / Nishitani (vide, néant, lieu)</li>
+            <li>Maître Eckhart (dépouillement, non-fond)</li>
+            <li>Henry Corbin (imaginal)</li>
+          </ul>
+
+          <h3><span>02</span>Traditions de l’illusion / vacuité</h3>
+          <ul>
+            <li>Vedānta · Māyā</li>
+            <li>Upanishads</li>
+            <li>Bouddhisme (Theravāda, Mahāyāna, Madhyamaka)</li>
+            <li>Dzogchen · rigpa, apparences</li>
+            <li>Taoïsme (Dao, non-agir, formes vides)</li>
+            <li>Soufisme (Ibn ‘Arabī, imaginal)</li>
+            <li>Kabbale (Ein Sof, tsimtsoum)</li>
+          </ul>
+
+          <h3><span>03</span>Cosmologies vernaculaires</h3>
+          <ul>
+            <li>Aborigènes (Dreamtime)</li>
+            <li>Yoruba (Orishas, Ifa)</li>
+            <li>Navajo (Hózhó)</li>
+            <li>Dogon (Nommo)</li>
+            <li>Kogi, Mapuche, Maori, Inuit…</li>
+          </ul>
+
+          <p class="hint">
+            C1 n’essaie pas d’unifier ; il juxtapose des manières de dire
+            que ce que nous prenons pour « réalité » n’est jamais donné tel quel.
+          </p>
+        </article>
+
+        <!-- C2 -->
+        <article class="panel">
+          <h2>Champ C2 · Langage / Sens / Narratif</h2>
+          <p>
+            Références où le monde apparaît comme texte, code, récit, mythe, message.
+          </p>
+
+          <h3><span>01</span>Langage et signe</h3>
+          <ul>
+            <li>Saussure (signifiant / signifié)</li>
+            <li>Wittgenstein (limites du langage)</li>
+            <li>Derrida (différance, trace)</li>
+            <li>Austin / Searle (performativité)</li>
+            <li>Quine (indétermination de la traduction)</li>
+            <li>Peirce, Jakobson, Eco, Barthes…</li>
+          </ul>
+
+          <h3><span>02</span>Récits, mythes, fictions</h3>
+          <ul>
+            <li>Lévi-Strauss (mythologiques)</li>
+            <li>Joseph Campbell (monomythe)</li>
+            <li>Mircea Eliade (sacré/profane)</li>
+            <li>Borges, Kafka, Beckett</li>
+            <li>Philip K. Dick, Ursula Le Guin, Gibson</li>
+            <li>Matrix, Ghost in the Shell, Black Mirror…</li>
+          </ul>
+
+          <h3><span>03</span>Médias et narratifs collectifs</h3>
+          <ul>
+            <li>McLuhan (le médium est le message)</li>
+            <li>Baudrillard (simulacres, hyperréel)</li>
+            <li>Chomsky / Herman (manufacturing consent)</li>
+            <li>Réseaux sociaux, memes, stories, avatars</li>
+          </ul>
+
+          <p class="hint">
+            C2 rassemble tout ce qui transforme le « réel »
+            en texte, en récit, en image, en flux de signes.
+          </p>
+        </article>
+
+        <!-- C3 -->
+        <article class="panel">
+          <h2>Champ C3 · Psyché / Corps / Symptômes</h2>
+          <p>
+            Références où le moi, la souffrance, le trauma, les émotions
+            apparaissent comme montages, constructions, stabilisations.
+          </p>
+
+          <h3><span>01</span>Psychanalyses & cliniques</h3>
+          <ul>
+            <li>Freud (souvenir-écran, mise en scène)</li>
+            <li>Lacan (symbolique, imaginaire, Réel)</li>
+            <li>Winnicott (aire transitionnelle)</li>
+            <li>Bion (O, pensée sans mémoire ni désir)</li>
+            <li>Jung (archétypes)</li>
+          </ul>
+
+          <h3><span>02</span>Psychologies, modèles, DSM</h3>
+          <ul>
+            <li>DSM et classifications diagnostics</li>
+            <li>Thérapies (EMDR, IFS, ACT, Gestalt, systémiques…)</li>
+            <li>Attachement (sécure, insécure, désorganisé)</li>
+            <li>Polyvagale, window of tolerance</li>
+          </ul>
+
+          <h3><span>03</span>Neuro / cognition affective</h3>
+          <ul>
+            <li>Émotions construites (Barrett)</li>
+            <li>Hallucination contrôlée (predictive brain)</li>
+            <li>Mémoire reconstructive, faux souvenirs</li>
+          </ul>
+
+          <p class="hint">
+            C3 ne nie pas la souffrance ; il rappelle que ses formes
+            sont toujours configurées par des modèles, des récits, des cadres.
+          </p>
+        </article>
+
+        <!-- C4 -->
+        <article class="panel">
+          <h2>Champ C4 · Monde social / Pouvoir / Institutions</h2>
+          <p>
+            Références où la « réalité sociale » apparaît comme résultat de
+            structures, normes, récits, intérêts, dispositifs.
+          </p>
+
+          <h3><span>01</span>Anthropologies du monde</h3>
+          <ul>
+            <li>Lévi-Strauss, Descola (ontologies)</li>
+            <li>Animisme, totémisme, analogisme, naturalisme</li>
+            <li>Rituels, liminalité (Turner)</li>
+          </ul>
+
+          <h3><span>02</span>Sociologies critiques</h3>
+          <ul>
+            <li>Bourdieu (habitus, champs)</li>
+            <li>Goffman (présentation de soi)</li>
+            <li>Debord (société du spectacle)</li>
+            <li>Latour (actants, réseaux)</li>
+          </ul>
+
+          <h3><span>03</span>Économie, droit, santé, climat…</h3>
+          <ul>
+            <li>Marx, Keynes, Hayek, Piketty, Minsky…</li>
+            <li>Droit (Kelsen, Dworkin, legal realism)</li>
+            <li>Biopolitique (Foucault, Rose)</li>
+            <li>Big Pharma, DSM, climat (GIEC, scénarios), école…</li>
+          </ul>
+
+          <p class="hint">
+            C4 regroupe les dispositifs qui fabriquent un « monde »
+            où l’on finit par oublier que tout a une histoire.
+          </p>
+        </article>
+
+        <!-- C5 -->
+        <article class="panel">
+          <h2>Champ C5 · Formels / Sciences / Limites</h2>
+          <p>
+            Références où les systèmes les plus rigoureux révèlent leurs trous,
+            bords, paradoxes, indéterminations.
+          </p>
+
+          <h3><span>01</span>Mathématiques & logique</h3>
+          <ul>
+            <li>Gödel (incomplétude)</li>
+            <li>Logiques paraconsistantes</li>
+            <li>Théorie des catégories, topos</li>
+            <li>Ensembles transfinis</li>
+          </ul>
+
+          <h3><span>02</span>Physique & complexité</h3>
+          <ul>
+            <li>Quantique (superposition, indétermination)</li>
+            <li>Relational QM (Rovelli), temps émergent (Barbour)</li>
+            <li>Holographie, multivers, gravité émergente</li>
+            <li>Chaos, systèmes complexes, auto-organisation</li>
+          </ul>
+
+          <p class="hint">
+            C5 montre que même la rigueur maximale ne supprime pas
+            les zones blanches : elle les rend visibles.
+          </p>
+        </article>
+
+        <!-- C6 -->
+        <article class="panel">
+          <h2>Champ C6 · Expérience-limite / États modifiés / Art</h2>
+          <p>
+            Références où la « réalité ordinaire » se fissure :
+            rêves, états modifiés, expériences esthétiques, frontières.
+          </p>
+
+          <h3><span>01</span>Rêves & états modifiés</h3>
+          <ul>
+            <li>Rêve lucide, hypnose</li>
+            <li>Psychédéliques (Carhart-Harris, Grof…)</li>
+            <li>Méditation profonde, samadhi, vipassana</li>
+            <li>ECM, transe, flow</li>
+          </ul>
+
+          <h3><span>02</span>Art & expériences limites</h3>
+          <ul>
+            <li>Tarkovski, Lynch, Beckett</li>
+            <li>Performance, art conceptuel</li>
+            <li>VR sociale, isolation sensorielle</li>
+          </ul>
+
+          <p class="hint">
+            C6 est la zone où la réalité se montre comme modulable,
+            friable, poreuse — sans garantie de retour au même.
+          </p>
+        </article>
+      </section>
+
+      <!-- Colonne latérale : Axes, invariants, mémo d'usage -->
+      <aside>
+        <article class="panel">
+          <h2>Axes transversaux T^ref</h2>
+          <p>
+            Axes de lecture qui traversent tous les champs. Ce ne sont pas des théories,
+            seulement des directions possibles.
+          </p>
+          <h3><span>A1</span>Apparence ↔ « Réel »</h3>
+          <p>Partout où quelque chose apparaît comme monde, mais n’est qu’une forme.</p>
+
+          <h3><span>A2</span>Un ↔ Multiplicité</h3>
+          <p>Un monde unique ? ou des mondes parallèles, incompatibles, simultanés.</p>
+
+          <h3><span>A3</span>Continu ↔ Fissuré</h3>
+          <p>Zones de coupure, trous, manques, traumas, singularités.</p>
+
+          <h3><span>A4</span>Simulé ↔ Non-simulable</h3>
+          <p>Ce que les modèles rejouent, et ce qui leur échappe.</p>
+
+          <p class="hint">
+            On peut noter un point de lecture par ex. : <code>C3 · A1</code>,
+            « psyché / symptôme » sous l’axe « apparence / réel ».
+          </p>
+        </article>
+
+        <article class="panel">
+          <h2>Invariants T^ref (bruts)</h2>
+          <ul>
+            <li>Rien de ce qui est vécu comme « réel » n’est brut.</li>
+            <li>Il n’y a pas un monde, mais des mondes.</li>
+            <li>Le moi, l’identité, le symptôme sont des formes construites.</li>
+            <li>Tout système cohérent a ses trous.</li>
+            <li>L’art, le rêve, les états modifiés laissent voir l’illusion comme illusion.</li>
+            <li>Toute sortie d’IA reste narratif de ∆, jamais le réel.</li>
+          </ul>
+          <p class="hint">
+            Ces invariants ne sont pas des dogmes : seulement ce qui revient,
+            encore et encore, dans les nuages de T^ref.
+          </p>
+        </article>
+
+        <article class="panel">
+          <h2>Usage brut de T^ref</h2>
+          <p>
+            Pour un sujet donné (par ex. : jeunes, DSM, climat, IA, trauma…),
+            on peut simplement repérer :
+          </p>
+          <ul>
+            <li>les champs concernés (C1…C6),</li>
+            <li>les axes activés (A1…A4),</li>
+            <li>les invariants touchés.</li>
+          </ul>
+          <p class="hint">
+            T^ref n’explique pas. Il aligne des repères autour d’un point
+            et laisse T^ faire le reste.
+          </p>
+        </article>
+      </aside>
+    </main>
+
+    <!-- Ici on pourra insérer plus tard : Bloc T^Spirale∆(IA) - v2.0 -->
+  </div>
+</body>
+</html>

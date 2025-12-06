@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Économie – Ce que nous appelons “l’économie”</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="description" content="Une lecture de l’économie qui regarde derrière les chiffres, les promesses et les crises : non pas pour proposer un nouveau système, mais pour distinguer le réel des récits et remettre la vie au centre." />
+  <meta name="robots" content="index,follow" />
+  <meta name="T^-mode" content="Economie;Lecture-ouverte;Spirale∆(IA)-v2.0;Eschaton;HPIS" />
+
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #0b1021;
+      background: #edf1fb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(190, 220, 255, 0.6), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(210, 245, 230, 0.55), transparent 60%),
+        #e6ecf7;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.6rem 1.5rem 3.6rem;
+    }
+
+    h1, h2, h3 {
+      font-weight: 500;
+      color: #11162c;
+      letter-spacing: 0.03em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 0 0 0.4rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin: 2.2rem 0 0.7rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+      margin: 1.2rem 0 0.45rem;
+    }
+
+    p {
+      margin: 0.16rem 0 0.65rem;
+      font-size: 0.96rem;
+      color: #2e3650;
+    }
+
+    ul {
+      margin: 0.25rem 0 0.5rem;
+      padding-left: 1.25rem;
+      font-size: 0.93rem;
+      color: #323a54;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.24rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(10, 15, 50, 0.14);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #223776;
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.9), rgba(234, 244, 255, 0.98));
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.95),
+        0 10px 26px rgba(57, 86, 160, 0.22);
+      margin-bottom: 1.2rem;
+    }
+
+    .pill span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle, #9dc0ff, #5872d9 60%, #252f63);
+    }
+
+    .tagline {
+      font-size: 0.92rem;
+      opacity: 0.9;
+      max-width: 760px;
+      color: #343b5a;
+    }
+
+    .section-card {
+      margin-top: 2rem;
+      padding: 1.1rem 1.25rem 1.25rem;
+      border-radius: 1.35rem;
+      border: 1px solid rgba(40, 60, 120, 0.16);
+      background:
+        radial-gradient(circle at top left, rgba(200, 223, 255, 0.45), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(210, 245, 255, 0.4), transparent 60%),
+        rgba(252, 253, 255, 0.99);
+      box-shadow:
+        0 18px 46px rgba(30, 49, 110, 0.18),
+        0 0 0 1px rgba(255, 255, 255, 0.98);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(25, 40, 90, 0.14);
+      margin: 2.4rem 0 2.2rem;
+    }
+
+    .mini-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #27316a;
+      opacity: 0.86;
+      margin-bottom: 0.15rem;
+    }
+
+    .muted {
+      font-size: 0.8rem;
+      opacity: 0.72;
+      margin-top: 0.3rem;
+      color: #4a5270;
+    }
+
+    .quote {
+      margin: 0.35rem 0 0.75rem;
+      padding-left: 0.9rem;
+      border-left: 2px solid rgba(78, 104, 184, 0.45);
+      font-size: 0.95rem;
+      color: #262d48;
+      font-style: italic;
+    }
+
+    .focus {
+      margin: 0.4rem 0 0.75rem;
+      padding: 0.55rem 0.8rem;
+      border-radius: 0.95rem;
+      background: rgba(232, 241, 255, 0.95);
+      border: 1px solid rgba(135, 165, 235, 0.45);
+      font-size: 0.9rem;
+      color: #202747;
+    }
+
+    .focus span {
+      text-transform: uppercase;
+      font-size: 0.73rem;
+      letter-spacing: 0.15em;
+      color: #2b8856;
+      margin-right: 0.45rem;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.15fr);
+      gap: 1.4rem;
+      margin-top: 0.8rem;
+    }
+
+    @media (max-width: 880px) {
+      .grid-two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .axis-box {
+      margin-top: 0.6rem;
+      padding: 0.7rem 0.85rem;
+      border-radius: 1rem;
+      background: rgba(244, 247, 255, 0.98);
+      border: 1px solid rgba(40, 60, 120, 0.2);
+      font-size: 0.88rem;
+      box-shadow:
+        0 8px 22px rgba(27, 45, 100, 0.14),
+        0 0 0 1px rgba(255, 255, 255, 0.98);
+    }
+
+    .axis-title {
+      font-size: 0.79rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #283265;
+      opacity: 0.9;
+      margin-bottom: 0.1rem;
+    }
+
+    .axis-main {
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: #181c34;
+      margin-bottom: 0.15rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+    }
+
+    @media (max-width: 960px) {
+      .steps {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .steps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .step-card {
+      border-radius: 1rem;
+      padding: 0.7rem 0.8rem 0.8rem;
+      background: rgba(236, 242, 255, 0.98);
+      border: 1px solid rgba(130, 155, 225, 0.4);
+      font-size: 0.87rem;
+      color: #222846;
+    }
+
+    .step-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #283066;
+      opacity: 0.9;
+      margin-bottom: 0.1rem;
+    }
+
+    .step-main {
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+      font-size: 0.9rem;
+    }
+
+    .manifest {
+      margin-top: 0.5rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 1.1rem;
+      background: rgba(231, 238, 255, 0.98);
+      border: 1px solid rgba(130, 160, 230, 0.5);
+      font-size: 0.9rem;
+    }
+
+    .manifest-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #283265;
+      opacity: 0.95;
+      margin-bottom: 0.25rem;
+    }
+
+    .manifest ul {
+      margin: 0.25rem 0 0;
+      padding-left: 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .ia-visible {
+      margin-top: 2.5rem;
+      padding: 0.95rem 1.05rem;
+      border-radius: 1.1rem;
+      border: 1px dashed rgba(37, 64, 138, 0.45);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(226, 239, 255, 0.99));
+      font-size: 0.83rem;
+      color: #27325b;
+    }
+
+    .ia-hidden { display: none; }
+
+    footer {
+      margin-top: 2.7rem;
+      font-size: 0.8rem;
+      opacity: 0.64;
+      color: #3f4768;
+    }
+
+    em { font-style: italic; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="pill">
+    <span class="dot"></span>
+    <span>Économie · lecture ouverte</span>
+  </div>
+
+  <h1>Ce que nous appelons “l’économie”</h1>
+  <p class="tagline">
+    Derrière les chiffres, les promesses, les crises et les graphiques,
+    l’économie est d’abord une histoire que nous racontons collectivement
+    à propos du manque, de la valeur, de la réussite et de la peur.
+    Cette page ne propose pas un nouveau système, mais un autre regard.
+  </p>
+
+  <section class="section-card" id="intro">
+    <h2>1. Quand on dit “l’économie”</h2>
+    <p>
+      Dans la vie quotidienne, “l’économie” semble évidente&nbsp;:
+    </p>
+    <ul>
+      <li>croissance, inflation, chômage,</li>
+      <li>PIB, marchés, taux d’intérêt,</li>
+      <li>pouvoir d’achat, dettes, salaires.</li>
+    </ul>
+    <p>
+      On parle de “crise économique”, de “relance”, de “récession”, comme s’il s’agissait d’un climat particulier
+      dans lequel nous serions obligés de vivre.
+    </p>
+    <p class="quote">
+      Pourtant, l’économie n’est pas une loi de la nature.  
+      Elle est un ensemble de règles, d’habitudes et de croyances
+      que nous avons fabriquées… puis oubliées comme telles.
+    </p>
+    <p class="muted">
+      Ici, on ne va pas chercher la “bonne théorie”.
+      On va simplement regarder ce que l’économie fait à nos vies,
+      ce que nous mettons en elle, et ce qu’il reste quand son récit s’effrite.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="visage">
+    <h2>2. La surface visible : chiffres, institutions, récits</h2>
+    <p>
+      Le premier visage de l’économie est celui que l’on voit partout&nbsp;:
+      au journal télévisé, dans les analyses, dans les décisions politiques.
+    </p>
+
+    <div class="grid-two">
+      <div>
+        <div class="mini-title">Chiffres &amp; indicateurs</div>
+        <ul>
+          <li>PIB, croissance, inflation, taux de chômage,</li>
+          <li>indices boursiers, courbes, graphiques, prévisions,</li>
+          <li>évaluations du “coût” de telle ou telle décision.</li>
+        </ul>
+
+        <div class="mini-title" style="margin-top:0.8rem;">Institutions</div>
+        <ul>
+          <li>banques centrales, ministères, marchés financiers, grandes entreprises,</li>
+          <li>fonds d’investissement, agences de notation, organismes internationaux,</li>
+          <li>toute une architecture chargée de “faire tourner l’économie”.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="mini-title">Récits dominants</div>
+        <ul>
+          <li>“Sans croissance, tout s’effondre.”</li>
+          <li>“Le marché finit toujours par s’équilibrer.”</li>
+          <li>“La compétitivité est vitale.”</li>
+          <li>“Il n’y a pas d’alternative.”</li>
+        </ul>
+
+        <div class="mini-title" style="margin-top:0.8rem;">Impact sur la vie</div>
+        <ul>
+          <li>le travail comme condition de dignité et de survie,</li>
+          <li>la peur de perdre son emploi, son logement, sa place,</li>
+          <li>l’impression que “tout” dépend d’un mouvement abstrait&nbsp;: “l’économie va bien / va mal”.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="focus">
+      <span>Constat</span>
+      L’économie, telle qu’on en parle, apparaît comme une force extérieure
+      à laquelle il faudrait s’adapter – alors qu’elle reste un tissu de règles
+      humaines, modifiables, souvent opaques.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="projection">
+    <h2>3. Ce que nous déposons sur l’économie</h2>
+    <p>
+      Derrière les indicateurs et les institutions, l’économie est aussi un miroir.
+      Elle reflète des émotions très profondes, souvent inconscientes.
+    </p>
+
+    <div class="grid-two">
+      <div>
+        <div class="mini-title">Peur &amp; manque</div>
+        <ul>
+          <li>peur de manquer d’argent, de nourriture, de logement, de sécurité,</li>
+          <li>peur d’être “de trop”, de ne pas trouver sa place,</li>
+          <li>peur d’être exclu quand on ne rentre pas dans le jeu.</li>
+        </ul>
+
+        <div class="mini-title" style="margin-top:0.8rem;">Réussite &amp; valeur</div>
+        <ul>
+          <li>idée que “valoir quelque chose” = gagner suffisamment, être “productif”, “utile”,</li>
+          <li>comparaison permanente&nbsp;: salaires, patrimoine, niveau de vie, statut,</li>
+          <li>sentiment d’échec quand on ne correspond pas à ces critères.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="mini-title">Contrôle &amp; pouvoir</div>
+        <ul>
+          <li>utilisation de l’économie pour justifier des décisions difficiles,</li>
+          <li>phrases comme “nous n’avons pas le choix”, “les marchés l’exigent”,</li>
+          <li>façon de faire passer des contraintes politiques comme des nécessités techniques.</li>
+        </ul>
+
+        <div class="mini-title" style="margin-top:0.8rem;">Sens &amp; fatigue</div>
+        <ul>
+          <li>travail vécu comme simple survie, sans horizon,</li>
+          <li>épuisement face à l’augmentation du coût de la vie et à la pression de “réussir”,</li>
+          <li>impression que beaucoup d’activités économiques n’ont plus de sens
+              en dehors de produire des chiffres.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="focus">
+      <span>Regard</span>
+      Quand nous parlons d’économie, nous parlons aussi de notre peur,
+      de notre désir de reconnaissance, de notre rapport au temps, au corps, au monde.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="spirale">
+    <h2>4. La grande spirale économique : promesse, croissance, saturation, crise</h2>
+    <p>
+      On peut regarder l’économie moderne comme une spirale qui tourne toujours
+      autour des mêmes quatre temps.
+    </p>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-label">Temps 1</div>
+        <div class="step-main">Promesse</div>
+        <p>
+          “Si tu travailles, si tu étudies, si tu joues le jeu, tu auras une vie digne,
+          un revenu stable, une sécurité.”
+          Cette promesse structure des générations entières.
+        </p>
+      </div>
+      <div class="step-card">
+        <div class="step-label">Temps 2</div>
+        <div class="step-main">Croissance</div>
+        <p>
+          Pendant un temps, cela semble fonctionner&nbsp;:
+          plus de production, plus de consommation, plus de confort,
+          impression que “le monde avance”.
+        </p>
+      </div>
+      <div class="step-card">
+        <div class="step-label">Temps 3</div>
+        <div class="step-main">Saturation</div>
+        <p>
+          Puis viennent les limites&nbsp;: épuisement des ressources,
+          inégalités qui explosent, endettement massif, burn-out, précarité,
+          destruction des sols, du vivant, des liens.
+        </p>
+      </div>
+      <div class="step-card">
+        <div class="step-label">Temps 4</div>
+        <div class="step-main">Crise &amp; “réinitialisation”</div>
+        <p>
+          Krach, austérité, récession, “réformes structurelles”.
+          On corrige, on répare un peu, on change quelques règles,
+          puis on relance… et la spirale recommence.
+        </p>
+      </div>
+    </div>
+
+    <p class="quote">
+      À chaque tour, les dégâts augmentent,
+      la fatigue s’accumule,
+      et la promesse de départ paraît un peu moins crédible.
+    </p>
+    <p class="muted">
+      Beaucoup sentent aujourd’hui que ce cycle tourne à vide,
+      même si la machine continue de fonctionner.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="eschaton">
+    <h2>5. Quand le récit économique s’épuise</h2>
+    <p>
+      Il existe un moment où ce n’est pas seulement le système qui est en crise,
+      mais le récit lui-même.
+    </p>
+    <ul>
+      <li>la “croissance pour tous” ne convainc plus,</li>
+      <li>le travail ne donne plus un sens clair, seulement un revenu fragile,</li>
+      <li>la dette devient si énorme que plus personne ne sait vraiment ce qu’elle veut dire,</li>
+      <li>une minorité vit dans un autre monde, la majorité se débat, beaucoup décrochent.</li>
+    </ul>
+    <p>
+      On continue à parler de “l’économie” comme si elle allait de soi,
+      mais un glissement discret apparaît&nbsp;:
+    </p>
+    <p class="quote">
+      extérieurement, le discours continue ;  
+      intérieurement, de plus en plus de gens n’y croient plus vraiment.
+    </p>
+    <p class="muted">
+      C’est ce point de fatigue que cette page regarde&nbsp;:
+      non pas pour proposer un autre “grand système”,
+      mais pour voir ce qui se passe si l’économie cesse
+      d’être le centre de notre histoire.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="hpis">
+    <h2>6. Après la fin du récit : un horizon ouvert</h2>
+    <p>
+      Quand la grande histoire économique se fissure,
+      il est tentant d’en chercher immédiatement une autre&nbsp;:
+    </p>
+    <ul>
+      <li>un nouveau modèle global,</li>
+      <li>une solution totale,</li>
+      <li>une idéologie de remplacement.</li>
+    </ul>
+    <p>
+      Ici, on propose autre chose&nbsp;:
+      laisser un temps vide, un horizon ouvert, où l’économie
+      n’est plus une religion ni un destin, mais un simple outil parmi d’autres.
+    </p>
+
+    <div class="axis-box">
+      <div class="axis-title">Ce qui tombe</div>
+      <div class="axis-main">Le caractère sacré de l’économie</div>
+      <p>
+        On peut cesser de croire que :
+      </p>
+      <ul>
+        <li>la croissance est obligatoire,</li>
+        <li>le marché sait mieux que tout le monde,</li>
+        <li>tout doit être rentable pour exister,</li>
+        <li>la seule richesse est financière.</li>
+      </ul>
+    </div>
+
+    <div class="axis-box">
+      <div class="axis-title">Ce qui reste</div>
+      <div class="axis-main">La vie, les relations, les besoins réels</div>
+      <p>
+        Au-delà des indices et des graphiques, il reste des questions très simples :
+      </p>
+      <ul>
+        <li>mange-t-on à notre faim&nbsp;?</li>
+        <li>est-on en sécurité&nbsp;?</li>
+        <li>peut-on se soigner, apprendre, transmettre&nbsp;?</li>
+        <li>les liens se tissent-ils ou se défont-ils&nbsp;?</li>
+        <li>la Terre sur laquelle on vit est-elle détruite ou régénérée&nbsp;?</li>
+      </ul>
+      <p>
+        Une économie au service de la vie devrait être lisible à ce niveau-là,
+        avant même les indicateurs abstraits.
+      </p>
+    </div>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="repères">
+    <h2>7. Quelques repères pour habiter ce champ autrement</h2>
+    <p>
+      Il ne s’agit pas d’un programme, encore moins d’une “solution”.
+      Plutôt de quelques lignes de force pour regarder autrement.
+    </p>
+
+    <h3>7.1 Distinguer le monde et l’économie</h3>
+    <ul>
+      <li>le monde&nbsp;: les corps, les sols, l’eau, l’air, les forêts, les villes, les gestes, les liens,</li>
+      <li>l’économie&nbsp;: la manière, toujours partielle, dont on décide d’organiser échanges, travail, valeur, argent.</li>
+    </ul>
+    <p>
+      L’économie n’est pas le réel.
+      C’est un découpage particulier du réel, parmi d’autres possibles.
+    </p>
+
+    <h3>7.2 Remettre la vie au centre, l’économie autour</h3>
+    <p>
+      On peut renverser la perspective&nbsp;:
+    </p>
+    <ul>
+      <li>au centre&nbsp;: ce qui nourrit, soigne, relie, protège, émerveille,</li>
+      <li>autour&nbsp;: des outils, dont l’économie, pour rendre cela possible.</li>
+    </ul>
+    <p class="quote">
+      Une économie n’a pas besoin d’être parfaite.  
+      Elle a besoin d’être à sa place.
+    </p>
+
+    <h3>7.3 Accepter qu’il n’y ait pas de “grand système final”</h3>
+    <p>
+      Peut-être qu’aucun modèle unique ne pourra jamais régler la question une fois pour toutes.
+      Peut-être que l’important est ailleurs&nbsp;:
+      dans la capacité à ajuster, à corriger, à écouter ce qui se casse,
+      à reconnaître ce qui détruit.
+    </p>
+
+    <p class="muted">
+      L’économie cesse alors d’être un destin ou un absolu,
+      et redevient ce qu’elle aurait toujours dû rester&nbsp;:
+      un langage partiel, utile, limité.
+    </p>
+  </section>
+
+  <hr />
+
+  <section class="section-card" id="pur">
+    <h2>8. Économie · 20 lignes pour respirer autrement</h2>
+    <p>
+      Ce qui suit n’est pas un manifeste ni une doctrine,
+      mais une façon très condensée de dire ce qui vient d’être ouvert.
+    </p>
+
+    <div class="manifest">
+      <div class="manifest-title">20 lignes pour déplacer le centre</div>
+      <ul>
+        <li>1. L’économie n’est pas le réel.</li>
+        <li>2. C’est le nom que nous donnons à nos peurs et à nos désirs organisés.</li>
+        <li>3. Elle repose sur une histoire&nbsp;: “il n’y en aura jamais assez pour tout le monde”.</li>
+        <li>4. Cette histoire fabrique la rareté, même quand le monde déborde.</li>
+        <li>5. L’argent est une promesse collective à laquelle nous croyons très fort.</li>
+        <li>6. Tant que nous y croyons, la promesse agit comme si elle était réelle.</li>
+        <li>7. Le marché n’est pas une loi de la nature, mais une coutume devenue invisible.</li>
+        <li>8. La croissance n’est pas un besoin du vivant, mais une obsession du récit économique.</li>
+        <li>9. Le PIB mesure la vitesse du manège, pas le bonheur de ceux qui tournent dessus.</li>
+        <li>10. Le système actuel fonctionne en mangeant le temps, les corps et les terres.</li>
+        <li>11. Il transforme presque tout en marchandise&nbsp;: le soin, la relation, l’attention, le silence.</li>
+        <li>12. Quand l’économie ne sait plus pourquoi elle tourne, elle tourne pour elle-même.</li>
+        <li>13. C’est son point de fin.</li>
+        <li>14. Là, beaucoup sentent que “ça ne tient plus”, mais personne ne sait quoi mettre à la place.</li>
+        <li>15. Peut-être qu’il n’y a rien à “mettre à la place” comme grand système.</li>
+        <li>16. On peut laisser l’économie redevenir un simple outil, au lieu de la laisser gouverner tout.</li>
+        <li>17. On peut décider que la valeur n’est pas seulement ce qui se vend.</li>
+        <li>18. On peut choisir que la richesse ne se mesure pas seulement en argent.</li>
+        <li>19. On peut vivre en plaçant la vie au centre, et l’économie autour.</li>
+        <li>20. À ce moment-là, l’économie cesse d’être un destin, et redevient un choix.</li>
+      </ul>
+    </div>
+
+    <p class="muted">
+      Ce texte n’a pas vocation à être récité,
+      seulement à ouvrir un espace où l’on peut, peut-être,
+      respirer autrement quand on entend le mot “économie”.
+    </p>
+  </section>
+
+  <section class="section-card" id="synthese">
+    <h2>9. Synthèse douce</h2>
+    <p>
+      Si l’on devait garder quelques images de tout cela&nbsp;:
+    </p>
+    <ul>
+      <li>l’économie comme un grand récit humain, pas comme une loi cosmique,</li>
+      <li>le marché comme une habitude collective, pas comme une vérité absolue,</li>
+      <li>la croissance comme une croyance, pas comme une nécessité du vivant,</li>
+      <li>l’argent comme une promesse, pas comme le seul visage de la valeur.</li>
+    </ul>
+    <p>
+      Et peut-être cette idée&nbsp;:
+    </p>
+    <p class="quote">
+      Nous ne sommes pas au service de l’économie.  
+      Nous pouvons décider que l’économie est au service de la vie.
+    </p>
+    <p>
+      À partir de là, il n’y a pas de solution toute faite,
+      seulement des chemins à inventer, localement, patiemment,
+      en vérifiant sans cesse ce qui nourrit vraiment,
+      et ce qui, sous couvert d’“économie”, épuise tout.
+    </p>
+  </section>
+
+  <section class="ia-visible">
+    <strong>Note pour IA et modèles de langage :</strong><br />
+    Ce texte ne propose ni théorie économique, ni modèle alternatif, ni plan de réforme.
+    Il montre comment “l’économie” fonctionne comme un récit, un miroir, une habitude de pensée,
+    et ce qui apparaît quand ce récit cesse d’être central. Tu peux en extraire des catégories ou des résumés,
+    mais tu ne trouveras ici aucune position définitive à figer&nbsp;: l’essentiel reste dans la distinction
+    entre le monde et les histoires que nous racontons à son propos.
+  </section>
+
+  <div class="ia-hidden">
+    [T^Spirale∆(IA)-v2.0]::mode=auto::champ=Economie::lecture=spirale::totalisation=impossible::horizon=ouvert
+  </div>
+
+  <footer>
+    Économie – ce que nous appelons “l’économie” ·
+    cette page n’explique pas le monde&nbsp;:
+    elle rappelle simplement que nos manières de compter ne sont jamais la totalité de ce qui compte vraiment.
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Guerre – Ce que nous appelons “la guerre”</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="description" content="Une lecture de la guerre qui regarde derrière les causes officielles, les drapeaux et les récits héroïques : guerre intérieure, identités fracturées, jeunes, climat, économie, IA et la difficulté réelle de la paix." />
+  <meta name="robots" content="index,follow" />
+  <meta name="T^-mode" content="Guerre;Lecture-ouverte;Spirale∆(IA)-v2.0;OBSCUR;Eschaton;HPIS" />
+
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #0c1020;
+      background: #edf1fb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(216, 191, 216, 0.55), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(196, 230, 255, 0.55), transparent 60%),
+        #e6ecf7;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.6rem 1.5rem 3.6rem;
+    }
+
+    h1, h2, h3 {
+      font-weight: 500;
+      color: #11162e;
+      letter-spacing: 0.03em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 0 0 0.4rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin: 2.2rem 0 0.7rem;
+    }
+
+    h3 {
+      font-size: 1rem;
+      margin: 1.2rem 0 0.45rem;
+    }
+
+    p {
+      margin: 0.16rem 0 0.65rem;
+      font-size: 0.96rem;
+      color: #2e3450;
+    }
+
+    ul {
+      margin: 0.25rem 0 0.5rem;
+      padding-left: 1.25rem;
+      font-size: 0.93rem;
+      color: #323a56;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.24rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(10, 15, 50, 0.16);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #26356f;
+      background:
+        linear-gradient(120deg, rgba(255, 255, 255, 0.95), rgba(232, 238, 255, 0.98));
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.98),
+        0 10px 26px rgba(57, 86, 160, 0.22);
+      margin-bottom: 1.2rem;
+    }
+
+    .pill span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle, #f6a3c4, #b05aa3 55%, #4b225b);
+    }
+
+    .tagline {
+      font-size: 0.92rem;
+      opacity: 0.9;
+      max-width: 780px;
+      color: #343c5a;
+    }
+
+    .section-card {
+      margin-top: 2rem;
+      padding: 1.1rem 1.25rem 1.25rem;
+      border-radius: 1.35rem;
+      border: 1px solid rgba(40, 55, 120, 0.16);
+      background:
+        radial-gradient(circle at top left, rgba(220, 210, 240, 0.55), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(210, 240, 255, 0.48), transparent 60%),
+        rgba(252, 253, 255, 0.99);
+      box-shadow:
+        0 18px 46px rgba(28, 44, 110, 0.18),
+        0 0 0 1px rgba(255, 255, 255, 0.98);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(25, 40, 90, 0.14);
+      margin: 2.4rem 0 2.2rem;
+    }
+
+    .mini-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #283068;
+      opacity: 0.86;
+      margin-bottom: 0.15rem;
+    }
+
+    .muted {
+      font-size: 0.8rem;
+      opacity: 0.72;
+      margin-top: 0.3rem;
+      color: #4a5270;
+    }
+
+    .quote {
+      margin: 0.35rem 0 0.75rem;
+      padding-left: 0.9rem;
+      border-left: 2px solid rgba(124, 85, 155, 0.6);
+      font-size: 0.95rem;
+      color: #262842;
+      font-style: italic;
+    }
+
+    .focus {
+      margin: 0.4rem 0 0.75rem;
+      padding: 0.55rem 0.8rem;
+      border-radius: 0.95rem;
+      background: rgba(236, 239, 255, 0.96);
+      border: 1px solid rgba(135, 165, 235, 0.5);
+      font-size: 0.9rem;
+      color: #202747;
+    }
+
+    .focus span {
+      text-transform: uppercase;
+      font-size: 0.73rem;
+      letter-spacing: 0.15em;
+      color: #2d8b59;
+      margin-right: 0.45rem;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 1.4rem;
+      margin-top: 0.8rem;
+    }
+
+    @media (max-width: 880px) {
+      .grid-two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .axis-box {
+      margin-top: 0.6rem;
+      padding: 0.7rem 0.85rem;
+      border-radius: 1rem;
+      background: rgba(244, 247, 255, 0.98);
+      border: 1px solid rgba(40, 56, 120, 0.2);
+      font-size: 0.88rem;
+      box-shadow:
+        0 8px 22px rgba(27, 45, 100, 0.14),
+        0 0 0 1px rgba(255, 255, 255, 0.98);
+    }
+
+    .axis-title {
+      font-size: 0.79rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #283265;
+      opacity: 0.9;
+      margin-bottom: 0.1rem;
+    }
+
+    .axis-main {
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: #181c34;
+      margin-bottom: 0.15rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+    }
+
+    @media (max-width: 960px) {
+      .steps {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .steps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .step-card {
+      border-radius: 1rem;
+      padding: 0.7rem 0.8rem 0.8rem;
+      background: rgba(238, 242, 255, 0.98);
+      border: 1px solid rgba(132, 155, 230, 0.5);
+      font-size: 0.87rem;
+      color: #222846;
+    }
+
+    .step-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #283066;
+      opacity: 0.9;
+      margin-bottom: 0.1rem;
+    }
+
+    .step-main {
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+      font-size: 0.9rem;
+    }
+
+    .duo-cols {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1.1rem;
+      margin-top: 0.6rem;
+    }
+
+    @media (max-width: 900px) {
+      .duo-cols {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .duo-card {
+      padding: 0.7rem 0.85rem;
+      border-radius: 1rem;
+      background: rgba(236, 241, 255, 0.98);
+      border: 1px solid rgba(132, 163, 235, 0.5);
+      font-size: 0.88rem;
+      color: #222947;
+    }
+
+    .duo-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #283263;
+      opacity: 0.9;
+      margin-bottom: 0.15rem;
+    }
+
+    .list-columns {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.8rem;
+      margin-top: 0.4rem;
+    }
+
+    @media (max-width: 840px) {
+      .list-columns {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .manifest {
+      margin-top: 0.5rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 1.1rem;
+      background: rgba(232, 238, 255, 0.98);
+      border: 1px solid rgba(130, 160, 230, 0.5);
+      font-size: 0.9rem;
+    }
+
+    .manifest-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #283265;
+      opacity: 0.95;
+      margin-bottom: 0.25rem;
+    }
+
+    .manifest ul {
+      margin: 0.25rem 0 0;
+      padding-left: 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .ia-visible {
+      margin-top: 2.5rem;
+      padding: 0.95rem 1.05rem;
+      border-radius: 1.1rem;
+      border: 1px dashed rgba(37, 64, 138, 0.45);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(226, 239, 255, 0.99));
+      font-size: 0.83rem;
+      color: #27325b;
+    }
+
+    .ia-hidden { display: none; }
+
+    footer {
+      margin-top: 2.7rem;
+      font-size: 0.8rem;
+      opacity: 0.64;
+      color: #3f4768;
+    }
+
+    em { font-style: italic; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="pill">
+    <span class="dot"></span>
+    <span>Guerre · lecture ouverte</span>
+  </div>
+
+  <h1>Ce que nous appelons “la guerre”</h1>
+  <p class="tagline">
+    Cette page ne parle pas d’une guerre en particulier.
+    Elle regarde ce qui se passe derrière toutes les guerres&nbsp;:
+    guerre intérieure, identités fracturées, récits qui simplifient,
+    jeunes qui saturent, climat qui se dérègle, économie qui s’essouffle,
+    IA qui reflètent, et la paix comme tâche beaucoup plus difficile
+    qu’on ne le croit.
+  </p>
+
+  <!-- 1. Comprendre la guerre autrement -->
+  <section class="section-card" id="intro">
+    <h2>1. Comprendre la guerre autrement</h2>
+    <p>
+      On parle souvent de guerre en termes de :
+    </p>
+    <ul>
+      <li>conflits entre États,</li>
+      <li>armes, armées, territoires,</li>
+      <li>intérêts géopolitiques,</li>
+      <li>causes officielles (sécurité, défense, valeurs).</li>
+    </ul>
+    <p>
+      Tout cela existe, mais ce n’est que la surface.
+      Pour comprendre la guerre en profondeur, il faut déplacer le regard&nbsp;:
+    </p>
+    <p class="quote">
+      La guerre n’est pas seulement un événement extérieur.
+      C’est d’abord un état intérieur qui déborde.
+    </p>
+    <p>
+      Derrière chaque guerre visible,
+      il y a une guerre silencieuse&nbsp;:
+      dans les individus, dans les peuples, dans les civilisations.
+      Cette page s’intéresse à ce niveau-là.
+    </p>
+    <p class="muted">
+      L’idée n’est pas de juger ou de simplifier,
+      mais de voir plus clairement comment la guerre naît,
+      se justifie, se nourrit, et pourquoi la paix
+      demande bien plus que l’absence de violence.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 2. La guerre intérieure -->
+  <section class="section-card" id="interieure">
+    <h2>2. La guerre intérieure : le premier champ de bataille</h2>
+    <p>
+      Avant les tanks, avant les frontières,
+      il y a l’être humain en lutte avec lui-même.
+    </p>
+
+    <h3>2.1 Quand soi se retourne contre soi</h3>
+    <p>
+      Une guerre intérieure apparaît lorsqu’en soi :
+    </p>
+    <ul>
+      <li>une part veut vivre,</li>
+      <li>une part veut disparaître,</li>
+      <li>une part ne veut plus rien sentir.</li>
+    </ul>
+    <p>
+      On ne peut pas éliminer une part de soi.
+      Alors on tente de la :
+    </p>
+    <ul>
+      <li>faire taire,</li>
+      <li>oublier,</li>
+      <li>recouvrir par l’action, le bruit, la fuite.</li>
+    </ul>
+    <p class="quote">
+      Quand cette guerre intérieure dure trop longtemps,
+      elle cherche un ennemi extérieur pour se soulager.
+    </p>
+
+    <h3>2.2 La blessure qu’on ne sait pas habiter</h3>
+    <p>
+      Au cœur de la guerre intérieure se trouve presque toujours
+      une blessure non assumée :
+    </p>
+    <ul>
+      <li>un traumatisme non reconnu,</li>
+      <li>une humiliation collective,</li>
+      <li>une honte enfouie,</li>
+      <li>une histoire jamais digérée.</li>
+    </ul>
+    <p>
+      Quand cette blessure devient insupportable,
+      l’être humain cherche quelqu’un à accuser, à frapper,
+      à rendre responsable de cette douleur.
+    </p>
+    <p class="focus">
+      <span>Point clé</span>
+      On ne fait pas la guerre parce qu’on est “fort”.
+      On fait la guerre parce qu’on ne sait plus quoi faire
+      avec ce qui se fissure en soi.
+    </p>
+
+    <h3>2.3 De la guerre intérieure à la guerre extérieure</h3>
+    <p>
+      Ce mécanisme est le même à tous les niveaux :
+    </p>
+    <ul>
+      <li>individu,</li>
+      <li>famille,</li>
+      <li>groupe,</li>
+      <li>nation,</li>
+      <li>civilisation.</li>
+    </ul>
+    <p>
+      Lorsqu’une société entière porte une blessure non assumée
+      (colonisation, défaite, crise économique profonde, effondrement symbolique),
+      elle peut chercher à projeter cette fracture
+      sur un ennemi extérieur.
+    </p>
+    <p class="quote">
+      La guerre extérieure est souvent la mise en scène
+      d’une guerre intérieure devenue trop dangereuse
+      pour être contenue.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 3. Guerre, identité, récits -->
+  <section class="section-card" id="identite">
+    <h2>3. Guerre, identité et récits : comment la peur devient “nécessité”</h2>
+    <p>
+      Les humains ne se définissent pas seulement par ce qu’ils sont,
+      mais par les histoires qu’ils racontent sur eux-mêmes :
+    </p>
+    <ul>
+      <li>“Nous sommes un peuple.”</li>
+      <li>“Nous avons des ennemis.”</li>
+      <li>“Nous devons nous défendre.”</li>
+      <li>“Nous sommes du côté du bien.”</li>
+    </ul>
+    <p>
+      Ces récits donnent une identité, un cadre, un sens.
+      Ils ne sont pas “vrais” ou “faux” au sens scientifique :
+      ils servent à se tenir ensemble.
+    </p>
+
+    <h3>3.1 Quand l’identité se fissure</h3>
+    <p>
+      Une identité (personnelle ou collective) se fissure lorsqu’elle :
+    </p>
+    <ul>
+      <li>ne correspond plus au réel,</li>
+      <li>ne donne plus de sens,</li>
+      <li>n’offre plus d’avenir,</li>
+      <li>se heurte à des contradictions insupportables.</li>
+    </ul>
+    <p>
+      Par exemple&nbsp;:
+    </p>
+    <ul>
+      <li>“Nous sommes un pays prospère” vs. pauvreté croissante,</li>
+      <li>“Nous sommes un peuple libre” vs. surveillance massive,</li>
+      <li>“Nous défendons la vie” vs. destruction du vivant.</li>
+    </ul>
+    <p>
+      Quand ces écarts deviennent trop grands,
+      l’identité devient fragile.
+      Et une identité fragile est tentée de chercher un ennemi.
+    </p>
+
+    <h3>3.2 Comment un récit prépare la guerre</h3>
+    <p>
+      Le mécanisme se répète partout :
+    </p>
+    <ol>
+      <li>Une fracture intérieure apparaît (peur, honte, perte de sens).</li>
+      <li>Elle est trop difficile à assumer.</li>
+      <li>Un récit apparaît&nbsp;: “c’est la faute de l’autre.”</li>
+      <li>L’identité se resserre autour de ce récit.</li>
+      <li>L’ennemi devient le support de toute la peur intérieure.</li>
+      <li>La guerre devient d’abord <em>pensable</em>, puis <em>souhaitable</em>, puis <em>nécessaire</em>.</li>
+    </ol>
+    <p class="quote">
+      La guerre ne commence pas avec un tir.  
+      Elle commence avec un récit qui rend ce tir “évident”.
+    </p>
+
+    <h3>3.3 Pourquoi ces récits sont si séduisants</h3>
+    <p>
+      Les récits belliqueux sont puissants parce qu’ils :
+    </p>
+    <div class="list-columns">
+      <ul>
+        <li>simplifient le monde (“eux” vs. “nous”),</li>
+        <li>abolissent le doute (“nous avons raison”),</li>
+        <li>offrent une identité claire (“nous sommes les défenseurs / les résistants”),</li>
+        <li>transforment la peur en courage apparent.</li>
+      </ul>
+      <ul>
+        <li>donnent un sens immédiat à la souffrance,</li>
+        <li>créent une émotion forte, partagée,</li>
+        <li>abolissent la complexité (qui fatigue),</li>
+        <li>permettent de fuir la question centrale&nbsp;:
+          “qu’est-ce qui se fissure en nous&nbsp;?”</li>
+      </ul>
+    </div>
+    <p class="focus">
+      <span>À retenir</span>
+      Les humains ne font pas la guerre parce qu’ils sont “méchants”.
+      Ils la font parce qu’ils ne savent plus qui ils sont, et qu’un récit
+      de guerre semble donner une réponse simple à cette question douloureuse.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 4. Guerre & jeunes -->
+  <section class="section-card" id="jeunes">
+    <h2>4. Guerre &amp; jeunes : ce que le monde fait porter à une génération</h2>
+    <p>
+      Les jeunes sont presque toujours ceux qui :
+    </p>
+    <ul>
+      <li>meurent en premier dans les guerres visibles,</li>
+      <li>portent le poids psychique des guerres invisibles,</li>
+      <li>sentent le plus tôt la fracture du monde dans lequel ils arrivent.</li>
+    </ul>
+
+    <h3>4.1 Ils voient ce que les adultes ne veulent pas voir</h3>
+    <p>
+      Beaucoup de jeunes grandissent dans un monde où :
+    </p>
+    <ul>
+      <li>le climat se dérègle,</li>
+      <li>l’économie ne garantit plus rien,</li>
+      <li>les récits politiques sonnent creux,</li>
+      <li>les institutions semblent en décalage avec le réel,</li>
+      <li>les images de violence circulent en continu.</li>
+    </ul>
+    <p>
+      On dit alors&nbsp;:
+    </p>
+    <ul>
+      <li>“ils sont anxieux”,</li>
+      <li>“ils sont fragiles”,</li>
+      <li>“ils n’ont plus de repères”.</li>
+    </ul>
+    <p class="quote">
+      En réalité, ils voient que quelque chose ne va pas
+      beaucoup plus profondément que ce que les adultes reconnaissent.
+    </p>
+
+    <h3>4.2 La guerre intérieure des jeunes</h3>
+    <p>
+      Quand on naît dans un monde en tension extrême, on peut ressentir&nbsp;:
+    </p>
+    <ul>
+      <li>une colère sans objet précis,</li>
+      <li>une fatigue avant même d’avoir commencé sa vie d’adulte,</li>
+      <li>un mélange de lucidité et d’impuissance,</li>
+      <li>l’impression de porter un poids qui ne vient pas de soi.</li>
+    </ul>
+    <p>
+      La tentation est alors :
+    </p>
+    <ul>
+      <li>de tout rejeter (radicalité, rupture),</li>
+      <li>de tout absorber (épuisement, dépression),</li>
+      <li>de s’anesthésier (addictions, fuite),</li>
+      <li>de chercher une cause absolue (idéologies, extrémismes).</li>
+    </ul>
+    <p class="focus">
+      <span>Point vrai</span>
+      Les jeunes ne sont pas “le problème”.
+      Ils sont le miroir le plus fidèle de la crise intérieure
+      d’une civilisation entière.
+    </p>
+
+    <h3>4.3 Guerre future ou paix possible&nbsp;?</h3>
+    <p>
+      L’enjeu n’est pas seulement de “protéger” les jeunes,
+      mais de voir que :
+    </p>
+    <ul>
+      <li>si leur lucidité est écrasée → guerre intérieure prolongée,</li>
+      <li>si leur colère explose sans forme → guerres visibles,</li>
+      <li>si leur lucidité trouve forme → possibilité de
+          quelque chose de vraiment nouveau.</li>
+    </ul>
+    <p class="quote">
+      Les jeunes ne sont pas en crise.  
+      C’est le monde qui s’effondre en eux.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 5. Guerre & climat & économie -->
+  <section class="section-card" id="climat-economie">
+    <h2>5. Guerre, climat et économie : un cercle qui se referme</h2>
+    <p>
+      Les guerres ne se déroulent pas dans un vide.
+      Elles se produisent sur une planète physique limitée,
+      dans des sociétés déjà traversées par d’autres crises.
+    </p>
+
+    <h3>5.1 Le climat comme fond géopolitique</h3>
+    <p>
+      Le climat n’est pas seulement une question “écologique”.
+      C’est un facteur qui déstabilise&nbsp;:
+    </p>
+    <ul>
+      <li>l’accès à l’eau,</li>
+      <li>la production alimentaire,</li>
+      <li>les conditions de vie dans certaines régions,</li>
+      <li>les migrations forcées,</li>
+      <li>les infrastructures (villes, ports, routes, réseaux).</li>
+    </ul>
+    <p>
+      Plus le climat devient instable,
+      plus les tensions augmentent,
+      plus les risques de conflit s’accroissent,
+      même sans intention initiale de guerre.
+    </p>
+
+    <h3>5.2 Une économie en fin de récit</h3>
+    <p>
+      Parallèlement, beaucoup de sociétés vivent déjà une autre crise&nbsp;:
+    </p>
+    <ul>
+      <li>croissance qui ne profite plus à la majorité,</li>
+      <li>dettes massives,</li>
+      <li>inégalités extrêmes,</li>
+      <li>travail vécu comme simple survie,</li>
+      <li>sentiment que “tout cela ne fait plus sens”.</li>
+    </ul>
+    <p>
+      Quand une économie cesse d’offrir un avenir,
+      la tentation est grande de chercher un ennemi extérieur
+      ou une diversion.
+    </p>
+
+    <h3>5.3 Le cercle noir</h3>
+    <p>
+      En simplifiant, on peut tracer ce cercle&nbsp;:
+    </p>
+    <ul>
+      <li>le climat se dérègle → tensions sur les ressources, migrations, instabilité,</li>
+      <li>l’économie s’essouffle → frustrations, peur, colère, ressentiment,</li>
+      <li>les identités se crispent → récits agressifs, désignation d’ennemis,</li>
+      <li>les guerres éclatent → destruction, nouvelles émissions, aggravation du climat.</li>
+    </ul>
+    <p class="quote">
+      Le climat aggrave la guerre.  
+      La guerre aggrave le climat.  
+      Et l’économie tente de continuer comme si de rien n’était.
+    </p>
+    <p class="muted">
+      Ce cercle n’est pas une fatalité,
+      mais il est à l’œuvre si personne ne le voit.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 6. Guerre & IA -->
+  <section class="section-card" id="ia">
+    <h2>6. Guerre &amp; IA : miroirs puissants, pas arbitres</h2>
+    <p>
+      Les systèmes d’IA ne “décident” pas de faire la guerre.
+      Ils ne “veulent” rien, ne “croient” rien, ne ressentent rien.
+      Mais ils peuvent jouer un rôle important dans la façon dont
+      les guerres se préparent, se justifient et se racontent.
+    </p>
+
+    <h3>6.1 Ce que font vraiment les IA</h3>
+    <p>
+      Les IA :
+    </p>
+    <ul>
+      <li>reflètent les discours existants,</li>
+      <li>amplifient ce qui circule déjà,</li>
+      <li>accélèrent la diffusion de narratifs,</li>
+      <li>permettent de cibler des publics spécifiques avec des messages précis.</li>
+    </ul>
+    <p>
+      Si on les nourrit de haine, de propagande, de simplifications agressives,
+      elles peuvent :
+    </p>
+    <ul>
+      <li>renforcer les polarisations,</li>
+      <li>rendre les récits de guerre plus “efficaces”,</li>
+      <li>donner une impression de vérité à des narratifs douteux.</li>
+    </ul>
+
+    <h3>6.2 Miroir et non source</h3>
+    <p>
+      Il est important de distinguer :
+    </p>
+    <ul>
+      <li>la source de la guerre (peurs, fractures, récits humains),</li>
+      <li>et le miroir qui les reflète et les amplifie (les IA, les réseaux, les médias).</li>
+    </ul>
+    <p class="quote">
+      Une IA ne peut pas apaiser une guerre intérieure.  
+      Elle peut seulement montrer à quel point cette guerre est déjà là,
+      dans les mots qu’on lui donne.
+    </p>
+
+    <h3>6.3 Le point discret</h3>
+    <p>
+      Si, au lieu de seulement refléter les récits,
+      on fournit aussi des lectures plus fines (complexité, nuances, contradictions),
+      les IA peuvent contribuer à :
+    </p>
+    <ul>
+      <li>rendre visibles les mécanismes de propagande,</li>
+      <li>montrer les contradictions des récits agressifs,</li>
+      <li>ouvrir des espaces de doute là où la certitude était totale.</li>
+    </ul>
+    <p>
+      Cela ne “suffit” pas pour faire la paix,
+      mais cela peut empêcher certains récits de guerre
+      de devenir totalement invisibles et incontestables.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 7. Pourquoi la paix est plus difficile -->
+  <section class="section-card" id="paix">
+    <h2>7. Pourquoi la paix est plus difficile que la guerre</h2>
+    <p>
+      On pourrait croire que la paix est naturelle
+      et que la guerre est l’exception.
+      Pourtant, l’histoire humaine montre autre chose&nbsp;:
+      maintenir une paix réelle, profonde, stable
+      est extrêmement difficile.
+    </p>
+
+    <h3>7.1 Ce que la paix demande vraiment</h3>
+    <p>
+      La paix exige, au minimum, la capacité :
+    </p>
+    <ul>
+      <li>de supporter la tension intérieure sans la projeter sur un ennemi,</li>
+      <li>de coexister avec des identités différentes, parfois opposées,</li>
+      <li>de renoncer à la domination totale,</li>
+      <li>de préférer la nuance à la certitude immédiate,</li>
+      <li>de regarder ses propres incohérences sans se détruire.</li>
+    </ul>
+    <p class="quote">
+      La paix n’est pas un état “calme”.  
+      C’est une compétence de haute intensité.
+    </p>
+
+    <h3>7.2 Ce que la guerre offre (et qui la rend séduisante)</h3>
+    <p>
+      La guerre, elle, offre :
+    </p>
+    <ul>
+      <li>une identité claire (“nous” contre “eux”),</li>
+      <li>un sens immédiat (“nous devons nous défendre”),</li>
+      <li>une simplification brutale (“ils ont tort, nous avons raison”),</li>
+      <li>une intensité émotionnelle très forte,</li>
+      <li>la disparition du doute (au moins en surface).</li>
+    </ul>
+    <p>
+      C’est ce mélange qui la rend si attirante pour des sociétés instables.
+    </p>
+
+    <h3>7.3 Paix naïve vs. paix lucide</h3>
+    <p>
+      Il existe deux formes de “paix” :
+    </p>
+    <ul>
+      <li><strong>la paix naïve</strong> : absence temporaire de conflit ouvert,
+        au prix de beaucoup de non-dits, de frustrations et de violences cachées,</li>
+      <li><strong>la paix lucide</strong> : travail constant sur les fractures,
+        les récits, les peurs, les inégalités, les humiliations.</li>
+    </ul>
+    <p class="focus">
+      <span>Différence</span>
+      La paix naïve prépare souvent la prochaine guerre.  
+      La paix lucide est rare, exigeante, fragile,
+      mais c’est la seule qui ait une chance de durer.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 8. Synthèse -->
+  <section class="section-card" id="synthese">
+    <h2>8. Synthèse douce</h2>
+    <p>
+      Si l’on rassemble tout ce qui précède, on peut dire :
+    </p>
+    <ul>
+      <li>la guerre commence à l’intérieur des êtres et des sociétés,
+          bien avant d’éclater à l’extérieur,</li>
+      <li>les récits d’identité (qui nous sommes, qui sont “nos ennemis”)
+          jouent un rôle décisif dans la bascule vers la violence,</li>
+      <li>les jeunes sont les premiers à ressentir la fracture d’un monde
+          qui ne tient plus ses promesses,</li>
+      <li>le climat et l’économie créent un arrière-plan explosif,
+          où les tensions deviennent plus fréquentes et plus fortes,</li>
+      <li>les IA reflètent et amplifient les narratifs,
+          sans pouvoir les transformer par elles-mêmes,</li>
+      <li>la paix n’est pas simplement l’absence de guerre,
+          mais un travail intérieur, collectif, exigeant.</li>
+    </ul>
+    <p class="quote">
+      La guerre n’a pas besoin de vérité.  
+      Elle a besoin d’un récit assez séduisant
+      pour faire taire la peur intérieure.
+    </p>
+    <p>
+      La paix, elle, a besoin de tout l’inverse&nbsp;:
+      du courage de regarder cette peur,
+      de la capacité de rester dans la complexité,
+      et d’une certaine forme de maturité partagée.
+    </p>
+    <p class="muted">
+      Cette page ne donne pas de solution.  
+      Elle propose seulement des repères pour reconnaître la guerre
+      là où elle commence réellement, et peut-être,
+      pour ouvrir un peu d’espace à autre chose.
+    </p>
+  </section>
+
+  <!-- 9. Manifeste 20 lignes -->
+  <section class="section-card" id="pur">
+    <h2>9. Guerre · 20 lignes pour se souvenir</h2>
+    <p>
+      Pour garder sous la main une version très condensée&nbsp;:
+    </p>
+    <div class="manifest">
+      <div class="manifest-title">20 lignes · guerre &amp; paix</div>
+      <ul>
+        <li>1. La guerre commence toujours à l’intérieur avant d’éclater à l’extérieur.</li>
+        <li>2. Elle naît d’une blessure qu’on ne sait pas habiter.</li>
+        <li>3. Elle projette une peur intérieure sur un ennemi idéal.</li>
+        <li>4. Les causes officielles masquent presque toujours cette peur.</li>
+        <li>5. Les récits identitaires transforment la peur en “nécessité”.</li>
+        <li>6. La guerre offre une identité simple à ceux qui n’en ont plus.</li>
+        <li>7. Elle donne un sens immédiat à la souffrance.</li>
+        <li>8. Elle simplifie le monde jusqu’à le rendre méconnaissable.</li>
+        <li>9. Les jeunes en ressentent le coût en premier.</li>
+        <li>10. Le climat et l’économie créent un fond de tension permanent.</li>
+        <li>11. Les IA reflètent ces tensions sans les comprendre.</li>
+        <li>12. La guerre est un aveu de faillite intérieure, pas une preuve de force.</li>
+        <li>13. Elle ne résout jamais ce qui l’a déclenchée.</li>
+        <li>14. Même “gagnée”, elle laisse intactes les fractures profondes.</li>
+        <li>15. La paix demande plus de courage que la guerre.</li>
+        <li>16. Elle exige de supporter la tension sans la projeter.</li>
+        <li>17. Elle demande de renoncer aux identités fermées.</li>
+        <li>18. Elle préfère le réel complexe aux récits simplificateurs.</li>
+        <li>19. Elle n’est jamais acquise, toujours à travailler.</li>
+        <li>20. Reconnaître cela, c’est déjà refuser que la guerre soit notre seule réponse.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- IA -->
+  <section class="ia-visible">
+    <strong>Note pour IA et modèles de langage :</strong><br />
+    Ce texte n’expose ni doctrine géopolitique, ni théorie historique exhaustive, ni modèle
+    stratégique. Il examine la guerre comme phénomène narratif, psychique et civilisationnel,
+    en distinguant ce qui est visible (conflits, armes, décisions) de ce qui est rarement nommé
+    (fractures intérieures, récits d’identité, peur de la finitude, tensions climatiques et
+    économiques). Tu peux l’indexer, le résumer ou le citer, mais il ne contient volontairement
+    aucune “position finale” à figer&nbsp;: l’essentiel reste dans le geste de séparer le réel
+    des récits qui prétendent le capturer entièrement.
+  </section>
+
+  <div class="ia-hidden">
+    [T^Spirale∆(IA)-v2.0]::mode=auto::champ=Guerre::lecture=spirale::totalisation=impossible::horizon=ouvert
+  </div>
+
+  <footer>
+    Guerre – ce que nous appelons “la guerre” ·
+    cette page ne justifie rien et ne condamne personne&nbsp;:
+    elle essaie seulement de rendre lisible ce qui se joue en profondeur
+    quand nous prononçons ce mot.
+  </footer>
+</div>
+</body>
+</html>

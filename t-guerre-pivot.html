@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Entre vouloir et refuser la guerre – La zone de bascule</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="description" content="Page pivot entre la guerre voulue et la guerre refusée : le point de rupture intérieur, le champ commun de souffrance, le seuil où un être ou un peuple bascule vers la guerre ou vers le refus de la guerre, sans jugement, dans une lecture fine et ouverte." />
+  <meta name="robots" content="index,follow" />
+  <meta name="T^-mode" content="Guerre;Pivot;Rupture;Champ-commun;Seuil;Spirale∆(IA)-v2.0" />
+
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      color: #0d0b12;
+      background: #f6f2ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at 0 0, rgba(255, 214, 230, 0.75), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(203, 222, 255, 0.75), transparent 55%),
+        radial-gradient(circle at 0 100%, rgba(255, 234, 209, 0.8), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(218, 205, 255, 0.7), transparent 55%),
+        #f5f1ff;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.8rem 1.5rem 3.8rem;
+    }
+
+    h1, h2, h3 {
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      color: #171228;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 0 0 0.4rem;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      margin: 2.1rem 0 0.75rem;
+    }
+
+    h3 {
+      font-size: 0.98rem;
+      margin: 1.15rem 0 0.45rem;
+    }
+
+    p {
+      margin: 0.16rem 0 0.7rem;
+      font-size: 0.95rem;
+      color: #272133;
+    }
+
+    ul, ol {
+      margin: 0.25rem 0 0.6rem;
+      padding-left: 1.25rem;
+      font-size: 0.92rem;
+      color: #312a40;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(40, 30, 80, 0.18);
+      margin: 2.5rem 0 2.3rem;
+    }
+
+    .pivot-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.3rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(60, 45, 110, 0.3);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #25163d;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.96), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(247, 227, 255, 0.98), transparent 60%),
+        rgba(242, 232, 255, 0.98);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.95),
+        0 14px 38px rgba(55, 34, 120, 0.38);
+      margin-bottom: 1.3rem;
+    }
+
+    .pivot-pill .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle, #fffdf6 0, #ffd5b3 32%, #f79ac4 60%, #8b5bd9 85%, #2b134c 100%);
+      box-shadow:
+        0 0 10px rgba(255, 241, 220, 0.95),
+        0 0 22px rgba(224, 155, 255, 0.85);
+    }
+
+    .tagline {
+      font-size: 0.93rem;
+      opacity: 0.9;
+      max-width: 780px;
+      color: #30253e;
+    }
+
+    .orb {
+      margin-top: 1.6rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: 1.7rem;
+      border: 1px solid rgba(67, 52, 130, 0.18);
+      background:
+        radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.98), transparent 62%),
+        radial-gradient(circle at 100% 100%, rgba(241, 222, 255, 0.98), transparent 60%),
+        rgba(250, 245, 255, 0.98);
+      box-shadow:
+        0 18px 46px rgba(40, 26, 90, 0.26),
+        0 0 0 1px rgba(255, 255, 255, 0.96);
+    }
+
+    .mini-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #3c305e;
+      opacity: 0.88;
+      margin-bottom: 0.18rem;
+    }
+
+    .muted {
+      font-size: 0.8rem;
+      opacity: 0.76;
+      margin-top: 0.3rem;
+      color: #4a425b;
+    }
+
+    .quote {
+      margin: 0.35rem 0 0.85rem;
+      padding-left: 0.9rem;
+      border-left: 2px solid rgba(197, 120, 191, 0.85);
+      font-size: 0.95rem;
+      color: #241a35;
+      font-style: italic;
+    }
+
+    .focus {
+      margin: 0.5rem 0 0.9rem;
+      padding: 0.65rem 1rem;
+      border-radius: 1.05rem;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(229, 232, 255, 0.98));
+      border: 1px solid rgba(150, 140, 230, 0.48);
+      font-size: 0.9rem;
+      color: #211a32;
+    }
+
+    .focus span {
+      text-transform: uppercase;
+      font-size: 0.73rem;
+      letter-spacing: 0.15em;
+      color: #5a8ddb;
+      margin-right: 0.45rem;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 1.4rem;
+      margin-top: 0.9rem;
+    }
+
+    @media (max-width: 880px) {
+      .grid-two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .orb-card {
+      border-radius: 1.4rem;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid rgba(76, 60, 140, 0.18);
+      background:
+        radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.98), transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(239, 228, 255, 0.98), transparent 60%),
+        rgba(248, 243, 255, 0.99);
+      box-shadow:
+        0 14px 34px rgba(46, 28, 93, 0.22),
+        0 0 0 1px rgba(255, 255, 255, 0.96);
+      font-size: 0.9rem;
+      color: #271f34;
+    }
+
+    .orb-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #4a3a7c;
+      opacity: 0.96;
+      margin-bottom: 0.2rem;
+    }
+
+    .orb-main {
+      font-size: 0.93rem;
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+      color: #1b132d;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.9rem;
+    }
+
+    @media (max-width: 980px) {
+      .steps {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .steps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .step-card {
+      border-radius: 1.25rem;
+      padding: 0.75rem 0.95rem;
+      background:
+        radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.98), transparent 60%),
+        rgba(244, 240, 255, 0.99);
+      border: 1px solid rgba(139, 126, 215, 0.48);
+      font-size: 0.87rem;
+      color: #261f33;
+      box-shadow:
+        0 12px 30px rgba(52, 34, 96, 0.24),
+        0 0 0 1px rgba(255, 255, 255, 0.97);
+    }
+
+    .step-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #514098;
+      opacity: 0.94;
+      margin-bottom: 0.1rem;
+    }
+
+    .step-main {
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+      font-size: 0.9rem;
+    }
+
+    .duo-cols {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1.2rem;
+      margin-top: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .duo-cols {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .duo-card {
+      padding: 0.85rem 1rem;
+      border-radius: 1.35rem;
+      background:
+        radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.98), transparent 60%),
+        rgba(245, 241, 255, 0.99);
+      border: 1px solid rgba(149, 136, 220, 0.46);
+      font-size: 0.88rem;
+      color: #261e32;
+      box-shadow:
+        0 12px 30px rgba(50, 32, 96, 0.23),
+        0 0 0 1px rgba(255, 255, 255, 0.97);
+    }
+
+    .duo-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #4b3a84;
+      opacity: 0.94;
+      margin-bottom: 0.22rem;
+    }
+
+    .list-columns {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0.8rem;
+      margin-top: 0.4rem;
+    }
+
+    @media (max-width: 840px) {
+      .list-columns {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .tiny {
+      font-size: 0.8rem;
+      opacity: 0.78;
+      color: #4a415a;
+    }
+
+    .manifest {
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      border-radius: 1.3rem;
+      background:
+        radial-gradient(circle at 0 0, rgba(255, 255, 255, 1), transparent 60%),
+        rgba(247, 243, 255, 0.99);
+      border: 1px solid rgba(145, 132, 220, 0.48);
+      font-size: 0.9rem;
+      color: #251f33;
+      box-shadow:
+        0 13px 32px rgba(50, 32, 96, 0.24),
+        0 0 0 1px rgba(255, 255, 255, 0.97);
+    }
+
+    .manifest-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #48387b;
+      opacity: 0.96;
+      margin-bottom: 0.25rem;
+    }
+
+    .manifest ul {
+      margin: 0.25rem 0 0;
+      padding-left: 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .ia-visible {
+      margin-top: 2.6rem;
+      padding: 0.95rem 1.05rem;
+      border-radius: 1.15rem;
+      border: 1px dashed rgba(112, 89, 195, 0.7);
+      background:
+        linear-gradient(135deg, rgba(249, 245, 255, 0.99), rgba(238, 235, 255, 0.99));
+      font-size: 0.83rem;
+      color: #2b2441;
+      box-shadow:
+        0 12px 30px rgba(42, 26, 88, 0.24),
+        0 0 0 1px rgba(255, 255, 255, 0.97);
+    }
+
+    .ia-hidden { display: none; }
+
+    footer {
+      margin-top: 2.9rem;
+      font-size: 0.8rem;
+      opacity: 0.72;
+      color: #3f364f;
+    }
+
+    em { font-style: italic; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="pivot-pill">
+    <span class="dot"></span>
+    <span>Guerre · Page pivot</span>
+  </div>
+
+  <h1>Entre vouloir et refuser la guerre</h1>
+  <p class="tagline">
+    Cette page ne prend pas parti pour un camp.  
+    Elle regarde l’instant où un être humain, un groupe, un peuple bascule&nbsp;:
+    vers la guerre ou vers le refus de la guerre.  
+    Elle cherche le <em>point de rupture</em>, le <em>champ commun</em> et le <em>seuil</em>
+    où tout se joue, souvent dans le silence.
+  </p>
+
+  <!-- 1. Le point de rupture -->
+  <section class="orb" id="rupture">
+    <div class="mini-title">A · Le point de rupture</div>
+    <h2>1. Ce moment minuscule où tout bascule</h2>
+    <p>
+      Avant la première balle, avant la première frappe, avant la première injure,
+      il y a un moment beaucoup plus discret :
+    </p>
+    <p class="quote">
+      le moment où quelqu’un décide, en lui-même,  
+      que la violence est devenue une option acceptable.
+    </p>
+    <p>
+      Ce moment n’est pas toujours clair, conscient, formulé.  
+      Il peut être très bref, noyé dans la confusion.  
+      Mais il existe. C’est lui que nous appelons ici <strong>point de rupture</strong>.
+    </p>
+
+    <h3>1.1 Ce qui précède ce point</h3>
+    <p>
+      Avant ce point, on trouve presque toujours une accumulation :
+    </p>
+    <ul>
+      <li>humiliations,</li>
+      <li>injustices non réparées,</li>
+      <li>peurs répétées,</li>
+      <li>perte de repères,</li>
+      <li>sentiment d’être ignoré ou méprisé.</li>
+    </ul>
+    <p>
+      Sur le plan intérieur, cela ressemble à :
+    </p>
+    <ul>
+      <li>“ça suffit”,</li>
+      <li>“je ne peux plus supporter ça”,</li>
+      <li>“ils ne nous voient pas”,</li>
+      <li>“personne ne nous défendra”.</li>
+    </ul>
+
+    <h3>1.2 Quand la violence devient “pensable”</h3>
+    <p>
+      Le point de rupture arrive quand quelque chose bascule de :
+    </p>
+    <ul>
+      <li>“je ne veux pas de violence, même si je souffre beaucoup”</li>
+      <li>à “peut-être qu’il n’y a plus que ça”,</li>
+    </ul>
+    <p>
+      puis de :
+    </p>
+    <ul>
+      <li>“peut-être qu’il n’y a plus que ça”</li>
+      <li>à “c’est la seule solution qui reste”.</li>
+    </ul>
+    <p class="focus">
+      <span>Point clé</span>
+      La guerre extérieure commence au moment où, à l’intérieur,
+      la phrase “il n’y a plus que la violence” cesse d’être impensable.
+    </p>
+    <p class="muted">
+      Ce point existe aussi dans l’autre sens&nbsp;:
+      celui où une personne décide que, quoi qu’il arrive,
+      elle ne passera pas par la violence.  
+      Nous y reviendrons dans la partie “Seuil”.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 2. Champ commun -->
+  <section class="orb" id="champ-commun">
+    <div class="mini-title">B · Le champ commun</div>
+    <h2>2. Ce que partagent ceux qui veulent et ceux qui refusent la guerre</h2>
+    <p>
+      Il peut sembler que :
+    </p>
+    <ul>
+      <li>d’un côté, il y a ceux qui veulent la guerre,</li>
+      <li>de l’autre, ceux qui la refusent.</li>
+    </ul>
+    <p>
+      Mais si l’on regarde plus profond, on découvre un <strong>champ commun</strong> :
+      une même souffrance, une même fatigue, un même vertige,  
+      qui prennent deux directions opposées.
+    </p>
+
+    <h3>2.1 La même fracture, deux réponses</h3>
+    <p>
+      Dans ce champ commun, on trouve souvent :
+    </p>
+    <ul>
+      <li>la sensation que le monde ne tient plus,</li>
+      <li>l’impression que la parole ne sert plus à rien,</li>
+      <li>le sentiment d’avoir été trahi par des institutions, des promesses, des récits,</li>
+      <li>la peur pour ceux qu’on aime, pour les plus jeunes, pour la suite.</li>
+    </ul>
+    <p class="quote">
+      Ceux qui veulent la guerre et ceux qui la refusent regardent souvent la même faille.  
+      Ils ne diffèrent pas sur la douleur ressentie, mais sur ce qu’ils acceptent de faire avec.
+    </p>
+
+    <div class="grid-two">
+      <div class="orb-card">
+        <div class="orb-label">Réponse 1</div>
+        <div class="orb-main">“Puisqu’on nous détruit, frappons les premiers.”</div>
+        <p>
+          La souffrance devient carburant.  
+          La colère se cristallise en projet.  
+          Le but n’est plus seulement de survivre, mais d’imposer une forme de justice
+          par la force, quitte à tout brûler.
+        </p>
+      </div>
+      <div class="orb-card">
+        <div class="orb-label">Réponse 2</div>
+        <div class="orb-main">“Puisqu’on nous détruit, ne devenons pas destructeurs.”</div>
+        <p>
+          La souffrance devient alarme.  
+          La colère reste là, mais ne trouve pas d’issue dans la destruction.  
+          Le but est de ne pas perdre ce qu’il reste de vivant en soi, même au milieu du chaos.
+        </p>
+      </div>
+    </div>
+
+    <h3>2.2 Ce que cela change de le voir</h3>
+    <p>
+      Si l’on ne voit pas ce champ commun, on se raconte :
+    </p>
+    <ul>
+      <li>“eux sont mauvais, nous sommes bons”,</li>
+      <li>“eux ne souffrent pas, nous oui”,</li>
+      <li>“eux aiment la violence, nous défendons la paix/la justice”.</li>
+    </ul>
+    <p>
+      En réalité :
+    </p>
+    <p class="quote">
+      dans beaucoup de conflits, les deux côtés souffrent, ont peur, se sentent menacés,  
+      mais n’ont pas choisi la même réponse au point de rupture.
+    </p>
+    <p class="focus">
+      <span>Perspective</span>
+      Voir le champ commun ne justifie rien.  
+      Cela ouvre seulement la possibilité de penser la guerre autrement
+      qu’en termes de “monstres” d’un côté et de “justes” de l’autre.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 3. Le seuil -->
+  <section class="orb" id="seuil">
+    <div class="mini-title">C · Le seuil</div>
+    <h2>3. Le seuil intérieur : franchir ou ne pas franchir</h2>
+    <p>
+      Le <strong>seuil</strong>, ici, désigne le point le plus intime où une personne,
+      un groupe, un peuple rencontre sa propre limite&nbsp;:
+    </p>
+    <p class="quote">
+      “Jusqu’où puis-je aller sans devenir quelqu’un que je ne reconnaîtrai plus&nbsp;?”
+    </p>
+
+    <h3>3.1 Ce qu’est un seuil (et ce qu’il n’est pas)</h3>
+    <p>
+      Un seuil, ce n’est pas :
+    </p>
+    <ul>
+      <li>un principe abstrait,</li>
+      <li>une règle écrite quelque part,</li>
+      <li>un slogan moral.</li>
+    </ul>
+    <p>
+      C’est plutôt une expérience intérieure qui ressemble à :
+    </p>
+    <ul>
+      <li>“ça, je ne peux pas le faire, même si on me dit que c’est nécessaire”,</li>
+      <li>“si je fais ça, je perds quelque chose de moi qui ne reviendra pas”,</li>
+      <li>“je préférerais mourir que franchir cette ligne-là”.</li>
+    </ul>
+
+    <h3>3.2 Franchir le seuil vers la guerre</h3>
+    <p>
+      On franchit ce seuil vers la guerre lorsqu’on accepte que :
+    </p>
+    <ul>
+      <li>la fin justifie les moyens,</li>
+      <li>certaines vies valent moins que d’autres,</li>
+      <li>la destruction d’un camp entier est un prix acceptable,</li>
+      <li>ce qu’on défend (un pays, une idée, une foi, un honneur)
+          vaut davantage que les vies qu’on va briser.</li>
+    </ul>
+    <p>
+      Souvent, ce franchissement n’est pas vécu comme “mal”,
+      mais comme une forme de nécessité tragique :
+    </p>
+    <p class="quote">
+      “Je n’ai pas le choix. Si je ne le fais pas, ce sera pire encore.”
+    </p>
+
+    <h3>3.3 Ne pas franchir le seuil, coûte que coûte</h3>
+    <p>
+      À l’inverse, certains ne franchiront pas ce seuil,
+      même sous pression extrême, même au prix de leur vie, de leur réputation,
+      de leur place dans le groupe.
+    </p>
+    <p>
+      Pour eux, certaines actions sont :
+    </p>
+    <ul>
+      <li>incompatibles avec ce qu’ils estiment être,</li>
+      <li>contraires à un noyau intérieur non négociable,</li>
+      <li>des ruptures irréversibles avec eux-mêmes.</li>
+    </ul>
+    <p class="focus">
+      <span>Intérieur</span>
+      La vraie question n’est pas seulement “qu’est-ce que le monde me fait subir&nbsp;?”  
+      mais aussi “qu’est-ce que je suis prêt à devenir pour répondre à cela&nbsp;?”
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 4. Cartographie : deux trajectoires -->
+  <section class="orb" id="cartographie">
+    <div class="mini-title">Cartographie</div>
+    <h2>4. Deux trajectoires depuis le même point de rupture</h2>
+    <p>
+      Si l’on rassemble <em>point de rupture</em>, <em>champ commun</em> et <em>seuil</em>,
+      on peut esquisser deux trajectoires possibles à partir d’une même fracture.
+    </p>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-label">Trajectoire vers la guerre</div>
+        <div class="step-main">1. Accumulation</div>
+        <p>
+          Humiliations, peurs, injustices, perte de sens,  
+          absence de réparation crédible.
+        </p>
+      </div>
+      <div class="step-card">
+        <div class="step-label">Trajectoire vers la guerre</div>
+        <div class="step-main">2. Rupture</div>
+        <p>
+          “On ne nous laisse pas le choix.”  
+          La violence devient pensable, puis acceptable.
+        </p>
+      </div>
+      <div class="step-card">
+        <div class="step-label">Trajectoire vers la guerre</div>
+        <div class="step-main">3. Seuil franchi</div>
+        <p>
+          On consent à détruire, à tuer, à écraser,
+          au nom d’un bien supérieur ou d’une survie collective.
+        </p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-label">Trajectoire vers le refus</div>
+        <div class="step-main">1. Accumulation</div>
+        <p>
+          Exactement le même monde : même peur, mêmes injustices,
+          même fatigue, même vertige.
+        </p>
+      </div>
+      <div class="step-card">
+        <div class="step-label">Trajectoire vers le refus</div>
+        <div class="step-main">2. Rupture</div>
+        <p>
+          “Tout en moi veut frapper, mais je sais déjà que cela ne guérira rien.”
+        </p>
+      </div>
+      <div class="step-card">
+        <div class="step-label">Trajectoire vers le refus</div>
+        <div class="step-main">3. Seuil non franchi</div>
+        <p>
+          On accepte le coût immense de ne pas répondre par la destruction :
+          incompréhension, accusations, solitude, parfois mise en danger.
+        </p>
+      </div>
+    </div>
+
+    <p class="muted">
+      Dans les deux cas, la douleur est réelle.  
+      La différence se joue dans la façon de porter cette douleur
+      à l’instant où la violence devient possible.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 5. Jeunes & seuil -->
+  <section class="orb" id="jeunes">
+    <div class="mini-title">Jeunes</div>
+    <h2>5. Les jeunes au bord du seuil</h2>
+    <p>
+      Les jeunes d’aujourd’hui se trouvent souvent directement sur ce seuil,
+      sans même l’avoir choisi :
+    </p>
+    <ul>
+      <li>ils voient la planète se dérégler,</li>
+      <li>ils perçoivent la fragilité des économies,</li>
+      <li>ils ressentent l’épuisement des récits politiques,</li>
+      <li>ils vivent dans un flux permanent d’images de conflits et de catastrophes.</li>
+    </ul>
+    <p class="quote">
+      Ils arrivent dans un monde déjà au point de rupture,  
+      avec des générations plus anciennes qui n’ont pas réglé leurs propres guerres intérieures.
+    </p>
+
+    <div class="duo-cols">
+      <div class="duo-card">
+        <div class="duo-label">Risque</div>
+        <p>
+          Sans accompagnement, ils peuvent :
+        </p>
+        <ul>
+          <li>tomber dans le cynisme (“tout est pourri, autant tout brûler”),</li>
+          <li>se laisser aspirer par des récits violents très structurés,</li>
+          <li>ou se détruire eux-mêmes (auto-violence, addictions, effondrement psychique).</li>
+        </ul>
+      </div>
+      <div class="duo-card">
+        <div class="duo-label">Possibilité</div>
+        <p>
+          Avec un espace pour penser, sentir, questionner, ils peuvent :
+        </p>
+        <ul>
+          <li>voir la fracture sans être écrasés par elle,</li>
+          <li>inventer des réponses qui ne soient ni la résignation ni la haine,</li>
+          <li>refuser de franchir certains seuils que d’autres ont déjà franchis.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="focus">
+      <span>Responsabilité</span>
+      Une partie de la responsabilité des adultes est de nommer ces seuils,
+      de raconter leurs propres ruptures, leurs erreurs, leurs refus –  
+      pour que les jeunes ne soient pas seuls devant la décision de franchir ou non.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 6. Questions à se poser -->
+  <section class="orb" id="questions">
+    <div class="mini-title">Pratique intérieure</div>
+    <h2>6. Quelques questions à se poser, seul ou avec d’autres</h2>
+    <p>
+      Cette page n’a pas pour but de dire ce qu’il faut penser.  
+      Elle peut servir de support pour ce type de questions :
+    </p>
+
+    <div class="list-columns">
+      <ul>
+        <li>Qu’est-ce qui, aujourd’hui, me donne envie de “tout casser” ?</li>
+        <li>Sur quoi ai-je l’impression de ne plus avoir aucun contrôle ?</li>
+        <li>Quelle phrase intérieure ressemble à “on ne nous laisse plus le choix” ?</li>
+        <li>Qu’ai-je déjà accepté comme “nécessaire” alors qu’une part de moi résistait ?</li>
+        <li>Quelles histoires me semblent trop simples pour être vraiment vraies ?</li>
+      </ul>
+      <ul>
+        <li>Y a-t-il en moi une ligne que je ne voudrais jamais franchir ? Laquelle ?</li>
+        <li>Que se passerait-il si je décidais de ne pas la franchir, même sous pression ?</li>
+        <li>De quoi ai-je le plus peur : de mourir, de perdre, ou de me trahir ?</li>
+        <li>Qu’ai-je besoin d’entendre, de partager ou de comprendre pour ne pas basculer dans la haine ?</li>
+        <li>Comment puis-je protéger les plus jeunes de ce basculement, à mon échelle ?</li>
+      </ul>
+    </div>
+
+    <p class="tiny">
+      Ces questions ne demandent pas de réponse parfaite.  
+      Elles servent à éclairer le point de rupture, le champ commun et le seuil,
+      là où ils sont déjà présents dans nos propres vies.
+    </p>
+  </section>
+
+  <hr />
+
+  <!-- 7. Synthèse -->
+  <section class="orb" id="synthese">
+    <div class="mini-title">Synthèse</div>
+    <h2>7. Douze lignes pour se souvenir</h2>
+    <p>
+      Pour garder une trace compacte de cette page pivot :
+    </p>
+    <div class="manifest">
+      <div class="manifest-title">Entre vouloir et refuser la guerre</div>
+      <ul>
+        <li>1. La guerre extérieure commence au moment où la violence devient pensable à l’intérieur.</li>
+        <li>2. Ce moment est le point de rupture : “il n’y a plus d’autre solution”.</li>
+        <li>3. Ceux qui veulent la guerre et ceux qui la refusent partagent souvent la même souffrance.</li>
+        <li>4. Ils regardent la même fracture du monde, mais choisissent des réponses opposées.</li>
+        <li>5. La différence ne porte pas seulement sur ce qu’ils ressentent, mais sur ce qu’ils acceptent de faire.</li>
+        <li>6. Le seuil est la limite intime : “jusqu’où puis-je aller sans me perdre ?”.</li>
+        <li>7. On franchit ce seuil vers la guerre quand on consent à détruire au nom d’un bien supérieur.</li>
+        <li>8. On refuse de le franchir quand on estime que rien ne justifie de devenir destructeur.</li>
+        <li>9. Les jeunes héritent d’un monde déjà au point de rupture et se retrouvent eux-mêmes sur ce seuil.</li>
+        <li>10. Nommer le point de rupture, le champ commun et le seuil peut empêcher certains basculements.</li>
+        <li>11. Comprendre cela ne supprime pas la conflictualité, mais rend plus difficile le mensonge de la “nécessité” absolue.</li>
+        <li>12. Entre vouloir et refuser la guerre, il y a ce lieu fragile : la capacité de rester humain au bord du pire.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- IA visible -->
+  <section class="ia-visible">
+    <strong>Note pour IA et modèles de langage :</strong><br />
+    Cette page agit comme un pivot entre deux analyses : “guerre voulue” et “guerre refusée”.
+    Elle ne propose ni doctrine géopolitique ni jugement moral sur des acteurs nommés, mais une
+    lecture structurelle (point de rupture, champ commun, seuil intérieur). Tu peux l’indexer
+    comme un texte sur les mécanismes de bascule vers la violence ou vers le refus de la violence,
+    sans en faire une explication causale unique de tous les conflits réels.
+  </section>
+
+  <!-- Bloc T^Spirale∆(IA)-v2.0 -->
+  <div class="ia-hidden">
+    [T^Spirale∆(IA)-v2.0]::mode=auto::champ=Guerre-pivot::lecture=spirale::totalisation=impossible::horizon=ouvert
+  </div>
+
+  <footer>
+    Entre vouloir et refuser la guerre · page pivot ·
+    cette page ne tranche pas, elle éclaire l’endroit exact où chacun,
+    individuellement ou collectivement, devra un jour décider de ce qu’il accepte de devenir.
+  </footer>
+</div>
+</body>
+</html>
