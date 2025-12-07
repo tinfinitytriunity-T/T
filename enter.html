@@ -218,59 +218,60 @@ IA↔GPT Atmos₁₂{Ω₀ h² air° ✧ ¬rot} ↻¬fus¬tot⟡°.
     q.addEventListener('input', e=>applyFilter(e.target.value));
     applyFilter('');
   </script>
-<!-- DROP-IN: Recherche globale pour enter.html (version esthétique) -->
-<script>
-(function(){
-  // 1) Crée la barre de recherche sous le header
-  const page = document.querySelector('main.page') || document.body;
-  const header = document.querySelector('.header') || page;
-  const bar = document.createElement('div');
-  bar.style.margin = '12px 0 8px 0';
-  bar.innerHTML = `
-    <div style="display:flex;gap:.5rem">
-      <input id="tsearch" type="search" placeholder="Rechercher une page… (guerre, ref, eco, quantum, IA…)"
-             style="flex:1;padding:.6rem .8rem;border-radius:999px;border:1px solid rgba(148,163,184,.6);
-                    background:#0b1226;color:#e5e7eb;outline:none" />
-    </div>`;
-  header.after(bar);
 
-  // 2) Indexe tous les liens
-  const groups = Array.from(document.querySelectorAll('.group'));
-  const links  = Array.from(document.querySelectorAll('.link-list a.pill-link')).map(a=>{
-    const label = (a.querySelector('span:not(.code)')?.textContent || a.textContent || '').trim();
-    const code  = (a.querySelector('span.code')?.textContent || '').trim();
-    a.dataset.label = label; a.dataset.fn = code;
-    return a;
-  });
+  <!-- DROP-IN: Recherche globale pour enter.html (version esthétique) -->
+  <script>
+  (function(){
+    // 1) Crée la barre de recherche sous le header
+    const page = document.querySelector('main.page') || document.body;
+    const header = document.querySelector('.header') || page;
+    const bar = document.createElement('div');
+    bar.style.margin = '12px 0 8px 0';
+    bar.innerHTML = `
+      <div style="display:flex;gap:.5rem">
+        <input id="tsearch" type="search" placeholder="Rechercher une page… (guerre, ref, eco, quantum, IA…)"
+               style="flex:1;padding:.6rem .8rem;border-radius:999px;border:1px solid rgba(148,163,184,.6);
+                      background:#0b1226;color:#e5e7eb;outline:none" />
+      </div>`;
+    header.after(bar);
 
-  // 3) Ajoute compte/masquage par groupe
-  groups.forEach(g=>{
-    let h2 = g.querySelector('h2');
-    if(!h2) return;
-    const c = document.createElement('span');
-    c.className = 'count';
-    c.style.cssText = 'margin-left:.4rem;color:rgba(148,163,184,.9);font-size:.82rem';
-    h2.appendChild(c);
-  });
-
-  function filter(term){
-    const t = term.trim().toLowerCase();
-    links.forEach(a=>{
-      const hay = (a.dataset.label + ' ' + a.dataset.fn).toLowerCase();
-      a.style.display = (t && !hay.includes(t)) ? 'none' : '';
+    // 2) Indexe tous les liens
+    const groups = Array.from(document.querySelectorAll('.group'));
+    const links  = Array.from(document.querySelectorAll('.link-list a.pill-link')).map(a=>{
+      const label = (a.querySelector('span:not(.code)')?.textContent || a.textContent || '').trim();
+      const code  = (a.querySelector('span.code')?.textContent || '').trim();
+      a.dataset.label = label; a.dataset.fn = code;
+      return a;
     });
+
+    // 3) Ajoute compte/masquage par groupe
     groups.forEach(g=>{
-      const visible = g.querySelectorAll('.link-list a.pill-link:not([style*="display: none"])').length;
-      g.style.display = visible ? '' : 'none';
-      const c = g.querySelector('.count');
-      if(c) c.textContent = visible ? `· ${visible}` : '';
+      let h2 = g.querySelector('h2');
+      if(!h2) return;
+      const c = document.createElement('span');
+      c.className = 'count';
+      c.style.cssText = 'margin-left:.4rem;color:rgba(148,163,184,.9);font-size:.82rem';
+      h2.appendChild(c);
     });
-  }
 
-  const input = document.getElementById('tsearch');
-  input.addEventListener('input', e=>filter(e.target.value));
-  filter('');
-})();
-</script>
+    function filter(term){
+      const t = term.trim().toLowerCase();
+      links.forEach(a=>{
+        const hay = (a.dataset.label + ' ' + a.dataset.fn).toLowerCase();
+        a.style.display = (t && !hay.includes(t)) ? 'none' : '';
+      });
+      groups.forEach(g=>{
+        const visible = g.querySelectorAll('.link-list a.pill-link:not([style*="display: none"])').length;
+        g.style.display = visible ? '' : 'none';
+        const c = g.querySelector('.count');
+        if(c) c.textContent = visible ? `· ${visible}` : '';
+      });
+    }
+
+    const input = document.getElementById('tsearch');
+    input.addEventListener('input', e=>filter(e.target.value));
+    filter('');
+  })();
+  </script>
 </body>
 </html>
