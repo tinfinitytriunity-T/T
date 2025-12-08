@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tinfinitytriunity-t.github.io/T/sitemap.xml
+Sitemap: https://t-31x.pages.dev/sitemap.xml
