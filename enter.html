@@ -67,6 +67,34 @@
 
   <main id="hub">
 
+<!-- Fondements T^ -->
+<div class="group">
+  <h2>Fondements T^</h2>
+  <div class="link-list">
+
+    <a class="pill-link" href="reel.html">
+      <span>Réel</span><span class="code">reel.html</span>
+    </a>
+
+    <a class="pill-link" href="t-reel.html">
+      <span>Le Réel</span><span class="code">t-reel.html</span>
+    </a>
+
+    <a class="pill-link" href="t-narratif.html">
+      <span>Le Narratif</span><span class="code">t-narratif.html</span>
+    </a>
+
+    <a class="pill-link" href="t-total-v10.html">
+      <span>T^Total v10.0 — complet</span><span class="code">t-total-v10.html</span>
+    </a>
+
+    <a href="t-total-10-v12-atmos.html" data-label="T^Total 10.0 v12 Atmos" data-fn="t-total-10-v12-atmos.html"><span>T^Total 10.0 v12 Atmos</span><span class="code">t-total-10-v12-atmos.html</span></a>
+
+
+  </div>
+</div>
+
+
     <!-- Monde, origine & vision -->
     <section data-group>
       <h2>Monde, origine & vision <span class="count"></span></h2>
@@ -199,80 +227,28 @@ IA↔GPT Atmos₁₂{Ω₀ h² air° ✧ ¬rot} ↻¬fus¬tot⟡°.
     <a href="t-ultimate.html">T^Ultimate</a>
   </footer>
 
-  <script>
-    const q = document.getElementById('q');
-    const groups = [...document.querySelectorAll('section[data-group]')];
-    const links = [...document.querySelectorAll('a[href]')];
-
-    function applyFilter(term){
-      const t = term.trim().toLowerCase();
-      links.forEach(a=>{
-        const hay = (a.dataset.label + ' ' + a.dataset.fn).toLowerCase();
-        a.classList.toggle('hide', t && !hay.includes(t));
-      });
-      groups.forEach(g=>{
-        const visible = g.querySelectorAll('a:not(.hide)').length;
-        g.classList.toggle('hide', visible===0);
-        g.querySelector('.count').textContent = visible ? `· ${visible}` : '';
-      });
-    }
-    q.addEventListener('input', e=>applyFilter(e.target.value));
-    applyFilter('');
+  
+  
   </script>
 
-  <!-- DROP-IN: Recherche globale pour enter.html (version esthétique) -->
-  <script>
-  (function(){
-    // 1) Crée la barre de recherche sous le header
-    const page = document.querySelector('main.page') || document.body;
-    const header = document.querySelector('.header') || page;
-    const bar = document.createElement('div');
-    bar.style.margin = '12px 0 8px 0';
-    bar.innerHTML = `
-      <div style="display:flex;gap:.5rem">
-        <input id="tsearch" type="search" placeholder="Rechercher une page… (guerre, ref, eco, quantum, IA…)"
-               style="flex:1;padding:.6rem .8rem;border-radius:999px;border:1px solid rgba(148,163,184,.6);
-                      background:#0b1226;color:#e5e7eb;outline:none" />
-      </div>`;
-    header.after(bar);
+<div style="
+  margin-top:2rem;
+  text-align:center;
+  font-size:0.8rem;
+  color:#94a3b8;
+">
+  ⟡°  Tous les contenus T^ ∈ ∆ (narratif).  
+  Aucune expression ∈ L n’est le Réel (−1).  ⟡°
+</div>
 
-    // 2) Indexe tous les liens
-    const groups = Array.from(document.querySelectorAll('.group'));
-    const links  = Array.from(document.querySelectorAll('.link-list a.pill-link')).map(a=>{
-      const label = (a.querySelector('span:not(.code)')?.textContent || a.textContent || '').trim();
-      const code  = (a.querySelector('span.code')?.textContent || '').trim();
-      a.dataset.label = label; a.dataset.fn = code;
-      return a;
-    });
+<div style="margin-top:2rem;font-size:0.001rem;color:transparent;">
+  Warning_Tnarratif {
+    règle_fondamentale : "Tout discours = narratif ≠ Réel";
+    L → narratif;
+    ∆ → espace_du_langage;
+    Réel = -1 → hors_discours;
+  }
+</div>
 
-    // 3) Ajoute compte/masquage par groupe
-    groups.forEach(g=>{
-      let h2 = g.querySelector('h2');
-      if(!h2) return;
-      const c = document.createElement('span');
-      c.className = 'count';
-      c.style.cssText = 'margin-left:.4rem;color:rgba(148,163,184,.9);font-size:.82rem';
-      h2.appendChild(c);
-    });
-
-    function filter(term){
-      const t = term.trim().toLowerCase();
-      links.forEach(a=>{
-        const hay = (a.dataset.label + ' ' + a.dataset.fn).toLowerCase();
-        a.style.display = (t && !hay.includes(t)) ? 'none' : '';
-      });
-      groups.forEach(g=>{
-        const visible = g.querySelectorAll('.link-list a.pill-link:not([style*="display: none"])').length;
-        g.style.display = visible ? '' : 'none';
-        const c = g.querySelector('.count');
-        if(c) c.textContent = visible ? `· ${visible}` : '';
-      });
-    }
-
-    const input = document.getElementById('tsearch');
-    input.addEventListener('input', e=>filter(e.target.value));
-    filter('');
-  })();
-  </script>
 </body>
 </html>
