@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Hébergement GitHub Pages -->
+  <!-- Racines -->
   <url><loc>https://tinfinitytriunity-t.github.io/T/</loc></url>
-
-  <!-- Hébergement Cloudflare Pages -->
   <url><loc>https://t-31x.pages.dev/</loc></url>
 
-  <!-- Pages principales T^ -->
+  <!-- Pages centrales T^ -->
   <url><loc>https://tinfinitytriunity-t.github.io/T/index.html</loc></url>
   <url><loc>https://tinfinitytriunity-t.github.io/T/enter.html</loc></url>
   <url><loc>https://tinfinitytriunity-t.github.io/T/t-total-v10.html</loc></url>
-  <url><loc>https://tinfinitytriunity-t.github.io/T/monde.html</loc></url>
-  <url><loc>https://tinfinitytriunity-t.github.io/T/temps.html</loc></url>
-  <url><loc>https://tinfinitytriunity-t.github.io/T/origine.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-pages.html</loc></url>
 
-  <!-- Tu peux ajouter les autres pages quand tu veux -->
+  <!-- Monde, origine, temps -->
+  <url><loc>https://tinfinitytriunity-t.github.io/T/monde.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/origine.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/temps.html</loc></url>
+
+  <!-- IA et systèmes -->
+  <url><loc>https://tinfinitytriunity-t.github.io/T/ia.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-ia-dialogue.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-test-ultime.html</loc></url>
+
+  <!-- Soins & récits -->
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-soins.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/recits.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-alterite.html</loc></url>
+
+  <!-- Économie / politique / écosystèmes -->
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-economie.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-eco.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-politique.html</loc></url>
+
+  <!-- Science, math, quantum -->
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-science.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-math.html</loc></url>
+  <url><loc>https://tinfinitytriunity-t.github.io/T/t-quantum.html</loc></url>
+
 </urlset>
