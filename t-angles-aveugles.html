@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Angles aveugles — Rapport</title>
+<style>
+:root{--bg:#fbfafc;--card:#ffffff;--muted:#6b7280;--accent:#2b6cb0;--accent-2:#6b21a8}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#0f172a;background:linear-gradient(180deg,#fbfbff 0%,#f7f9fc 100%)}
+.container{max-width:1100px;margin:40px auto;padding:40px}
+.header{display:flex;gap:20px;align-items:center}
+.logo{width:84px;height:84px;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px}
+.h-title{margin:0}
+.h-sub{color:var(--muted);margin-top:6px}
+.lead{margin-top:28px;padding:22px;border-radius:14px;background:linear-gradient(180deg,#fff,#f7fbff);box-shadow:0 8px 30px rgba(20,30,60,0.06)}
+.section{margin-top:32px}
+.card{background:var(--card);padding:22px;border-radius:12px;box-shadow:0 6px 20px rgba(15,23,42,0.04);}
+.row{display:grid;grid-template-columns:1fr 320px;gap:28px}
+@media(max-width:920px){.row{grid-template-columns:1fr} .aside{order:2}}
+.kv{display:flex;gap:12px;align-items:center}
+.kv .n{font-weight:700;color:var(--accent);font-size:22px}
+.h2{font-size:20px;margin:0 0 12px}
+.h3{font-size:16px;margin:0 0 8px}
+.p{color:var(--muted);line-height:1.55}
+.block{margin:18px 0}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.list{padding-left:18px;color:var(--muted)}
+.table{width:100%;border-collapse:collapse;margin-top:12px}
+.table th{background:#f3f6fb;color:#0f172a;font-weight:700;text-align:left;padding:10px;border-bottom:1px solid #eef2f7}
+.table td{padding:10px;border-bottom:1px solid #f4f6fb;color:#223}
+.callout{padding:14px;border-radius:10px;background:linear-gradient(90deg,#fff7ed, #fff );border:1px solid #ffecd1;color:#92400e}
+.footer{margin-top:40px;padding:26px;text-align:center;color:var(--muted);font-size:13px}
+.code{font-family:SFMono-Regular,Menlo,monospace;background:#0f172a;color:#fff;padding:8px;border-radius:8px;display:inline-block}
+.metric{display:flex;gap:14px;align-items:baseline}
+.metric .big{font-size:28px;color:var(--accent);font-weight:800}
+.metric .desc{color:var(--muted)}
+.quote{padding:16px;border-left:4px solid var(--accent);background:#fbfdff;border-radius:8px}
+.visual{height:180px;background:linear-gradient(90deg,#eef2ff,#f6f0ff);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.anchors{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tag{padding:8px 12px;background:#fff;border-radius:999px;border:1px solid #eef2f7;color:var(--muted);font-size:13px}
+.long{white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo">T^</div>
+    <div>
+      <h1 class="h-title">Angles aveugles des systèmes & pensées sur l'IA— Analyse approfondie</h1>
+      <div class="h-sub">Un dossier premium : auteurs, enjeux, métriques et pistes d’action sur l’identité humaine, l’intelligence artificielle et la transformation du travail</div>
+        <div class="h-sub">et... ce que les "auteurs" ne voient pas...</div>
+    </div>
+  </div>
+
+  <div class="lead card">
+    <div class="kv">
+      <div class="n">Rapport long</div>
+      <div style="color:var(--muted)">— lecture synthétique et notes détaillées</div>
+    </div>
+    <p class="p block">Ce document présente une lecture structurée et accessible des « angles aveugles » — les limites conceptuelles, méthodologiques et politiques — que portent certaines pensées critiques (notamment Éric Sadin, Bernard Stiegler et Byung‑Chul Han), ainsi que des institutions et des systèmes techniques (modèles d’IA). Le propos allie rigueur, exemples empiriques et propositions opérationnelles.</p>
+    <div class="anchors">
+      <span class="tag">Sadin</span>
+      <span class="tag">Stiegler</span>
+      <span class="tag">Byung‑Chul Han</span>
+      <span class="tag">IA</span>
+      <span class="tag">Angles aveugles</span>
+      <span class="tag">Apocalypse jobs</span>
+      <span class="tag">Politiques publiques</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="row">
+      <div>
+        <div class="card">
+          <h2 class="h2">Sommaire exécutif</h2>
+          <p class="p">Ce rapport identifie et décrit les angles aveugles majeurs qui affectent la compréhension de la transformation technologique : (1) la tendance à opposer l'humain et la technique au lieu d'analyser leur co‑évolution ; (2) la linéarité narrative des diagnostics catastrophistes ; (3) la sous‑estimation des dynamiques locales et des pratiques hybrides ; (4) la focalisation sur des symptômes (emploi, attention, automatisation) plutôt que sur des systèmes de pouvoir, de marché et d'éducation.</p>
+          <div class="block">
+            <strong>Points clés</strong>
+            <ul class="list">
+              <li>Beaucoup d’analyses critiques mettent en évidence des risques réels, mais génèrent des schémas explicatifs trop homogènes.</li>
+              <li>L’impact sur l’emploi est substantiel : en Europe, des dizaines de millions d’emplois sont exposés à des transformations.</li>
+              <li>Les métiers relationnels augmentent l’exposition, mais la substitution est incertaine et dépendra de choix politiques.</li>
+              <li>Des mesures publiques (formation, redistribution, régulation) peuvent réduire fortement les pires scénarios.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card section">
+          <h2 class="h2">Méthodologie</h2>
+          <p class="p">Le travail s'appuie sur :</p>
+          <ul class="list">
+            <li>Lecture critique des principaux auteurs contemporains (Sadin, Stiegler, Byung‑Chul Han) ;</li>
+            <li>Compilation de rapports et d'études (OCDE, JRC, études sectorielles 2023‑2025) ;</li>
+            <li>Cartographie conceptuelle des angles aveugles (pratiques, institutions, technologies) ;</li>
+            <li>Estimation d’impacts sectoriels, fourchettes prudentes, scénarios contrastés.</li>
+          </ul>
+          <p class="p">Le document évite le jargon technique spécialisé : les concepts sont traduits dans un langage clair et opérationnel pour un public exigeant.</p>
+        </div>
+
+        <div class="card section">
+          <h2 class="h2">Résumés analytiques : les auteurs</h2>
+          <div class="grid-2">
+            <div>
+              <h3 class="h3">Éric Sadin</h3>
+              <p class="p">Philosophe et essayiste français, Sadin alerte sur la perte d'autonomie cognitive et culturelle liée à la diffusion des technologies numériques et en particulier des intelligences artificielles génératives. Il dépeint un risque de « dépossession » : la langue, la créativité et la mémoire peuvent être déléguées à des systèmes externes, transformant l’humain en variable économique.</p>
+            </div>
+            <div>
+              <h3 class="h3">Bernard Stiegler</h3>
+              <p class="p">Penseur de la technique et de l’attention, Stiegler analyse comment les industries numériques transforment les processus d’individuation et de transmission. Il insiste sur le rôle du soin, de l’éducation et de la préservation de capacités attentionnelles dans la lutte contre la captation commerciale des esprits.</p>
+            </div>
+            <div>
+              <h3 class="h3">Byung‑Chul Han</h3>
+              <p class="p">Philosophe coréen‑allemand, Han critique la société de la performance et de la transparence qui érode l’intériorité. Il met en garde contre l’auto‑exploitation, la fatigue psychique et la disparition de l’espace privé qui abrite la réflexion critique.</p>
+            </div>
+            <div>
+              <h3 class="h3">Autres voix</h3>
+              <p class="p">D'autres chercheurs (sociologues, économistes, chercheurs en science des données) apportent des nuances en montrant que la transformation est hétérogène : certains métiers sont résilients, d'autres voient une évolution des tâches plutôt qu'une disparition pure.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card section">
+          <h2 class="h2">Comparaison synthétique</h2>
+          <p class="p">Les trois penseurs partagent une posture critique mais diffèrent sur le cœur de la menace : Sadin voit une dépossession culturelle, Stiegler une perte d’individuation liée à la technique, Han une érosion de l’intériorité par la dynamique de performance. Leur point aveugle commun : la difficulté à saisir la plasticité humaine et les formes d'hybridation déjà en cours.</p>
+        </div>
+
+      </div>
+
+      <aside class="aside">
+        <div class="card">
+          <h3 class="h3">Faits saillants</h3>
+          <div class="metric">
+            <div class="big">≈ 112M</div>
+            <div class="desc">Actifs en Europe exposés à des transformations par l’IA (ordre de grandeur)</div>
+          </div>
+          <div style="height:12px"></div>
+          <div class="metric">
+            <div class="big">22M → 71M</div>
+            <div class="desc">Fourchette d’emplois potentiellement supprimés selon scénario (bas → haut)</div>
+          </div>
+          <div style="height:16px"></div>
+          <div class="callout">Note : ces chiffres sont des estimations prudentes basées sur études publiques et hypothèses d’adoption massive sans politiques compensatoires.</div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h3 class="h3">Phrase‑clé</h3>
+          <div class="quote">« L’enjeu n’est pas seulement technique : il est politique, éducatif et anthropologique. »</div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h3 class="h3">Ressources</h3>
+          <ul class="list">
+            <li>Rapports OCDE, JRC, études sectorielles 2023–2025</li>
+            <li>Ouvrages : É. Sadin, B. Stiegler, B.‑C. Han</li>
+            <li>Analyses sectorielles (banque, santé, éducation, logistique)</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <h2 class="h2">Angles aveugles : cartographie & explications</h2>
+      <p class="p">Ci‑dessous, dix angles aveugles récurrents identifiés à partir des lectures et des données empiriques.</p>
+
+      <div class="block">
+        <h3 class="h3">1. Opposer l’humain et la technique</h3>
+        <p class="p">Beaucoup d'analyses posent une séparation nette entre l’humain et la technique. Or l’histoire montre que les outils et les pratiques ont toujours co‑construit nos facultés (langage, mémoire, savoir). Le risque est de demander une « purification » impossible et d’ignorer les politiques d’accompagnement nécessaires.</p>
+      </div>
+
+      <div class="block">
+        <h3 class="h3">2. Linéarité du récit catastrophiste</h3>
+        <p class="p">Les diagnostics qui décrivent un déroulé inévitable vers la catastrophe négligent les rétroactions sociales, les résistances locales et la capacité des institutions à modifier les trajectoires.</p>
+      </div>
+
+      <div class="block">
+        <h3 class="h3">3. Sous‑estimation des usages locaux</h3>
+        <p class="p">Les pratiques effectives d’un territoire, d’un métier ou d’une communauté créent des adaptations qui empêchent l’uniformisation complète ; ces micro‑pratiques sont souvent négligées.</p>
+      </div>
+
+      <div class="block">
+        <h3 class="h3">4. Focus sur le symptôme « emploi »</h3>
+        <p class="p">Les débats publics concentrent l’attention sur le nombre d’emplois perdus ou transformés, mais délaissent les transformations des rapports sociaux, des salaires, des statuts et des protections collectives.</p>
+      </div>
+
+      <div class="block">
+        <h3 class="h3">5. Invisibilité des angles financiers et politiques</h3>
+        <p class="p">La technique ne se déploie pas de manière neutre : elle suit des intérêts financiers et des stratégies d’acteurs. Les analyses critiques peinent parfois à incorporer ces jeux d’influence.</p>
+      </div>
+
+      <div class="block">
+        <h3 class="h3">6. Méconnaissance des conséquences psychiques</h3>
+        <p class="p">L’impact sur la santé mentale, le sens du travail et le lien social est difficile à mesurer mais central. Une attention insuffisante à ces effets mène à des politiques inadaptées.</p>
+      </div>
+
+      <div class="block">
+        <h3 class="h3">7. Effets de seconde main et externalités</h3>
+        <p class="p">Les transformations technologiques engendrent des effets indirects (délocalisations, changements de chaine de valeur, nouvelles vulnérabilités) souvent absents des diagnostics initiaux.</p>
+      </div>
+
+      <div class="block">
+        <h3 class="h3">8. Sous‑estimation des opportunités créatives</h3>
+        <p class="p">Les technologies produisent aussi des formes inédites de création, de relation et d’économie ; les négliger conduit à des politiques purement défensives.</p>
+      </div>
+
+      <div class="block">
+        <h3 class="h3">9. L’illusion de la neutralité scientifique</h3>
+        <p class="p">Les sciences et les données sont marquées par des choix (données collectées, questions posées), et ces biais peuvent structurer les décisions publiques si on ne les interroge pas.</p>
+      </div>
+
+      <div class="block">
+        <h3 class="h3">10. L’espace des pratiques non‑marchandes</h3>
+        <p class="p">Les activités non monétisées (care, bénévolat, rituels culturels) jouent un rôle majeur pour la cohésion sociale ; leur fragilisation par une logique d’optimisation du coût est un angle aveugle politique.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="row">
+      <div class="card">
+        <h2 class="h2">Empreinte sur l’emploi — chiffres et scénarios</h2>
+        <p class="p">Présentation synthétique des estimations pour l’UE + Suisse (ordre de grandeur).</p>
+
+        <table class="table">
+          <thead>
+            <tr><th>Type d’emploi</th><th>% exposé</th><th>Nb. exposés (M)</th><th>Suppression plausible (M)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Administratif / bureautique</td><td>60%</td><td>14.4</td><td>4.8 → 9.6</td></tr>
+            <tr><td>Comptabilité / finance</td><td>70%</td><td>7.0</td><td>1.0 → 2.5</td></tr>
+            <tr><td>Services clients / call centers</td><td>70%</td><td>8.4</td><td>2.4 → 6.0</td></tr>
+            <tr><td>Retail / front</td><td>50%</td><td>10.0</td><td>3.0 → 7.0</td></tr>
+            <tr><td>Marketing / contenu</td><td>70%</td><td>5.6</td><td>1.2 → 3.6</td></tr>
+            <tr><td>Dev / ingénierie</td><td>40%</td><td>4.0</td><td>0.5 → 1.5</td></tr>
+            <tr><td>R&amp;D / science</td><td>30%</td><td>1.2</td><td>0 → 0.4</td></tr>
+            <tr><td>Logistique / entrepôts</td><td>50%</td><td>6.0</td><td>1.8 → 4.8</td></tr>
+            <tr><td>Industrie / production</td><td>60%</td><td>18.0</td><td>3.0 → 12.0</td></tr>
+            <tr><td>Éducation</td><td>40%</td><td>5.6</td><td>0.7 → 2.1</td></tr>
+            <tr><td>Santé (clinique + relationnel)</td><td>50%</td><td>8.0</td><td>0.8 → 4.8</td></tr>
+            <tr><td>Juridique (paralegals)</td><td>70%</td><td>2.8</td><td>0.4 → 1.6</td></tr>
+            <tr><td>Création (assistants)</td><td>70%</td><td>4.2</td><td>0.6 → 3.0</td></tr>
+            <tr><td>Agriculture</td><td>20%</td><td>1.2</td><td>0 → 0.6</td></tr>
+            <tr><td>Secteur public</td><td>40%</td><td>4.0</td><td>0.5 → 2.5</td></tr>
+            <tr><td>Care / services sociaux</td><td>45%</td><td>4.5</td><td>0.5 → 3.0</td></tr>
+            <tr><td>Hospitality / tourisme</td><td>50%</td><td>7.0</td><td>1.4 → 5.6</td></tr>
+          </tbody>
+        </table>
+
+        <div class="block">
+          <p class="p">Total exposés approximatifs : <strong>≈ 112 M</strong>. Fourchette de suppression plausible : <strong>≈ 22.6 M → 70.6 M</strong> selon degré d’adoption et politiques publiques.</p>
+        </div>
+
+        <div class="block">
+          <h3 class="h3">Scénarios synthétiques</h3>
+          <ul class="list">
+            <li><strong>Scénario modéré :</strong> adoption encadrée, reconversion active → suppression faible, transformation élevée.</li>
+            <li><strong>Scénario probable :</strong> adoption forte avec protections limitées → pertes nettes substantielles (vers milieu della fourchette).</li>
+            <li><strong>Scénario sévère :</strong> adoption massive, absence de redistribution → pertes proches de la fourchette haute.</li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="aside card">
+        <h3 class="h3">Interprétation</h3>
+        <p class="p">Les chiffres montrent une exposition large mais non uniformément distribuée : les métiers relationnels, traditionnellement vus comme protégés, voient augmenter leur exposition à mesure que les technologies simulent des interactions humaines (chatbots, robots d’assistance, interfaces vocales).</p>
+        <div style="height:12px"></div>
+        <div class="visual">Graphiques & cartes disponibles en annexe</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <h2 class="h2">Angles aveugles détaillés par domaine</h2>
+      <p class="p">Courte synthèse par domaine — ce qu’on tend à manquer quand on lit les discours critiques ou les rapports techniques.</p>
+
+      <div class="grid-2">
+        <div>
+          <h3 class="h3">Santé</h3>
+          <p class="p">On met l’accent sur les gains de productivité et les diagnostics assistés ; on minimise souvent l’impact sur la relation soignant‑soigné, l’épuisement professionnel et les inégalités d’accès. Les robots d’assistance élargissent l’accès mais changent profondément la nature du soin.</p>
+        </div>
+        <div>
+          <h3 class="h3">Éducation</h3>
+          <p class="p">Les outils adaptatifs personnalisent l’apprentissage mais risquent d’externaliser la pédagogie : la transmission, l’autorité éducative et la socialisation sont des dimensions rarement chiffrées.</p>
+        </div>
+        <div>
+          <h3 class="h3">Finance & banque</h3>
+          <p class="p">Automatisation des tâches et décisions algorithmiques : le biais des données, la dépendance aux modèles propriétaires et les risques systémiques sont souvent sous‑estimés.</p>
+        </div>
+        <div>
+          <h3 class="h3">Médias & création</h3>
+          <p class="p">La production massive de contenus par IA transforme la valeur de l’originalité ; la protection des auteurs et la traçabilité des œuvres sont des enjeux cruciaux.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <h2 class="h2">Propositions politiques et techniques</h2>
+      <p class="p">Mesures opérationnelles pour réduire les angles aveugles et atténuer les risques sociaux.</p>
+
+      <div class="grid-2">
+        <div>
+          <h3 class="h3">Politiques publiques</h3>
+          <ul class="list">
+            <li><strong>Formation et reconversion</strong> : programmes massifs ciblant compétences numériques, recyclage métier, accompagnement transversal.</li>
+            <li><strong>Protection sociale</strong> : revenu de transition, assurance reconversion, filets renforcés.</li>
+            <li><strong>Taxation des gains automatisés</strong> : prélèvements dédiés à la reconversion et aux services publics.</li>
+            <li><strong>Normes de traçabilité</strong> : obligation d’étiquetage des contenus générés par IA, transparence des décisions algorithmiques en secteur public.</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="h3">Mesures techniques & gouvernance</h3>
+          <ul class="list">
+            <li><strong>Audit indépendant des modèles</strong> avant déploiement à large échelle.</li>
+            <li><strong>Sidecar de surveillance</strong> : module d’analyse en temps réel des sorties IA (logs immuables, étiquettes de risque).</li>
+            <li><strong>Human‑in‑the‑loop</strong> obligatoire pour décisions à risque élevé (santé, justice, finance).</li>
+            <li><strong>Tests de robustesse non linéaire</strong> : simulations de scénarios et stress‑tests sociaux.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3 class="h3">Mesure pilote recommandée</h3>
+        <div class="callout">Créer un fonds européen de transition (revenu + formation) financé par une taxe sur l’utilisation commerciale des IA génératives, avec des projets pilotes régionaux de reconversion.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <h2 class="h2">Annexes & ressources</h2>
+      <p class="p">Sélection d’études et de sources utilisées pour construire les estimations et analyses.</p>
+      <ul class="list">
+        <li>Rapports OCDE — Impact de l’IA sur l’emploi (2023‑2025)</li>
+        <li>Joint Research Centre (JRC) — Usages de l’IA en entreprise (2025)</li>
+        <li>Analyses sectorielles : santé, finance, éducation (revues professionnelles 2023‑2025)</li>
+        <li>Ouvrages : Éric Sadin, Bernard Stiegler, Byung‑Chul Han</li>
+        <li>Articles de synthèse et revues spécialisées (2023‑2025)</li>
+      </ul>
+      <div class="block">
+        <h3 class="h3">Méthode de calcul — résumé</h3>
+        <p class="p">Les chiffres d’exposition résultent de l’agrégation de parts sectorielles, de partages d’activités automatisables et d’hypothèses prudentes sur le taux d’adoption. Les intervalles de suppression tiennent compte de scénarios contrastés (politiques protectrices vs laissez‑faire).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer card">
+    <div style="font-weight:700">Contact & usage</div>
+    <div class="p" style="margin-top:8px">Document produit à la demande — usage libre pour discussion, enseignement et débat public. Citation recommandée : « Analyse Angles aveugles — dossier synthétique ». Pour version modifiable, demandez l’export HTML/JSON.</div>
+  </div>
+
+</div>
+</body>
+</html>
