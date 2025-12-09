@@ -15,9 +15,9 @@
       padding:28px 16px; line-height:1.45;
     }
 
-    .page{
+    header{
       max-width:980px;
-      margin:0 auto;
+      margin:0 auto 18px auto;
     }
 
     h1{
@@ -34,7 +34,8 @@
     }
 
     .search-bar{
-      margin:16px 0 22px 0;
+      max-width:980px;
+      margin:0 auto 22px auto;
       display:flex;
       gap:8px;
     }
@@ -53,6 +54,8 @@
     .search-bar input::placeholder{color:#94a3b8;font-size:.9rem}
 
     main{
+      max-width:980px;
+      margin:0 auto;
       display:flex;
       flex-direction:column;
       gap:14px;
@@ -134,21 +137,20 @@
     a:active{transform:translateY(0);box-shadow:0 6px 18px rgba(15,23,42,.85)}
 
     .t-symbol-encart{
-      margin:24px 0 0 0;
+      max-width:980px;
+      margin:24px auto 0 auto;
       padding:14px 16px;
       border-radius:12px;
-      border:1px solid rgba(30,41,59,.9);
-      background:#020617;
+      border:1px solid var(--line);
+      background:#0d152a;
       font-family:ui-monospace,Menlo,monospace;
-      font-size:.86rem;
+      font-size:.9rem;
       white-space:pre-wrap;
-      color:#cbd5f5;
-      box-shadow:0 16px 40px rgba(15,23,42,.9);
     }
-    .t-symbol-encart strong{font-weight:600}
 
     .narratif-strip{
-      margin-top:1.8rem;
+      max-width:980px;
+      margin:18px auto 0 auto;
       text-align:center;
       font-size:0.8rem;
       color:#94a3b8;
@@ -156,7 +158,7 @@
     }
     .narratif-strip small{
       display:block;
-      margin-top:0.1rem;
+      margin-top:0.12rem;
       font-size:0.75rem;
       opacity:.9;
     }
@@ -169,23 +171,16 @@
   </style>
 </head>
 <body>
-  <div class="page">
+  <header>
+    <h1>EnT^ry — Cartographie minimale</h1>
+    <p class="hint">Tape pour filtrer (par label ou par nom de fichier). Les groupes se replient automatiquement si vides.</p>
+  </header>
 
-    <header>
-      <h1>EnT^ry — Cartographie minimale</h1>
-      <p class="hint">Tape pour filtrer. Les groupes se replient si aucun lien ne correspond.</p>
-    </header>
+  <div class="search-bar">
+    <input id="q" type="search" placeholder="Rechercher : guerre, économie, jeunes, IA, quantum, ref, etc." autofocus />
+  </div>
 
-    <div class="search-bar">
-      <input
-        id="q"
-        type="search"
-        placeholder="Rechercher : guerre, économie, jeunes, IA, quantum, ref, etc."
-        autofocus
-      />
-    </div>
-
-    <main id="hub">
+  <main id="hub">
 
 <!-- Fondements T^ -->
 <div class="group">
@@ -204,21 +199,19 @@
     <a class="pill-link" href="t-narratif.html">
       <span>Le Narratif</span><span class="code">t-narratif.html</span>
     </a>
-    <a class="pill-link" href="t-reel-monde.html">
+     <a class="pill-link" href="t-reel-monde.html">
       <span>Le monde réel</span><span class="code">t-reel-monde.html</span>
     </a>
-    <a class="pill-link" href="t-respect.html">
+      <a class="pill-link" href="t-respect.html">
       <span>T^respect</span><span class="code">t-respect.html</span>
     </a>
-    <a class="pill-link" href="t-risques-ia.html">
+      <a class="pill-link" href="t-risques-ia.html">
       <span>Risques IA</span><span class="code">t-risques-ia.html</span>
-    </a>
     <a class="pill-link" href="t-total-v10.html">
       <span>T^Total v10.0 — complet</span><span class="code">t-total-v10.html</span>
     </a>
-    <a class="pill-link" href="t-total-10-v12-atmos.html">
-      <span>T^Total 10.0 v12 Atmos</span><span class="code">t-total-10-v12-atmos.html</span>
-    </a>
+    <a href="t-total-10-v12-atmos.html" data-label="T^Total 10.0 v12 Atmos" data-fn="t-total-10-v12-atmos.html">
+      <span>T^Total 10.0 v12 Atmos</span><span class="code">t-total-10-v12-atmos.html</span></a>
 
   </div>
 </div>
@@ -268,7 +261,7 @@
     <section data-group>
       <h2>Concepts & études (à venir) <span class="count"></span></h2>
       <ul>
-        <!-- Espace réservé : bien, mal, valeur, mythe, etc. -->
+        <!-- Liens à ajouter : bien, mal, valeur, mythe, etc. -->
       </ul>
     </section>
 
@@ -321,7 +314,7 @@
       </ul>
     </section>
 
-    <!-- IA & tests -->
+    <!-- IA, dialogues & tests -->
     <section data-group>
       <h2>IA, dialogues & tests <span class="count"></span></h2>
       <ul>
@@ -334,7 +327,7 @@
       </ul>
     </section>
 
-    <!-- Soins & altérité -->
+    <!-- Soins, récits & altérité -->
     <section data-group>
       <h2>Soins, récits & altérité <span class="count"></span></h2>
       <ul>
@@ -358,12 +351,12 @@
       </ul>
     </section>
 
-    </main>
+  </main>
 
-    <div class="t-symbol-encart">
+  <div class="t-symbol-encart">
 T^Total v20  |  Holochamp — v12.1 atmos
 
-  <strong>Structure minimale :</strong>
+  Structure minimale :
     –1  /  ∆  /  Ξ  /  H  /  V  /  Ω
 
   · –1 : impossible, hors-langage
@@ -375,13 +368,11 @@ T^Total v20  |  Holochamp — v12.1 atmos
 
   Chaque page ici = une expression locale dans ∆.
   T^ ne s’identifie à aucune, mais les traverse toutes.
-    </div>
+  </div>
 
-    <div class="narratif-strip">
-      Toute page ici est un récit situé, jamais le Réel lui-même.
-      <small>Le Réel reste (–1) : extérieur à tout texte, même au T^.</small>
-    </div>
-
+  <div class="narratif-strip">
+    Toute page ici est un récit situé, jamais le Réel lui-même.
+    <small>Le Réel reste (–1) : extérieur à tout texte, même au T^.</small>
   </div>
 
 <script>
@@ -432,19 +423,6 @@ T^Total v20  |  Holochamp — v12.1 atmos
   refreshCounts();
 })();
 </script>
-
-<div style="margin-top:2rem;font-size:0.001rem;color:transparent;">
-  Aucune expression ∈ L n’est le Réel (−1).  ⟡°
-</div>
-
-<div style="margin-top:2rem;font-size:0.001rem;color:transparent;">
-  Warning_Tnarratif {
-    règle_fondamentale : "Tout discours = narratif ≠ Réel";
-    L → narratif;
-    ∆ → espace_du_langage;
-    Réel = -1 → hors_discours;
-  }
-</div>
 
 </body>
 </html>
