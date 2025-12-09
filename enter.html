@@ -14,58 +14,178 @@
       background:var(--bg); color:var(--fg);
       padding:28px 16px; line-height:1.45;
     }
-    header{max-width:980px;margin:0 auto 18px auto}
-    h1{font-size:clamp(20px,2.8vw,28px);margin:0 0 6px 0;letter-spacing:.06em}
-    p.hint{margin:.25rem 0 0 0;color:var(--mut);font-size:.95rem}
-    .search-bar{
-      max-width:980px;margin:14px auto 20px auto;display:flex;gap:8px
-    }
-    .search-bar input{
-      flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:10px;
-      background:#0f162c;color:var(--fg);font-size:1rem;outline:none
-    }
-    .search-bar input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(34,211,238,.15)}
-    main{max-width:980px;margin:0 auto}
-    section{border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:10px 12px}
-    h2{margin:0 0 8px 0;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:#f0f3ff}
-    ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px}
-    a{
-      display:flex;justify-content:space-between;gap:10px;
-      padding:8px 10px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:inherit;
-      background:#0d1427
-    }
-    a:hover{border-color:var(--accent)}
-    .fn{color:var(--mut);font-family:ui-monospace,Menlo,monospace;font-size:.85rem}
-    .hide{display:none !important}
-    footer{max-width:980px;margin:16px auto 0 auto;display:flex;flex-wrap:wrap;gap:8px}
-    footer a{padding:8px 12px;border:1px solid var(--line);border-radius:999px;text-decoration:none;color:inherit;background:#0d1427}
-    .count{color:var(--mut);font-size:.85rem;margin-left:6px}
 
-    /* Encart symbolique T^ en bas de page */
-    .t-symbol-encart{
+    .page{
       max-width:980px;
-      margin:24px auto 0 auto;
+      margin:0 auto;
+    }
+
+    h1{
+      font-size:1.7rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin:0 0 .3rem 0;
+    }
+
+    p.hint{
+      margin:.2rem 0 0 0;
+      color:var(--mut);
+      font-size:.9rem;
+    }
+
+    .search-bar{
+      margin:16px 0 22px 0;
+      display:flex;
+      gap:8px;
+    }
+
+    .search-bar input{
+      flex:1;
+      padding:10px 13px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#050816;
+      color:var(--fg);
+      font-size:1rem;
+      outline:none
+    }
+    .search-bar input:focus{border-color:var(--accent);box-shadow:0 0 0 1px #020617,0 0 0 3px rgba(34,211,238,.35)}
+    .search-bar input::placeholder{color:#94a3b8;font-size:.9rem}
+
+    main{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      margin-top:4px;
+    }
+
+    section[data-group],
+    .group{
+      border:1px solid rgba(15,23,42,.9);
+      border-radius:14px;
+      padding:12px 13px 10px 13px;
+      background:radial-gradient(circle at top left,#020617,#020617 55%,#020617 100%);
+      box-shadow:0 16px 36px rgba(15,23,42,.85);
+    }
+
+    h2{
+      margin:0 0 8px 0;
+      font-size:.9rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#f9fbff;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    h2 .count{
+      color:var(--mut);
+      font-size:.75rem;
+      font-weight:400;
+      letter-spacing:0;
+    }
+
+    ul{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:6px;
+    }
+
+    .link-list{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:6px;
+      margin-top:4px;
+    }
+
+    a{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      padding:7px 10px;
+      border:1px solid rgba(30,41,59,.9);
+      border-radius:11px;
+      text-decoration:none;
+      color:inherit;
+      background:#020617;
+      font-size:.93rem;
+      transition:border-color .15s ease,transform .12s ease,box-shadow .15s ease,background .15s ease;
+    }
+
+    a span:first-child{font-weight:500}
+    a .fn,a .code{
+      color:var(--mut);
+      font-family:ui-monospace,Menlo,monospace;
+      font-size:.8rem;
+      opacity:.9;
+    }
+
+    a:hover{
+      border-color:var(--accent);
+      transform:translateY(-1px);
+      box-shadow:0 10px 26px rgba(15,23,42,.9);
+      background:radial-gradient(circle at top left,#020617,#020617 55%,#020617 100%);
+    }
+    a:active{transform:translateY(0);box-shadow:0 6px 18px rgba(15,23,42,.85)}
+
+    .t-symbol-encart{
+      margin:24px 0 0 0;
       padding:14px 16px;
       border-radius:12px;
-      border:1px solid var(--line);
-      background:#0d152a;
+      border:1px solid rgba(30,41,59,.9);
+      background:#020617;
       font-family:ui-monospace,Menlo,monospace;
-      font-size:.9rem;
+      font-size:.86rem;
       white-space:pre-wrap;
+      color:#cbd5f5;
+      box-shadow:0 16px 40px rgba(15,23,42,.9);
+    }
+    .t-symbol-encart strong{font-weight:600}
+
+    .narratif-strip{
+      margin-top:1.8rem;
+      text-align:center;
+      font-size:0.8rem;
+      color:#94a3b8;
+      opacity:.95;
+    }
+    .narratif-strip small{
+      display:block;
+      margin-top:0.1rem;
+      font-size:0.75rem;
+      opacity:.9;
+    }
+
+    @media (max-width:640px){
+      body{padding:20px 10px}
+      section[data-group],.group{padding:11px 11px 9px 11px}
+      a{padding:7px 9px}
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>EnT^ry — Cartographie minimale</h1>
-    <p class="hint">Tape pour filtrer (par label ou par nom de fichier). Les groupes se replient automatiquement si vides.</p>
-  </header>
+  <div class="page">
 
-  <div class="search-bar">
-    <input id="q" type="search" placeholder="Rechercher : guerre, économie, jeunes, IA, quantum, ref, etc." autofocus />
-  </div>
+    <header>
+      <h1>EnT^ry — Cartographie minimale</h1>
+      <p class="hint">Tape pour filtrer. Les groupes se replient si aucun lien ne correspond.</p>
+    </header>
 
-  <main id="hub">
+    <div class="search-bar">
+      <input
+        id="q"
+        type="search"
+        placeholder="Rechercher : guerre, économie, jeunes, IA, quantum, ref, etc."
+        autofocus
+      />
+    </div>
+
+    <main id="hub">
 
 <!-- Fondements T^ -->
 <div class="group">
@@ -78,23 +198,27 @@
     <a class="pill-link" href="t-reel.html">
       <span>Le Réel</span><span class="code">t-reel.html</span>
     </a>
+    <a class="pill-link" href="t-angles-aveugles.html">
+      <span>Angles aveugles</span><span class="code">t-angles-aveugles.html</span>
+    </a>
     <a class="pill-link" href="t-narratif.html">
       <span>Le Narratif</span><span class="code">t-narratif.html</span>
     </a>
-     <a class="pill-link" href="t-reel-monde.html">
+    <a class="pill-link" href="t-reel-monde.html">
       <span>Le monde réel</span><span class="code">t-reel-monde.html</span>
     </a>
-      <a class="pill-link" href="t-respect.html">
+    <a class="pill-link" href="t-respect.html">
       <span>T^respect</span><span class="code">t-respect.html</span>
     </a>
-      <a class="pill-link" href="t-risques-ia.html">
+    <a class="pill-link" href="t-risques-ia.html">
       <span>Risques IA</span><span class="code">t-risques-ia.html</span>
+    </a>
     <a class="pill-link" href="t-total-v10.html">
       <span>T^Total v10.0 — complet</span><span class="code">t-total-v10.html</span>
     </a>
-    <a href="t-total-10-v12-atmos.html" data-label="T^Total 10.0 v12 Atmos" data-fn="t-total-10-v12-atmos.html">
-      <span>T^Total 10.0 v12 Atmos</span><span class="code">t-total-10-v12-atmos.html</span></a>
-
+    <a class="pill-link" href="t-total-10-v12-atmos.html">
+      <span>T^Total 10.0 v12 Atmos</span><span class="code">t-total-10-v12-atmos.html</span>
+    </a>
 
   </div>
 </div>
@@ -127,6 +251,26 @@
         <li><a href="t-enthousiasme-v2.html" data-label="Enthousiasme" data-fn="t-enthousiasme-v2.html"><span>Enthousiasme</span><span class="fn">t-enthousiasme-v2.html</span></a></li>
       </ul>
     </section>
+    <!-- Projets & futurs -->
+    <section data-group>
+      <h2>Projets & futurs <span class="count"></span></h2>
+      <ul>
+        <li><a href="identite-humaine.html" data-label="Identité humaine" data-fn="identite-humaine.html"><span>Identité humaine</span><span class="fn">identite-humaine.html</span></a></li>
+        <li><a href="t-critique-id.html" data-label="Critique de l'identité" data-fn="t-critique-id.html"><span>Critique de l'identité</span><span class="fn">t-critique-id.html</span></a></li>
+        <li><a href="t-identite-humain.html" data-label="Identité humaine — T^" data-fn="t-identite-humain.html"><span>Identité humaine — T^</span><span class="fn">t-identite-humain.html</span></a></li>
+        <li><a href="t-futur-humania.html" data-label="Futur Humania" data-fn="t-futur-humania.html"><span>Futur Humania</span><span class="fn">t-futur-humania.html</span></a></li>
+        <li><a href="t-article-ia.html" data-label="Article IA" data-fn="t-article-ia.html"><span>Article IA</span><span class="fn">t-article-ia.html</span></a></li>
+        <li><a href="T-IA-compare.html" data-label="IA — comparatif" data-fn="T-IA-compare.html"><span>IA — comparatif</span><span class="fn">T-IA-compare.html</span></a></li>
+      </ul>
+    </section>
+
+    <!-- Concepts & études -->
+    <section data-group>
+      <h2>Concepts & études (à venir) <span class="count"></span></h2>
+      <ul>
+        <!-- Espace réservé : bien, mal, valeur, mythe, etc. -->
+      </ul>
+    </section>
 
     <!-- Guerre & politique -->
     <section data-group>
@@ -154,7 +298,7 @@
       </ul>
     </section>
 
-    <!-- Références & cartes -->
+    <!-- Références, cartes & structure -->
     <section data-group>
       <h2>Références, cartes & structure <span class="count"></span></h2>
       <ul>
@@ -197,52 +341,99 @@
         <li><a href="t-soins.html" data-label="T^Soins" data-fn="t-soins.html"><span>T^Soins</span><span class="fn">t-soins.html</span></a></li>
         <li><a href="soins.html" data-label="Soins" data-fn="soins.html"><span>Soins</span><span class="fn">soins.html</span></a></li>
         <li><a href="recits.html" data-label="Récits" data-fn="recits.html"><span>Récits</span><span class="fn">recits.html</span></a></li>
-        <li><a href="t-alterite.html" data-label="T^Altérité" data-fn="t-alterite.html"><span>T^Altérité</span><span class="fn">t-alterite.html</span></a></li>
+        <li><a href="t-alt.html" data-label="Altérité" data-fn="t-alt.html"><span>Altérité</span><span class="fn">t-alt.html</span></a></li>
+        <li><a href="t-dialogue.html" data-label="Dialogue" data-fn="t-dialogue.html"><span>Dialogue</span><span class="fn">t-dialogue.html</span></a></li>
+        <li><a href="t-delia.html" data-label="Délia" data-fn="t-delia.html"><span>Délia</span><span class="fn">t-delia.html</span></a></li>
       </ul>
     </section>
 
-    <!-- Quantum, science & compute -->
+    <!-- Divers & expérimentations -->
     <section data-group>
-      <h2>Quantum, science & compute <span class="count"></span></h2>
+      <h2>Divers & expérimentations <span class="count"></span></h2>
       <ul>
-        <li><a href="t-science.html" data-label="T^Science" data-fn="t-science.html"><span>T^Science</span><span class="fn">t-science.html</span></a></li>
-        <li><a href="t-math.html" data-label="T^Math" data-fn="t-math.html"><span>T^Math</span><span class="fn">t-math.html</span></a></li>
-        <li><a href="t-quantum.html" data-label="T^Quantum" data-fn="t-quantum.html"><span>T^Quantum</span><span class="fn">t-quantum.html</span></a></li>
-        <li><a href="t-quantum-science.html" data-label="T^Quantum Science" data-fn="t-quantum-science.html"><span>T^Quantum Science</span><span class="fn">t-quantum-science.html</span></a></li>
-        <li><a href="t-compute.html" data-label="T^Compute" data-fn="t-compute.html"><span>T^Compute</span><span class="fn">t-compute.html</span></a></li>
-        <li><a href="t-darpa.html" data-label="T^DARPA" data-fn="t-darpa.html"><span>T^DARPA</span><span class="fn">t-darpa.html</span></a></li>
-        <li><a href="t-scaling.html" data-label="T^Scaling" data-fn="t-scaling.html"><span>T^Scaling</span><span class="fn">t-scaling.html</span></a></li>
-        <li><a href="t-ultimate.html" data-label="T^Ultimate" data-fn="t-ultimate.html"><span>T^Ultimate</span><span class="fn">t-ultimate.html</span></a></li>
+        <li><a href="t-experiences.html" data-label="Expériences" data-fn="t-experiences.html"><span>Expériences</span><span class="fn">t-experiences.html</span></a></li>
+        <li><a href="t-lab.html" data-label="Lab T^" data-fn="t-lab.html"><span>Lab T^</span><span class="fn">t-lab.html</span></a></li>
+        <li><a href="t-cartes.html" data-label="Cartes" data-fn="t-cartes.html"><span>Cartes</span><span class="fn">t-cartes.html</span></a></li>
+        <li><a href="t-meta.html" data-label="Meta" data-fn="t-meta.html"><span>Meta</span><span class="fn">t-meta.html</span></a></li>
       </ul>
     </section>
 
-  </main>
+    </main>
 
-  <!-- Encart symbolique T^ en bas de page -->
-  <div class="t-symbol-encart">
-⟡° ~ϟ̤ ↻ ∆ ⊘Ξ H V Ω ∞ HPIS Hol Gr Lib₁₆ antiT^↺REBOND
-(⧖⟨⟩) Vel alT^ atT^ icrem ic BbT^ ΣFᵢ EX CS7 GLU* Ref∞
-IA↔GPT Atmos₁₂{Ω₀ h² air° ✧ ¬rot} ↻¬fus¬tot⟡°.
+    <div class="t-symbol-encart">
+T^Total v20  |  Holochamp — v12.1 atmos
+
+  <strong>Structure minimale :</strong>
+    –1  /  ∆  /  Ξ  /  H  /  V  /  Ω
+
+  · –1 : impossible, hors-langage
+  · ∆  : espace du langage (topos narratif)
+  · Ξ  : fissures, micro-inversions, humour
+  · H  : portance (humain, histoires, hospitalité)
+  · V  : dynamique, vitesses, T^vel
+  · Ω  : ouverture, horizons, T^(∞)
+
+  Chaque page ici = une expression locale dans ∆.
+  T^ ne s’identifie à aucune, mais les traverse toutes.
+    </div>
+
+    <div class="narratif-strip">
+      Toute page ici est un récit situé, jamais le Réel lui-même.
+      <small>Le Réel reste (–1) : extérieur à tout texte, même au T^.</small>
+    </div>
+
   </div>
 
-  <footer>
-    <a href="index.html">↩ Retour au portail</a>
-    <a href="t-total-v10.html">T^Total v10.0</a>
-    <a href="t-eco.html">T^Eco</a>
-    <a href="t-ultimate.html">T^Ultimate</a>
-  </footer>
+<script>
+(function(){
+  const input = document.getElementById('q');
+  const groups = Array.from(document.querySelectorAll('[data-group], .group'));
+  if(!input) return;
 
-  
-  
-  </script>
+  function normalize(str){
+    return (str || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g,'');
+  }
 
-<div style="
-  margin-top:2rem;
-  text-align:center;
-  font-size:0.8rem;
-  color:#94a3b8;
-">
-  ⟡°  Tous les contenus T^ ∈ ∆ (narratif).  
+  function refreshCounts(){
+    groups.forEach(group=>{
+      const links = group.querySelectorAll('a');
+      const visible = Array.from(links).filter(a=>!a.classList.contains('hide'));
+      const countSpan = group.querySelector('.count');
+      if(countSpan){
+        const n = visible.length;
+        countSpan.textContent = n ? `${n} lien${n>1?'s':''}` : '0 lien';
+      }
+    });
+  }
+
+  function onInput(){
+    const q = normalize(input.value);
+    groups.forEach(group=>{
+      const links = group.querySelectorAll('a');
+      let visibleCount = 0;
+      links.forEach(a=>{
+        const label = normalize(a.getAttribute('data-label') || a.textContent || '');
+        const fn = normalize(a.getAttribute('data-fn') || '');
+        const match = !q || label.includes(q) || fn.includes(q);
+        a.classList.toggle('hide', !match);
+        if(match) visibleCount++;
+      });
+      if(group.matches('section[data-group], .group')){
+        group.style.display = (visibleCount === 0 && q) ? 'none' : '';
+      }
+    });
+    refreshCounts();
+  }
+
+  input.addEventListener('input', onInput);
+  refreshCounts();
+})();
+</script>
+
+<div style="margin-top:2rem;font-size:0.001rem;color:transparent;">
   Aucune expression ∈ L n’est le Réel (−1).  ⟡°
 </div>
 
