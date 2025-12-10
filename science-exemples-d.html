@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Science & désobéissance — Exemples</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --bg:#050816;
+      --bg-soft:#0b1020;
+      --bg-panel:#0d1427;
+      --fg:#e7e9ee;
+      --mut:#a9b1c6;
+      --line:#1e2536;
+      --accent:#22d3ee;
+      --accent-soft:rgba(34,211,238,.16);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      min-height:100vh;
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:
+        radial-gradient(circle at top, #1e293b 0, transparent 55%),
+        radial-gradient(circle at bottom, #020617 0, transparent 55%),
+        var(--bg);
+      color:var(--fg);
+      padding:24px 12px 40px 12px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .page{
+      width:100%;
+      max-width:1120px;
+    }
+
+    header{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 18px 16px 18px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.85);
+      margin-bottom:18px;
+    }
+
+    .header-meta{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+      font-size:.86rem;
+      color:var(--mut);
+      margin-bottom:4px;
+    }
+
+    .header-meta span.label{
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.75rem;
+    }
+
+    h1{
+      font-size:clamp(22px,3vw,30px);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin:0;
+    }
+
+    .subtitle{
+      margin-top:4px;
+      color:var(--mut);
+      font-size:.95rem;
+    }
+
+    /* Layout principal : colonne sommaire + article */
+    .layout{
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      gap:16px;
+      align-items:flex-start;
+    }
+
+    @media (max-width:880px){
+      .layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    /* Sommaire / navigation interne */
+    nav.toc{
+      position:sticky;
+      top:16px;
+      align-self:flex-start;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px 12px;
+      background:rgba(10,16,35,.96);
+      box-shadow:0 14px 32px rgba(15,23,42,.9);
+      font-size:.9rem;
+    }
+
+    .toc-title{
+      text-transform:uppercase;
+      font-size:.8rem;
+      letter-spacing:.18em;
+      color:var(--mut);
+      margin-bottom:6px;
+    }
+
+    .toc ul{
+      list-style:none;
+      margin:4px 0 0 0;
+      padding:0;
+    }
+
+    .toc li{
+      margin:3px 0;
+    }
+
+    .toc a{
+      display:block;
+      text-decoration:none;
+      color:var(--fg);
+      padding:4px 4px;
+      border-radius:6px;
+      transition:background .16s ease, color .16s ease;
+    }
+
+    .toc a span.num{
+      font-family:ui-monospace,Menlo,monospace;
+      font-size:.8rem;
+      color:var(--mut);
+      margin-right:4px;
+    }
+
+    .toc a:hover{
+      background:rgba(15,23,42,.95);
+      color:var(--accent);
+    }
+
+    /* Article */
+    article{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px 18px 16px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.9);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid var(--accent-soft);
+      background:rgba(15,23,42,.9);
+      font-size:.78rem;
+      color:var(--mut);
+      margin-bottom:6px;
+    }
+
+    .badge-dot{
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 10px var(--accent);
+    }
+
+    h2{
+      margin:14px 0 4px 0;
+      font-size:1.1rem;
+      letter-spacing:.09em;
+      text-transform:uppercase;
+    }
+
+    h3{
+      margin:10px 0 4px 0;
+      font-size:1rem;
+    }
+
+    .section-meta{
+      font-size:.8rem;
+      color:var(--mut);
+      margin-bottom:2px;
+    }
+
+    /* Multi-colonnes pour le corps du texte des sections */
+    .section-body{
+      margin-top:4px;
+      font-size:.95rem;
+      line-height:1.55;
+      color:#e2e6f3;
+    }
+
+    @media (min-width:900px){
+      .section-body.columns{
+        column-count:2;
+        column-gap:2.5rem;
+      }
+    }
+
+    .section-body p{
+      margin-bottom:.65rem;
+      break-inside:avoid;
+    }
+
+    .section-body ul{
+      margin:0 0 .65rem 1.1rem;
+      padding:0;
+      break-inside:avoid;
+    }
+
+    .section-body li{
+      margin-bottom:.25rem;
+    }
+
+    .tag-inline{
+      font-family:ui-monospace,Menlo,monospace;
+      font-size:.82rem;
+      background:rgba(15,23,42,.9);
+      padding:1px 6px;
+      border-radius:6px;
+      border:1px solid rgba(148,163,184,.45);
+      margin:0 2px;
+      white-space:nowrap;
+    }
+
+    .callout{
+      margin:8px 0 8px 0;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px dashed rgba(148,163,184,.7);
+      background:rgba(15,23,42,.85);
+      font-size:.88rem;
+      break-inside:avoid;
+    }
+
+    .example-block{
+      margin:8px 0;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(51,65,85,.9);
+      background:rgba(15,23,42,.9);
+      font-size:.9rem;
+      break-inside:avoid;
+    }
+
+    .example-title{
+      font-weight:600;
+      margin-bottom:4px;
+    }
+
+    .small-top-link{
+      font-size:.78rem;
+      text-align:right;
+      margin-top:4px;
+    }
+
+    .small-top-link a{
+      color:var(--mut);
+      text-decoration:none;
+    }
+
+    .small-top-link a:hover{
+      color:var(--accent);
+      text-decoration:underline;
+    }
+
+    hr.sep{
+      border:none;
+      border-top:1px solid rgba(30,41,59,.9);
+      margin:10px 0 8px 0;
+    }
+
+    footer.page-foot{
+      margin-top:18px;
+      font-size:.8rem;
+      color:var(--mut);
+      text-align:center;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:6px 0 8px 0;
+      font-size:.9rem;
+      break-inside:avoid;
+    }
+
+    th, td{
+      border:1px solid rgba(51,65,85,.9);
+      padding:5px 6px;
+      vertical-align:top;
+    }
+
+    th{
+      background:rgba(15,23,42,.95);
+      font-weight:600;
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="page">
+
+    <header>
+      <div class="header-meta">
+        <div>
+          <span class="label">T^ · Rapport conceptuel</span><br>
+          <span>Version 1.0 — Science & désobéissance : exemples</span>
+        </div>
+        <div>
+          <span class="label">Module</span><br>
+          <span>T^Science · T^Narratif · T^Total v20</span>
+        </div>
+      </div>
+      <h1>Science & désobéissance — Exemples</h1>
+      <p class="subtitle">
+        Catalogue analytique d’exemples de désobéissance scientifique, de l’astronomie ancienne
+        aux biotechnologies contemporaines, interprétés dans le cadre T^ (–1 / ∆ / Ξ / H / V / Ω).
+      </p>
+    </header>
+
+    <div class="layout">
+
+      <!-- Sommaire -->
+      <nav class="toc" aria-label="Sommaire">
+        <div class="toc-title">Sommaire</div>
+        <ul>
+          <li><a href="#abstract"><span class="num">0.</span> Résumé</a></li>
+          <li><a href="#sec-1"><span class="num">1.</span> Cadre & méthode</a></li>
+          <li><a href="#sec-2"><span class="num">2.</span> Astronomie & cosmologie</a></li>
+          <li><a href="#sec-3"><span class="num">3.</span> Physique & mathématiques</a></li>
+          <li><a href="#sec-4"><span class="num">4.</span> Chimie & sciences de la Terre</a></li>
+          <li><a href="#sec-5"><span class="num">5.</span> Biologie, génétique & médecine</a></li>
+          <li><a href="#sec-6"><span class="num">6.</span> Information, IA & computation</a></li>
+          <li><a href="#sec-7"><span class="num">7.</span> Désobéissance éthique & institutionnelle</a></li>
+          <li><a href="#sec-8"><span class="num">8.</span> Lecture T^ des exemples</a></li>
+          <li><a href="#sec-9"><span class="num">9.</span> Tableau récapitulatif</a></li>
+        </ul>
+      </nav>
+
+      <!-- Article -->
+      <article>
+
+        <!-- Résumé -->
+        <div class="badge" id="abstract">
+          <span class="badge-dot"></span>
+          <span>Résumé</span>
+        </div>
+        <div class="section-body">
+          <p>
+            Ce document rassemble et analyse une série d’exemples où des scientifiques ont
+            pratiqué une <strong>désobéissance décisive</strong> : refus d’un modèle dominant,
+            d’une norme méthodologique, d’une consigne institutionnelle, ou même de leurs
+            propres intuitions. L’objectif est de montrer comment ces actes de rupture, loin
+            d’être périphériques, constituent une dynamique interne des sciences.
+          </p>
+          <p>
+            La sélection couvre plusieurs domaines&nbsp;: astronomie, physique, chimie,
+            sciences de la Terre, biologie, génétique, médecine, information, IA, ainsi que
+            des cas de désobéissance éthique. Chaque exemple est relu dans le langage T^ :
+            les fissures <span class="tag-inline">Ξ</span> dans les récits stabilisés
+            <span class="tag-inline">H</span> ouvrent des interstices
+            <span class="tag-inline">∆</span> sous la contrainte du réel
+            <span class="tag-inline">–1</span>, permettant des ouvertures
+            <span class="tag-inline">Ω</span> et de nouvelles dynamiques
+            <span class="tag-inline">V</span>.
+          </p>
+          <p>
+            Ce catalogue n’est ni exhaustif ni neutre&nbsp;: il fonctionne comme un
+            <em>atlas narratif</em> des points où la science s’est reconfigurée grâce
+            à des gestes de désobéissance orientés vers le réel, plutôt que vers
+            l’ego ou la simple opposition.
+          </p>
+        </div>
+
+        <hr class="sep">
+
+        <!-- 1. Cadre & méthode -->
+        <section id="sec-1">
+          <div class="section-meta">Section 1</div>
+          <h2>1. Cadre & méthode de sélection</h2>
+          <div class="section-body columns">
+            <h3>1.1. Définition de la désobéissance scientifique</h3>
+            <p>
+              On appellera ici <strong>désobéissance scientifique</strong> tout geste
+              par lequel un·e scientifique&nbsp;:
+            </p>
+            <ul>
+              <li>refuse de se soumettre à une théorie dominante quand les faits la contredisent ;</li>
+              <li>conteste une habitude méthodologique devenue stérile ;</li>
+              <li>résiste à une pression institutionnelle incompatible avec l’intégrité de la recherche ;</li>
+              <li>ou accepte de penser contre ses propres intuitions pour suivre les données.</li>
+            </ul>
+
+            <h3>1.2. Critères de sélection</h3>
+            <p>
+              Les exemples retenus respectent au moins deux des critères suivants&nbsp;:
+            </p>
+            <ul>
+              <li>
+                <strong>Impact structurel</strong> : la désobéissance a modifié la
+                manière d’aborder un domaine entier.
+              </li>
+              <li>
+                <strong>Résistance rencontrée</strong> : le geste a affronté une opposition
+                explicite (académique, sociale, politique ou symbolique).
+              </li>
+              <li>
+                <strong>Lisibilité T^</strong> : l’exemple permet de lire clairement les
+                transitions entre <span class="tag-inline">Ξ</span>, <span class="tag-inline">H</span>,
+                <span class="tag-inline">V</span> et <span class="tag-inline">Ω</span>.
+              </li>
+            </ul>
+
+            <h3>1.3. Organisation de la page</h3>
+            <p>
+              Les exemples sont regroupés par grandes familles disciplinaires
+              (astronomie, physique, chimie, biologie, information…), suivies d’une
+              section spécifique sur la désobéissance éthique et institutionnelle,
+              puis d’une synthèse dans le cadre T^ et d’un tableau récapitulatif.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 2. Astronomie & cosmologie -->
+        <section id="sec-2">
+          <div class="section-meta">Section 2</div>
+          <h2>2. Astronomie & cosmologie</h2>
+          <div class="section-body columns">
+
+            <div class="example-block">
+              <div class="example-title">2.1. Galilée : refuser l’autorité textuelle au profit de l’observation</div>
+              <p>
+                Contexte : la doctrine géocentrique, appuyée par une tradition de
+                plusieurs siècles, structure la cosmologie. Les textes d’Aristote
+                et de Ptolémée fonctionnent comme une <span class="tag-inline">H</span>
+                extrêmement stable : un horizon de sens où la Terre est au centre.
+              </p>
+              <p>
+                Geste de désobéissance : Galilée refuse d’accorder à ces textes une
+                autorité supérieure aux observations télescopiques. Il accepte que
+                <em>voir autre chose</em> implique de <em>penser autrement</em>. Il
+                désobéit donc à la hiérarchie « texte &gt; expérience » et inverse
+                la priorité : <strong>expérience &gt; texte</strong>.
+              </p>
+              <p>
+                Effet : déclenchement d’un <span class="tag-inline">Ξ</span> massif
+                dans le récit cosmologique. Les phases de Vénus, les satellites de
+                Jupiter et les reliefs lunaires deviennent des anomalies pour le
+                modèle géocentrique, mais des évidences pour le modèle héliocentrique.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">2.2. Kepler : désobéir à la « perfection » des cercles</div>
+              <p>
+                Contexte : pendant des siècles, on considère que les orbites
+                célestes doivent être circulaires, par analogie avec une idée de
+                perfection géométrique. Cette exigence esthétique devient une norme
+                quasi-dogmatique.
+              </p>
+              <p>
+                Geste de désobéissance : Kepler accepte une solution « laide » au
+                regard de cette esthétique : des <strong>ellipses</strong>. Il
+                désobéit non seulement à un modèle, mais à une image du cosmos
+                fondée sur l’harmonie circulaire. Il choisit de <em>suivre Mars</em>
+                plutôt que d’arrondir les données.
+              </p>
+              <p>
+                Effet : l’espace <span class="tag-inline">∆</span> des modèles
+                planétaires se reconfigure profondément. L’ellipse devient la
+                nouvelle norme, et l’ancienne perfection circulaire est reléguée au
+                rang de symbole plutôt que de loi.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">2.3. Giordano Bruno : désobéissance spéculative sur l’infinité de l’univers</div>
+              <p>
+                Contexte : dans la cosmologie de son époque, l’univers est fini,
+                clos, centré. Les textes sacrés et la tradition philosophique
+                refusent l’idée d’une infinité d’astres et de mondes.
+              </p>
+              <p>
+                Geste de désobéissance : Bruno affirme, par une démarche
+                philosophico-scientifique encore spéculative, l’existence d’un
+                univers infini, sans centre unique. Même si ses arguments ne sont pas
+                expérimentaux au sens moderne, il désobéit à la forme globale du
+                récit cosmique.
+              </p>
+              <p>
+                Effet : sa désobéissance n’est pas immédiatement intégrée dans les
+                sciences, mais elle fournit un <span class="tag-inline">Ξ</span>
+                narratif puissant qui préfigure l’abandon d’un cosmos clos.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">2.4. Vera Rubin : refuser d’ignorer la matière noire</div>
+              <p>
+                Contexte : les modèles de galaxies supposent que la matière visible
+                explique les courbes de rotation. Les observations divergentes sont
+                souvent traitées comme des anomalies locales ou des erreurs.
+              </p>
+              <p>
+                Geste de désobéissance : Rubin refuse de considérer ces anomalies
+                comme négligeables. Elle maintient la tension entre ce qui est vu
+                et ce qui est calculé. Sa désobéissance consiste à <em>ne pas
+                lisser</em> les données pour sauver le modèle classique.
+              </p>
+              <p>
+                Effet : la notion de matière noire s’impose comme nécessité
+                explicative. Un nouveau pan de <span class="tag-inline">∆</span>
+                (le récit cosmologique) s’ouvre, clairement adossé à un
+                <span class="tag-inline">Ξ</span> observé.
+              </p>
+            </div>
+
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 3. Physique & mathématiques -->
+        <section id="sec-3">
+          <div class="section-meta">Section 3</div>
+          <h2>3. Physique & mathématiques</h2>
+          <div class="section-body columns">
+
+            <div class="example-block">
+              <div class="example-title">3.1. Newton : introduire l’action à distance</div>
+              <p>
+                Contexte : la physique mécaniste privilégie les contacts locaux.
+                L’idée qu’un corps puisse agir sur un autre « à distance » sans
+                support est jugée suspecte.
+              </p>
+              <p>
+                Geste : Newton accepte néanmoins une force gravitationnelle agissant
+                à distance, parce que les calculs et les observations l’y conduisent.
+                Il désobéit à une exigence de « pureté mécaniste » pour rester
+                cohérent avec les phénomènes.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">3.2. Einstein : désobéir trois fois au consensus</div>
+              <p>
+                Contexte : fin XIXᵉ-début XXᵉ, on suppose un éther, un temps absolu,
+                et une continuité de l’énergie.
+              </p>
+              <p>
+                Geste : en quelques années, Einstein&nbsp;:
+              </p>
+              <ul>
+                <li>
+                  refuse l’éther et unifie espace et temps (relativité restreinte) ;
+                </li>
+                <li>
+                  refuse la gravitation newtonienne en termes de force et la remplace
+                  par une géométrie (relativité générale) ;
+                </li>
+                <li>
+                  accepte des quanta d’énergie (effet photoélectrique) contre la
+                  continuité classique.
+                </li>
+              </ul>
+              <p>
+                Effet : triple désobéissance paradigmatique qui reconfigure l’espace
+                <span class="tag-inline">∆</span> de la physique fondamentale.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">3.3. Dirac : accepter l’antimatière</div>
+              <p>
+                Contexte : une équation relativiste de l’électron fait apparaître
+                des solutions d’énergie négative. Beaucoup seraient tentés de les
+                rejeter comme « non physiques ».
+              </p>
+              <p>
+                Geste : Dirac choisit de ne pas désobéir à la <em>mathématique</em> :
+                il accepte les conséquences dérangeantes de sa propre équation.
+                Il propose l’existence d’un positron avant sa détection.
+              </p>
+              <p>
+                Effet : la désobéissance consiste ici à <em>ne pas censurer</em>
+                les implications d’un formalisme cohérent, même s’il contredit
+                l’intuition classique.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">3.4. Feynman : intégrales de chemin</div>
+              <p>
+                Contexte : la mécanique quantique possède déjà des formulations
+                acceptées. Introduire un nouveau formalisme est vu comme superflu
+                ou exotique.
+              </p>
+              <p>
+                Geste : Feynman désobéit à la forme canonique et imagine la
+                description d’une particule comme la somme de tous les chemins
+                possibles. Il reformule la théorie d’une manière qui brise les
+                habitudes de représentation.
+              </p>
+              <p>
+                Effet : cette désobéissance mathématique ouvre une nouvelle manière
+                d’attaquer les problèmes, aujourd’hui pleinement intégrée.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">3.5. Allan Turing : redéfinir le calcul</div>
+              <p>
+                Contexte : le « calcul » est une notion intuitive, liée au travail
+                humain, aux algorithmes informels, à la logique symbolique.
+              </p>
+              <p>
+                Geste : Turing introduit une machine abstraite qui désobéit à
+                l’intuition selon laquelle le calcul est toujours situé dans un
+                cerveau ou une main. Il déplace la question dans un espace
+                conceptuel plus austère, mais plus précis.
+              </p>
+              <p>
+                Effet : l’informatique théorique naît précisément de cette
+                désobéissance aux formes intuitives du calcul.
+              </p>
+            </div>
+
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 4. Chimie & sciences de la Terre -->
+        <section id="sec-4">
+          <div class="section-meta">Section 4</div>
+          <h2>4. Chimie & sciences de la Terre</h2>
+          <div class="section-body columns">
+
+            <div class="example-block">
+              <div class="example-title">4.1. Lavoisier : sortir du phlogistique</div>
+              <p>
+                Contexte : la théorie du phlogistique domine la chimie. On pense
+                qu’un « principe de feu » quitte les corps qui brûlent. Cette
+                théorie est profondément entremêlée avec les habitudes de langage
+                des chimistes.
+              </p>
+              <p>
+                Geste : Lavoisier refuse de conserver ce cadre lorsque la pesée
+                précise montre que quelque chose ne va pas. Il désobéit à
+                l’interprétation dominante et reconstruit le récit de la combustion
+                à partir de mesures quantitatives (oxygène, conservation de la masse).
+              </p>
+              <p>
+                Effet : naissance de la chimie moderne, reconfiguration radicale de
+                <span class="tag-inline">∆</span> dans ce domaine.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">4.2. Wegener : dérive des continents</div>
+              <p>
+                Contexte : la croûte terrestre est largement pensée comme fixe. Les
+                ressemblances de côtes, de fossiles ou de formations rocheuses sont
+                traitées comme des coïncidences ou expliquées par des ponts
+                hypothétiques.
+              </p>
+              <p>
+                Geste : Wegener prend ces indices au sérieux et propose l’idée de
+                continents en mouvement. La résistance est massive, notamment parce
+                que le mécanisme reste flou.
+              </p>
+              <p>
+                Effet : des décennies plus tard, la tectonique des plaques valide
+                l’intuition. La désobéissance de Wegener est un <span class="tag-inline">Ξ</span>
+                précoce, dont la validation sera différée.
+              </p>
+            </div>
+
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 5. Biologie, génétique & médecine -->
+        <section id="sec-5">
+          <div class="section-meta">Section 5</div>
+          <h2>5. Biologie, génétique & médecine</h2>
+          <div class="section-body columns">
+
+            <div class="example-block">
+              <div class="example-title">5.1. Mendel : introduire une statistique du vivant</div>
+              <p>
+                Contexte : le vivant est souvent appréhendé de manière descriptive
+                et qualitative. L’idée d’une loi numérique pour la transmission des
+                caractères ne va pas de soi.
+              </p>
+              <p>
+                Geste : Mendel, en observant des croisements de pois, refuse
+                d’interpréter les proportions comme de simples irrégularités. Il
+                introduit une grille mathématique dans un domaine dominé par la
+                description morphologique.
+              </p>
+              <p>
+                Effet : sa désobéissance méthodologique (quantifier là où on décrit)
+                prépare la génétique moderne, même si elle restera ignorée pendant
+                plusieurs décennies.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">5.2. Barbara McClintock : la stabilité génétique remise en cause</div>
+              <p>
+                Contexte : le génome est initialement pensé comme une structure
+                relativement fixe. L’idée de segments mobiles est jugée improbable.
+              </p>
+              <p>
+                Geste : McClintock observe des phénomènes qui suggèrent des
+                éléments transposables. Elle refuse de les traiter comme des
+                anomalies ou des erreurs. Sa désobéissance consiste à <em>croire</em>
+                ses données contre le schéma stabilisé.
+              </p>
+              <p>
+                Effet : après une longue période de marginalisation, sa découverte
+                est reconnue. Le récit <span class="tag-inline">H</span> de la
+                génétique s’élargit pour intégrer la mobilité génomique.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">5.3. Tu Youyou : combiner tradition & protocole moderne</div>
+              <p>
+                Contexte : la recherche mondiale sur le paludisme reste centrée
+                sur certaines molécules et approches. Les savoirs issus de
+                traditions médicales locales sont peu considérés par les standards
+                scientifiques dominants.
+              </p>
+              <p>
+                Geste : Tu Youyou refuse cette frontière rigide. Elle explore des
+                textes anciens, identifie des préparations et les met à l’épreuve
+                avec des protocoles modernes. Elle désobéit à la séparation stricte
+                entre « scientifique » et « traditionnel ».
+              </p>
+              <p>
+                Effet : découverte de l’artémisinine, traitement majeur contre le
+                paludisme. La désobéissance méthodologique ouvre un nouveau chemin
+                entre deux mondes de savoir.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">5.4. Doudna & Charpentier : déplacement transdisciplinaire (CRISPR)</div>
+              <p>
+                Contexte : CRISPR est d’abord étudié comme un système immunitaire
+                bactérien. Le lien avec l’édition génomique n’est pas immédiat.
+              </p>
+              <p>
+                Geste : en combinant microbiologie, biochimie et génétique
+                moléculaire, les chercheuses désobéissent à la segmentation
+                disciplinaire. Elles osent voir dans ce mécanisme un outil
+                d’édition génétique général.
+              </p>
+              <p>
+                Effet : un champ entier de biotechnologies s’ouvre, accompagné de
+                questions éthiques de grande ampleur.
+              </p>
+            </div>
+
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 6. Information, IA & computation -->
+        <section id="sec-6">
+          <div class="section-meta">Section 6</div>
+          <h2>6. Information, IA & computation</h2>
+          <div class="section-body columns">
+
+            <div class="example-block">
+              <div class="example-title">6.1. Claude Shannon : information ≠ sens</div>
+              <p>
+                Contexte : l’« information » est spontanément associée au contenu
+                sémantique d’un message. La notion technique n’existe pas encore.
+              </p>
+              <p>
+                Geste : Shannon désobéit à cette intuition. Il formalise
+                l’information en termes de probabilité et d’incertitude, indépendamment
+                du sens. Il refuse de confondre quantité d’information et signification.
+              </p>
+              <p>
+                Effet : cette désobéissance conceptuelle fonde la théorie moderne
+                de l’information, base des télécommunications et du numérique.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">6.2. Kary Mullis : amplification exponentielle (PCR)</div>
+              <p>
+                Contexte : la manipulation de l’ADN repose sur des techniques plus
+                lentes et moins automatisées. L’idée d’amplifier un segment précis
+                de manière exponentielle est jugée improbable ou techniquement trop
+                complexe.
+              </p>
+              <p>
+                Geste : Mullis imagine un cycle répétitif d’amplification, en
+                combinant enzymes thermostables et changements de température. Il
+                désobéit aux habitudes méthodologiques et à l’estimation de ce qui
+                est « réaliste » en laboratoire.
+              </p>
+              <p>
+                Effet : la PCR devient une technique standard, transformant
+                profondément la biologie et la médecine.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">6.3. Turing & la machine abstraite (complément)</div>
+              <p>
+                Au croisement de la logique, des mathématiques et de l’informatique,
+                la machine de Turing est une désobéissance à l’idée que le calcul
+                doit toujours être pensé à travers une forme « humaine » ou une
+                machine concrète. Cette abstraction permet d’anticiper des systèmes
+                qui n’existent pas encore physiquement.
+              </p>
+            </div>
+
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 7. Désobéissance éthique & institutionnelle -->
+        <section id="sec-7">
+          <div class="section-meta">Section 7</div>
+          <h2>7. Désobéissance éthique & institutionnelle</h2>
+          <div class="section-body columns">
+            <p>
+              Certains gestes de désobéissance ne portent pas directement sur les
+              modèles ou les données, mais sur la <strong>manière</strong> dont la
+              science est intégrée dans des structures politiques, militaires ou
+              économiques. Ils relèvent d’une <em>désobéissance éthique</em>.
+            </p>
+
+            <div class="example-block">
+              <div class="example-title">7.1. Oppenheimer : refus partiel de la logique d’armement</div>
+              <p>
+                Contexte : après avoir dirigé un projet d’armement majeur, la
+                pression pour continuer dans la même voie est forte.
+              </p>
+              <p>
+                Geste : Oppenheimer exprime des réserves, s’oppose à certains
+                développements, tente de freiner la course aux armes plus
+                destructrices. Sa désobéissance, bien que limitée, est une rupture
+                avec l’alignement total sur les intérêts militaires.
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">7.2. Déclarations collectives : refuser certaines applications</div>
+              <p>
+                De nombreux scientifiques signent des manifestes pour s’opposer à
+                l’usage de certaines technologies (armes biologiques, nucléaire,
+                systèmes autonomes létaux, etc.). Ils désobéissent à la logique
+                implicite « tout ce qui est possible doit être développé ».
+              </p>
+            </div>
+
+            <div class="example-block">
+              <div class="example-title">7.3. Refus de participer à certains protocoles</div>
+              <p>
+                Dans la recherche médicale, certains praticiens et chercheurs
+                choisissent de refuser des protocoles jugés non éthiques, même
+                lorsqu’ils sont autorisés. Leur désobéissance est un rappel que la
+                science ne peut pas se déployer indépendamment de la question du
+                respect des sujets, humains ou non humains.
+              </p>
+            </div>
+
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 8. Lecture T^ des exemples -->
+        <section id="sec-8">
+          <div class="section-meta">Section 8</div>
+          <h2>8. Lecture T^ des exemples</h2>
+          <div class="section-body columns">
+            <p>
+              En langage T^, on peut décrire tous ces exemples comme des moments où
+              un·e scientifique accepte de traverser un <span class="tag-inline">Ξ</span>
+              (fissure, tension, paradoxe) plutôt que de le masquer, de l’ignorer ou
+              de le recouvrir par un récit plus confortable.
+            </p>
+            <p>
+              <strong>Schéma générique :</strong>
+            </p>
+            <ul>
+              <li>
+                le réel <span class="tag-inline">–1</span> produit des données, des
+                phénomènes, des expériences qui ne rentrent pas bien dans le récit
+                actuel <span class="tag-inline">H</span> ;
+              </li>
+              <li>
+                ce décalage crée un <span class="tag-inline">Ξ</span> : anomalie,
+                paradoxe, résultat « impossible » ;
+              </li>
+              <li>
+                la désobéissance consiste à <em>ne pas refermer</em> le
+                <span class="tag-inline">Ξ</span> par un ajustement cosmétique, mais
+                à en faire le point de départ d’un nouvel interstice
+                <span class="tag-inline">∆</span> (nouvelle famille de modèles) ;
+              </li>
+              <li>
+                par une dynamique <span class="tag-inline">V</span>, un nouveau
+                régime d’intelligibilité se forme : un
+                <span class="tag-inline">Ω</span> local (ouverture conceptuelle).
+              </li>
+            </ul>
+
+            <div class="callout">
+              <strong>Point clé :</strong><br>
+              La désobéissance scientifique n’est pas une opposition aveugle aux
+              cadres existants. Elle est une <em>fidélité plus profonde au réel</em>
+              qu’aux récits. Elle accepte de laisser le réel fissurer les discours,
+              y compris lorsque ces discours sont les nôtres.
+            </div>
+
+            <p>
+              Dans cette perspective, chaque exemple du catalogue peut être vu
+              comme un <em>grain</em> local de T^Science&nbsp;: un point de l’espace
+              <span class="tag-inline">Holo(T^)</span> où le flux
+              <span class="tag-inline">–1 → Ξ → ∆ → V → Ω</span> est particulièrement
+              visible.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 9. Tableau récapitulatif -->
+        <section id="sec-9">
+          <div class="section-meta">Section 9</div>
+          <h2>9. Tableau récapitulatif des désobéissances scientifiques</h2>
+          <div class="section-body">
+            <p>
+              Le tableau suivant synthétise quelques exemples majeurs, en indiquant
+              le domaine, le type de désobéissance et l’effet principal sur
+              l’architecture des savoirs.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Domaine</th>
+                  <th>Scientifique / épisode</th>
+                  <th>Type de désobéissance</th>
+                  <th>Effet sur le champ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Astronomie</td>
+                  <td>Galilée</td>
+                  <td>Paradigmatique, textuelle</td>
+                  <td>Priorité de l’observation sur l’autorité textuelle ; bascule vers le modèle héliocentrique.</td>
+                </tr>
+                <tr>
+                  <td>Astronomie</td>
+                  <td>Kepler</td>
+                  <td>Esthétique → empirique</td>
+                  <td>Abandon des orbites circulaires au profit des ellipses ; reconfiguration de la mécanique céleste.</td>
+                </tr>
+                <tr>
+                  <td>Astronomie / cosmologie</td>
+                  <td>Giordano Bruno</td>
+                  <td>Spéculative, cosmologique</td>
+                  <td>Préfiguration de l’idée d’univers non centré, infini, même si la validation sera postérieure.</td>
+                </tr>
+                <tr>
+                  <td>Astronomie</td>
+                  <td>Vera Rubin</td>
+                  <td>Observations vs théorie</td>
+                  <td>Consolidation de la notion de matière noire ; obligation d’étendre le modèle cosmologique.</td>
+                </tr>
+                <tr>
+                  <td>Physique</td>
+                  <td>Newton</td>
+                  <td>Conceptuelle (action à distance)</td>
+                  <td>Introduction de la gravitation newtonienne, malgré la tension avec l’idéologie mécaniste.</td>
+                </tr>
+                <tr>
+                  <td>Physique</td>
+                  <td>Einstein</td>
+                  <td>Paradigmatique multiple</td>
+                  <td>Relativité, quanta : redéfinition de l’espace, du temps, de l’énergie et de la gravitation.</td>
+                </tr>
+                <tr>
+                  <td>Physique</td>
+                  <td>Dirac</td>
+                  <td>Mathématique, conceptuelle</td>
+                  <td>Acception de l’antimatière à partir de solutions « indésirables » de son équation.</td>
+                </tr>
+                <tr>
+                  <td>Physique</td>
+                  <td>Feynman</td>
+                  <td>Formalisme alternatif</td>
+                  <td>Réécriture de la mécanique quantique via les intégrales de chemin.</td>
+                </tr>
+                <tr>
+                  <td>Math / Info</td>
+                  <td>Turing</td>
+                  <td>Abstraction du calcul</td>
+                  <td>Naissance de l’informatique théorique et nouvelle définition du calculable.</td>
+                </tr>
+                <tr>
+                  <td>Chimie</td>
+                  <td>Lavoisier</td>
+                  <td>Expérimentale, paradigmatique</td>
+                  <td>Abandon du phlogistique ; émergence de la chimie moderne.</td>
+                </tr>
+                <tr>
+                  <td>Géosciences</td>
+                  <td>Wegener</td>
+                  <td>Paradigmatique</td>
+                  <td>Préfiguration de la tectonique des plaques, malgré un long rejet.</td>
+                </tr>
+                <tr>
+                  <td>Biologie</td>
+                  <td>Mendel</td>
+                  <td>Méthodologique (statistique)</td>
+                  <td>Fondation de la génétique, après redécouverte.</td>
+                </tr>
+                <tr>
+                  <td>Génétique</td>
+                  <td>Barbara McClintock</td>
+                  <td>Institutionnelle, paradigmatique</td>
+                  <td>Reconnaissance de la mobilité génomique ; élargissement de la génétique.</td>
+                </tr>
+                <tr>
+                  <td>Médecine / pharmacologie</td>
+                  <td>Tu Youyou</td>
+                  <td>Transculturelle, méthodologique</td>
+                  <td>Découverte de l’artémisinine ; articulation entre savoirs traditionnels et protocole moderne.</td>
+                </tr>
+                <tr>
+                  <td>Biotechnologies</td>
+                  <td>Doudna & Charpentier</td>
+                  <td>Transdisciplinaire</td>
+                  <td>CRISPR : ouverture d’un nouvel espace technique et éthique pour l’édition du génome.</td>
+                </tr>
+                <tr>
+                  <td>Information</td>
+                  <td>Claude Shannon</td>
+                  <td>Conceptuelle</td>
+                  <td>Théorie de l’information : dissociation entre information quantitative et sens.</td>
+                </tr>
+                <tr>
+                  <td>Biologie moléculaire</td>
+                  <td>Kary Mullis</td>
+                  <td>Méthodologique</td>
+                  <td>PCR : transformation des pratiques de biologie et de médecine.</td>
+                </tr>
+                <tr>
+                  <td>Éthique</td>
+                  <td>Oppenheimer & autres</td>
+                  <td>Éthique, institutionnelle</td>
+                  <td>Mises en question des usages militaires et politiques de la recherche.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>
+              Ce tableau ne clôt rien&nbsp;: il fonctionne comme une base pour
+              cartographier d’autres gestes de désobéissance scientifique, y compris
+              à petite échelle, dans des laboratoires ou des disciplines moins
+              visibles, mais tout aussi structurants.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+      </article>
+    </div>
+
+    <footer class="page-foot">
+      T^Total v20 — Science & désobéissance : exemples · Document narratif situé dans ∆, sous contrainte du Réel (–1).
+    </footer>
+
+  </div>
+</body>
+</html>

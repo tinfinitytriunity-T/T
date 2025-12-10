@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nature du modèle scientifique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --bg:#050816;
+      --bg-soft:#0b1020;
+      --bg-panel:#0d1427;
+      --fg:#e7e9ee;
+      --mut:#a9b1c6;
+      --line:#1e2536;
+      --accent:#22d3ee;
+      --accent-soft:rgba(34,211,238,.16);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      min-height:100vh;
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:
+        radial-gradient(circle at top, #1e293b 0, transparent 55%),
+        radial-gradient(circle at bottom, #020617 0, transparent 55%),
+        var(--bg);
+      color:var(--fg);
+      padding:24px 12px 40px 12px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .page{
+      width:100%;
+      max-width:1120px;
+    }
+
+    header{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 18px 16px 18px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.85);
+      margin-bottom:18px;
+    }
+
+    .header-meta{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      flex-wrap:wrap;
+      font-size:.86rem;
+      color:var(--mut);
+      margin-bottom:4px;
+    }
+
+    .header-meta span.label{
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-size:.75rem;
+    }
+
+    h1{
+      font-size:clamp(22px,3vw,30px);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin:0;
+    }
+
+    .subtitle{
+      margin-top:4px;
+      color:var(--mut);
+      font-size:.95rem;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      gap:16px;
+      align-items:flex-start;
+    }
+
+    @media (max-width:880px){
+      .layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    nav.toc{
+      position:sticky;
+      top:16px;
+      align-self:flex-start;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:10px 12px;
+      background:rgba(10,16,35,.96);
+      box-shadow:0 14px 32px rgba(15,23,42,.9);
+      font-size:.9rem;
+    }
+
+    .toc-title{
+      text-transform:uppercase;
+      font-size:.8rem;
+      letter-spacing:.18em;
+      color:var(--mut);
+      margin-bottom:6px;
+    }
+
+    .toc ul{
+      list-style:none;
+      margin:4px 0 0 0;
+      padding:0;
+    }
+
+    .toc li{
+      margin:3px 0;
+    }
+
+    .toc a{
+      display:block;
+      text-decoration:none;
+      color:var(--fg);
+      padding:4px 4px;
+      border-radius:6px;
+      transition:background .16s ease, color .16s ease;
+    }
+
+    .toc a span.num{
+      font-family:ui-monospace,Menlo,monospace;
+      font-size:.8rem;
+      color:var(--mut);
+      margin-right:4px;
+    }
+
+    .toc a:hover{
+      background:rgba(15,23,42,.95);
+      color:var(--accent);
+    }
+
+    article{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px 16px 18px 16px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.9);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid var(--accent-soft);
+      background:rgba(15,23,42,.9);
+      font-size:.78rem;
+      color:var(--mut);
+      margin-bottom:6px;
+    }
+
+    .badge-dot{
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 10px var(--accent);
+    }
+
+    h2{
+      margin:14px 0 4px 0;
+      font-size:1.1rem;
+      letter-spacing:.09em;
+      text-transform:uppercase;
+    }
+
+    h3{
+      margin:10px 0 4px 0;
+      font-size:1rem;
+    }
+
+    .section-meta{
+      font-size:.8rem;
+      color:var(--mut);
+      margin-bottom:2px;
+    }
+
+    .section-body{
+      margin-top:4px;
+      font-size:.95rem;
+      line-height:1.55;
+      color:#e2e6f3;
+    }
+
+    @media (min-width:900px){
+      .section-body.columns{
+        column-count:2;
+        column-gap:2.5rem;
+      }
+    }
+
+    .section-body p{
+      margin-bottom:.65rem;
+      break-inside:avoid;
+    }
+
+    .section-body ul{
+      margin:0 0 .65rem 1.1rem;
+      padding:0;
+      break-inside:avoid;
+    }
+
+    .section-body li{
+      margin-bottom:.25rem;
+    }
+
+    .tag-inline{
+      font-family:ui-monospace,Menlo,monospace;
+      font-size:.82rem;
+      background:rgba(15,23,42,.9);
+      padding:1px 6px;
+      border-radius:6px;
+      border:1px solid rgba(148,163,184,.45);
+      margin:0 2px;
+      white-space:nowrap;
+    }
+
+    .callout{
+      margin:8px 0 8px 0;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px dashed rgba(148,163,184,.7);
+      background:rgba(15,23,42,.85);
+      font-size:.88rem;
+      break-inside:avoid;
+    }
+
+    .small-top-link{
+      font-size:.78rem;
+      text-align:right;
+      margin-top:4px;
+    }
+
+    .small-top-link a{
+      color:var(--mut);
+      text-decoration:none;
+    }
+
+    .small-top-link a:hover{
+      color:var(--accent);
+      text-decoration:underline;
+    }
+
+    hr.sep{
+      border:none;
+      border-top:1px solid rgba(30,41,59,.9);
+      margin:10px 0 8px 0;
+    }
+
+    footer.page-foot{
+      margin-top:18px;
+      font-size:.8rem;
+      color:var(--mut);
+      text-align:center;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin:6px 0 8px 0;
+      font-size:.9rem;
+      break-inside:avoid;
+    }
+
+    th, td{
+      border:1px solid rgba(51,65,85,.9);
+      padding:5px 6px;
+      vertical-align:top;
+    }
+
+    th{
+      background:rgba(15,23,42,.95);
+      font-weight:600;
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="page">
+
+    <header>
+      <div class="header-meta">
+        <div>
+          <span class="label">T^ · Rapport conceptuel</span><br>
+          <span>Version 1.0 — Nature du modèle scientifique</span>
+        </div>
+        <div>
+          <span class="label">Module</span><br>
+          <span>T^Science · T^World-Lang · T^Total v20</span>
+        </div>
+      </div>
+      <h1>Nature du modèle scientifique</h1>
+      <p class="subtitle">
+        Analyse des modèles scientifiques comme récits structurés dans ∆, sous contrainte du Réel (–1),
+        en lien avec les notions de théorie, loi, simulation et T^Total v20.
+      </p>
+    </header>
+
+    <div class="layout">
+
+      <nav class="toc" aria-label="Sommaire">
+        <div class="toc-title">Sommaire</div>
+        <ul>
+          <li><a href="#abstract"><span class="num">0.</span> Résumé</a></li>
+          <li><a href="#sec-1"><span class="num">1.</span> Définir le modèle scientifique</a></li>
+          <li><a href="#sec-2"><span class="num">2.</span> Modèle, réel & représentation (T^)</a></li>
+          <li><a href="#sec-3"><span class="num">3.</span> Types de modèles</a></li>
+          <li><a href="#sec-4"><span class="num">4.</span> Construction, validation, révision</a></li>
+          <li><a href="#sec-5"><span class="num">5.</span> Modèles, théories, lois</a></li>
+          <li><a href="#sec-6"><span class="num">6.</span> Lecture T^ : modèles dans ∆ / H / Ξ / Ω</a></li>
+          <li><a href="#sec-7"><span class="num">7.</span> Implications pour la pratique scientifique</a></li>
+          <li><a href="#sec-8"><span class="num">8.</span> Tableau synthétique</a></li>
+        </ul>
+      </nav>
+
+      <article>
+
+        <div class="badge" id="abstract">
+          <span class="badge-dot"></span>
+          <span>Résumé</span>
+        </div>
+        <div class="section-body">
+          <p>
+            Cette page propose une exploration de la <strong>nature du modèle scientifique</strong>.
+            Elle montre comment un modèle n’est jamais le réel lui-même, mais une
+            <em>structure narrative formalisée</em> placée dans l’espace
+            <span class="tag-inline">∆</span> du langage, sous contrainte du
+            <span class="tag-inline">–1</span> (Réel) et stabilisée par des habitudes
+            et héritages <span class="tag-inline">H</span>.
+          </p>
+          <p>
+            On distingue différents types de modèles (conceptuels, mathématiques,
+            numériques, analogiques), et on analyse la façon dont ils sont construits,
+            validés, révisés ou abandonnés. Le cadre T^Total v20 permet de situer
+            le modèle comme un objet situé dans ∆, traversé par des fissures
+            <span class="tag-inline">Ξ</span> (anomalies, tensions), pris dans des
+            dynamiques <span class="tag-inline">V</span> (révisions, extensions) et
+            orienté vers des ouvertures <span class="tag-inline">Ω</span> (nouvelles
+            cohérences).
+          </p>
+          <p>
+            L’objectif est double&nbsp;: clarifier la place des modèles pour éviter
+            les confusions (le modèle n’est ni une simple carte, ni la vérité), et
+            fournir un langage pour décrire les trajectoires de modèles à l’intérieur
+            de T^Science.
+          </p>
+        </div>
+
+        <hr class="sep">
+
+        <section id="sec-1">
+          <div class="section-meta">Section 1</div>
+          <h2>1. Définir le modèle scientifique</h2>
+          <div class="section-body columns">
+            <h3>1.1. Définition opérationnelle</h3>
+            <p>
+              On appellera <strong>modèle scientifique</strong> toute construction
+              explicite qui :
+            </p>
+            <ul>
+              <li>reprend certains aspects d’un fragment du réel ;</li>
+              <li>les organise dans une structure cohérente (logiquement ou mathématiquement) ;</li>
+              <li>permet de produire des <em>conséquences contrôlables</em> (prédictions, scénarios, explications) ;</li>
+              <li>est <em>révisable</em> en fonction des données ultérieures.</li>
+            </ul>
+
+            <h3>1.2. Modèle ≠ simple description</h3>
+            <p>
+              Une description brute (« le ciel est bleu ») n’est pas encore un
+              modèle. Le modèle suppose :
+            </p>
+            <ul>
+              <li>
+                une <strong>sélection</strong> de variables ou de grandeurs ;
+              </li>
+              <li>
+                une <strong>forme</strong> (équations, schéma, diagramme, code) ;
+              </li>
+              <li>
+                une possibilité de <strong>manipulation</strong> : on peut changer
+                les paramètres et voir ce qui se passe dans le modèle.
+              </li>
+            </ul>
+
+            <h3>1.3. Modèle ≠ réalité</h3>
+            <p>
+              Dans le langage T^, le modèle se situe entièrement dans
+              <span class="tag-inline">∆</span> (langage, symboles, représentations).
+              Le réel <span class="tag-inline">–1</span> ne se laisse jamais réduire
+              à un modèle. Même un modèle très réussi reste un récit structuré
+              <em>à propos de</em> quelque chose qui n’est pas lui.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-2">
+          <div class="section-meta">Section 2</div>
+          <h2>2. Modèle, réel & représentation (T^)</h2>
+          <div class="section-body columns">
+            <h3>2.1. Le triptyque –1 / ∆ / H</h3>
+            <p>
+              Dans T^Total v20 :
+            </p>
+            <ul>
+              <li>
+                <span class="tag-inline">–1</span> : le Réel, hors langage, inépuisable ;
+              </li>
+              <li>
+                <span class="tag-inline">∆</span> : l’espace du langage, où vivent les modèles ;
+              </li>
+              <li>
+                <span class="tag-inline">H</span> : les habitudes, héritages, horizons d’une communauté scientifique.
+              </li>
+            </ul>
+            <p>
+              Un modèle est donc une structure dans <span class="tag-inline">∆</span>,
+              façonnée par <span class="tag-inline">H</span> et contrainte par ce que
+              <span class="tag-inline">–1</span> laisse passer à travers les
+              observations et les expériences.
+            </p>
+
+            <h3>2.2. Représentation et perte</h3>
+            <p>
+              Toute modélisation implique des pertes :
+            </p>
+            <ul>
+              <li>on sélectionne certains aspects du phénomène ;</li>
+              <li>on néglige d’autres aspects (jugés « secondaires ») ;</li>
+              <li>on impose une forme (linéaire, continue, probabiliste, etc.).</li>
+            </ul>
+            <p>
+              Le modèle gagne en clarté ce qu’il perd en exhaustivité. Il donne une
+              prise locale sur quelque chose d’infini.
+            </p>
+
+            <h3>2.3. Modèle comme interface</h3>
+            <p>
+              On peut voir le modèle comme une <em>interface</em> entre trois
+              régions :
+            </p>
+            <ul>
+              <li>le réel (–1) qui impose certaines contraintes ;</li>
+              <li>les pratiques expérimentales qui produisent des données ;</li>
+              <li>les communautés <span class="tag-inline">H</span> qui interprètent et stabilisent.</li>
+            </ul>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-3">
+          <div class="section-meta">Section 3</div>
+          <h2>3. Types de modèles</h2>
+          <div class="section-body columns">
+            <p>
+              On peut distinguer plusieurs grandes familles de modèles, souvent
+              entrelacées :
+            </p>
+
+            <h3>3.1. Modèles conceptuels</h3>
+            <p>
+              Ce sont des schémas verbaux ou graphiques qui organisent des idées :
+              diagrammes, métaphores structurantes (« champ », « paysage »,
+              « réseau »). Ils ont une fonction de <em>cartographie</em> plutôt
+              que de calcul.
+            </p>
+
+            <h3>3.2. Modèles mathématiques</h3>
+            <p>
+              Ils expriment des relations entre variables sous forme d’équations
+              ou de systèmes. Ils permettent de dériver des conséquences précises
+              et de quantifier la qualité de l’ajustement aux données.
+            </p>
+
+            <h3>3.3. Modèles numériques / simulations</h3>
+            <p>
+              Ils implémentent un modèle (souvent mathématique) dans un code
+              exécutable. La simulation permet d’explorer des scénarios impossibles
+              à réaliser directement dans le réel (climat, flux financiers, IA, etc.).
+            </p>
+
+            <h3>3.4. Modèles analogiques</h3>
+            <p>
+              Utilisation d’un système physique comme modèle d’un autre système
+              (par exemple, un réseau électrique pour simuler un réseau de flux,
+              ou un bac de sable pour étudier des avalanches).
+            </p>
+
+            <h3>3.5. Modèles hybrides</h3>
+            <p>
+              De nombreux modèles contemporains combinent :
+            </p>
+            <ul>
+              <li>une partie théorique (équations) ;</li>
+              <li>une partie numérique (code) ;</li>
+              <li>une partie empirique (paramètres calibrés sur données) ;</li>
+              <li>une partie narrative (interprétation, visualisations).</li>
+            </ul>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-4">
+          <div class="section-meta">Section 4</div>
+          <h2>4. Construction, validation, révision</h2>
+          <div class="section-body columns">
+            <h3>4.1. Construction</h3>
+            <p>
+              Construire un modèle, c’est :
+            </p>
+            <ul>
+              <li>choisir un domaine (ce que le modèle couvre et ce qu’il ne couvre pas) ;</li>
+              <li>identifier les variables et relations pertinentes ;</li>
+              <li>choisir une forme (linéaire/non-linéaire, continue/discrète, déterministe/probabiliste) ;</li>
+              <li>formuler des hypothèses explicites.</li>
+            </ul>
+
+            <h3>4.2. Validation</h3>
+            <p>
+              La validation n’est jamais absolue : on teste le modèle par
+              confrontation aux données disponibles, par comparaison avec d’autres
+              modèles, par analyse de sensibilité.
+            </p>
+            <div class="callout">
+              Un modèle est « bon » non pas parce qu’il est vrai, mais parce qu’il
+              est <em>adéquat</em> pour certaines questions, à une certaine échelle,
+              avec une marge d’erreur contrôlée.
+            </div>
+
+            <h3>4.3. Révision et abandon</h3>
+            <p>
+              Lorsque des anomalies (au sens de T^ : <span class="tag-inline">Ξ</span>)
+              se multiplient, plusieurs options existent :
+            </p>
+            <ul>
+              <li>ajuster les paramètres ;</li>
+              <li>ajouter des termes correctifs ;</li>
+              <li>changer de modèle ;</li>
+              <li>changer de <em>type</em> de modèle (par exemple, passer d’un modèle
+                déterministe à un modèle stochastique).</li>
+            </ul>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-5">
+          <div class="section-meta">Section 5</div>
+          <h2>5. Modèles, théories, lois</h2>
+          <div class="section-body columns">
+            <h3>5.1. Théorie</h3>
+            <p>
+              Une <strong>théorie</strong> est souvent un cadre plus large qui
+              relie plusieurs modèles, les unifie et les hiérarchise. La théorie
+              fournit le langage et les principes à partir desquels les modèles
+              sont construits.
+            </p>
+
+            <h3>5.2. Loi</h3>
+            <p>
+              Une <strong>loi</strong> exprime un invariant empirique (par exemple,
+              une relation régulière entre grandeurs) dans une forme compacte.
+              Les lois peuvent être vues comme des « lignes de force » qui traversent
+              différents modèles d’un même domaine.
+            </p>
+
+            <h3>5.3. Position du modèle</h3>
+            <p>
+              On peut schématiser comme suit :
+            </p>
+            <ul>
+              <li>la théorie = cadre conceptuel global ;</li>
+              <li>le modèle = mise en forme spécifique pour un problème donné ;</li>
+              <li>les lois = contraintes récurrentes qu’on retrouve à travers plusieurs modèles.</li>
+            </ul>
+            <p>
+              Dans T^, ces trois éléments vivent en ∆, mais n’ont pas le même rôle
+              dans la dynamique <span class="tag-inline">V</span> des savoirs.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-6">
+          <div class="section-meta">Section 6</div>
+          <h2>6. Lecture T^ : modèles dans ∆ / H / Ξ / Ω</h2>
+          <div class="section-body columns">
+            <h3>6.1. Modèle comme cristallisation de H</h3>
+            <p>
+              Un modèle donné exprime une certaine configuration de
+              <span class="tag-inline">H</span> : ce qu’une communauté juge
+              important, plausible, raisonnable. Il est porteur de ses habitudes,
+              de ses métaphores, de ses préférences mathématiques.
+            </p>
+
+            <h3>6.2. Modèle fissuré : rôle de Ξ</h3>
+            <p>
+              Lorsque les données produisent des écarts persistants, on a un
+              <span class="tag-inline">Ξ</span>. Le modèle devient un lieu où l’on
+              voit apparaître les limites de <span class="tag-inline">H</span>.
+              La désobéissance scientifique (page sœur) consiste à ne pas refermer
+              trop vite ces fissures.
+            </p>
+
+            <h3>6.3. Ouvertures Ω</h3>
+            <p>
+              Quand un nouveau modèle s’impose, plus cohérent avec les données, un
+              <span class="tag-inline">Ω</span> local apparaît : une ouverture du
+              champ de possibles. De nouveaux phénomènes deviennent visibles ou
+              calculables.
+            </p>
+
+            <h3>6.4. Modèles multiples, T^Holo</h3>
+            <p>
+              Dans T^Holo, chaque modèle est un grain partiel qui ne voit qu’un
+              certain angle du réel. La pluralité de modèles (parfois incompatibles)
+              est une ressource, pas une anomalie : elle signale la richesse de
+              <span class="tag-inline">–1</span>.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-7">
+          <div class="section-meta">Section 7</div>
+          <h2>7. Implications pour la pratique scientifique</h2>
+          <div class="section-body columns">
+            <p>
+              Comprendre la nature des modèles permet de :
+            </p>
+            <ul>
+              <li>
+                éviter de sacraliser un modèle comme s’il était le réel lui-même ;
+              </li>
+              <li>
+                accepter plus sereinement la coexistence de modèles partiels ;
+              </li>
+              <li>
+                identifier les moments où la révision de modèle est plus honnête
+                que l’ajout de correctifs ad hoc ;
+              </li>
+              <li>
+                mieux articuler les modèles scientifiques avec d’autres formes de récits
+                (arts, mythes, politiques, T^Narratif).
+              </li>
+            </ul>
+            <p>
+              Dans le cadre T^, l’enjeu n’est pas de trouver « le bon » modèle
+              final, mais d’entretenir une <em>écologie de modèles</em> capable de
+              dialoguer avec la complexité du réel.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-8">
+          <div class="section-meta">Section 8</div>
+          <h2>8. Tableau synthétique</h2>
+          <div class="section-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Aspect</th>
+                  <th>Rôle du modèle</th>
+                  <th>Lecture T^</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Rapport au réel</td>
+                  <td>Interface, pas copie</td>
+                  <td>Objet situé en ∆, sous contrainte de –1</td>
+                </tr>
+                <tr>
+                  <td>Construction</td>
+                  <td>Sélection, formalisation, hypothèses</td>
+                  <td>Inscription locale d’un grain Holo(T^)</td>
+                </tr>
+                <tr>
+                  <td>Validation</td>
+                  <td>Adéquation partielle, testable</td>
+                  <td>Tension entre H (récits) et Ξ (anomalies)</td>
+                </tr>
+                <tr>
+                  <td>Révision</td>
+                  <td>Changements de forme, de type, d’échelle</td>
+                  <td>Flux V (T^vel) réorganisant la carte</td>
+                </tr>
+                <tr>
+                  <td>Ouvertures</td>
+                  <td>Nouveaux phénomènes calculables</td>
+                  <td>Ω local : élargissement du possible</td>
+                </tr>
+                <tr>
+                  <td>Pluralité</td>
+                  <td>Modèles multiples pour un même phénomène</td>
+                  <td>T^Holo : grains partiels d’un même champ</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              Ce tableau peut servir de grille pour lire n’importe quel modèle
+              scientifique en contexte T^ : où est-il situé, quelles fissures Ξ
+              le travaillent, et quelles ouvertures Ω il rend possibles.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+      </article>
+    </div>
+
+    <footer class="page-foot">
+      T^Total v20 — Nature du modèle scientifique · Document narratif situé dans ∆, sous contrainte du Réel (–1).
+    </footer>
+
+  </div>
+</body>
+</html>

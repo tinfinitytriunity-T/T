@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Limites du mesurable</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* même CSS que les autres pages science-*.html */
+    :root{
+      --bg:#050816;
+      --bg-soft:#0b1020;
+      --bg-panel:#0d1427;
+      --fg:#e7e9ee;
+      --mut:#a9b1c6;
+      --line:#1e2536;
+      --accent:#22d3ee;
+      --accent-soft:rgba(34,211,238,.16);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:
+        radial-gradient(circle at top,#1e293b 0,transparent 55%),
+        radial-gradient(circle at bottom,#020617 0,transparent 55%),
+        var(--bg);
+      color:var(--fg);padding:24px 12px 40px 12px;
+      display:flex;justify-content:center;
+    }
+    .page{width:100%;max-width:1120px}
+    header{
+      border:1px solid var(--line);border-radius:16px;
+      padding:14px 18px 16px 18px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.85);
+      margin-bottom:18px;
+    }
+    .header-meta{
+      display:flex;justify-content:space-between;align-items:flex-start;
+      gap:12px;flex-wrap:wrap;font-size:.86rem;color:var(--mut);margin-bottom:4px;
+    }
+    .header-meta span.label{text-transform:uppercase;letter-spacing:.14em;font-size:.75rem}
+    h1{font-size:clamp(22px,3vw,30px);letter-spacing:.08em;text-transform:uppercase;margin:0}
+    .subtitle{margin-top:4px;color:var(--mut);font-size:.95rem}
+    .layout{
+      display:grid;grid-template-columns:260px minmax(0,1fr);
+      gap:16px;align-items:flex-start;
+    }
+    @media (max-width:880px){.layout{grid-template-columns:1fr}}
+    nav.toc{
+      position:sticky;top:16px;align-self:flex-start;
+      border:1px solid var(--line);border-radius:14px;
+      padding:10px 12px;background:rgba(10,16,35,.96);
+      box-shadow:0 14px 32px rgba(15,23,42,.9);font-size:.9rem;
+    }
+    .toc-title{text-transform:uppercase;font-size:.8rem;letter-spacing:.18em;color:var(--mut);margin-bottom:6px}
+    .toc ul{list-style:none;margin:4px 0 0 0;padding:0}
+    .toc li{margin:3px 0}
+    .toc a{
+      display:block;text-decoration:none;color:var(--fg);
+      padding:4px 4px;border-radius:6px;
+      transition:background .16s ease,color .16s ease;
+    }
+    .toc a span.num{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--mut);margin-right:4px}
+    .toc a:hover{background:rgba(15,23,42,.95);color:var(--accent)}
+    article{
+      border:1px solid var(--line);border-radius:16px;
+      padding:14px 16px 18px 16px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.9);
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:3px 8px;border-radius:999px;
+      border:1px solid var(--accent-soft);
+      background:rgba(15,23,42,.9);
+      font-size:.78rem;color:var(--mut);margin-bottom:6px;
+    }
+    .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+    h2{margin:14px 0 4px 0;font-size:1.1rem;letter-spacing:.09em;text-transform:uppercase}
+    h3{margin:10px 0 4px 0;font-size:1rem}
+    .section-meta{font-size:.8rem;color:var(--mut);margin-bottom:2px}
+    .section-body{margin-top:4px;font-size:.95rem;line-height:1.55;color:#e2e6f3}
+    @media (min-width:900px){.section-body.columns{column-count:2;column-gap:2.5rem}}
+    .section-body p{margin-bottom:.65rem;break-inside:avoid}
+    .section-body ul{margin:0 0 .65rem 1.1rem;padding:0;break-inside:avoid}
+    .section-body li{margin-bottom:.25rem}
+    .tag-inline{
+      font-family:ui-monospace,Menlo,monospace;font-size:.82rem;
+      background:rgba(15,23,42,.9);padding:1px 6px;border-radius:6px;
+      border:1px solid rgba(148,163,184,.45);margin:0 2px;white-space:nowrap;
+    }
+    .callout{
+      margin:8px 0 8px 0;padding:8px 10px;border-radius:10px;
+      border:1px dashed rgba(148,163,184,.7);background:rgba(15,23,42,.85);
+      font-size:.88rem;break-inside:avoid;
+    }
+    .small-top-link{font-size:.78rem;text-align:right;margin-top:4px}
+    .small-top-link a{color:var(--mut);text-decoration:none}
+    .small-top-link a:hover{color:var(--accent);text-decoration:underline}
+    hr.sep{border:none;border-top:1px solid rgba(30,41,59,.9);margin:10px 0 8px 0}
+    footer.page-foot{margin-top:18px;font-size:.8rem;color:var(--mut);text-align:center}
+    table{width:100%;border-collapse:collapse;margin:6px 0 8px 0;font-size:.9rem;break-inside:avoid}
+    th,td{border:1px solid rgba(51,65,85,.9);padding:5px 6px;vertical-align:top}
+    th{background:rgba(15,23,42,.95);font-weight:600}
+  </style>
+</head>
+<body id="top">
+  <div class="page">
+
+    <header>
+      <div class="header-meta">
+        <div>
+          <span class="label">T^ · Rapport conceptuel</span><br>
+          <span>Version 1.0 — Limites du mesurable</span>
+        </div>
+        <div>
+          <span class="label">Module</span><br>
+          <span>T^Science · T^World-Lang · T^Total v20</span>
+        </div>
+      </div>
+      <h1>Limites du mesurable</h1>
+      <p class="subtitle">
+        Exploration des frontières du mesurable en science : ce qui peut être quantifié, ce qui résiste,
+        et ce que T^Total v20 permet de dire sur l’au-delà de la mesure.
+      </p>
+    </header>
+
+    <div class="layout">
+
+      <nav class="toc" aria-label="Sommaire">
+        <div class="toc-title">Sommaire</div>
+        <ul>
+          <li><a href="#abstract"><span class="num">0.</span> Résumé</a></li>
+          <li><a href="#sec-1"><span class="num">1.</span> Qu’est-ce que mesurer ?</a></li>
+          <li><a href="#sec-2"><span class="num">2.</span> Domaines du mesurable</a></li>
+          <li><a href="#sec-3"><span class="num">3.</span> Trois types de limites</a></li>
+          <li><a href="#sec-4"><span class="num">4.</span> Exemple : quantique, vivant, collectif</a></li>
+          <li><a href="#sec-5"><span class="num">5.</span> Ce qui échappe à la mesure</a></li>
+          <li><a href="#sec-6"><span class="num">6.</span> Lecture T^ : mesure, ∆ et –1</a></li>
+          <li><a href="#sec-7"><span class="num">7.</span> Implications éthiques & pratiques</a></li>
+          <li><a href="#sec-8"><span class="num">8.</span> Tableau synthétique</a></li>
+        </ul>
+      </nav>
+
+      <article>
+
+        <div class="badge" id="abstract">
+          <span class="badge-dot"></span>
+          <span>Résumé</span>
+        </div>
+        <div class="section-body">
+          <p>
+            Cette page examine la notion de <strong>mesure</strong> en science et ses limites.
+            Mesurer, c’est associer un aspect du réel à une structure numérique ou ordinale.
+            Mais cette opération n’est jamais neutre : elle dépend d’instruments, de
+            conventions, de choix de variables, d’un langage.
+          </p>
+          <p>
+            Dans le cadre T^, la mesure est une opération dans <span class="tag-inline">∆</span>
+            qui tente de capter une partie de <span class="tag-inline">–1</span>.
+            Les limites du mesurable apparaissent alors comme :
+          </p>
+          <ul>
+            <li>des limites techniques ;</li>
+            <li>des limites conceptuelles ;</li>
+            <li>des limites ontologiques : certaines dimensions du réel excèdent toute quantification.</li>
+          </ul>
+          <p>
+            L’objectif est de donner un langage pour distinguer les cas où « on ne mesure pas encore »
+            de ceux où « la mesure n’est peut-être pas la bonne approche ».
+          </p>
+        </div>
+
+        <hr class="sep">
+
+        <section id="sec-1">
+          <div class="section-meta">Section 1</div>
+          <h2>1. Qu’est-ce que mesurer ?</h2>
+          <div class="section-body columns">
+            <h3>1.1. Définition</h3>
+            <p>
+              Mesurer, c’est établir une <strong>correspondance structurée</strong> entre :
+            </p>
+            <ul>
+              <li>un aspect du réel (longueur, durée, intensité, fréquence, etc.) ;</li>
+              <li>une structure symbolique (nombre, intervalle, catégorie ordonnée) ;</li>
+              <li>via un dispositif (instrument, protocole, algorithme).</li>
+            </ul>
+
+            <h3>1.2. Échelle de mesure</h3>
+            <p>
+              On peut distinguer plusieurs échelles :
+            </p>
+            <ul>
+              <li>nominale (catégories sans ordre) ;</li>
+              <li>ordinale (classement) ;</li>
+              <li>intervalles (différences significatives) ;</li>
+              <li>ratio (zéro significatif, proportions). </li>
+            </ul>
+            <p>
+              Plus l’échelle est riche, plus la mesure permet de calculs, mais au
+              prix de conventions plus fortes.
+            </p>
+
+            <h3>1.3. Mesure & langage</h3>
+            <p>
+              Toute mesure est déjà une opération dans <span class="tag-inline">∆</span> :
+              choix des unités, définition des grandeurs, procédures de comparaison.
+              Elle n’est pas un accès brut à <span class="tag-inline">–1</span>,
+              mais une façon d’articuler une partie du réel avec une forme symbolique.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-2">
+          <div class="section-meta">Section 2</div>
+          <h2>2. Domaines du mesurable</h2>
+          <div class="section-body columns">
+            <p>
+              On peut distinguer plusieurs grandes zones où la mesure joue un rôle central :
+            </p>
+            <ul>
+              <li>
+                <strong>Physique</strong> : grandeurs physiques (distance, temps,
+                masse, énergie, charge…).
+              </li>
+              <li>
+                <strong>Biologie</strong> : concentrations, taux, fréquences,
+                tailles de populations, paramètres physiologiques.
+              </li>
+              <li>
+                <strong>Sciences humaines</strong> : indices, scores, échelles,
+                indicateurs socio-économiques.
+              </li>
+              <li>
+                <strong>Informatique & IA</strong> : pertes, métriques de performance,
+                mesures de similarité.
+              </li>
+            </ul>
+            <p>
+              Dans chaque domaine, la question est : <em>que gagne-t-on et que
+              perd-on</em> avec la mesure ?
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-3">
+          <div class="section-meta">Section 3</div>
+          <h2>3. Trois types de limites</h2>
+          <div class="section-body columns">
+            <h3>3.1. Limites techniques</h3>
+            <p>
+              Elles viennent de nos instruments : résolution finie, bruit, accès
+              partiel. Ces limites peuvent évoluer avec la technologie.
+            </p>
+
+            <h3>3.2. Limites conceptuelles</h3>
+            <p>
+              Parfois, le problème n’est pas l’instrument, mais le concept :
+            </p>
+            <ul>
+              <li>grandeurs mal définies ;</li>
+              <li>confusion entre ce qui est mesuré et ce qu’on croit mesurer ;</li>
+              <li>usage abusif de nombres pour des phénomènes mal quantifiables.</li>
+            </ul>
+
+            <h3>3.3. Limites ontologiques</h3>
+            <p>
+              Certaines dimensions du réel peuvent être structurellement
+              réfractaires à la quantification :
+            </p>
+            <ul>
+              <li>qualités vécues (souffrance, beauté, sens) ;</li>
+              <li>structures relationnelles complexes ;</li>
+              <li>phénomènes dont la mesure les altère irréversiblement.</li>
+            </ul>
+            <p>
+              T^ permet de les situer comme des zones où ∆ ne peut pas capturer
+              tout ce que –1 implique, quelles que soient les améliorations techniques.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-4">
+          <div class="section-meta">Section 4</div>
+          <h2>4. Exemple : quantique, vivant, collectif</h2>
+          <div class="section-body columns">
+            <h3>4.1. Quantique : observer, c’est intervenir</h3>
+            <p>
+              Dans certains phénomènes quantiques, l’acte de mesure modifie l’état
+              du système. La mesure ne révèle pas un état préexistant intact,
+              mais participe à la configuration de ce que l’on observe.
+            </p>
+
+            <h3>4.2. Vivant : complexité & multi-échelles</h3>
+            <p>
+              Mesurer un paramètre biologique (par exemple, un taux sanguin) ne
+              suffit pas à saisir l’état global d’un organisme. Le vivant est un
+              jeu d’échelles imbriquées, où certaines interactions ne sont pas
+              directement mesurables, mais seulement inférées.
+            </p>
+
+            <h3>4.3. Collectif : indices & réduction</h3>
+            <p>
+              Les indicateurs socio-économiques (PIB, taux de chômage, etc.)
+              condensent des réalités très diverses en nombres uniques. Ils sont
+              utiles, mais risquent de masquer les dimensions qualitatives
+              (dignité, sens, justice).
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-5">
+          <div class="section-meta">Section 5</div>
+          <h2>5. Ce qui échappe à la mesure</h2>
+          <div class="section-body columns">
+            <p>
+              Certaines dimensions semblent structurellement rétives à la mesure
+              directe :
+            </p>
+            <ul>
+              <li>le sens vécu d’une expérience ;</li>
+              <li>la qualité d’une relation ;</li>
+              <li>l’unicité d’un événement historique ;</li>
+              <li>la profondeur d’un récit ou d’une œuvre.</li>
+            </ul>
+            <p>
+              On peut certes les corréler à des données mesurables, mais la
+              corrélation ne signifie pas capture intégrale. Il reste un surplus,
+              un « reste » qui échappe.
+            </p>
+            <div class="callout">
+              Ce reste peut être lu comme une signature forte de <span class="tag-inline">–1</span> :
+              ce que ∆ ne peut pas enfermer dans une grille de mesure.
+            </div>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-6">
+          <div class="section-meta">Section 6</div>
+          <h2>6. Lecture T^ : mesure, ∆ et –1</h2>
+          <div class="section-body columns">
+            <h3>6.1. La mesure comme opération en ∆</h3>
+            <p>
+              La mesure est une opération à l’intérieur de
+              <span class="tag-inline">∆</span> : elle construit un pont entre
+              des événements sensibles et des marqueurs symboliques (nombres).
+            </p>
+
+            <h3>6.2. –1 et le non-mesurable</h3>
+            <p>
+              <span class="tag-inline">–1</span> désigne le Réel comme ce qui ne
+              se laisse jamais épuiser par nos représentations. Les limites du
+              mesurable rappellent que –1 ne se réduit pas à ce qui est numérisable.
+            </p>
+
+            <h3>6.3. H, Ξ et les excès de mesure</h3>
+            <p>
+              Une communauté <span class="tag-inline">H</span> peut être tentée
+              d’étendre la mesure partout. <span class="tag-inline">Ξ</span>
+              apparaît alors lorsque les effets de cette extension deviennent
+              destructeurs (réification du vivant, réduction de la personne à
+              des scores, etc.).
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-7">
+          <div class="section-meta">Section 7</div>
+          <h2>7. Implications éthiques & pratiques</h2>
+          <div class="section-body columns">
+            <p>
+              Reconnaître les limites du mesurable implique :
+            </p>
+            <ul>
+              <li>
+                de ne pas confondre « non mesuré » et « inexistant » ;
+              </li>
+              <li>
+                de ne pas faire de la métrique l’unique critère de décision ;
+              </li>
+              <li>
+                d’articuler chiffres et récits, statistiques et témoignages ;
+              </li>
+              <li>
+                d’accepter des zones de non-savoir, plutôt que de fabriquer des chiffres vides.
+              </li>
+            </ul>
+            <p>
+              Dans T^Total v20, cela revient à maintenir l’ouverture de
+              <span class="tag-inline">Ω</span> : ne pas laisser la mesure fermer
+              l’horizon, mais l’utiliser comme un outil parmi d’autres dans ∆.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-8">
+          <div class="section-meta">Section 8</div>
+          <h2>8. Tableau synthétique</h2>
+          <div class="section-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Type de limite</th>
+                  <th>Caractérisation</th>
+                  <th>Effet T^</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Technique</td>
+                  <td>Instrument, résolution, bruit</td>
+                  <td>Peut être réduite par des améliorations en ∆</td>
+                </tr>
+                <tr>
+                  <td>Conceptuelle</td>
+                  <td>Grandeurs mal définies, confusion de niveaux</td>
+                  <td>Appel à réviser H et les modèles en ∆</td>
+                </tr>
+                <tr>
+                  <td>Ontologique</td>
+                  <td>Dimensions du réel réfractaires à la quantification</td>
+                  <td>Rappel de –1 : irréductible à la mesure</td>
+                </tr>
+                <tr>
+                  <td>Excès de mesure</td>
+                  <td>Réduction abusive de réalités complexes à des chiffres</td>
+                  <td>Ξ critique : nécessité de combiner chiffres et récits</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              Ce tableau peut être utilisé comme grille T^ pour analyser n’importe
+              quel dispositif de mesure : où se situe-t-il, quelles limites accepte-t-il,
+              lesquelles tente-t-il de nier ?
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+      </article>
+    </div>
+
+    <footer class="page-foot">
+      T^Total v20 — Limites du mesurable · Document narratif situé dans ∆, sous contrainte du Réel (–1).
+    </footer>
+
+  </div>
+</body>
+</html>

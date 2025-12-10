@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Erreur, falsification & théorie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* même CSS que la page précédente */
+    :root{
+      --bg:#050816;
+      --bg-soft:#0b1020;
+      --bg-panel:#0d1427;
+      --fg:#e7e9ee;
+      --mut:#a9b1c6;
+      --line:#1e2536;
+      --accent:#22d3ee;
+      --accent-soft:rgba(34,211,238,.16);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:
+        radial-gradient(circle at top,#1e293b 0,transparent 55%),
+        radial-gradient(circle at bottom,#020617 0,transparent 55%),
+        var(--bg);
+      color:var(--fg);padding:24px 12px 40px 12px;
+      display:flex;justify-content:center;
+    }
+    .page{width:100%;max-width:1120px}
+    header{
+      border:1px solid var(--line);border-radius:16px;
+      padding:14px 18px 16px 18px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.85);
+      margin-bottom:18px;
+    }
+    .header-meta{
+      display:flex;justify-content:space-between;align-items:flex-start;
+      gap:12px;flex-wrap:wrap;font-size:.86rem;color:var(--mut);margin-bottom:4px;
+    }
+    .header-meta span.label{text-transform:uppercase;letter-spacing:.14em;font-size:.75rem}
+    h1{font-size:clamp(22px,3vw,30px);letter-spacing:.08em;text-transform:uppercase;margin:0}
+    .subtitle{margin-top:4px;color:var(--mut);font-size:.95rem}
+    .layout{
+      display:grid;grid-template-columns:260px minmax(0,1fr);
+      gap:16px;align-items:flex-start;
+    }
+    @media (max-width:880px){.layout{grid-template-columns:1fr}}
+    nav.toc{
+      position:sticky;top:16px;align-self:flex-start;
+      border:1px solid var(--line);border-radius:14px;
+      padding:10px 12px;background:rgba(10,16,35,.96);
+      box-shadow:0 14px 32px rgba(15,23,42,.9);font-size:.9rem;
+    }
+    .toc-title{text-transform:uppercase;font-size:.8rem;letter-spacing:.18em;color:var(--mut);margin-bottom:6px}
+    .toc ul{list-style:none;margin:4px 0 0 0;padding:0}
+    .toc li{margin:3px 0}
+    .toc a{
+      display:block;text-decoration:none;color:var(--fg);
+      padding:4px 4px;border-radius:6px;
+      transition:background .16s ease,color .16s ease;
+    }
+    .toc a span.num{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--mut);margin-right:4px}
+    .toc a:hover{background:rgba(15,23,42,.95);color:var(--accent)}
+    article{
+      border:1px solid var(--line);border-radius:16px;
+      padding:14px 16px 18px 16px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.9);
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:3px 8px;border-radius:999px;
+      border:1px solid var(--accent-soft);
+      background:rgba(15,23,42,.9);
+      font-size:.78rem;color:var(--mut);margin-bottom:6px;
+    }
+    .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+    h2{margin:14px 0 4px 0;font-size:1.1rem;letter-spacing:.09em;text-transform:uppercase}
+    h3{margin:10px 0 4px 0;font-size:1rem}
+    .section-meta{font-size:.8rem;color:var(--mut);margin-bottom:2px}
+    .section-body{margin-top:4px;font-size:.95rem;line-height:1.55;color:#e2e6f3}
+    @media (min-width:900px){.section-body.columns{column-count:2;column-gap:2.5rem}}
+    .section-body p{margin-bottom:.65rem;break-inside:avoid}
+    .section-body ul{margin:0 0 .65rem 1.1rem;padding:0;break-inside:avoid}
+    .section-body li{margin-bottom:.25rem}
+    .tag-inline{
+      font-family:ui-monospace,Menlo,monospace;font-size:.82rem;
+      background:rgba(15,23,42,.9);padding:1px 6px;border-radius:6px;
+      border:1px solid rgba(148,163,184,.45);margin:0 2px;white-space:nowrap;
+    }
+    .callout{
+      margin:8px 0 8px 0;padding:8px 10px;border-radius:10px;
+      border:1px dashed rgba(148,163,184,.7);background:rgba(15,23,42,.85);
+      font-size:.88rem;break-inside:avoid;
+    }
+    .small-top-link{font-size:.78rem;text-align:right;margin-top:4px}
+    .small-top-link a{color:var(--mut);text-decoration:none}
+    .small-top-link a:hover{color:var(--accent);text-decoration:underline}
+    hr.sep{border:none;border-top:1px solid rgba(30,41,59,.9);margin:10px 0 8px 0}
+    footer.page-foot{margin-top:18px;font-size:.8rem;color:var(--mut);text-align:center}
+    table{width:100%;border-collapse:collapse;margin:6px 0 8px 0;font-size:.9rem;break-inside:avoid}
+    th,td{border:1px solid rgba(51,65,85,.9);padding:5px 6px;vertical-align:top}
+    th{background:rgba(15,23,42,.95);font-weight:600}
+  </style>
+</head>
+<body id="top">
+  <div class="page">
+
+    <header>
+      <div class="header-meta">
+        <div>
+          <span class="label">T^ · Rapport conceptuel</span><br>
+          <span>Version 1.0 — Erreur, falsification & théorie</span>
+        </div>
+        <div>
+          <span class="label">Module</span><br>
+          <span>T^Science · T^POS · T^Total v20</span>
+        </div>
+      </div>
+      <h1>Erreur, falsification & théorie</h1>
+      <p class="subtitle">
+        Comment l’erreur, la falsification et les ruptures de cohérence structurent la vie des théories,
+        relues dans le cadre T^ (Ξ, H, V, Ω).
+      </p>
+    </header>
+
+    <div class="layout">
+
+      <nav class="toc" aria-label="Sommaire">
+        <div class="toc-title">Sommaire</div>
+        <ul>
+          <li><a href="#abstract"><span class="num">0.</span> Résumé</a></li>
+          <li><a href="#sec-1"><span class="num">1.</span> Erreur : ennemi ou ressource ?</a></li>
+          <li><a href="#sec-2"><span class="num">2.</span> Falsification & tests sévères</a></li>
+          <li><a href="#sec-3"><span class="num">3.</span> Théories, anomalies & crises</a></li>
+          <li><a href="#sec-4"><span class="num">4.</span> Typologie de l’erreur scientifique</a></li>
+          <li><a href="#sec-5"><span class="num">5.</span> Lecture T^ : Ξ comme moteur</a></li>
+          <li><a href="#sec-6"><span class="num">6.</span> Pratiques : organiser l’erreur</a></li>
+          <li><a href="#sec-7"><span class="num">7.</span> Tableau récapitulatif</a></li>
+        </ul>
+      </nav>
+
+      <article>
+
+        <div class="badge" id="abstract">
+          <span class="badge-dot"></span>
+          <span>Résumé</span>
+        </div>
+        <div class="section-body">
+          <p>
+            Cette page explore la place de l’erreur et de la falsification dans la dynamique
+            des théories scientifiques. Loin d’être un simple « échec », l’erreur devient,
+            dans une perspective T^, une manifestation de <span class="tag-inline">Ξ</span> :
+            fissure productive dans un horizon de pensée <span class="tag-inline">H</span>.
+          </p>
+          <p>
+            La falsification est abordée comme une pratique organisée consistant à exposer
+            une théorie à des tests qui ont de fortes chances de la contredire, si elle
+            est inadéquate. On examine comment les théories se défendent, se modifient,
+            ou s’effondrent face à ces fissures, et comment l’écologie des erreurs
+            façonne l’évolution de ∆ dans T^Science.
+          </p>
+        </div>
+
+        <hr class="sep">
+
+        <section id="sec-1">
+          <div class="section-meta">Section 1</div>
+          <h2>1. Erreur : ennemi ou ressource ?</h2>
+          <div class="section-body columns">
+            <h3>1.1. Erreur comme déviation</h3>
+            <p>
+              Dans le langage courant, l’erreur est ce qui s’écarte de la vérité
+              ou de la norme. On la traite souvent comme quelque chose à éliminer
+              le plus vite possible, pour retrouver la « bonne » trajectoire.
+            </p>
+
+            <h3>1.2. Erreur scientifique</h3>
+            <p>
+              En science, l’erreur peut désigner :
+            </p>
+            <ul>
+              <li>une mesure imprécise ou biaisée ;</li>
+              <li>un dispositif mal calibré ;</li>
+              <li>un raisonnement incorrect ;</li>
+              <li>un modèle inadapté ;</li>
+              <li>une hypothèse fausse.</li>
+            </ul>
+
+            <h3>1.3. Erreur comme signal</h3>
+            <p>
+              Dans la perspective T^, l’erreur n’est pas seulement ce qui doit
+              être corrigé, mais un <strong>signal</strong> :
+            </p>
+            <div class="callout">
+              L’erreur est un marqueur de <span class="tag-inline">Ξ</span> :
+              quelque chose ne colle pas entre <span class="tag-inline">H</span>
+              (ce que nous croyons) et <span class="tag-inline">–1</span>
+              (ce que le réel impose).
+            </div>
+            <p>
+              La question devient : <em>que faire de ce signal ?</em>
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-2">
+          <div class="section-meta">Section 2</div>
+          <h2>2. Falsification & tests sévères</h2>
+          <div class="section-body columns">
+            <h3>2.1. Idée de base</h3>
+            <p>
+              L’idée de falsification consiste à dire : une bonne théorie n’est pas
+              celle que l’on protège de toute critique, mais celle que l’on expose
+              volontairement à des tests qui pourraient la contredire.
+            </p>
+
+            <h3>2.2. Test sévère</h3>
+            <p>
+              Un test est dit « sévère » lorsqu’il satisfait approximativement
+              les conditions suivantes :
+            </p>
+            <ul>
+              <li>si la théorie est fausse, il a une forte probabilité de le montrer ;</li>
+              <li>si la théorie passe le test, on a une bonne raison de la considérer comme robuste ;</li>
+              <li>le test n’est pas taillé sur mesure pour sauver la théorie.</li>
+            </ul>
+
+            <h3>2.3. Rôle de l’erreur dans la falsification</h3>
+            <p>
+              Une falsification réussie se manifeste par un écart systématique :
+              les prédictions de la théorie ne coïncident pas avec les données, au-delà
+              de ce qu’on peut attribuer au hasard ou aux incertitudes.
+            </p>
+            <p>
+              L’erreur ici n’est pas un accident, mais le résultat d’une procédure
+              honnête qui place theory face à ses propres limites.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-3">
+          <div class="section-meta">Section 3</div>
+          <h2>3. Théories, anomalies & crises</h2>
+          <div class="section-body columns">
+            <h3>3.1. Théorie stable</h3>
+            <p>
+              Une théorie est dite « stable » lorsque :
+            </p>
+            <ul>
+              <li>elle produit des prédictions correctes dans une large gamme de cas ;</li>
+              <li>les écarts sont rares, localisés et explicables ;</li>
+              <li>la communauté <span class="tag-inline">H</span> la considère comme
+                un cadre naturel de travail.</li>
+            </ul>
+
+            <h3>3.2. Anomalies accumulées</h3>
+            <p>
+              Progressivement, des observations ou expériences peuvent générer des
+              anomalies récurrentes. À ce stade :
+            </p>
+            <ul>
+              <li>on peut tenter d’ajuster les paramètres ;</li>
+              <li>on peut introduire des hypothèses auxiliaires ;</li>
+              <li>on peut reformuler certaines parties de la théorie.</li>
+            </ul>
+
+            <h3>3.3. Crise</h3>
+            <p>
+              Quand les anomalies deviennent centrales, la théorie entre en crise :
+            </p>
+            <div class="callout">
+              Une crise scientifique est un moment où le système de théories ne
+              parvient plus à intégrer les erreurs sans se déformer lui-même.
+            </div>
+            <p>
+              C’est souvent à ce moment que surgissent des propositions de rupture,
+              des réécritures conceptuelles et des nouveaux cadres.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-4">
+          <div class="section-meta">Section 4</div>
+          <h2>4. Typologie de l’erreur scientifique</h2>
+          <div class="section-body columns">
+            <p>On peut distinguer plusieurs familles d’erreurs :</p>
+
+            <h3>4.1. Erreurs de mesure</h3>
+            <p>
+              Instruments mal calibrés, fluctuations non contrôlées, biais de
+              sélection des données. Ces erreurs relèvent souvent de la technique
+              et se corrigent par amélioration méthodologique.
+            </p>
+
+            <h3>4.2. Erreurs de modèle</h3>
+            <p>
+              Le modèle utilisé ne capture pas une structure importante du phénomène.
+              Les données sont alors systématiquement décalées, même avec des
+              mesures précises.
+            </p>
+
+            <h3>4.3. Erreurs d’interprétation</h3>
+            <p>
+              Mauvaise lecture des résultats, confusion entre corrélation et
+              causalité, sur-interprétation d’un effet statistiquement fragile.
+            </p>
+
+            <h3>4.4. Erreurs structurelles</h3>
+            <p>
+              Certaines erreurs viennent du fait que l’on pose mal la question :
+              le cadre entier (<span class="tag-inline">H</span>) est inadéquat.
+              Ce sont les plus difficiles à reconnaître.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-5">
+          <div class="section-meta">Section 5</div>
+          <h2>5. Lecture T^ : Ξ comme moteur</h2>
+          <div class="section-body columns">
+            <h3>5.1. Erreur = manifestation de Ξ</h3>
+            <p>
+              Dans T^, <span class="tag-inline">Ξ</span> désigne les fissures,
+              tensions, paradoxes. L’erreur scientifique est une manière concrète
+              dont Ξ se manifeste dans les pratiques :
+            </p>
+            <ul>
+              <li>elle signale un décalage entre H et –1 ;</li>
+              <li>elle oblige à retravailler les modèles en ∆ ;</li>
+              <li>elle ouvre des dynamiques V (révisions, inversions).</li>
+            </ul>
+
+            <h3>5.2. Neutralité de l’erreur</h3>
+            <p>
+              Dans T^POS (module des positions), l’erreur n’a pas de statut moral.
+              Elle est neutre, structurelle :
+            </p>
+            <div class="callout">
+              L’erreur n’est pas un défaut du sujet, mais une propriété de toute
+              tentative d’inscrire le réel (–1) dans ∆.
+            </div>
+
+            <h3>5.3. Falsification comme T^humour</h3>
+            <p>
+              Lorsqu’une expérience falsifie une théorie, on peut y voir une forme
+              de <span class="tag-inline">T^humour</span> : le réel « corrige »
+              nos récits, parfois de façon brutale, parfois avec une élégance
+              surprenante (un résultat simple qui traverse une construction compliquée).
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-6">
+          <div class="section-meta">Section 6</div>
+          <h2>6. Pratiques : organiser l’erreur</h2>
+          <div class="section-body columns">
+            <p>
+              Une science vivante n’essaie pas de supprimer l’erreur, mais
+              d’<strong>organiser</strong> la rencontre avec elle :
+            </p>
+            <ul>
+              <li>protocoles de réplication ;</li>
+              <li>tests indépendants ;</li>
+              <li>culture du doute ;</li>
+              <li>publication de résultats négatifs ;</li>
+              <li>analyse systématique des biais.</li>
+            </ul>
+            <p>
+              L’objectif n’est pas l’infaillibilité, mais la capacité à transformer
+              les erreurs en déplacements de H, en réécriture de ∆, en nouvelles
+              ouvertures Ω.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <section id="sec-7">
+          <div class="section-meta">Section 7</div>
+          <h2>7. Tableau récapitulatif</h2>
+          <div class="section-body">
+            <table>
+              <thead>
+                <tr>
+                  <th>Élément</th>
+                  <th>Description</th>
+                  <th>Lecture T^</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Erreur</td>
+                  <td>Écart entre théorie/modèle et données</td>
+                  <td>Manifestation de Ξ dans ∆</td>
+                </tr>
+                <tr>
+                  <td>Falsification</td>
+                  <td>Test organisé visant à exposer une théorie à la réfutation</td>
+                  <td>Activation volontaire de Ξ pour stabiliser ou réviser H</td>
+                </tr>
+                <tr>
+                  <td>Anomalie</td>
+                  <td>Résultat répété qui contredit les attentes</td>
+                  <td>Signal d’une future réorganisation V, possible Ω</td>
+                </tr>
+                <tr>
+                  <td>Crise</td>
+                  <td>Accumulation d’anomalies non intégrables</td>
+                  <td>H atteint un seuil où un changement profond est requis</td>
+                </tr>
+                <tr>
+                  <td>Nouvelle théorie</td>
+                  <td>Cadre qui réintègre les erreurs de manière cohérente</td>
+                  <td>Nouvelle configuration de H et ∆, ouverture Ω locale</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              Ce tableau reflète une vision : l’erreur n’est pas un déchet de la
+              science, mais l’un de ses moteurs les plus puissants, lorsqu’elle
+              est accueillie comme Ξ et non dissimulée.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+      </article>
+    </div>
+
+    <footer class="page-foot">
+      T^Total v20 — Erreur, falsification & théorie · Document narratif situé dans ∆, sous contrainte du Réel (–1).
+    </footer>
+
+  </div>
+</body>
+</html>
