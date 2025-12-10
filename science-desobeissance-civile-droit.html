@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Désobéissance civile — approche juridique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --bg:#050816;
+      --bg-soft:#0b1020;
+      --bg-panel:#0d1427;
+      --fg:#e7e9ee;
+      --mut:#a9b1c6;
+      --line:#1e2536;
+      --accent:#22d3ee;
+      --accent-soft:rgba(34,211,238,.16);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:
+        radial-gradient(circle at top,#1e293b 0,transparent 55%),
+        radial-gradient(circle at bottom,#020617 0,transparent 55%),
+        var(--bg);
+      color:var(--fg);padding:24px 12px 40px 12px;
+      display:flex;justify-content:center;
+    }
+    .page{width:100%;max-width:1120px}
+    header{
+      border:1px solid var(--line);border-radius:16px;
+      padding:14px 18px 16px 18px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.85);
+      margin-bottom:18px;
+    }
+    .header-meta{
+      display:flex;justify-content:space-between;align-items:flex-start;
+      gap:12px;flex-wrap:wrap;font-size:.86rem;color:var(--mut);margin-bottom:4px;
+    }
+    .header-meta span.label{text-transform:uppercase;letter-spacing:.14em;font-size:.75rem}
+    h1{font-size:clamp(22px,3vw,30px);letter-spacing:.08em;text-transform:uppercase;margin:0}
+    .subtitle{margin-top:4px;color:var(--mut);font-size:.95rem}
+    .layout{
+      display:grid;grid-template-columns:260px minmax(0,1fr);
+      gap:16px;align-items:flex-start;
+    }
+    @media (max-width:880px){.layout{grid-template-columns:1fr}}
+    nav.toc{
+      position:sticky;top:16px;align-self:flex-start;
+      border:1px solid var(--line);border-radius:14px;
+      padding:10px 12px;background:rgba(10,16,35,.96);
+      box-shadow:0 14px 32px rgba(15,23,42,.9);font-size:.9rem;
+    }
+    .toc-title{text-transform:uppercase;font-size:.8rem;letter-spacing:.18em;color:var(--mut);margin-bottom:6px}
+    .toc ul{list-style:none;margin:4px 0 0 0;padding:0}
+    .toc li{margin:3px 0}
+    .toc a{
+      display:block;text-decoration:none;color:var(--fg);
+      padding:4px 4px;border-radius:6px;
+      transition:background .16s ease,color .16s ease;
+    }
+    .toc a span.num{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--mut);margin-right:4px}
+    .toc a:hover{background:rgba(15,23,42,.95);color:var(--accent)}
+    article{
+      border:1px solid var(--line);border-radius:16px;
+      padding:14px 16px 18px 16px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.9);
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:3px 8px;border-radius:999px;
+      border:1px solid var(--accent-soft);
+      background:rgba(15,23,42,.9);
+      font-size:.78rem;color:var(--mut);margin-bottom:6px;
+    }
+    .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+    h2{margin:14px 0 4px 0;font-size:1.1rem;letter-spacing:.09em;text-transform:uppercase}
+    h3{margin:10px 0 4px 0;font-size:1rem}
+    .section-meta{font-size:.8rem;color:var(--mut);margin-bottom:2px}
+    .section-body{margin-top:4px;font-size:.95rem;line-height:1.55;color:#e2e6f3}
+    @media (min-width:900px){.section-body.columns{column-count:2;column-gap:2.5rem}}
+    .section-body p{margin-bottom:.65rem;break-inside:avoid}
+    .section-body ul{margin:0 0 .65rem 1.1rem;padding:0;break-inside:avoid}
+    .section-body li{margin-bottom:.25rem}
+    .tag-inline{
+      font-family:ui-monospace,Menlo,monospace;font-size:.82rem;
+      background:rgba(15,23,42,.9);padding:1px 6px;border-radius:6px;
+      border:1px solid rgba(148,163,184,.45);margin:0 2px;white-space:nowrap;
+    }
+    .callout{
+      margin:8px 0 8px 0;padding:8px 10px;border-radius:10px;
+      border:1px dashed rgba(148,163,184,.7);background:rgba(15,23,42,.85);
+      font-size:.88rem;break-inside:avoid;
+    }
+    blockquote{
+      margin:8px 0;
+      padding:8px 10px;
+      border-left:3px solid var(--accent);
+      background:rgba(15,23,42,.9);
+      border-radius:8px;
+      font-size:.9rem;
+    }
+    blockquote footer{
+      margin-top:4px;
+      font-size:.78rem;
+      color:var(--mut);
+    }
+    .small-top-link{font-size:.78rem;text-align:right;margin-top:4px}
+    .small-top-link a{color:var(--mut);text-decoration:none}
+    .small-top-link a:hover{color:var(--accent);text-decoration:underline}
+    hr.sep{border:none;border-top:1px solid rgba(30,41,59,.9);margin:10px 0 8px 0}
+    footer.page-foot{margin-top:18px;font-size:.8rem;color:var(--mut);text-align:center}
+    table{width:100%;border-collapse:collapse;margin:6px 0 8px 0;font-size:.9rem;break-inside:avoid}
+    th,td{border:1px solid rgba(51,65,85,.9);padding:5px 6px;vertical-align:top}
+    th{background:rgba(15,23,42,.95);font-weight:600}
+  </style>
+</head>
+<body id="top">
+  <div class="page">
+
+    <header>
+      <div class="header-meta">
+        <div>
+          <span class="label">T^ · Rapport juridique</span><br>
+          <span>Version 1.0 — Désobéissance civile : droit naturel, droit positif, jurisprudence</span>
+        </div>
+        <div>
+          <span class="label">Module</span><br>
+          <span>T^Science · T^World-Lang · T^Total v20</span>
+        </div>
+      </div>
+      <h1>Désobéissance civile — Approche juridique</h1>
+      <p class="subtitle">
+        Analyse de la désobéissance civile dans le langage du droit : droit naturel, droit positif,
+        droits fondamentaux et grandes lignes de jurisprudence, avec un bref ancrage T^ en conclusion.
+      </p>
+    </header>
+
+    <div class="layout">
+
+      <nav class="toc" aria-label="Sommaire">
+        <div class="toc-title">Sommaire</div>
+        <ul>
+          <li><a href="#abstract"><span class="num">0.</span> Résumé</a></li>
+          <li><a href="#sec-1"><span class="num">1.</span> Droit naturel & droit positif</a></li>
+          <li><a href="#sec-2"><span class="num">2.</span> Lex iniusta non est lex en droit naturel</a></li>
+          <li><a href="#sec-3"><span class="num">3.</span> Droits fondamentaux & constitutions</a></li>
+          <li><a href="#sec-4"><span class="num">4.</span> Désobéissance civile & droit pénal</a></li>
+          <li><a href="#sec-5"><span class="num">5.</span> Objection de conscience & clauses spécifiques</a></li>
+          <li><a href="#sec-6"><span class="num">6.</span> Lanceurs d’alerte & état de nécessité</a></li>
+          <li><a href="#sec-7"><span class="num">7.</span> Lecture T^ & synthèse</a></li>
+        </ul>
+      </nav>
+
+      <article>
+
+        <!-- 0. Résumé -->
+        <div class="badge" id="abstract">
+          <span class="badge-dot"></span>
+          <span>Résumé</span>
+        </div>
+        <div class="section-body">
+          <p>
+            Ce rapport examine la <strong>désobéissance civile</strong> dans le langage du droit.
+            Il situe le geste de transgression volontaire d’une loi jugée injuste dans la tension
+            entre <strong>droit naturel</strong> (justice, dignité, droits fondamentaux) et
+            <strong>droit positif</strong> (normes effectivement en vigueur).
+          </p>
+          <p>
+            La première partie rappelle les distinctions essentielles entre loi naturelle et loi
+            humaine, en montrant comment le principe <em>lex iniusta non est lex</em> a servi
+            historiquement à justifier un droit, voire un devoir de désobéir à certaines lois.
+            La deuxième partie analyse la place de la désobéissance civile dans les systèmes
+            constitutionnels contemporains : illégalité pénale, mais parfois légitimité
+            politique ou morale, mise en tension avec les droits fondamentaux.
+          </p>
+          <p>
+            Le rapport aborde ensuite trois zones juridiques sensibles : l’<strong>objection
+            de conscience</strong>, les <strong>lanceurs d’alerte</strong> et l’<strong>état
+            de nécessité</strong>. Il conclut par une brève lecture T^, où les constructions
+            juridiques apparaissent comme des réponses institutionnelles aux fissures
+            <span class="tag-inline">Ξ</span> révélées par la désobéissance civile, dans la
+            tentative de réarticuler les horizons juridiques <span class="tag-inline">H</span>
+            avec la contrainte du Réel <span class="tag-inline">–1</span>.
+          </p>
+        </div>
+
+        <hr class="sep">
+
+        <!-- 1. Droit naturel & droit positif -->
+        <section id="sec-1">
+          <div class="section-meta">Section 1</div>
+          <h2>1. Droit naturel &amp; droit positif</h2>
+          <div class="section-body columns">
+            <h3>1.1. Droit positif</h3>
+            <p>
+              On appelle <strong>droit positif</strong> l’ensemble des normes juridiques
+              effectivement en vigueur dans un ordre déterminé : lois, règlements, décisions
+              de justice, coutumes reconnues. Ces normes tirent leur validité de procédures
+              formelles (compétence de l’autorité, respect de la procédure législative ou
+              réglementaire, promulgation, etc.).
+            </p>
+
+            <h3>1.2. Droit naturel</h3>
+            <p>
+              Le <strong>droit naturel</strong>, dans sa version classique, renvoie à un ordre
+              de justice accessible à la raison humaine, antérieur et supérieur aux lois
+              positives. Il fournit des critères pour juger ces dernières : une loi positive
+              qui contredit manifestement le droit naturel perd tout ou partie de sa légitimité.
+            </p>
+
+            <h3>1.3. Tension structurante</h3>
+            <p>
+              Les théories modernes du droit varient sur le statut du droit naturel : certaines
+              l’acceptent explicitement, d’autres le refusent, mais la tension demeure. Dans la
+              pratique, les constitutions contemporaines intègrent souvent, sous d’autres noms
+              (droits de l’homme, dignité, égalité, etc.), des éléments qui jouent un rôle
+              analogue : un noyau de principes supérieurs auxquels le droit positif doit
+              se conformer.
+            </p>
+            <div class="callout">
+              La désobéissance civile surgit précisément là où un sujet perçoit une divergence
+              entre le droit positif et ces principes supérieurs, et choisit de donner
+              priorité à ces derniers.
+            </div>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 2. Lex iniusta non est lex -->
+        <section id="sec-2">
+          <div class="section-meta">Section 2</div>
+          <h2>2. <em>Lex iniusta non est lex</em> en droit naturel classique</h2>
+          <div class="section-body columns">
+            <h3>2.1. Principe général</h3>
+            <p>
+              Le principe <em>lex iniusta non est lex</em> (« une loi injuste n’est pas une loi »)
+              résume une intuition du droit naturel classique : la loi ne tire pas sa qualité
+              de loi uniquement de sa forme (texte adopté selon les procédures), mais de son
+              accord avec la justice. Une loi qui viole gravement la justice est, en un sens
+              essentiel, une <em>corruption</em> de la loi.
+            </p>
+
+            <h3>2.2. Augustin & Thomas d’Aquin</h3>
+            <p>
+              Augustin et Thomas d’Aquin fournissent deux formulations emblématiques.
+              Augustin affirme que « la loi injuste ne semble pas être une loi », tandis que
+              Thomas précise que la loi humaine n’a qualité de loi que dans la mesure où elle
+              dérive de la loi naturelle.
+            </p>
+            <blockquote>
+              « Lex humana in tantum habet rationem legis, in quantum a lege naturali derivatur. »<br>
+              <br>
+              « La loi humaine n’a qualité de loi que dans la mesure où elle dérive de la loi naturelle. »
+              <footer>Thomas d’Aquin, <em>Somme théologique</em>, I–II, q.95, a.2.</footer>
+            </blockquote>
+            <p>
+              D’où la conclusion classique : une loi humaine gravement contraire à la loi
+              naturelle peut cesser d’obliger en conscience. Le devoir général d’obéir est
+              alors limité par un devoir supérieur de ne pas coopérer à l’injustice.
+            </p>
+
+            <h3>2.3. Devoir de résistance</h3>
+            <p>
+              Certaines doctrines vont plus loin et soutiennent qu’il existe, dans certains
+              cas extrêmes (tyrannie manifeste, violation massive des droits fondamentaux),
+              non seulement un droit de résistance, mais un <strong>devoir</strong> de
+              désobéir. L’ordre juridique perd alors sa prétention à l’obéissance morale
+              et peut être contesté, voire renversé.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 3. Droits fondamentaux & constitutions -->
+        <section id="sec-3">
+          <div class="section-meta">Section 3</div>
+          <h2>3. Droits fondamentaux &amp; constitutions</h2>
+          <div class="section-body columns">
+            <h3>3.1. Constitutionnalisation des droits</h3>
+            <p>
+              Dans de nombreux États, les constitutions et les textes à valeur
+              constitutionnelle (déclarations de droits, chartes, etc.) consacrent
+              des <strong>droits fondamentaux</strong> : dignité, liberté, égalité,
+              sûreté, liberté d’expression, liberté de religion, etc. Ces droits
+              fonctionnent comme un noyau normatif supérieur, auquel les lois ordinaires
+              doivent se conformer.
+            </p>
+
+            <h3>3.2. Contrôle de constitutionnalité</h3>
+            <p>
+              Des mécanismes de <strong>contrôle de constitutionnalité</strong> permettent
+              de censurer des lois qui violent ces droits fondamentaux. Idéalement, ce
+              contrôle évite que les citoyens se trouvent coincés entre l’obligation
+              d’obéir à la loi et le refus de se rendre complices d’une injustice grave.
+            </p>
+            <p>
+              En pratique, cependant, le contrôle de constitutionnalité est :
+            </p>
+            <ul>
+              <li>souvent réservé à certains acteurs (juges, tribunaux) ;</li>
+              <li>parfois tardif ;</li>
+              <li>conditionné par des équilibres politiques.</li>
+            </ul>
+            <p>
+              C’est dans ces interstices que la désobéissance civile peut se manifester
+              comme rappel du décalage entre la lettre de la loi et l’esprit de la
+              constitution.
+            </p>
+
+            <h3>3.3. Droits fondamentaux comme limite au pouvoir de punir</h3>
+            <p>
+              Même lorsqu’un acte de désobéissance civile est pénalement punissable,
+              les droits fondamentaux (liberté d’expression, de réunion, d’association,
+              droit à un procès équitable, etc.) encadrent la manière dont l’État peut
+              réagir :
+            </p>
+            <ul>
+              <li>les sanctions doivent rester proportionnées ;</li>
+              <li>les procès doivent respecter les garanties de défense ;</li>
+              <li>la répression ne doit pas annihiler l’espace public de contestation.</li>
+            </ul>
+            <p>
+              La tension entre désobéissance civile et ordre constitutionnel se joue
+              donc sur une ligne fine : le droit tente d’intégrer la contestation
+              sans se détruire lui-même.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 4. Désobéissance civile & droit pénal -->
+        <section id="sec-4">
+          <div class="section-meta">Section 4</div>
+          <h2>4. Désobéissance civile &amp; droit pénal</h2>
+          <div class="section-body columns">
+            <h3>4.1. Illégalité pénale</h3>
+            <p>
+              Du point de vue du <strong>droit pénal positif</strong>, la désobéissance
+              civile est généralement <strong>illégale</strong> : blocage d’axe routier,
+              intrusion dans des locaux, refus d’obtempérer à certaines obligations,
+              etc. L’infraction est souvent caractérisée indépendamment du motif.
+            </p>
+
+            <h3>4.2. Motif politique & appréciation judiciaire</h3>
+            <p>
+              Toutefois, le motif peut jouer un rôle dans :
+            </p>
+            <ul>
+              <li>l’appréciation de la gravité des faits ;</li>
+              <li>le choix de la peine ;</li>
+              <li>la décision de poursuivre ou de classer ;</li>
+              <li>la perception publique de la décision.</li>
+            </ul>
+            <p>
+              Des juges peuvent tenir compte du caractère symbolique et politique de
+              l’acte pour prononcer des peines réduites, assorties du sursis, voire
+              des relaxes lorsque certaines conditions sont réunies (par exemple, si
+              des causes de justification sont invoquées).
+            </p>
+
+            <h3>4.3. Distinction avec la violence politique</h3>
+            <p>
+              Le droit pénal opère souvent une distinction nette entre :
+            </p>
+            <ul>
+              <li>des actes non violents, symboliques, visant principalement à alerter ;</li>
+              <li>des actes violents, comportant des atteintes aux personnes ou des destructions massives.</li>
+            </ul>
+            <p>
+              La désobéissance civile entend rester dans la première catégorie, ce
+              qui facilite, dans certains cas, une relative clémence ou une
+              compréhension accrue de la part des juridictions.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 5. Objection de conscience -->
+        <section id="sec-5">
+          <div class="section-meta">Section 5</div>
+          <h2>5. Objection de conscience &amp; clauses spécifiques</h2>
+          <div class="section-body columns">
+            <h3>5.1. Définition</h3>
+            <p>
+              L’<strong>objection de conscience</strong> désigne le refus, par une
+              personne, d’accomplir un acte prescrit par la loi ou par un règlement
+              au motif que cet acte serait gravement contraire à ses convictions
+              morales, religieuses ou philosophiques.
+            </p>
+
+            <h3>5.2. Objecteurs reconnus par la loi</h3>
+            <p>
+              Dans certains domaines, le droit positif a prévu des <strong>clauses
+              spécifiques</strong> pour protéger les objecteurs de conscience :
+            </p>
+            <ul>
+              <li>
+                service militaire (possibilité de service civil de remplacement
+                dans plusieurs pays) ;
+              </li>
+              <li>
+                professions médicales (conscience en matière de participation à
+                certains actes, dans des limites définies) ;
+              </li>
+              <li>
+                participation à des recherches ou programmes jugés contraires à
+                la dignité humaine.
+              </li>
+            </ul>
+            <p>
+              Ces clauses transforment une partie de la désobéissance potentielle
+              en exception légalement reconnue, en encadrant strictement les
+              conditions de l’objection (sincérité, proportionnalité, absence
+              de discrimination à l’égard des usagers, etc.).
+            </p>
+
+            <h3>5.3. Limites & conflits de droits</h3>
+            <p>
+              L’objection de conscience confronte souvent le droit à des conflits
+              entre droits fondamentaux :
+            </p>
+            <ul>
+              <li>droit de la personne à agir selon sa conscience ;</li>
+              <li>droit des tiers à accéder à un service ou à un droit garanti par la loi ;</li>
+              <li>exigences de neutralité ou de continuité du service public.</li>
+            </ul>
+            <p>
+              La jurisprudence cherche alors un équilibre : reconnaître la conscience
+              sans permettre qu’elle serve de prétexte à des discriminations ou à
+              des atteintes aux droits d’autrui.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 6. Lanceurs d’alerte & état de nécessité -->
+        <section id="sec-6">
+          <div class="section-meta">Section 6</div>
+          <h2>6. Lanceurs d’alerte &amp; état de nécessité</h2>
+          <div class="section-body columns">
+            <h3>6.1. Lanceurs d’alerte</h3>
+            <p>
+              Les <strong>lanceurs d’alerte</strong> sont des personnes qui révèlent,
+              dans l’intérêt général, des informations confidentielles portant sur
+              des faits graves : corruption, atteintes à l’environnement, violations
+              des droits fondamentaux, etc. Leur geste implique souvent une violation
+              des règles de secret ou de loyauté envers l’employeur.
+            </p>
+            <p>
+              De plus en plus d’ordres juridiques adoptent des législations de
+              protection des lanceurs d’alerte, qui conditionnent cette protection
+              à certains critères : bonne foi, intérêt public, caractère proportionné
+              de la divulgation, etc.
+            </p>
+
+            <h3>6.2. État de nécessité</h3>
+            <p>
+              La notion d’<strong>état de nécessité</strong> désigne une situation
+              dans laquelle la commission d’un acte normalement infractionnel est
+              justifiée par la nécessité de sauvegarder un intérêt supérieur
+              (vie humaine, intégrité physique, environnement, etc.), à condition
+              que ce ne soit pas disproportionné.
+            </p>
+            <p>
+              Dans certains cas, des militants ou des citoyens ont invoqué l’état
+              de nécessité pour justifier des actions de désobéissance civile,
+              en soutenant que l’infraction commise (par exemple, pénétrer dans un
+              lieu interdit) était destinée à prévenir un dommage grave et imminent
+              (danger écologique, risque pour la population).
+            </p>
+
+            <h3>6.3. Zones grises & évolution du droit</h3>
+            <p>
+              Ces domaines illustrent la manière dont le droit positif tente, parfois
+              avec retard, de reconnaître des motifs supérieurs de désobéissance :
+              conscience, intérêt public, nécessité. La ligne entre infraction et
+              justification est cependant délicate à tracer, et la jurisprudence
+              évolue au gré des affaires et des contextes politiques.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 7. Lecture T^ & synthèse -->
+        <section id="sec-7">
+          <div class="section-meta">Section 7</div>
+          <h2>7. Lecture T^ &amp; synthèse</h2>
+          <div class="section-body columns">
+            <h3>7.1. Le droit comme H structurant</h3>
+            <p>
+              Dans le langage T^Total v20, le droit apparaît comme une forme
+              particulièrement élaborée de <span class="tag-inline">H</span> :
+              un horizon stabilisé de normes, de procédures et de récits sur
+              ce qui est permis, interdit, exigé. Il tente de traduire, dans
+              des règles positives, une part de la contrainte du Réel
+              <span class="tag-inline">–1</span> (dignité, vulnérabilité,
+              finitude, coexistence).
+            </p>
+
+            <h3>7.2. Désobéissance civile comme révélateur de Ξ</h3>
+            <p>
+              La désobéissance civile, l’objection de conscience, les alertes
+              et l’invocation de l’état de nécessité signalent des
+              <span class="tag-inline">Ξ</span> : des fissures où le droit positif
+              se montre en retard, en contradiction ou en tension avec la justice
+              qu’il prétend servir. Le travail des juges, des législateurs et des
+              théoriciens du droit peut être lu comme une tentative de traiter
+              ces fissures sans effondrer H.
+            </p>
+
+            <h3>7.3. Réponses juridiques comme reconfiguration de H vers Ω</h3>
+            <p>
+              La constitutionnalisation des droits, les clauses d’objection de
+              conscience, les régimes de protection des lanceurs d’alerte ou les
+              aménagements de l’état de nécessité sont autant de manières de
+              réorienter H vers des configurations plus justes
+              <span class="tag-inline">Ω</span>. On pourrait dire que le droit
+              tente, par ces ajustements, de réintégrer dans ses structures
+              une part de la contestation qui venait de l’extérieur.
+            </p>
+
+            <h3>7.4. Place du sujet en ∆</h3>
+            <p>
+              Le sujet qui désobéit, dans cette lecture, se tient en
+              <span class="tag-inline">∆</span> : entre la loi existante et
+              l’exigence de justice qu’il perçoit. Les dispositifs juridiques
+              étudiés (droit naturel, droits fondamentaux, objections, nécessité)
+              peuvent alors être vus comme des façons, pour l’ordre juridique,
+              de reconnaître et de structurer cet interstice au lieu de le
+              nier purement et simplement.
+            </p>
+
+            <p>
+              Ainsi, le rapport entre désobéissance civile et droit n’est pas
+              seulement conflictuel : il est aussi génératif. La contestation
+              obligée par le Réel (–1) transforme, à terme, certains segments
+              de H, en ouvrant des chemins vers de nouveaux équilibres Ω.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+      </article>
+    </div>
+
+    <footer class="page-foot">
+      T^Total v20 — Désobéissance civile : approche juridique · Document situé dans ∆, à la frontière entre H (ordre légal) et –1 (justice).
+    </footer>
+
+  </div>
+</body>
+</html>

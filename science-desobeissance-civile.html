@@ -1,0 +1,677 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Désobéissance civile & devoir de désobéir</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --bg:#050816;
+      --bg-soft:#0b1020;
+      --bg-panel:#0d1427;
+      --fg:#e7e9ee;
+      --mut:#a9b1c6;
+      --line:#1e2536;
+      --accent:#22d3ee;
+      --accent-soft:rgba(34,211,238,.16);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      min-height:100vh;margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:
+        radial-gradient(circle at top,#1e293b 0,transparent 55%),
+        radial-gradient(circle at bottom,#020617 0,transparent 55%),
+        var(--bg);
+      color:var(--fg);padding:24px 12px 40px 12px;
+      display:flex;justify-content:center;
+    }
+    .page{width:100%;max-width:1120px}
+    header{
+      border:1px solid var(--line);border-radius:16px;
+      padding:14px 18px 16px 18px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.85);
+      margin-bottom:18px;
+    }
+    .header-meta{
+      display:flex;justify-content:space-between;align-items:flex-start;
+      gap:12px;flex-wrap:wrap;font-size:.86rem;color:var(--mut);margin-bottom:4px;
+    }
+    .header-meta span.label{text-transform:uppercase;letter-spacing:.14em;font-size:.75rem}
+    h1{font-size:clamp(22px,3vw,30px);letter-spacing:.08em;text-transform:uppercase;margin:0}
+    .subtitle{margin-top:4px;color:var(--mut);font-size:.95rem}
+    .layout{
+      display:grid;grid-template-columns:260px minmax(0,1fr);
+      gap:16px;align-items:flex-start;
+    }
+    @media (max-width:880px){.layout{grid-template-columns:1fr}}
+    nav.toc{
+      position:sticky;top:16px;align-self:flex-start;
+      border:1px solid var(--line);border-radius:14px;
+      padding:10px 12px;background:rgba(10,16,35,.96);
+      box-shadow:0 14px 32px rgba(15,23,42,.9);font-size:.9rem;
+    }
+    .toc-title{text-transform:uppercase;font-size:.8rem;letter-spacing:.18em;color:var(--mut);margin-bottom:6px}
+    .toc ul{list-style:none;margin:4px 0 0 0;padding:0}
+    .toc li{margin:3px 0}
+    .toc a{
+      display:block;text-decoration:none;color:var(--fg);
+      padding:4px 4px;border-radius:6px;
+      transition:background .16s ease,color .16s ease;
+    }
+    .toc a span.num{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--mut);margin-right:4px}
+    .toc a:hover{background:rgba(15,23,42,.95);color:var(--accent)}
+    article{
+      border:1px solid var(--line);border-radius:16px;
+      padding:14px 16px 18px 16px;
+      background:radial-gradient(circle at top left,#020617,#050816 55%,#020617 100%);
+      box-shadow:0 18px 40px rgba(15,23,42,.9);
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:3px 8px;border-radius:999px;
+      border:1px solid var(--accent-soft);
+      background:rgba(15,23,42,.9);
+      font-size:.78rem;color:var(--mut);margin-bottom:6px;
+    }
+    .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+    h2{margin:14px 0 4px 0;font-size:1.1rem;letter-spacing:.09em;text-transform:uppercase}
+    h3{margin:10px 0 4px 0;font-size:1rem}
+    .section-meta{font-size:.8rem;color:var(--mut);margin-bottom:2px}
+    .section-body{margin-top:4px;font-size:.95rem;line-height:1.55;color:#e2e6f3}
+    @media (min-width:900px){.section-body.columns{column-count:2;column-gap:2.5rem}}
+    .section-body p{margin-bottom:.65rem;break-inside:avoid}
+    .section-body ul{margin:0 0 .65rem 1.1rem;padding:0;break-inside:avoid}
+    .section-body li{margin-bottom:.25rem}
+    .tag-inline{
+      font-family:ui-monospace,Menlo,monospace;font-size:.82rem;
+      background:rgba(15,23,42,.9);padding:1px 6px;border-radius:6px;
+      border:1px solid rgba(148,163,184,.45);margin:0 2px;white-space:nowrap;
+    }
+    .callout{
+      margin:8px 0 8px 0;padding:8px 10px;border-radius:10px;
+      border:1px dashed rgba(148,163,184,.7);background:rgba(15,23,42,.85);
+      font-size:.88rem;break-inside:avoid;
+    }
+    blockquote{
+      margin:8px 0;
+      padding:8px 10px;
+      border-left:3px solid var(--accent);
+      background:rgba(15,23,42,.9);
+      border-radius:8px;
+      font-size:.9rem;
+    }
+    blockquote footer{
+      margin-top:4px;
+      font-size:.78rem;
+      color:var(--mut);
+    }
+    .small-top-link{font-size:.78rem;text-align:right;margin-top:4px}
+    .small-top-link a{color:var(--mut);text-decoration:none}
+    .small-top-link a:hover{color:var(--accent);text-decoration:underline}
+    hr.sep{border:none;border-top:1px solid rgba(30,41,59,.9);margin:10px 0 8px 0}
+    footer.page-foot{margin-top:18px;font-size:.8rem;color:var(--mut);text-align:center}
+    table{width:100%;border-collapse:collapse;margin:6px 0 8px 0;font-size:.9rem;break-inside:avoid}
+    th,td{border:1px solid rgba(51,65,85,.9);padding:5px 6px;vertical-align:top}
+    th{background:rgba(15,23,42,.95);font-weight:600}
+  </style>
+</head>
+<body id="top">
+  <div class="page">
+
+    <header>
+      <div class="header-meta">
+        <div>
+          <span class="label">T^ · Rapport conceptuel</span><br>
+          <span>Version 1.0 — Désobéissance civile & devoir de désobéir</span>
+        </div>
+        <div>
+          <span class="label">Module</span><br>
+          <span>T^Science · T^World-Lang · T^Total v20</span>
+        </div>
+      </div>
+      <h1>Désobéissance civile & devoir de désobéir</h1>
+      <p class="subtitle">
+        Analyse conceptuelle, historique et philosophique de la désobéissance civile et du principe
+        <em>lex iniusta non est lex</em>, avec une lecture finale dans le langage T^Total v20.
+      </p>
+    </header>
+
+    <div class="layout">
+
+      <nav class="toc" aria-label="Sommaire">
+        <div class="toc-title">Sommaire</div>
+        <ul>
+          <li><a href="#abstract"><span class="num">0.</span> Résumé</a></li>
+          <li><a href="#sec-1"><span class="num">1.</span> Notions de base</a></li>
+          <li><a href="#sec-2"><span class="num">2.</span> Antigone, Augustin & lex iniusta</a></li>
+          <li><a href="#sec-3"><span class="num">3.</span> Thoreau : la conscience contre l’État</a></li>
+          <li><a href="#sec-4"><span class="num">4.</span> Gandhi : satyagraha & non-violence</a></li>
+          <li><a href="#sec-5"><span class="num">5.</span> Martin Luther King & les lois injustes</a></li>
+          <li><a href="#sec-6"><span class="num">6.</span> Typologie et critères de légitimité</a></li>
+          <li><a href="#sec-7"><span class="num">7.</span> Lecture T^ de la désobéissance civile</a></li>
+          <li><a href="#sec-8"><span class="num">8.</span> Synthèse & ouverture vers le droit</a></li>
+        </ul>
+      </nav>
+
+      <article>
+
+        <!-- 0. Résumé -->
+        <div class="badge" id="abstract">
+          <span class="badge-dot"></span>
+          <span>Résumé</span>
+        </div>
+        <div class="section-body">
+          <p>
+            Ce rapport propose une lecture approfondie de la <strong>désobéissance civile</strong> :
+            acte public, assumé, souvent non-violent, par lequel un individu ou un groupe transgresse
+            une loi jugée injuste au nom d’une exigence supérieure de justice. Il articule cette
+            pratique avec le principe classique <em>lex iniusta non est lex</em> —
+            « une loi injuste n’est pas une loi » — tel qu’il apparaît chez Augustin, Thomas d’Aquin
+            et ses héritiers, jusqu’aux figures modernes de Thoreau, Gandhi et Martin Luther King.
+          </p>
+          <p>
+            Après avoir clarifié les notions de loi, justice, conscience et légitimité, le texte
+            explore quatre grandes sources : le geste mythico-tragique d’Antigone, la tradition
+            du droit naturel (Augustin, Thomas), l’essai de Thoreau sur la désobéissance civile,
+            la pratique gandhienne de la non-violence et l’analyse magistrale de Martin Luther King
+            dans la <em>Letter from Birmingham Jail</em>.
+          </p>
+          <p>
+            Une section de typologie propose ensuite des critères de légitimité (gravité de
+            l’injustice, échec des voies ordinaires, publicité, non-violence, proportionnalité,
+            acceptation des sanctions), avant une lecture finale en langage T^Total v20 :
+            lois comme éléments de <span class="tag-inline">H</span>, fissures
+            <span class="tag-inline">Ξ</span> révélant l’injustice, désobéissance comme
+            ouverture d’un interstice <span class="tag-inline">∆</span> éthique orienté
+            vers des configurations plus justes <span class="tag-inline">Ω</span>.
+          </p>
+        </div>
+
+        <hr class="sep">
+
+        <!-- 1. Notions de base -->
+        <section id="sec-1">
+          <div class="section-meta">Section 1</div>
+          <h2>1. Notions de base</h2>
+          <div class="section-body columns">
+            <h3>1.1. Loi, légalité, légitimité</h3>
+            <p>
+              Dans un sens minimal, une <strong>loi</strong> est une norme générale édictée
+              par une autorité reconnue, assortie d’une sanction en cas de transgression.
+              On parle de <em>légalité</em> lorsque des actes sont conformes à ces normes,
+              et d’<em>illégalité</em> lorsqu’ils les transgressent.
+            </p>
+            <p>
+              La <strong>légitimité</strong>, elle, renvoie à la justification de la loi :
+              est-elle juste&nbsp;? respecte-t-elle la dignité des personnes&nbsp;? est-elle
+              conforme aux principes fondamentaux proclamés par l’ordre juridique lui-même
+              (droits de l’homme, constitution, etc.)&nbsp;? Une loi peut être légale au sens
+              formel (valablement adoptée) tout en étant contestée quant à sa légitimité.
+            </p>
+
+            <h3>1.2. Désobéissance ordinaire vs désobéissance civile</h3>
+            <p>
+              On peut distinguer la désobéissance civile de simples infractions ordinaires :
+            </p>
+            <ul>
+              <li>
+                l’infraction ordinaire vise un intérêt privé, se dissimule, cherche à éviter
+                la sanction ;
+              </li>
+              <li>
+                la <strong>désobéissance civile</strong> se veut publique, assumée, orientée
+                vers un intérêt général, et souvent non-violente.
+              </li>
+            </ul>
+            <p>
+              Elle ne cherche pas d’abord à abolir toute autorité, mais à rappeler que
+              la loi positive n’est légitime que si elle reste arrimée à une exigence
+              de justice plus fondamentale.
+            </p>
+
+            <h3>1.3. Le devoir d’obéir & le devoir de désobéir</h3>
+            <p>
+              Les sociétés modernes reposent sur un <strong>devoir général d’obéir</strong>
+              aux lois, condition minimale de la coexistence. Mais ce devoir n’est pas
+              absolu : une longue tradition soutient qu’il peut exister, dans certains cas,
+              un <strong>devoir de désobéir</strong>, lorsque l’obéissance ferait de nous
+              des complices d’une injustice grave.
+            </p>
+            <div class="callout">
+              Cette tension entre devoir d’obéir et devoir de désobéir est le cœur de
+              la réflexion sur la désobéissance civile : jusqu’où l’obéissance est-elle
+              vertu, et à partir de quand devient-elle abdication éthique&nbsp;?
+            </div>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 2. Antigone, Augustin & lex iniusta -->
+        <section id="sec-2">
+          <div class="section-meta">Section 2</div>
+          <h2>2. Antigone, Augustin &amp; <em>lex iniusta non est lex</em></h2>
+          <div class="section-body columns">
+            <h3>2.1. Antigone : les lois non écrites</h3>
+            <p>
+              Dans la tragédie <em>Antigone</em> de Sophocle, Créon interdit d’ensevelir
+              Polynice, déclaré traître. Antigone transgresse ce décret au nom de lois plus
+              anciennes et plus hautes que celles du roi.
+            </p>
+            <blockquote>
+              « Ce n’est pas Zeus qui les a proclamées ; ce ne sont pas les dieux d’en bas
+              qui ont fixé de telles lois pour les hommes. »<br>
+              <br>
+              (Antigone, v. 450–460, trad. libre à partir du grec)
+              <footer>Antigone affirme ici l’existence de lois non écrites, plus anciennes
+              que tout décret politique.</footer>
+            </blockquote>
+            <p>
+              Le geste d’Antigone met en scène un conflit fondamental :
+              <strong>loi positive</strong> d’un côté, <strong>loi non écrite</strong> de
+              l’autre. La désobéissance n’est pas caprice individuel, mais fidélité à une
+              norme considérée comme supérieure.
+            </p>
+
+            <h3>2.2. Augustin : une loi injuste n’est pas une loi</h3>
+            <p>
+              Saint Augustin formule une intuition appelée à devenir classique. Dans le
+              <em>De libero arbitrio</em>, il soutient qu’une loi qui ne respecte pas l’ordre
+              de la justice perd, en un sens, son statut de loi. La formule sera résumée
+              plus tard par :
+            </p>
+            <blockquote>
+              « Lex iniusta non est lex. »<br>
+              <br>
+              « Une loi injuste n’est pas une loi. »
+              <footer>Attribué à Augustin, repris par Thomas d’Aquin.</footer>
+            </blockquote>
+            <p>
+              Il faut entendre ici : une loi injuste peut bien exister comme texte
+              coercitif, mais elle n’a plus l’autorité morale de la loi. Elle prend
+              la forme de la loi tout en se vidant de sa légitimité.
+            </p>
+
+            <h3>2.3. Thomas d’Aquin : précision systématique</h3>
+            <p>
+              Thomas d’Aquin, dans la <em>Somme théologique</em>, systématise ce principe.
+              Une loi humaine doit être conforme à la loi naturelle (orientation de la
+              raison vers le bien commun). Si une loi s’en écarte, elle se corrompt
+              et ne possède plus la véritable qualité de loi.
+            </p>
+            <blockquote>
+              « Lex humana in tantum habet rationem legis, in quantum a lege naturali
+              derivatur. »<br>
+              <br>
+              « La loi humaine n’a qualité de loi que dans la mesure où elle dérive
+              de la loi naturelle. »
+              <footer>Thomas d’Aquin, <em>Somme théologique</em>, I–II, q.95, a.2.</footer>
+            </blockquote>
+            <p>
+              D’où la conséquence : si une loi humaine contredit manifestement la loi
+              naturelle, elle peut cesser d’obliger en conscience. L’obéissance devient
+              alors un problème moral, et non une évidence.
+            </p>
+
+            <h3>2.4. Du droit naturel à la désobéissance civile</h3>
+            <p>
+              Le principe <em>lex iniusta non est lex</em> deviendra une matrice
+              pour de nombreuses doctrines du <strong>droit naturel</strong> et, plus tard,
+              pour certaines théories de la désobéissance civile. Il fournit un critère :
+            </p>
+            <ul>
+              <li>toute loi n’est pas automatiquement juste ;</li>
+              <li>l’obéissance a des limites ;</li>
+              <li>il peut exister un droit — voire un devoir — de résistance.</li>
+            </ul>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 3. Thoreau -->
+        <section id="sec-3">
+          <div class="section-meta">Section 3</div>
+          <h2>3. Thoreau : la conscience contre l’État</h2>
+          <div class="section-body columns">
+            <h3>3.1. Contexte : esclavage & guerre du Mexique</h3>
+            <p>
+              En 1849, Henry David Thoreau publie l’essai qui sera plus tard connu
+              sous le titre <em>Civil Disobedience</em>. Il y justifie son refus de
+              payer un impôt servant à financer un gouvernement qui maintient
+              l’esclavage et mène la guerre contre le Mexique.
+            </p>
+
+            <h3>3.2. Primauté de la conscience</h3>
+            <p>
+              Pour Thoreau, l’individu ne doit pas se dissoudre dans l’État. Lorsque
+              la loi commande l’injustice, la conscience individuelle doit primer.
+            </p>
+            <blockquote>
+              « Under a government which imprisons any unjustly, the true place for a
+              just man is also a prison. »<br>
+              <br>
+              « Sous un gouvernement qui emprisonne injustement, la place d’un homme
+              juste est aussi en prison. »
+              <footer>H. D. Thoreau, <em>Civil Disobedience</em>, 1849.</footer>
+            </blockquote>
+            <p>
+              L’acceptation de la prison devient ainsi un signe de fidélité à la justice,
+              plutôt qu’une simple conséquence malheureuse d’un délit.
+            </p>
+
+            <h3>3.3. L’individu comme point de résistance</h3>
+            <p>
+              Thoreau insiste sur la responsabilité de chacun :
+            </p>
+            <ul>
+              <li>on ne peut pas se contenter de désapprouver en pensée ;</li>
+              <li>continuer à obéir et à payer revient à coopérer avec l’injustice ;</li>
+              <li>la désobéissance civile est un moyen de retirer son consentement pratique.</li>
+            </ul>
+            <p>
+              Le sujet moral devient un point de résistance à l’intérieur même
+              du dispositif légal et fiscal de l’État.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 4. Gandhi -->
+        <section id="sec-4">
+          <div class="section-meta">Section 4</div>
+          <h2>4. Gandhi : satyagraha &amp; non-violence</h2>
+          <div class="section-body columns">
+            <h3>4.1. Satyagraha : force de la vérité</h3>
+            <p>
+              Gandhi développe, dans le contexte de la domination coloniale britannique,
+              une théorie et une pratique de la <em>satyagraha</em>, souvent traduite
+              par « force de la vérité » ou « attachement à la vérité ». La désobéissance
+              civile devient un instrument central de ce combat.
+            </p>
+            <blockquote>
+              « Satyagraha is essentially a weapon of the truthful. »<br>
+              <br>
+              « La satyagraha est essentiellement une arme pour ceux qui sont dans la vérité. »
+              <footer>M. K. Gandhi, écrits sur la non-violence.</footer>
+            </blockquote>
+            <p>
+              L’idée n’est pas seulement de violer une loi injuste, mais de le
+              faire d’une manière qui cherche à toucher la conscience de l’adversaire,
+              sans haine, sans déshumanisation.
+            </p>
+
+            <h3>4.2. Non-violence & acceptation des peines</h3>
+            <p>
+              Deux traits caractérisent la désobéissance civile selon Gandhi :
+            </p>
+            <ul>
+              <li>la non-violence : pas d’atteinte volontaire aux personnes ;</li>
+              <li>l’acceptation des sanctions : on ne fuit pas la peine encourue.</li>
+            </ul>
+            <p>
+              En acceptant la peine, le résistant manifeste que son geste n’est
+              ni opportuniste ni intéressé, mais guidé par un principe. La souffrance
+              acceptée vise à rendre manifeste l’injustice du système.
+            </p>
+
+            <h3>4.3. Dimension collective</h3>
+            <p>
+              Gandhi déploie la désobéissance civile à l’échelle collective :
+              marches du sel, boycotts, grèves, refus coordonné de coopérer avec
+              les institutions coloniales. La désobéissance civile devient un
+              instrument de transformation politique à grande échelle, sans passer
+              par les formes classiques de la violence insurrectionnelle.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 5. MLK -->
+        <section id="sec-5">
+          <div class="section-meta">Section 5</div>
+          <h2>5. Martin Luther King &amp; les lois injustes</h2>
+          <div class="section-body columns">
+            <h3>5.1. Lettre de la prison de Birmingham</h3>
+            <p>
+              En 1963, Martin Luther King écrit depuis sa cellule la célèbre
+              <em>Letter from Birmingham Jail</em>, réponse à des religieux
+              qui lui reprochent de troubler l’ordre public par des actions
+              de désobéissance civile.
+            </p>
+            <blockquote>
+              « One has a moral responsibility to disobey unjust laws. »<br>
+              <br>
+              « Chacun a la responsabilité morale de désobéir aux lois injustes. »
+              <footer>M. L. King, <em>Letter from Birmingham Jail</em>, 1963.</footer>
+            </blockquote>
+            <p>
+              MLK ne se contente pas de dire que la désobéissance est permise :
+              il affirme qu’elle peut devenir une exigence morale.
+            </p>
+
+            <h3>5.2. Critère de justice de la loi</h3>
+            <p>
+              King reprend explicitement la tradition du droit naturel :
+            </p>
+            <blockquote>
+              « A just law is a man-made code that squares with the moral law or the law of God. »<br>
+              <br>
+              « Une loi juste est un code créé par l’homme qui s’accorde avec la loi morale ou la loi de Dieu. »
+              <footer>M. L. King, <em>Letter from Birmingham Jail</em>.</footer>
+            </blockquote>
+            <p>
+              Une loi injuste, par contraste, est celle qui dégrade la personne humaine,
+              qui crée des inégalités arbitraires, qui contredit la dignité. King
+              mobilise cette distinction pour justifier les actions contre la
+              ségrégation raciale.
+            </p>
+
+            <h3>5.3. Désobéissance civile & amour politique</h3>
+            <p>
+              Pour King, la désobéissance civile n’est ni haine de la loi ni
+              mépris de l’ordre. Elle est une forme d’<strong>amour politique</strong> :
+              dans la mesure où elle vise à purifier l’ordre juridique de ses
+              contradictions, elle est au service d’une communauté plus juste.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 6. Typologie -->
+        <section id="sec-6">
+          <div class="section-meta">Section 6</div>
+          <h2>6. Typologie et critères de légitimité</h2>
+          <div class="section-body columns">
+            <h3>6.1. Désobéissance civile vs autres formes de résistance</h3>
+            <p>
+              On peut distinguer :
+            </p>
+            <ul>
+              <li>
+                la <strong>désobéissance civile</strong> : publique, assumée, souvent non-violente,
+                visant une transformation légale ou politique ;
+              </li>
+              <li>
+                la <strong>résistance clandestine</strong> : dissimulée, parfois violente,
+                visant la survie ou la chute d’un régime ;
+              </li>
+              <li>
+                le <strong>terrorisme</strong> : violence indiscriminée contre des civils
+                pour imposer une cause ;
+              </li>
+              <li>
+                la <strong>fraude ordinaire</strong> : transgression pour intérêt privé.
+              </li>
+            </ul>
+            <p>
+              La désobéissance civile cherche à se distinguer clairement des formes
+              violentes et clandestines, afin de mettre au centre la question de
+              la légitimité plutôt que celle de la force.
+            </p>
+
+            <h3>6.2. Critères classiques de légitimité</h3>
+            <p>
+              Les théoriciens contemporains (inspirés de Thoreau, Gandhi, King et des
+              traditions du droit naturel) proposent souvent une liste de critères
+              pour qu’une désobéissance soit considérée comme légitime :
+            </p>
+            <ul>
+              <li>
+                <strong>Gravité de l’injustice</strong> : la loi contestée viole des
+                principes fondamentaux (dignité, égalité, droits de l’homme).
+              </li>
+              <li>
+                <strong>Échec des voies ordinaires</strong> : les moyens légaux
+                disponibles (vote, recours, pétitions) se sont révélés insuffisants.
+              </li>
+              <li>
+                <strong>Publicité</strong> : l’acte est accompli à visage découvert,
+                sans dissimulation.
+              </li>
+              <li>
+                <strong>Non-violence</strong> : pas d’atteinte volontaire à l’intégrité
+                des personnes, ni recours à la violence indiscriminée.
+              </li>
+              <li>
+                <strong>Proportionnalité</strong> : l’ampleur de l’acte est proportionnée
+                à l’injustice dénoncée.
+              </li>
+              <li>
+                <strong>Acceptation des sanctions</strong> : les acteurs assument le
+                risque de la peine, montrant que leur geste est principiel.
+              </li>
+            </ul>
+
+            <h3>6.3. Formes contemporaines</h3>
+            <p>
+              Dans les démocraties actuelles, la désobéissance civile prend des formes
+              variées :
+            </p>
+            <ul>
+              <li>occupations non violentes de lieux symboliques ;</li>
+              <li>refus de certaines obligations (service militaire, participation à des programmes jugés injustes) ;</li>
+              <li>actions de lanceurs d’alerte révélant des informations cachées ;</li>
+              <li>campagnes de boycott ciblé.</li>
+            </ul>
+            <p>
+              Le débat porte souvent sur la proportionnalité, la légitimité des objectifs,
+              et les frontières entre résistance civile et simple infraction.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 7. Lecture T^ -->
+        <section id="sec-7">
+          <div class="section-meta">Section 7</div>
+          <h2>7. Lecture T^ de la désobéissance civile</h2>
+          <div class="section-body columns">
+            <h3>7.1. Lois comme éléments de H</h3>
+            <p>
+              Dans le langage T^Total v20, <span class="tag-inline">H</span> désigne
+              les <strong>horizons</strong>, habitudes et structures stabilisées d’un
+              monde. Les lois positives d’un ordre politique sont une des formes de H :
+              elles cristallisent, à un moment donné, un certain compromis entre valeurs,
+              intérêts, rapports de force.
+            </p>
+
+            <h3>7.2. Injustice comme Ξ éthique</h3>
+            <p>
+              Lorsqu’une loi produit une injustice manifeste (discrimination, atteinte
+              grave à la dignité, contradictions internes avec les principes proclamés),
+              on peut lire cela comme l’apparition d’un
+              <span class="tag-inline">Ξ</span> : une fissure, une tension, une zone
+              de non-cohérence entre :
+            </p>
+            <ul>
+              <li>le récit légal (ce que la loi dit) ;</li>
+              <li>le réel vécu (ce que subissent les personnes) ;</li>
+              <li>les principes affichés par la communauté (droits de l’homme, etc.).</li>
+            </ul>
+
+            <h3>7.3. Désobéissance comme ouverture de ∆</h3>
+            <p>
+              La désobéissance civile ouvre un <span class="tag-inline">∆</span>
+              spécifique : un interstice où un sujet refuse de laisser H se refermer
+              sur lui comme une évidence. En termes T^ :
+            </p>
+            <ul>
+              <li>le sujet se situe en ∆, entre la loi existante et une exigence de justice ;</li>
+              <li>il rend visible Ξ (la fissure) par un acte public ;</li>
+              <li>il appelle à une reconfiguration de H (changement de loi, transformation institutionnelle).</li>
+            </ul>
+
+            <h3>7.4. –1, Ω et devoir de désobéir</h3>
+            <p>
+              <span class="tag-inline">–1</span> désigne le Réel comme ce qui ne
+              se laisse jamais réduire à nos structures. Sur le plan éthique, on
+              peut y lire la dignité irréductible de la personne, l’exigence de
+              justice qui excède toute loi positive.
+            </p>
+            <p>
+              Le principe <em>lex iniusta non est lex</em> traduit, dans le langage
+              juridique, une intuition T^ : lorsque H (la loi) se retourne contre
+              –1 (la dignité, la justice), l’obéissance peut cesser d’être vertu.
+              La désobéissance civile devient alors un mouvement vers
+              <span class="tag-inline">Ω</span> : un nouvel état d’ouverture plus
+              cohérent avec le Réel.
+            </p>
+
+            <h3>7.5. T^humour & renversement</h3>
+            <p>
+              Il existe une dimension de <span class="tag-inline">T^humour</span> dans
+              certaines actions de désobéissance civile : sit-in pacifiques révélant
+              l’absurdité d’une ségrégation, performances symboliques montrant l’excès
+              d’un dispositif sécuritaire, etc. Le sérieux de l’enjeu n’exclut pas
+              l’usage de formes ironiques qui dévoilent le décalage entre la lettre
+              de la loi et l’expérience vivante du juste.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+        <!-- 8. Synthèse -->
+        <section id="sec-8">
+          <div class="section-meta">Section 8</div>
+          <h2>8. Synthèse &amp; ouverture vers le droit</h2>
+          <div class="section-body">
+            <p>
+              De l’Antigone de Sophocle aux mouvements contemporains, la désobéissance
+              civile apparaît comme une constante de l’histoire politique : lorsque
+              les lois positives se coupent de la justice qu’elles prétendent servir,
+              des sujets individuels ou collectifs se dressent pour rappeler que
+              l’obéissance n’est pas une fin en soi.
+            </p>
+            <p>
+              Le principe <em>lex iniusta non est lex</em> fournit une articulation
+              conceptuelle : il rappelle que la légalité ne suffit pas à fonder la
+              légitimité. Dans cette perspective, il existe des situations où la
+              désobéissance n’est pas seulement permise, mais exigée par la fidélité
+              à une justice plus haute que la loi écrite.
+            </p>
+            <p>
+              Dans le langage T^Total v20, on pourrait dire : la désobéissance civile
+              est l’un des lieux où la tension entre –1 et ∆ devient la plus visible.
+              H (l’ordre légal) se fissure (Ξ), et des sujets ouvrent un nouvel
+              interstice (∆) orienté vers des configurations plus justes (Ω). La
+              suite naturelle de ce rapport sera une exploration plus technique
+              du traitement juridique de ces situations (droit naturel, droit
+              positif, jurisprudence, protections des objecteurs et des lanceurs
+              d’alerte), que l’on pourra développer dans une page dédiée.
+            </p>
+          </div>
+          <div class="small-top-link"><a href="#top">↑ Haut de page</a></div>
+        </section>
+
+      </article>
+    </div>
+
+    <footer class="page-foot">
+      T^Total v20 — Désobéissance civile & devoir de désobéir · Document narratif situé dans ∆, sous contrainte du Réel (–1).
+    </footer>
+
+  </div>
+</body>
+</html>
