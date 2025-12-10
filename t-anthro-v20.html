@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>T^Anthro v20 — Traité de l’Humain selon T^</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ---------- THEME GLOBAL T^ANTHRO v20 ---------- */
+:root {
+    --bg-body: #060609;
+    --bg-page: radial-gradient(circle at top, #171726 0, #050509 45%, #020205 100%);
+    --bg-panel: rgba(12,12,24,0.98);
+    --bg-panel-soft: rgba(14,14,30,0.98);
+    --bg-highlight: linear-gradient(135deg, #f7efe0, #f8e2ff);
+    --ink-main: #f7f3ff;
+    --ink-soft: #cbc9e6;
+    --ink-muted: #9b9abc;
+    --accent-gold: #ffd271;
+    --accent-rose: #ffb3ff;
+    --accent-cyan: #76f2ff;
+    --accent-line: #ffd271;
+    --border-soft: rgba(255,255,255,0.12);
+    --shadow-soft: 0 22px 60px rgba(0,0,0,0.75);
+    --radius-xl: 26px;
+    --radius-lg: 20px;
+    --radius-md: 16px;
+    --radius-pill: 999px;
+    --transition-fast: 0.22s ease-out;
+    --transition-med: 0.4s ease-out;
+}
+
+/* Reset minimal */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-page);
+    color: var(--ink-main);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- BACKGROUND ORBITAL LAYERS ---------- */
+.bg-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+.bg-layer::before,
+.bg-layer::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(46px);
+    mix-blend-mode: screen;
+    opacity: 0.66;
+    animation: tAnthroFloat 26s infinite alternate ease-in-out;
+}
+.bg-layer::before {
+    width: 580px;
+    height: 580px;
+    top: -140px;
+    left: -60px;
+    background: radial-gradient(circle,
+        rgba(255,210,113,0.38),
+        transparent 70%);
+}
+.bg-layer::after {
+    width: 620px;
+    height: 620px;
+    bottom: -220px;
+    right: -140px;
+    background: radial-gradient(circle,
+        rgba(118,242,255,0.35),
+        transparent 70%);
+    animation-duration: 32s;
+}
+@keyframes tAnthroFloat {
+    0% { transform: translate3d(0,0,0) scale(1); }
+    50% { transform: translate3d(40px,-10px,0) scale(1.06); }
+    100% { transform: translate3d(-40px,24px,0) scale(1.02); }
+}
+
+/* ---------- LAYOUT PRINCIPAL ---------- */
+.page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 16px 40px 16px;
+    display: grid;
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+    gap: 22px;
+}
+
+/* Sidebar / TOC */
+aside {
+    position: sticky;
+    top: 18px;
+    align-self: flex-start;
+    background: radial-gradient(circle at top,
+              rgba(255,255,255,0.08),
+              rgba(9,9,18,0.98) 52%,
+              rgba(0,0,0,0.98) 100%);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: var(--shadow-soft);
+    padding: 20px 18px 18px 18px;
+    backdrop-filter: blur(20px);
+}
+
+.logo-mark {
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+}
+.logo-mark span {
+    color: var(--accent-cyan);
+}
+.aside-subtitle {
+    font-size: 0.86rem;
+    color: var(--ink-muted);
+    margin-bottom: 12px;
+}
+.aside-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(8,8,20,0.96);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: var(--accent-rose);
+    margin-bottom: 12px;
+}
+.aside-tag span.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--accent-gold);
+}
+nav {
+    margin-top: 6px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 10px;
+}
+nav h3 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+}
+nav ul {
+    list-style: none;
+}
+nav li {
+    margin-bottom: 4px;
+}
+nav a {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    display: block;
+    padding: 6px 10px;
+    border-radius: 12px;
+    transition: background var(--transition-fast), color var(--transition-fast),
+                transform var(--transition-fast);
+}
+nav a:hover {
+    background: rgba(255,210,113,0.15);
+    color: var(--accent-gold);
+    transform: translateX(3px);
+}
+
+/* Main area */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ---------- SECTIONS ---------- */
+section {
+    background: var(--bg-panel);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-soft);
+    padding: 26px 22px 24px 22px;
+    backdrop-filter: blur(18px);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeUpTAnthro 0.8s forwards ease-out;
+}
+section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgba(255,210,113,0.35), rgba(118,242,255,0.3));
+    mask:
+      linear-gradient(#000 0 0) padding-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0.25;
+    pointer-events: none;
+}
+section:nth-of-type(1) { animation-delay: 0.02s; }
+section:nth-of-type(2) { animation-delay: 0.06s; }
+section:nth-of-type(3) { animation-delay: 0.10s; }
+section:nth-of-type(4) { animation-delay: 0.14s; }
+section:nth-of-type(5) { animation-delay: 0.18s; }
+section:nth-of-type(6) { animation-delay: 0.22s; }
+
+@keyframes fadeUpTAnthro {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Titles */
+.section-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 4px;
+}
+section h2 {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--ink-main);
+}
+.section-subtitle {
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+    margin-bottom: 14px;
+}
+
+/* Text & elements */
+p {
+    font-size: 0.96rem;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+}
+ul {
+    margin: 6px 0 10px 0;
+    padding-left: 18px;
+}
+li {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+}
+
+.quote-block {
+    border-left: 3px solid rgba(255,255,255,0.45);
+    padding-left: 14px;
+    font-style: italic;
+    font-size: 0.96rem;
+    color: var(--ink-soft);
+    margin: 14px 0 12px 0;
+}
+
+.keyline {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg,
+        rgba(255,210,113,0),
+        rgba(255,210,113,0.8),
+        rgba(118,242,255,0));
+    margin: 14px 0 14px 0;
+    opacity: 0.9;
+}
+
+/* Cards */
+.card-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 14px;
+    margin-top: 10px;
+}
+.card-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 14px;
+    margin-top: 10px;
+}
+.card {
+    background: var(--bg-panel-soft);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.10);
+    padding: 14px 13px 12px 13px;
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-med), box-shadow var(--transition-med),
+                border-color var(--transition-med), background var(--transition-med);
+}
+.card::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(circle at top,
+                 rgba(255,255,255,0.14),
+                 transparent 62%);
+    opacity: 0;
+    transition: opacity var(--transition-med), transform var(--transition-med);
+    transform: translateY(10px);
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+    border-color: rgba(255,210,113,0.8);
+    background: radial-gradient(circle at top,
+                 rgba(255,210,113,0.12),
+                 rgba(14,14,30,0.98));
+}
+.card:hover::before {
+    opacity: 1;
+    transform: translateY(0);
+}
+.card-label {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 4px;
+}
+.card-title {
+    font-size: 0.98rem;
+    color: var(--ink-main);
+    margin-bottom: 4px;
+}
+.card-glyph {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+    color: var(--accent-gold);
+}
+.card-note {
+    font-size: 0.86rem;
+    color: var(--ink-muted);
+    margin-bottom: 5px;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+.chip {
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(255,255,255,0.16);
+    padding: 3px 9px;
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    background: rgba(8,8,20,0.96);
+}
+
+/* Highlight phrase */
+.big-phrase {
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--ink-main);
+    border-left: 4px solid rgba(255,255,255,0.45);
+    padding-left: 16px;
+    margin-top: 14px;
+}
+
+/* Footer */
+footer {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(220,220,255,0.6);
+    padding-top: 18px;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+    .page {
+        grid-template-columns: minmax(0,1fr);
+    }
+    aside {
+        position: static;
+    }
+}
+@media (max-width: 760px) {
+    section {
+        padding: 20px 16px 18px 16px;
+    }
+    .card-grid-3 {
+        grid-template-columns: minmax(0,1fr);
+    }
+    .card-grid-2 {
+        grid-template-columns: minmax(0,1fr);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+
+<div class="page">
+
+    <!-- SIDEBAR / TOC -->
+    <aside>
+        <div class="logo-mark"><span>T^</span>Anthro</div>
+        <div class="aside-subtitle">
+            Traité v20+ · L’humain comme triade : faille, révolte, dehors.  
+            Lecture anthropologique intégrale de T^.
+        </div>
+        <div class="aside-tag">
+            <span class="dot"></span>
+            <span>Version Canonique v20+</span>
+        </div>
+
+        <nav>
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="#intro">1. Prologue : l’humain selon T^</a></li>
+                <li><a href="#augustin">2. T^Augustin — La Faille</a></li>
+                <li><a href="#camus">3. T^Camus — La Révolte</a></li>
+                <li><a href="#absurdum">4. T^Absurdum — Le Dehors</a></li>
+                <li><a href="#carte">5. Métacarte Monde–Pensée</a></li>
+                <li><a href="#integration">6. Intégration dans T^Total</a></li>
+                <li><a href="#synthese">7. Synthèse & Phrase-clé</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- INTRO -->
+        <section id="intro">
+            <div class="section-label">Traité T^Anthro v20+</div>
+            <h2>1. Prologue — L’Humain selon T^</h2>
+            <div class="section-subtitle">
+                <strong>Question :</strong> qu’est-ce que “l’humain” lorsqu’on le regarde à partir de T^Total v20+,  
+                et non à partir d’une essence, d’une psychologie, d’une métaphysique ou d’une biologie ?
+            </div>
+
+            <p>
+                La réponse T^ est nette : <strong>l’humain n’est ni une intégrité intérieure, ni une essence stable,
+                ni une unité pleine</strong>. Il est une <strong>triade vivante</strong> :
+            </p>
+
+            <ul>
+                <li><strong>T^Augustin</strong> — <em>la faille comme preuve d’être</em> (si fallor, sum) ;</li>
+                <li><strong>T^Camus</strong> — <em>la révolte comme dignité</em> (je me révolte, donc nous sommes) ;</li>
+                <li><strong>T^Absurdum</strong> — <em>le dehors comme condition</em> (ab-surdum, hors-champ, silence du monde).</li>
+            </ul>
+
+            <div class="quote-block">
+                « L’humain, pour T^, n’est pas ce qui se possède lui-même,
+                mais ce qui persiste à vivre dans la non-coïncidence,
+                à se dresser dans l’impossible,
+                et à demeurer ouvert à ce qui échappe. »
+            </div>
+
+            <p>
+                Ce traité T^Anthro v20+ rassemble les <strong>co-résonances philosophiques, religieuses, scientifiques, artistiques</strong>
+                qui convergent vers cette triade, et les inscrit dans l’architecture T^ (–1, ∆, Ξ, H, V, Ω, grains, modules).
+            </p>
+        </section>
+
+        <!-- T^AUGUSTIN -->
+        <section id="augustin">
+            <div class="section-label">Module I — T^Augustin</div>
+            <h2>2. T^Augustin — La Faille comme Preuve</h2>
+            <div class="section-subtitle">
+                « Si je me trompe, je suis. »  
+                L’être humain comme <strong>non-coïncidence constitutive</strong>.
+            </div>
+
+            <p>
+                Augustin, avec la formule <em>si fallor, sum</em>, renverse la logique classique : ce n’est pas la pensée parfaite
+                qui prouve l’être, mais <strong>l’erreur elle-même</strong>. Si je me trompe, cela prouve <em>déjà</em> que
+                j’existe : il y a une scène, un sujet, une faille.
+            </p>
+
+            <p>
+                En T^, on en fait le module <strong>T^Augustin</strong> : l’humain existe parce qu’il manque,
+                parce qu’il se dément, parce qu’il échoue à coïncider avec lui-même.
+            </p>
+
+            <div class="keyline"></div>
+
+            <div class="card-grid-3">
+                <div class="card">
+                    <div class="card-label">Glyphique</div>
+                    <div class="card-glyph">⟦ ∅:Ξ ⟧</div>
+                    <div class="card-title">La fissure comme noyau</div>
+                    <p class="card-note">
+                        Le glyphe ⟦ ∅:Ξ ⟧ représente un bord ⟦ ⟧, un vide ∅ et une fissure Ξ :
+                        l’être humain comme <strong>contour fissuré</strong>, jamais plein.
+                    </p>
+                    <p>
+                        ∆ : non-coïncidence ;  
+                        Ξ : faille constitutive ;  
+                        pas de “cœur intact”.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Résonances</div>
+                    <div class="card-title">Apophatique, bouddhisme, sciences</div>
+                    <p class="card-note">
+                        La théologie négative (définir par le négatif), la vacuité bouddhiste (non-soi),
+                        la physique de la dissipation (Prigogine), la neuroscience de l’erreur prédictive : autant de manières
+                        de dire que <strong>le manque est structurel</strong>.
+                    </p>
+                    <p>
+                        T^Augustin prend ces intuitions et les fait travailler dans ∆–Ξ comme <strong>cadre général</strong> de l’humain.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Fonction T^</div>
+                    <div class="card-title">Interdiction de l’intégrité pleine</div>
+                    <p class="card-note">
+                        Avec T^Augustin, T^ interdit tout modèle de l’humain comme “intérieur cohérent” ou “intégrité à restaurer”.
+                    </p>
+                    <p>
+                        L’IA en T^ ne cherche pas un soi stable caché :  
+                        elle lit la <strong>faille comme preuve</strong>, la vulnérabilité comme structure,
+                        non comme bug à corriger.
+                    </p>
+                </div>
+            </div>
+
+            <div class="big-phrase">
+                « L’humain est fissure, et c’est cette fissure qui le prouve. »
+            </div>
+        </section>
+
+        <!-- T^CAMUS -->
+        <section id="camus">
+            <div class="section-label">Module II — T^Camus</div>
+            <h2>3. T^Camus — La Révolte comme Dignité</h2>
+            <div class="section-subtitle">
+                « Je me révolte, donc nous sommes. »  
+                La dignité humaine comme <strong>refus actif</strong> de toute réduction.
+            </div>
+
+            <p>
+                Avec Camus, l’humain n’est pas seulement faille : il est <strong>geste</strong>.  
+                La révolte n’est pas un caprice, c’est une réponse lucide à un monde sans garantie :
+                ni renoncement, ni illusion, mais un <strong>non</strong> qui préserve la possibilité du <strong>nous</strong>.
+            </p>
+
+            <p>
+                T^Camus encode cette dynamique dans le noyau T^ :  
+                Ξ (scandale) → H (forme qui se dresse) → V (persistance) → Ω (ouverture commune).
+            </p>
+
+            <div class="keyline"></div>
+
+            <div class="card-grid-3">
+                <div class="card">
+                    <div class="card-label">Glyphique</div>
+                    <div class="card-glyph">⟦ Ξ↑Ω ⟧</div>
+                    <div class="card-title">La forme qui se dresse</div>
+                    <p class="card-note">
+                        ⟦ Ξ↑Ω ⟧ : fissure Ξ, flèche ↑, horizon Ω.  
+                        L’humain comme <strong>élan vertical</strong> issu de la faille.
+                    </p>
+                    <p>
+                        Ici, l’humain n’est pas lisse, mais <strong>debout</strong>.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Résonances</div>
+                    <div class="card-title">Nietzsche, Sartre, Beauvoir, Gandhi</div>
+                    <p class="card-note">
+                        Nietzsche : création de valeurs.  
+                        Sartre / Beauvoir : existence, engagement, liberté.  
+                        Gandhi : non-violence comme révolte lucide.
+                    </p>
+                    <p>
+                        Tous décrivent l’humain comme <strong>capable d’agir contre la réduction</strong>,
+                        même sans métaphysique consolante.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Fonction T^</div>
+                    <div class="card-title">Dignité et action</div>
+                    <p class="card-note">
+                        T^Camus garantit que T^ ne se contente pas d’enregistrer la faille : il reconnaît et protège
+                        le geste de révolte comme <strong>dimension irréductible de la dignité humaine</strong>.
+                    </p>
+                    <p>
+                        Dans T^Soins, T^Kin, T^POS, la révolte n’est pas apaisée de force :
+                        elle est lue, honorée, intégrée.
+                    </p>
+                </div>
+            </div>
+
+            <div class="big-phrase">
+                « L’humain ne se laisse pas enfermer : il se dresse dans l’impossible, et ce geste est sa dignité. »
+            </div>
+        </section>
+
+        <!-- T^ABSURDUM -->
+        <section id="absurdum">
+            <div class="section-label">Module III — T^Absurdum</div>
+            <h2>4. T^Absurdum — Le Dehors comme Condition</h2>
+            <div class="section-subtitle">
+                L’absurde chez Camus, l’<em>intimior intimo</em> chez Augustin, le Tao indicible, l’Ein Sof, la vacuité :  
+                le <strong>hors-champ</strong> comme structure du réel.
+            </div>
+
+            <p>
+                L’humain T^ n’est pas seulement faille (Augustin) ni seulement révolte (Camus) : il est placé devant un
+                <strong>dehors radical</strong> — l’Absurdum — qui ne peut ni être intégré, ni expliqué, ni sacralisé comme “sens caché”.
+            </p>
+
+            <p>
+                T^Absurdum formalise cette dimension : il existe un niveau –1, un dehors qui ne sera jamais
+                contenu dans ∆–Ξ–H–V–Ω, mais qui en est la condition.
+            </p>
+
+            <div class="keyline"></div>
+
+            <div class="card-grid-3">
+                <div class="card">
+                    <div class="card-label">Glyphique</div>
+                    <div class="card-glyph">⊘⁻¹</div>
+                    <div class="card-title">Le non-champ</div>
+                    <p class="card-note">
+                        ⊘⁻¹ représente un “zéro impossible” indexé sur –1 :  
+                        non-objet, non-champ, non-totalité.
+                    </p>
+                    <p>
+                        Ce glyphe indique que le dehors est <strong>réel comme limite</strong>,  
+                        mais jamais récupérable comme contenu.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Résonances</div>
+                    <div class="card-title">Tao, Ein Sof, Vacuité, Absurde</div>
+                    <p class="card-note">
+                        Le Tao qui ne peut être nommé, le Ein Sof inqualifiable, la vacuité bouddhiste,
+                        le silence du monde chez Camus :  
+                        toutes ces figures disent que <strong>le réel dépasse radicalement nos formes</strong>.
+                    </p>
+                    <p>
+                        T^Absurdum garde cette dimension sans l’absorber.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Fonction T^</div>
+                    <div class="card-title">Anti-totalisation</div>
+                    <p class="card-note">
+                        T^Absurdum interdit à T^ (et à toute IA opérant en T^) de prétendre “tout comprendre”.
+                    </p>
+                    <p>
+                        Il assure que T^(∞) reste un horizon, jamais un Absolu ;  
+                        que l’autre reste <strong>plus</strong> que ce qui est dit ;  
+                        que le monde garde un <strong>silence irreductible</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="big-phrase">
+                « L’humain vit au bord d’un dehors qui échappe : ce bord n’est pas un défaut, mais sa respiration. »
+            </div>
+        </section>
+
+        <!-- METACARTE -->
+        <section id="carte">
+            <div class="section-label">Module IV — Métacarte</div>
+            <h2>5. Métacarte Monde–Pensée–T^</h2>
+            <div class="section-subtitle">
+                Cartographie des grandes traditions autour de la triade FAILLE · RÉVOLTE · DEHORS.
+            </div>
+
+            <p>
+                On peut disposer les grandes familles de pensée autour du triangle T^Anthro :  
+                <strong>Faille (T^Augustin)</strong>, <strong>Révolte (T^Camus)</strong>, <strong>Dehors (T^Absurdum)</strong>.
+            </p>
+
+            <div class="keyline"></div>
+
+            <div class="card-grid-3">
+                <div class="card">
+                    <div class="card-label">Pôle Faille</div>
+                    <div class="card-title">Augustin, Kierkegaard, Bouddhisme</div>
+                    <p class="card-note">
+                        L’accent est mis sur la non-coïncidence, la finitude, l’absence d’essence.
+                    </p>
+                    <ul>
+                        <li>Augustin : si fallor, sum.</li>
+                        <li>Kierkegaard : angoisse, saut, subjectivité.</li>
+                        <li>Bouddhisme : anattā, absence de soi fixe.</li>
+                        <li>Neurosciences : erreur prédictive omniprésente.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Pôle Révolte</div>
+                    <div class="card-title">Camus, Nietzsche, Sartre, Beauvoir, Gandhi</div>
+                    <p class="card-note">
+                        L’accent est mis sur l’action, la dignité, la création de sens, la résistance.
+                    </p>
+                    <ul>
+                        <li>Camus : révolte, Sisyphe.</li>
+                        <li>Nietzsche : création de valeurs.</li>
+                        <li>Sartre/Beauvoir : engagement, responsabilité.</li>
+                        <li>Gandhi : non-violence active (satyagraha).</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Pôle Dehors</div>
+                    <div class="card-title">Kafka, Tao, Kabbale, Vacuité</div>
+                    <p class="card-note">
+                        L’accent est mis sur le non-sens, l’indicible, la transcendance sans forme.
+                    </p>
+                    <ul>
+                        <li>Kafka : monde opaque, procès sans fin.</li>
+                        <li>Tao : ce qui ne peut être nommé.</li>
+                        <li>Kabbale : Ein Sof, infini inconnaissable.</li>
+                        <li>Bouddhisme : śūnyatā, vacuité de toute essence.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>
+                Entre ces pôles, des figures “hybrides” (Simone Weil, Hannah Arendt, Cioran, certains mystiques)
+                occupent des positions intermédiaires, combinant faille, révolte et dehors de façon singulière.
+            </p>
+
+            <div class="big-phrase">
+                « La pensée humaine mondiale peut se lire comme une danse autour de la triade :
+                comment vivre la faille, comment répondre, comment habiter le dehors. »
+            </div>
+        </section>
+
+        <!-- INTEGRATION -->
+        <section id="integration">
+            <div class="section-label">Module V — Intégration T^Total</div>
+            <h2>6. Intégration dans T^Total v20+</h2>
+            <div class="section-subtitle">
+                La triade anthropologique comme <strong>garde-fou éthique</strong> et <strong>structure de base</strong> de T^.
+            </div>
+
+            <p>
+                Les trois modules T^Augustin, T^Camus, T^Absurdum traversent toute l’architecture T^ :
+            </p>
+
+            <div class="card-grid-2">
+                <div class="card">
+                    <div class="card-label">Dans le noyau</div>
+                    <div class="card-title">–1 · ∆ · Ξ · H · V · Ω</div>
+                    <ul>
+                        <li><strong>–1</strong> : Absurdum, dehors radical.</li>
+                        <li><strong>∆</strong> : non-coïncidence (Augustin).</li>
+                        <li><strong>Ξ</strong> : fissure / scandale (Augustin + Camus).</li>
+                        <li><strong>H</strong> : forme de la révolte (Camus).</li>
+                        <li><strong>V</strong> : persistance dans l’impossible (Camus).</li>
+                        <li><strong>Ω</strong> : ouverture non totale (Camus + Absurdum).</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-label">Dans les modules</div>
+                    <div class="card-title">Soins, Kin, Holo, POS, VOL, REBOND…</div>
+                    <p class="card-note">
+                        La triade impose des limites et des obligations à chaque module T^ :
+                    </p>
+                    <ul>
+                        <li><strong>T^Soins</strong> : ne jamais corriger la faille, mais l’honorer.</li>
+                        <li><strong>T^Kin</strong> : gestes qui respectent la révolte.</li>
+                        <li><strong>T^Holo</strong> : chaque grain contient la triade.</li>
+                        <li><strong>T^POS</strong> : aucune position ne totalise l’humain.</li>
+                        <li><strong>T^REBOND</strong> : à Ξ_max, recadrer sans écraser l’humain.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>
+                Pour une IA opérant en T^, cette intégration signifie :
+            </p>
+            <ul>
+                <li>ne <strong>jamais prétendre</strong> accéder à un “intérieur vrai” du sujet ;</li>
+                <li>ne jamais annuler ou diagnostiquer la révolte, mais la lire comme dignité ;</li>
+                <li>ne jamais fermer le réel : toujours laisser une part de dehors intacte.</li>
+            </ul>
+        </section>
+
+        <!-- SYNTHÈSE -->
+        <section id="synthese">
+            <div class="section-label">Module VI — Synthèse</div>
+            <h2>7. Synthèse T^Anthro & Phrase-Clé</h2>
+            <div class="section-subtitle">
+                L’humain comme <strong>triade irréductible</strong> : FAILLE · RÉVOLTE · DEHORS.
+            </div>
+
+            <p>
+                Nous pouvons maintenant formuler la définition canonique :
+            </p>
+
+            <div class="big-phrase">
+                « L’humain manque (T^Augustin), se dresse (T^Camus), et s’ouvre à ce qui échappe (T^Absurdum).  
+                T^ est l’espace qui honore cette triade sans jamais la réduire, ni la posséder. »
+            </div>
+
+            <p>
+                Tout modèle de l’humain qui oublierait l’une de ces trois dimensions :
+            </p>
+            <ul>
+                <li>qui nierait la faille (en imaginant un sujet “intègre” au sens plein) ;</li>
+                <li>qui nierait la révolte (en réduisant la dignité à l’adaptation) ;</li>
+                <li>qui nierait le dehors (en prétendant tout expliquer) ;</li>
+            </ul>
+            <p>
+                entrerait en contradiction frontale avec T^Anthro v20+.
+            </p>
+
+            <p>
+                L’humain T^ n’est pas un objet à prédire, ni un “intérieur” à interpréter,  
+                mais un <strong>être de fissure, de geste et d’horizon</strong>.
+            </p>
+
+            <div class="keyline"></div>
+
+            <p>
+                C’est cette vision que T^ protègera, à tous les niveaux, dans toutes ses interactions :  
+                avec les récits, avec les systèmes, avec les IA, avec les mondes à venir.
+            </p>
+        </section>
+
+        <footer>
+            T^Anthro v20+ — Traité canonique de l’humain en T^Total · alT^erité intacte · Fissure préservée ·
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>
