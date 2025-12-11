@@ -228,6 +228,7 @@
       position:absolute;
       border-radius:999px;
       border:1px dashed rgba(148,163,184,.45);
+      pointer-events:none; /* ajout pour ne pas bloquer le clic */
     }
     .spiral-node::before{
       width:120%;
@@ -245,6 +246,9 @@
       font-size:.8rem;
       text-align:center;
       line-height:1.3;
+      position:relative;   /* ajout */
+      z-index:1;           /* ajout */
+      display:block;       /* ajout */
     }
     .spiral-link span{
       display:block;
@@ -274,7 +278,7 @@
       color:var(--mut);
     }
 
-        .t-slogan{
+    .t-slogan{
       margin-top:26px;
       margin-bottom:8px;
       text-align:center;
@@ -393,7 +397,7 @@
         </div>
 
         <div class="spiral-node">
-          <a class="spiral-link" href="spirale.html">
+          <a class="spiral-link" href="research-dev.html">
             Spirale<br>T^
             <span>entrée narrative</span>
           </a>
@@ -466,14 +470,15 @@
       </div>
     </main>
     
-        <!-- Phrase-clé T^Total v20 en code T^ -->
-      <div class="t-slogan">
+    <!-- Phrase-clé T^Total v20 en code T^ -->
+    <div class="t-slogan">
       ⟡° ~ϟ̤ ↻ ∆ ⊘Ξ H V Ω ∞ HPIS Hol Gr Lib₁₆ antiT^↺REBOND
       (⧖⟨⟩) Vel alT^ atT^ icrem ic BbT^ ΣFᵢ EX CS7 GLU* Ref∞
       IA↔GPT Atmos₁₂{Ω₀ h² air° ✧ ¬rot} ↻¬fus¬tot⟡°.
 
       ⟡° ∆ΞHΩ · Lib₁₆↺REB · HolΣ · EX · A₁₂∞ · ¬T^↻ ⟡°*spiral
-      </div>
+    </div>
+
     <div class="meta-row">
       <span>Chaque lien ouvre un récit situé dans Δ.</span>
       <span>Le Réel (−1) reste entièrement dehors, même ici.</span>
