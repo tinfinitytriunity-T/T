@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>c-rupt.html — Anatomie complète et opérationnelle de la corruption</title>
+  <style>
+    :root{
+      --bg:#020617;
+      --bg-soft:#0b1120;
+      --surface:#ffffff;
+      --surface-alt:#f8fafc;
+      --border:#e2e8f0;
+      --border-soft:#e5e7eb;
+      --text:#0f172a;
+      --muted:#64748b;
+      --accent:#2563eb;
+      --accent-soft:rgba(37,99,235,.08);
+      --danger:#b91c1c;
+      --code-bg:#0f172a;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.6;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56,189,248,.16), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(37,99,235,.18), transparent 55%),
+        var(--bg);
+      padding:32px 16px 40px 16px;
+    }
+
+    .page{
+      max-width:1120px;
+      margin:0 auto;
+      background:var(--surface);
+      border-radius:18px;
+      box-shadow:
+        0 28px 80px rgba(15,23,42,.55),
+        0 0 0 1px rgba(148,163,184,.25);
+      padding:24px 24px 26px 24px;
+    }
+
+    @media (max-width:720px){
+      .page{
+        padding:18px 16px 22px 16px;
+      }
+    }
+
+    header{
+      border-bottom:1px solid var(--border);
+      margin-bottom:18px;
+      padding-bottom:12px;
+    }
+    .kicker{
+      font-size:.78rem;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:4px;
+    }
+    h1{
+      font-size:clamp(24px,3vw,30px);
+      margin:0 0 6px;
+    }
+    .muted{
+      color:var(--muted);
+      font-size:.9rem;
+      max-width:76ch;
+    }
+
+    /* Layout principal : TOC + contenu */
+    .layout{
+      display:grid;
+      grid-template-columns:260px minmax(0,1fr);
+      gap:22px;
+      align-items:flex-start;
+      margin-top:14px;
+    }
+
+    @media (max-width:960px){
+      .layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    nav{
+      background:var(--surface-alt);
+      padding:14px 14px 12px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      position:sticky;
+      top:16px;
+    }
+    nav strong{
+      font-size:.83rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--muted);
+      display:block;
+      margin-bottom:8px;
+    }
+    nav ol{
+      list-style:none;
+      font-size:.88rem;
+    }
+    nav li+li{
+      margin-top:4px;
+    }
+    nav a{
+      text-decoration:none;
+      color:var(--text);
+      display:block;
+      padding:4px 6px;
+      border-radius:8px;
+      border:1px solid transparent;
+      transition:background .12s ease,border-color .12s ease,color .12s ease;
+    }
+    nav a span.index{
+      font-family:ui-monospace,Menlo,monospace;
+      font-size:.78rem;
+      color:var(--muted);
+      margin-right:4px;
+    }
+    nav a:hover{
+      background:var(--accent-soft);
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+
+    main{
+      min-width:0;
+    }
+
+    section{
+      padding:14px 0;
+      border-bottom:1px solid var(--border-soft);
+    }
+    section:last-of-type{
+      border-bottom:none;
+      padding-bottom:4px;
+    }
+
+    h2{
+      font-size:1.2rem;
+      margin:0 0 8px;
+      border-left:3px solid var(--accent);
+      padding-left:10px;
+    }
+    h3{
+      font-size:1rem;
+      margin:14px 0 6px;
+      color:#0f172a;
+    }
+
+    p{
+      margin:6px 0 8px;
+      font-size:.94rem;
+    }
+
+    ul,ol{
+      margin:6px 0 10px 20px;
+      padding-left:4px;
+      font-size:.93rem;
+    }
+    li+li{
+      margin-top:2px;
+    }
+
+    pre{
+      background:#0b1120;
+      color:#e5e7eb;
+      padding:10px 12px;
+      border-radius:8px;
+      overflow:auto;
+      font-size:.85rem;
+      border:1px solid rgba(15,23,42,.7);
+    }
+
+    .box{
+      background:#f9fafb;
+      border:1px solid var(--border);
+      padding:12px;
+      border-radius:10px;
+      margin:12px 0;
+      font-size:.93rem;
+    }
+
+    table{
+      border-collapse:collapse;
+      width:100%;
+      margin-top:8px;
+      font-size:.9rem;
+    }
+    td,th{
+      border:1px solid var(--border-soft);
+      padding:8px;
+      text-align:left;
+    }
+    th{
+      background:var(--surface-alt);
+      font-weight:600;
+    }
+
+    footer{
+      border-top:1px solid var(--border);
+      margin-top:18px;
+      padding-top:10px;
+      color:var(--muted);
+      font-size:.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="kicker">Analyse structurée</div>
+      <h1>c-rupt.html — Anatomie complète et opérationnelle de la corruption</h1>
+      <p class="muted">
+        Page synthétique et détaillée : fondements scientifiques → structure → dynamique → diagnostics → interventions.
+        Langage clair, sans jargon interne.
+      </p>
+    </header>
+
+    <div class="layout">
+      <nav>
+        <strong>Plan</strong>
+        <ol>
+          <li><a href="#resume-executif"><span class="index">0.</span>Résumé exécutif</a></li>
+          <li><a href="#fondements-scientifiques"><span class="index">1.</span>Fondements scientifiques</a></li>
+          <li><a href="#structure-complete"><span class="index">2.</span>Structure complète de la corruption</a></li>
+          <li><a href="#cycle-dynamique"><span class="index">3.</span>Cycle dynamique (phases)</a></li>
+          <li><a href="#typologies-formes"><span class="index">4.</span>Typologies et formes</a></li>
+          <li><a href="#niveaux-organisation"><span class="index">5.</span>Niveaux d'organisation</a></li>
+          <li><a href="#mecanismes-internes"><span class="index">6.</span>Mécanismes internes / externes</a></li>
+          <li><a href="#formes-terminales"><span class="index">7.</span>Formes terminales et effets</a></li>
+          <li><a href="#signatures-indicateurs"><span class="index">8.</span>Signatures & indicateurs</a></li>
+          <li><a href="#grille-diagnostique"><span class="index">9.</span>Grille diagnostique opérationnelle</a></li>
+          <li><a href="#interventions-leviers"><span class="index">10.</span>Interventions & leviers</a></li>
+          <li><a href="#methodes-audit"><span class="index">11.</span>Méthodes d'audit et d'enquête</a></li>
+          <li><a href="#cas-pratiques"><span class="index">12.</span>Cas pratiques & scénarios</a></li>
+          <li><a href="#annexes"><span class="index">A.</span>Annexes : modèles, checklist, références</a></li>
+        </ol>
+      </nav>
+
+      <main>
+        <section id="resume-executif">
+          <h2>Résumé exécutif</h2>
+          <p>
+            La corruption est une <strong>dégradation organisée</strong> d'un système qui conduit à l'extraction de ressources,
+            la capture des fonctions et l'affaiblissement du bien commun. Elle est observable et modélisable grâce à des
+            principes empruntés aux sciences naturelles (physique, chimie, biologie), aux sciences des systèmes et aux
+            neurosciences. Cette page fournit :
+          </p>
+          <ul>
+            <li>les fondements scientifiques,</li>
+            <li>une cartographie structurelle et dynamique complète,</li>
+            <li>une typologie utilisable en diagnostic,</li>
+            <li>une grille opérationnelle pour audits et interventions,</li>
+            <li>méthodes concrètes pour repérer, mesurer et agir.</li>
+          </ul>
+        </section>
+
+        <section id="fondements-scientifiques">
+          <h2>1. Fondements scientifiques</h2>
+          <p>
+            Pour comprendre la corruption au-delà du moral, il faut la lire comme un phénomène de dégradation structurelle
+            et dynamique. Ci-dessous les analogies scientifiques pertinentes.
+          </p>
+
+          <h3>1.1 Physique : entropie, défauts et fatigue</h3>
+          <ul>
+            <li><strong>Entropie</strong> : la corruption augmente localement le désordre dans un système organisé (perte d'information, inefficacité, dissipation de ressources).</li>
+            <li><strong>Défauts structurels</strong> : comme des dislocations dans un cristal, les impuretés (acteurs corrompus) affaiblissent le réseau et propagent la fragilité.</li>
+            <li><strong>Fatigue / fissuration</strong> : de petites entorses répétées finissent par provoquer une rupture si elles ne sont pas réparées.</li>
+          </ul>
+
+          <h3>1.2 Chimie : oxydation et réactions parasites</h3>
+          <ul>
+            <li><strong>Oxydation</strong> (processus auto-accélérant) = métaphore de la rouille institutionnelle : une altération qui auto-propulse sa propre progression.</li>
+            <li><strong>Réactions parasites</strong> volent des ressources aux réactions saines : la corruption détourne ressources et attention.</li>
+            <li><strong>Embus de catalyse</strong> : l'empoisonnement d'un catalyseur correspond à la neutralisation d'un contrôleur essentiel.</li>
+          </ul>
+
+          <h3>1.3 Biologie : parasitisme, cancérisation, invasifs</h3>
+          <ul>
+            <li><strong>Parasitisme</strong> : extraction des ressources sans contribution, stratégie d'adaptation au détriment de l'hôte.</li>
+            <li><strong>Cancer</strong> : cellule qui détourne les signaux régulateurs et crée un réseau de soutien (analogue aux réseaux de protection dans la corruption).</li>
+            <li><strong>Espèces invasives</strong> : quand des comportements ou organisations étrangères déstabilisent un écosystème social.</li>
+          </ul>
+
+          <h3>1.4 Sciences des systèmes : rétroactions et attracteurs</h3>
+          <ul>
+            <li>Les boucles de rétroaction positives renforcent la corruption (succès → gains → expansion).</li>
+            <li>La corruption peut former un attracteur : comportement stable du système malgré l'apparence de chaos.</li>
+            <li>La sortie de ces attracteurs exige souvent une perturbation externe significative ou une reconception des règles.</li>
+          </ul>
+
+          <h3>1.5 Neurosciences : récompense et banalisation</h3>
+          <ul>
+            <li>Gain rapide active les circuits de récompense (dopamine) et consolide le comportement.</li>
+            <li>La répétition réduit la réactivité morale et la culpabilité → banalisation du mal.</li>
+            <li>Les mécanismes d'imitation sociale favorisent la diffusion.</li>
+          </ul>
+        </section>
+
+        <section id="structure-complete">
+          <h2>2. Structure complète de la corruption</h2>
+          <p>Schéma synthétique : Origine → Mécanismes → Propagation → Organisation → Effets → Effondrement.</p>
+
+          <h3>2.1 Origines</h3>
+          <ul>
+            <li>Opportunités structurelles (zones non surveillées).</li>
+            <li>Incentives inversés (gain individuel &gt; coût attendu).</li>
+            <li>Défaillance du contrôle (rotation de postes, surveillance, audits faibles).</li>
+          </ul>
+
+          <h3>2.2 Mécanismes</h3>
+          <ul>
+            <li>Détournement de flux (argent, biens, informations).</li>
+            <li>Intermédiation et sociétés-écran.</li>
+            <li>Protection interne par intimidation, dissimulation, falsification.</li>
+            <li>Recodage des règles et langage euphémistique.</li>
+          </ul>
+
+          <h3>2.3 Propagation</h3>
+          <ul>
+            <li>Mimétisme social, capture des postes clefs, tolérance institutionnelle.</li>
+            <li>Dissémination par réseaux et solidarités de clan.</li>
+          </ul>
+
+          <h3>2.4 Organisation</h3>
+          <p>Un système corrompu typique comporte :</p>
+          <ol>
+            <li>Noyau dur (décideurs et protecteurs)</li>
+            <li>Courtiers / intermédiaires</li>
+            <li>Bénéficiaires passifs</li>
+            <li>Agents contraints</li>
+            <li>Victimes/résources extraites</li>
+          </ol>
+
+          <h3>2.5 Effets</h3>
+          <ul>
+            <li>Perte d'efficacité, distorsion des marchés, fuite des talents.</li>
+            <li>Démoralisation, défiance, perte de légitimité.</li>
+          </ul>
+
+          <h3>2.6 Effondrement</h3>
+          <ul>
+            <li>Saturation, rigidification, parasitisme maximal, chute finale.</li>
+          </ul>
+        </section>
+
+        <section id="cycle-dynamique">
+          <h2>3. Cycle dynamique : 12 phases</h2>
+          <ol>
+            <li>Micro-entorse initiale</li>
+            <li>Justification / neutralisation</li>
+            <li>Répétition</li>
+            <li>Connexions opportunistes</li>
+            <li>Coordination informelle</li>
+            <li>Structuration en réseau</li>
+            <li>Détournement à grande échelle</li>
+            <li>Capture des fonctions critiques</li>
+            <li>Normalisation interne</li>
+            <li>Expansion / parasitisme</li>
+            <li>Saturation / rigidification</li>
+            <li>Rupture / effondrement</li>
+          </ol>
+          <p>Chaque phase comporte des indicateurs spécifiques utiles pour l'audit.</p>
+        </section>
+
+        <section id="typologies-formes">
+          <h2>4. Typologies et formes (synthèse)</h2>
+          <p>Rappel : 12 typologies fondamentales et 16 formes structurelles. Ci-dessous regroupées pour usage opérationnel.</p>
+
+          <h3>12 typologies (rappel condensé)</h3>
+          <ol>
+            <li>Corruption de flux</li>
+            <li>Corruption de norme</li>
+            <li>Corruption de loyauté</li>
+            <li>Corruption de fonction</li>
+            <li>Corruption de langage</li>
+            <li>Corruption de temps</li>
+            <li>Corruption institutionnelle</li>
+            <li>Corruption cognitive</li>
+            <li>Corruption relationnelle</li>
+            <li>Corruption émotionnelle</li>
+            <li>Corruption symbolique</li>
+            <li>Corruption de structure</li>
+          </ol>
+
+          <h3>16 formes (rappel condensé)</h3>
+          <ol>
+            <li>Détournement direct</li>
+            <li>Influence</li>
+            <li>Relationnel</li>
+            <li>Administratif</li>
+            <li>Cognitif (information)</li>
+            <li>Normatif</li>
+            <li>Culturel</li>
+            <li>Dépendance</li>
+            <li>Silencieuse</li>
+            <li>Stratégique</li>
+            <li>Réseau</li>
+            <li>Dissimulation</li>
+            <li>Punitive</li>
+            <li>Spéculative</li>
+            <li>Opportuniste</li>
+            <li>Systémique totale</li>
+          </ol>
+        </section>
+
+        <section id="niveaux-organisation">
+          <h2>5. Niveaux d'organisation (7 niveaux)</h2>
+          <ol>
+            <li>Individuel (psychique)</li>
+            <li>Interpersonnel</li>
+            <li>Groupal</li>
+            <li>Organisationnel</li>
+            <li>Institutionnel</li>
+            <li>Systémique</li>
+            <li>Civilisationnel</li>
+          </ol>
+          <p>Chaque niveau demande des outils et méthodes adaptés, depuis la formation individuelle jusqu'aux réformes structurelles.</p>
+        </section>
+
+        <section id="mecanismes-internes">
+          <h2>6. Mécanismes internes (biopsychologie &amp; sociologie)</h2>
+
+          <h3>Mécanismes psychologiques</h3>
+          <ul>
+            <li>Dopamine et renforcement</li>
+            <li>Désensibilisation morale</li>
+            <li>Biais cognitifs (auto-justification, illusion d'impunité)</li>
+          </ul>
+
+          <h3>Mécanismes sociaux</h3>
+          <ul>
+            <li>Conformisme, pression de groupe, clientélisme</li>
+            <li>Culture organisationnelle permissive</li>
+            <li>Capture des contrôles internes</li>
+          </ul>
+        </section>
+
+        <section id="mecanismes-externes">
+          <h2>7. Mécanismes externes (économie, politique, technologie)</h2>
+          <ul>
+            <li>Incitations et rentes (accès à la resource vs production)</li>
+            <li>Cadre juridique faible ou instrumentalisé</li>
+            <li>Architecture politique centralisée / personnalisation du pouvoir</li>
+            <li>Médias captifs et manipulation de l'opinion</li>
+            <li>Outils financiers et technologiques pour cacher les flux</li>
+            <li>Pressions internationales et aides mal conçues</li>
+          </ul>
+        </section>
+
+        <section id="formes-terminales">
+          <h2>8. Formes terminales et effets (signes de bout de course)</h2>
+          <ul>
+            <li>Économie de prédation, clientélisme existentiel</li>
+            <li>Capture totale de la justice et des contrôles</li>
+            <li>Militarisation de la répression et paralysie de l'État</li>
+            <li>Érosion massive du capital social et exode des compétences</li>
+          </ul>
+        </section>
+
+        <section id="signatures-indicateurs">
+          <h2>9. Signatures / indicateurs (diagnostic)</h2>
+          <p>Outils quantitatifs et qualitatifs regroupés pour une détection robuste.</p>
+
+          <h3>Signaux faibles</h3>
+          <ul>
+            <li>Asymétrie d'accès à l'information</li>
+            <li>Retards administratifs inexpliqués</li>
+            <li>Concentration répétée de contrats</li>
+            <li>Événements de langage (euphémismes, métaphores) qui masquent</li>
+          </ul>
+
+          <h3>Signaux forts</h3>
+          <ul>
+            <li>Transactions inhabituelles et comptes offshore</li>
+            <li>Dénonciations internes corroborées</li>
+            <li>Divergences budgétaires massives</li>
+          </ul>
+
+          <h3>Signatures réseau</h3>
+          <ul>
+            <li>Topologie core-periphery, chaînes d'intermédiaires, cycles fermés</li>
+          </ul>
+
+          <h3>Indicateurs mesurables (exemples)</h3>
+          <ul>
+            <li>Pourcentage des marchés publics attribués sans appel d'offres</li>
+            <li>Indice de rotation des postes-clefs</li>
+            <li>Écart recettes attendues / recouvrements</li>
+          </ul>
+        </section>
+
+        <section id="grille-diagnostique">
+          <h2>10. Grille diagnostique opérationnelle (checklist)</h2>
+          <p>Utiliser cette checklist lors d'un audit initial : cocher et pondérer.</p>
+          <ol>
+            <li>Existence de procédures d'appel d'offres claires ? (oui/non)</li>
+            <li>Rotations / vacations des postes de contrôle ? (oui/non)</li>
+            <li>Accès public aux documents financiers ? (oui/non)</li>
+            <li>Signaux de concentration des marchés ? (faible/moyen/fort)</li>
+            <li>Indices de collusion entre régulateurs et régulés ? (faible/moyen/fort)</li>
+            <li>Présence de transferts financiers inhabituels ? (faible/moyen/fort)</li>
+            <li>Culture interne tolérante (preuves empiriques) ? (oui/non)</li>
+            <li>Existence de mécanismes de dénonciation protégés ? (oui/non)</li>
+            <li>Réactivité judiciaire aux alertes ? (rapide/lente/absente)</li>
+            <li>Transparence des contrats et marchés ? (complète/partielle/aucune)</li>
+          </ol>
+          <p>Chaque réponse permet d'établir un score de risque et d'identifier priorités d'action.</p>
+        </section>
+
+        <section id="interventions-leviers">
+          <h2>11. Interventions &amp; leviers (stratégies pratiques)</h2>
+          <p>Les actions doivent se dérouler simultanément sur plusieurs axes : prévention, détection, répression, réparation et transformation structurelle.</p>
+
+          <h3>11.1 Prévention</h3>
+          <ul>
+            <li>Remise à plat des procédures (simplicité, publication, traçabilité).</li>
+            <li>Rotation des postes-clefs et limitation des mandats.</li>
+            <li>Formation continue en éthique et prise de décision.</li>
+            <li>Protection des lanceurs d'alerte (anonymat, garanties juridiques).</li>
+          </ul>
+
+          <h3>11.2 Détection</h3>
+          <ul>
+            <li>Mise en place d'indicateurs automatisés (contrôles algorithmiques sur transactions).</li>
+            <li>Analyses réseau (graphes) pour détecter core-periphery et cycles fermés.</li>
+            <li>Audits réguliers et aléatoires, revues externes indépendantes.</li>
+          </ul>
+
+          <h3>11.3 Répression &amp; sanction</h3>
+          <ul>
+            <li>Sanctions proportionnelles et effectives (pénales, administratives).</li>
+            <li>Sécurisation des preuves, unités spéciales d'investigation financière.</li>
+            <li>Transparence des procédures judiciaires et interdictions de conflit d'intérêt.</li>
+          </ul>
+
+          <h3>11.4 Réparation &amp; transformation</h3>
+          <ul>
+            <li>Restitution d'actifs, mécanismes de réparation pour victimes.</li>
+            <li>Réformes structurelles : séparation des pouvoirs, contrôle civil, médias indépendants.</li>
+            <li>Programmes d'intégrité pour recréer capital social (transparence, responsabilité).</li>
+          </ul>
+
+          <h3>11.5 Outils technologiques utiles</h3>
+          <ul>
+            <li>Registres publics accessibles en ligne (contrats, bénéficiaires effectifs).</li>
+            <li>Blockchain pour traçabilité ciblée (avec prudence et évaluation).</li>
+            <li>Plateformes sécurisées pour signalement anonyme.</li>
+            <li>Analytique financiere et machine learning pour détection d'anomalies.</li>
+          </ul>
+        </section>
+
+        <section id="methodes-audit">
+          <h2>12. Méthodes d'audit et d'enquête (pratique forensique)</h2>
+
+          <h3>12.1 Audit financier</h3>
+          <ol>
+            <li>Collecte complète des pièces (comptes, contrats, bons de commande).</li>
+            <li>Analyse des flux (cashflow) : régularités, transferts inhabituels.</li>
+            <li>Reconstruction des circuits : sous-traitants, bénéficiaires effectifs.</li>
+          </ol>
+
+          <h3>12.2 Enquête réseau</h3>
+          <ol>
+            <li>Constitution d'un graphe relationnel (personnes / structures / transactions).</li>
+            <li>Détection de motifs (triangles, chemins courts, ponts contrôlés).</li>
+            <li>Priorisation des nœuds à couchage profond (noyau dur).</li>
+          </ol>
+
+          <h3>12.3 Analyse documentaire</h3>
+          <ol>
+            <li>Vérifier cohérence temporelle des documents (dates, signatures, montants).</li>
+            <li>Comparer marché annoncé vs marché réalisé (livrables, qualité).</li>
+            <li>Rechercher doublons, modifications postérieures, versions alternatives.</li>
+          </ol>
+
+          <h3>12.4 Entretiens et témoignages</h3>
+          <ol>
+            <li>Conserver l'anonymat et protéger les sources.</li>
+            <li>Croiser les versions et rechercher convergences factuelles.</li>
+            <li>Documenter pressions, menaces, incitations non formelles.</li>
+          </ol>
+        </section>
+
+        <section id="cas-pratiques">
+          <h2>13. Cas pratiques &amp; scénarios (modèles d'étude)</h2>
+
+          <h3>Scénario A — ONG locale</h3>
+          <ol>
+            <li>Contexte : financement international, faible contrôle local.</li>
+            <li>Indices : dépenses floues, personnels liés à décideurs, factures sans justificatifs.</li>
+            <li>Actions d'audit : vérification des bénéficiaires effectifs, analyses des flux bancaires, entretiens anonymes.</li>
+            <li>Interventions possibles : suspension fonds, remplacement de personnels, publication des résultats.</li>
+          </ol>
+
+          <h3>Scénario B — Grand chantier public</h3>
+          <ol>
+            <li>Contexte : gros budgets, procédures d'urgence fréquentes.</li>
+            <li>Indices : contrats successifs aux mêmes firmes, dépassements inexpliqués, modifications de périmètre.</li>
+            <li>Actions d'audit : cartographie des fournisseurs, revue des appels d'offres, vérification matérielle sur site.</li>
+            <li>Interventions possibles : gel des paiements, enquête pénale, révision du processus d'appel d'offres.</li>
+          </ol>
+
+          <h3>Scénario C — Administration fiscale</h3>
+          <ol>
+            <li>Contexte : collecte essentielle, risques de capture locale.</li>
+            <li>Indices : écarts recettes attendues/recouvrées, comptes clients non vérifiés.</li>
+            <li>Actions d'audit : contrôle croisé des déclarations, rotation des postes de perception, automatisation des contrôles.</li>
+            <li>Interventions possibles : renforcement des systèmes informatiques, revue des procédures internes.</li>
+          </ol>
+        </section>
+
+        <section id="annexes">
+          <h2>Annexes</h2>
+
+          <h3>Annexe A — Checklist imprimable (version compacte)</h3>
+          <pre>
+1. Procédures d'appel d'offres publiées ? Y/N
+2. Rotation postes-clefs ? Y/N
+3. Registre bénéficiaires effectifs public ? Y/N
+4. Transferts financiers inhabituels détectés ? Low/Med/High
+5. Pressions documentées sur auditeurs ? Y/N
+6. Mécanismes de plainte protégés ? Y/N
+7. Transparence des contrats ? Complete/Partial/None
+          </pre>
+
+          <h3>Annexe B — Modèle simple de score de risque</h3>
+          <table>
+            <tr><th>Critère</th><th>Pondération</th><th>Commentaires</th></tr>
+            <tr><td>Opacité des marchés</td><td>20</td><td>Appels d'offres, publicité</td></tr>
+            <tr><td>Rotation postes-clefs</td><td>15</td><td>Faible rotation = risque</td></tr>
+            <tr><td>Transferts financiers</td><td>25</td><td>Offshores, virements</td></tr>
+            <tr><td>Contrôles indépendants</td><td>20</td><td>Existence et qualité</td></tr>
+            <tr><td>Protection lanceurs d'alerte</td><td>20</td><td>Garantie d'anonymat</td></tr>
+          </table>
+
+          <h3>Annexe C — Références utiles (sélection)</h3>
+          <ul>
+            <li>Ouvrages et revues en sciences politiques et économie (lecture recommandée pour approfondir).</li>
+            <li>Rapports d'agences internationales (Banque mondiale, Transparency International) — consulter les versions locales.</li>
+            <li>Manuels d'audit financier et forensique.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <p>
+       Tout est dans T^ (T^Humour) ;-P
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
+
+
