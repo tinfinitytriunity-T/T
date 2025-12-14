@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropologie — Cycle complet (1→8) · Version intégrale (langage courant)</title>
+<meta name="description" content="Page intégrale et développée du cycle anthropologique (1→8), en langage courant.">
+<style>
+:root {
+  --bg: #060609;
+  --bg-page: radial-gradient(circle at top, #171726 0, #050509 45%, #020205 100%);
+  --panel: rgba(12,12,24,0.98);
+  --ink: #f7f3ff;
+  --ink2: #cbc9e6;
+  --muted: #9b9abc;
+  --gold: #ffd271;
+  --cyan: #76f2ff;
+  --rose: #ffb3ff;
+  --border: rgba(255,255,255,0.12);
+  --shadow: 0 22px 60px rgba(0,0,0,0.75);
+  --r-xl: 26px;
+  --r-lg: 20px;
+  --r-md: 16px;
+  --pill: 999px;
+  --ease: 0.22s ease-out;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background: var(--bg-page);
+  color: var(--ink);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+.bg-layer{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.bg-layer::before,.bg-layer::after{
+  content:"";position:absolute;border-radius:999px;filter:blur(46px);
+  mix-blend-mode:screen;opacity:.62;animation:float 26s infinite alternate ease-in-out;
+}
+.bg-layer::before{width:620px;height:620px;top:-170px;left:-90px;background:radial-gradient(circle,rgba(255,210,113,.36),transparent 70%)}
+.bg-layer::after{width:680px;height:680px;bottom:-260px;right:-170px;background:radial-gradient(circle,rgba(118,242,255,.33),transparent 70%);animation-duration:34s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(44px,-10px,0) scale(1.06)}100%{transform:translate3d(-42px,24px,0) scale(1.02)}}
+
+.page{
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 28px 16px 44px;
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: 22px;
+}
+aside{
+  position: sticky;
+  top: 18px;
+  align-self: flex-start;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.08), rgba(9,9,18,0.98) 52%, rgba(0,0,0,0.98) 100%);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 20px 18px 18px;
+  backdrop-filter: blur(20px);
+}
+.brand{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.brand .mark{font-size:2rem;line-height:1;font-weight:520;letter-spacing:.04em}
+.brand .mark span{color:var(--cyan)}
+.brand .sub{font-size:.88rem;color:var(--muted)}
+.tag{
+  display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--pill);
+  border:1px solid rgba(255,255,255,.18);background:rgba(8,8,20,.96);
+  font-size:.78rem;text-transform:uppercase;letter-spacing:.13em;color:var(--rose);
+}
+.tag .dot{width:7px;height:7px;border-radius:999px;background:var(--gold)}
+.actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+button.print, button.copy {
+  appearance:none;border:1px solid rgba(255,255,255,.18);
+  background: rgba(12,12,24,.88);
+  color: var(--ink2);
+  padding: 8px 10px;
+  border-radius: 14px;
+  cursor:pointer;
+  transition: transform var(--ease), border-color var(--ease), background var(--ease);
+  font-size:.88rem;
+}
+button.print:hover, button.copy:hover{transform:translateY(-2px);border-color:rgba(255,210,113,.8);background:rgba(255,210,113,.10);color:var(--ink)}
+
+nav{margin-top:12px;border-top:1px solid rgba(255,255,255,.12);padding-top:12px}
+nav h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.13em;color:rgba(255,255,255,.7);margin-bottom:8px}
+nav ul{list-style:none;max-height:60vh;overflow:auto;padding-right:6px}
+nav li{margin-bottom:4px}
+nav a{
+  font-size:.92rem;color:var(--ink2);text-decoration:none;display:block;padding:6px 10px;border-radius:12px;
+  transition: background var(--ease), color var(--ease), transform var(--ease);
+}
+nav a:hover{background:rgba(255,210,113,.15);color:var(--gold);transform:translateX(3px)}
+
+main{display:flex;flex-direction:column;gap:20px}
+.hero{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(12,12,24,.96));
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 26px 22px 22px;
+  backdrop-filter: blur(18px);
+  position: relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background: linear-gradient(135deg, rgba(255,210,113,0.32), rgba(118,242,255,0.26));
+  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: .22;pointer-events:none;
+}
+.kicker{font-size:.8rem;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.72);margin-bottom:6px}
+.hero h1{font-size:2.0rem;font-weight:460;margin-bottom:8px}
+.hero p{color:var(--ink2);font-size:1.0rem;margin-bottom:10px}
+.keyline{
+  height:1px;width:100%;
+  background: linear-gradient(90deg, rgba(255,210,113,0), rgba(255,210,113,.8), rgba(118,242,255,0));
+  margin: 14px 0;
+  opacity:.95;
+}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pill{
+  padding:6px 10px;border-radius:var(--pill);
+  border:1px solid rgba(255,255,255,.16);
+  background: rgba(8,8,20,.94);
+  color: var(--muted);
+  font-size:.84rem;
+}
+section{
+  background: var(--panel);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 26px 22px 24px;
+  backdrop-filter: blur(18px);
+  position: relative;
+  overflow:hidden;
+}
+section::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background: linear-gradient(135deg, rgba(255,210,113,0.28), rgba(118,242,255,0.22));
+  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity:.22;pointer-events:none;
+}
+.section-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.66);margin-bottom:4px}
+h2{font-size:1.55rem;font-weight:440;margin-bottom:10px}
+h3{font-size:1.2rem;font-weight:520;margin:14px 0 8px}
+.content p{color:var(--ink2);font-size:.97rem;margin-bottom:10px}
+.content ul{margin: 6px 0 12px 18px}
+.content li{color:var(--ink2);margin-bottom:6px}
+.callout{
+  border-left: 4px solid rgba(255,255,255,.45);
+  padding-left: 16px;
+  margin: 12px 0 6px;
+  color: var(--ink);
+  font-style: italic;
+}
+small.foot{color:rgba(220,220,255,.62)}
+footer{text-align:center;font-size:.82rem;color:rgba(220,220,255,.6);padding:18px 0 0}
+@media print {
+  body{background:#fff;color:#000}
+  .bg-layer, aside, .actions{display:none !important}
+  .page{grid-template-columns:1fr;padding:0}
+  .hero, section{box-shadow:none;border:1px solid #ddd;background:#fff;color:#000}
+  .content p, .content li{color:#000}
+}
+@media (max-width: 980px){
+  .page{grid-template-columns:1fr}
+  aside{position:static}
+  nav ul{max-height:none}
+}
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="page">
+  <aside>
+    <div class="brand">
+      <div class="mark"><span>∴</span></div>
+      <div class="copy">
+        <div class="kicker">Anthropologie · cycle complet</div>
+        <div class="sub">Langage courant (niveau moyen-élevé) · version intégrale</div>
+      </div>
+    </div>
+
+    <nav class="content">
+      <div class="section-label">Sommaire</div>
+      <ul>
+        <li><a href="#0-intention">0) Intention et méthode</a></li>
+        <li><a href="#1-faille">1) Faille, révolte, dehors</a></li>
+        <li><a href="#2-corps">2) Corps, peau, blessure</a></li>
+        <li><a href="#3-relation">3) Relation, altérité, violence</a></li>
+        <li><a href="#4-institution">4) Institution, loi, bureaucratie</a></li>
+        <li><a href="#5-systemes">5) Systèmes techniques et décisions</a></li>
+        <li><a href="#6-monde">6) Monde, vivant non humain, écologie</a></li>
+        <li><a href="#7-cosmos">7) Temps, entropie, finitude</a></li>
+        <li><a href="#8-generation">8) Naissance, mort, transmission</a></li>
+        <li><a href="#garde-fous">Garde-fous transversaux</a></li>
+        <li><a href="#synthese">Synthèse courte (sans réduire)</a></li>
+      </ul>
+    </nav>
+
+    <div class="foot">
+      <div class="pills">
+        <span class="pill">Non moral</span>
+        <span class="pill">Non prescriptif</span>
+        <span class="pill">Nuancé</span>
+        <span class="pill">Transmissible</span>
+      </div>
+      <div class="actions">
+        <a class="print" href="#" onclick="window.print();return false;">Imprimer / PDF</a>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="hero">
+      <div class="tag">Page complète · sans jargon technique</div>
+      <h1>Anthropologie — cycle complet (1→8)</h1>
+      <p>
+        Cette page expose un cycle en huit volets. Il ne s’agit pas de définir « ce qu’est l’humain » une fois pour toutes,
+        mais de décrire <em>comment</em> l’humain devient visible lorsque des systèmes (de sens, de relation, de règle, de calcul,
+        de monde, de temps) tentent de se refermer.
+      </p>
+      <div class="pills">
+        <span class="pill">Intérieur → Corps → Relation → Institution → Technique → Monde → Cosmos → Générations</span>
+      </div>
+      <div class="keyline"></div>
+    </header>
+
+    <section id="0-intention" class="content">
+      <div class="section-label">0) Intention et méthode</div>
+      <h2>Une lecture en huit plans, sans totaliser</h2>
+      <p>
+        L’ambition de ce cycle est simple : rendre lisibles des situations humaines très différentes
+        (intimes, corporelles, sociales, institutionnelles, technologiques, écologiques et existentielles)
+        <strong>sans les réduire</strong> à une seule cause, une seule morale ou une seule théorie.
+      </p>
+      <p>
+        Chaque niveau du cycle est un « plan de réalité » : il met l’accent sur un type de tension
+        et sur les risques spécifiques de fermeture (par exemple : la certitude, la normalisation,
+        la procédure, l’optimisation, l’extraction, ou l’absolutisation).
+      </p>
+
+      <div class="pills">
+        <span class="pill">Ce texte décrit</span>
+        <span class="pill">Ce texte n’ordonne pas</span>
+        <span class="pill">Ce texte ne juge pas</span>
+      </div>
+
+      <p>
+        Ce cycle est volontairement <strong>non prescriptif</strong> : il n’édicte pas de conduite à tenir.
+        Il fournit plutôt une grille de lecture qui aide à reconnaître
+        quand une interprétation devient trop sûre d’elle, quand une aide devient contrôle,
+        quand une règle oublie l’humain, ou quand un calcul se prend pour une vérité.
+      </p>
+      <p class="small">
+        Remarque de méthode : des exemples sont utilisés pour clarifier. Ils ne valent pas comme preuve universelle,
+        mais comme illustration de mécanismes récurrents.
+      </p>
+    </section>
+
+    <section id="1-faille" class="content">
+      <div class="section-label">1) Faille, révolte, dehors</div>
+      <h2>La dignité fragile : l’humain n’est pas un système fermé</h2>
+      <p>
+        Le premier plan est celui de l’expérience intérieure : doute, erreur possible, ambivalence,
+        et cette sensation que « quelque chose » en nous ne se laisse pas entièrement résumer.
+        La <strong>faille</strong> n’est pas un manque honteux : c’est la condition d’une lucidité.
+      </p>
+
+      <div class="tag">Point clé</div>
+      <p>
+        Une vie intérieure saine n’est pas forcément une vie « cohérente ». Elle peut contenir des contradictions,
+        des retours en arrière, des zones de silence. Ce qui compte ici, c’est la possibilité de rester en contact
+        avec ce qui résiste à l’explication facile.
+      </p>
+
+      <h3>Révolte : refuser l’inacceptable sans fabriquer un absolu</h3>
+      <p>
+        La <strong>révolte</strong> désigne un « non » qui protège une limite : « ceci ne doit pas être franchi ».
+        Elle n’est pas une rage aveugle. Elle est une affirmation sans garantie : on ne possède pas toujours
+        une justification ultime, mais on sait qu’une ligne a été dépassée.
+      </p>
+
+      <h3>Le “dehors” : ce qui excède le sens</h3>
+      <p>
+        Le “dehors” n’est pas l’irrationnel au sens faible. C’est ce qui, dans l’existence,
+        excède nos catégories : l’absurde, l’incompréhensible, l’événement qui ne rentre pas dans le récit.
+        Reconnaître ce dehors, c’est éviter deux pièges : le cynisme (« rien n’a de sens »)
+        et la fermeture dogmatique (« tout s’explique »).
+      </p>
+
+      <div class="keyline"></div>
+      <p class="small">
+        Exemple : après un choc, certains cherchent à tout rationaliser immédiatement (fermeture),
+        d’autres fuient toute signification (effondrement). Ici, le point d’équilibre est d’accepter une zone ouverte
+        où l’on peut dire : « je ne sais pas encore ».
+      </p>
+    </section>
+
+    <section id="2-corps" class="content">
+      <div class="section-label">2) Corps, peau, blessure</div>
+      <h2>Quand la parole ne passe plus : le corps comme surface d’inscription</h2>
+      <p>
+        Le deuxième plan est celui de l’incarnation. Le corps n’est pas seulement un support biologique :
+        il est aussi une manière d’être au monde. La <strong>peau</strong> joue un rôle particulier :
+        frontière vivante entre dedans et dehors, interface de contact, et limite instable.
+      </p>
+
+      <h3>La peau : protection et exposition en même temps</h3>
+      <p>
+        La peau protège, mais elle expose aussi : elle sent, elle marque, elle garde des traces.
+        C’est pourquoi elle devient parfois le lieu d’une inscription lorsque la parole ou le lien ne suffisent plus.
+      </p>
+
+      <h3>Blessure : ne pas moraliser, ne pas romantiser</h3>
+      <p>
+        Une blessure peut être accident, violence subie, maladie, ou geste dirigé contre soi.
+        Ici, l’enjeu n’est pas de classer moralement, mais de comprendre un mécanisme :
+        quand l’intérieur est saturé (trop plein) ou vide (trop absent), le corps peut devenir le seul endroit
+        où une « preuve d’existence » semble encore possible.
+      </p>
+
+      <div class="tag">Automutilation : lecture structurelle (non clinique)</div>
+      <p>
+        Dans certains cas, l’automutilation peut être comprise comme une tentative de créer un passage
+        là où aucun passage symbolique (parole, lien, récit) n’est disponible.
+        Cela ne la justifie pas, et ne la glorifie pas : cela la rend intelligible sans capturer la personne.
+      </p>
+
+      <p>
+        Une formulation simple :
+        <strong>produire une coupure réelle</strong> quand aucune coupure intérieure n’arrive à se faire
+        (par exemple : sortir d’un état d’anesthésie affective, ou interrompre une spirale de douleur diffuse).
+      </p>
+
+      <div class="keyline"></div>
+      <p class="small">
+        Nuance importante : cette lecture n’est pas une explication universelle. Elle n’ôte rien au besoin d’aide,
+        de protection et de soin. Elle évite seulement de réduire la situation à une étiquette ou à une morale.
+      </p>
+    </section>
+
+    <section id="3-relation" class="content">
+      <div class="section-label">3) Relation, altérité, violence</div>
+      <h2>Le lien comme espace partagé : quand la fermeture devient violence</h2>
+      <p>
+        Le troisième plan est relationnel. Dès qu’il y a « nous », il y a un espace commun.
+        Cet espace peut être ouvert (reprise possible) ou fermé (rôles figés, sens imposé).
+        Ici, la violence est comprise d’abord comme une <strong>capture</strong> de l’autre.
+      </p>
+
+      <h3>Violence : souvent silencieuse, souvent précoce</h3>
+      <p>
+        La violence ne commence pas toujours par un acte brutal. Elle commence souvent
+        quand l’autre est réduit à un rôle : « patient », « problème », « ennemi », « ressource », « objet d’amour »,
+        sans possibilité de reprise.
+      </p>
+
+      <h3>Trois figures récurrentes</h3>
+      <ul>
+        <li><strong>Domination</strong> : fixer les places, confondre ordre et justice.</li>
+        <li><strong>Fusion</strong> : effacer les limites au nom de l’amour, du groupe, ou de l’unité.</li>
+        <li><strong>Exclusion</strong> : expulser hors de l’espace commun (humiliation, invisibilisation, bannissement).</li>
+      </ul>
+
+      <h3>Altérité : l’autre n’est pas un prolongement</h3>
+      <p>
+        L’altérité signifie ici : l’autre n’est pas réductible à mon cadre. La relation devient saine
+        quand elle supporte cette résistance sans la punir.
+      </p>
+
+      <div class="keyline"></div>
+      <p class="small">
+        Exemple : « je sais ce qui est bon pour toi » peut être soin ou domination selon qu’il reste contestable,
+        réversible, et ouvert à l’écoute.
+      </p>
+    </section>
+
+    <section id="4-institution" class="content">
+      <div class="section-label">4) Institution, loi, bureaucratie</div>
+      <h2>Stabiliser sans écraser : le paradoxe institutionnel</h2>
+      <p>
+        Le quatrième plan décrit ce qui arrive lorsque l’espace relationnel se stabilise sous forme de règles,
+        d’organisations et de procédures. Une institution peut protéger : elle limite l’arbitraire et la violence brute.
+        Mais elle peut aussi devenir violente lorsqu’elle se prend pour une vérité.
+      </p>
+
+      <h3>Quand la règle oublie l’exception</h3>
+      <p>
+        Une règle sert à traiter des situations fréquentes. Mais la vie humaine produit des cas limites.
+        Quand l’exception n’est plus un signal mais un scandale, l’institution se rigidifie.
+        Le résultat est souvent une injustice « propre » : impersonnelle, polie, mais destructrice.
+      </p>
+
+      <h3>Bureaucratie : la violence sans coupable</h3>
+      <p>
+        La bureaucratie est une forme de capture impersonnelle : personne ne décide, mais la procédure décide.
+        Cela dissout la responsabilité. La souffrance est alors « administrée ».
+      </p>
+
+      <h3>Pouvoir et nécessité</h3>
+      <p>
+        Le pouvoir bascule lorsqu’il se confond avec la nécessité : « il n’y a pas d’alternative ».
+        Cette phrase est un signal : elle ferme l’espace du débat et de la reprise.
+      </p>
+
+      <div class="keyline"></div>
+      <p class="small">
+        Nuance : certaines urgences exigent des décisions rapides. Le critère n’est pas la lenteur,
+        mais la possibilité, après coup, de contester, d’examiner, de réparer.
+      </p>
+    </section>
+
+    <section id="5-systemes" class="content">
+      <div class="section-label">5) Systèmes techniques et décisions</div>
+      <h2>Quand le calcul devient destin : le risque de délégation totale</h2>
+      <p>
+        Le cinquième plan concerne les systèmes techniques, dont l’intelligence artificielle.
+        Un système technique stabilise des régularités : il classe, prédit, optimise.
+        Le danger apparaît lorsque le calcul remplace l’espace humain de reprise.
+      </p>
+
+      <h3>Décision automatisée : le cas limite comme “erreur”</h3>
+      <p>
+        Les systèmes sont très bons pour traiter des cas typiques. Les cas singuliers
+        (parcours atypique, vulnérabilité, contexte rare) risquent d’être écrasés.
+        La violence est silencieuse : elle ressemble à une “neutralité”.
+      </p>
+
+      <h3>Trois signaux de fermeture</h3>
+      <ul>
+        <li>« l’algorithme a décidé » (effacement de la responsabilité)</li>
+        <li>« les données le prouvent » (confusion entre mesure et sens)</li>
+        <li>« c’est optimal » (optimisation confondue avec justice)</li>
+      </ul>
+
+      <h3>Contestation et reprise : conditions minimales</h3>
+      <p>
+        Un système qui affecte des vies humaines doit rester contestable : possibilité de comprendre,
+        de demander une révision, d’introduire le contexte, d’ouvrir un recours.
+      </p>
+
+      <div class="keyline"></div>
+      <p class="small">
+        Nuance : l’outil peut aider (détection, tri, assistance). Le problème n’est pas l’outil,
+        mais le moment où l’outil devient autorité.
+      </p>
+    </section>
+
+    <section id="6-monde" class="content">
+      <div class="section-label">6) Monde, vivant non humain, écologie</div>
+      <h2>Habiter plutôt qu’exploiter : reconnaître un monde non appropriable</h2>
+      <p>
+        Le sixième plan décentre l’humain : il n’est pas le propriétaire du monde.
+        Le monde n’est pas un stock, ni un décor. Il est un espace vivant de cohabitation.
+        La crise écologique peut être comprise comme la fermeture d’un rapport : réduire le monde à un moyen.
+      </p>
+
+      <h3>Le vivant : temporalités longues et résistances</h3>
+      <p>
+        Le vivant non humain n’est pas un miroir moral. Il a ses dynamiques, ses rythmes,
+        et ses seuils de rupture. Une logique d’extraction sans limite efface ces temporalités.
+      </p>
+
+      <h3>Violence écologique : quand tout devient moyen</h3>
+      <p>
+        La violence écologique ressemble souvent à de la rationalité : rendement, optimisation,
+        croissance. Le problème est l’absence de reste : tout doit être converti en utilité.
+      </p>
+
+      <div class="keyline"></div>
+      <p class="small">
+        Nuance : agir pour l’écologie n’exige pas une pureté morale. Cela exige surtout une capacité
+        à reconnaître les seuils, les limites, et les interdépendances.
+      </p>
+    </section>
+
+    <section id="7-cosmos" class="content">
+      <div class="section-label">7) Temps, entropie, finitude</div>
+      <h2>Une réalité irréversible : le sens sans clôture</h2>
+      <p>
+        Le septième plan place l’existence dans le cadre du temps irréversible et de la finitude.
+        Le temps ne se répare pas. On ne revient pas à l’identique. Cette irréversibilité empêche
+        les totalisations : aucune conclusion ne peut valoir comme absolu.
+      </p>
+
+      <h3>Entropie : dissipation et ouverture</h3>
+      <p>
+        L’entropie (au sens large : dissipation, perte, irréversibilité) n’est pas l’ennemie du sens.
+        Elle empêche le monde de se figer. Elle rend possible l’histoire, donc des recommencements locaux.
+      </p>
+
+      <h3>Décentrement cosmique</h3>
+      <p>
+        Le cosmos retire à l’humain la prétention d’être le centre. Mais cela ne retire pas la responsabilité.
+        Cela rappelle seulement : nous sommes un point de passage, pas un juge ultime.
+      </p>
+    </section>
+
+    <section id="8-generation" class="content">
+      <div class="section-label">8) Naissance, mort, transmission</div>
+      <h2>Le passage plutôt que la possession</h2>
+      <p>
+        Le huitième plan est généalogique : naissance, mort, transmission, générations.
+        Naître, c’est arriver dans un monde déjà ouvert. Mourir, c’est une limite qui rend la vie non totalisable.
+        Transmettre, c’est laisser passer sans garantir.
+      </p>
+
+      <h3>Transmission et perte</h3>
+      <p>
+        Toute transmission comporte une perte : on transmet en transformant, et l’autre reçoit en transformant.
+        Vouloir une transmission parfaite revient souvent à enfermer l’autre.
+      </p>
+
+      <h3>Violences généalogiques</h3>
+      <p>
+        Elles apparaissent quand l’héritage devient identité obligatoire, quand la mémoire devient injonction,
+        quand la filiation devient destin. Protéger la transmission, c’est protéger la possibilité de transmettre
+        sans enfermer.
+      </p>
+    </section>
+
+    <section id="garde-fous" class="content">
+      <div class="section-label">Garde-fous transversaux</div>
+      <h2>Six fonctions de protection, formulées en langage courant</h2>
+      <p>
+        Tout au long du cycle, on retrouve des fonctions récurrentes : repérer les retournements,
+        les ruptures, les sacralisations, couper les captures, maintenir l’habitabilité, relancer sans détruire.
+        Voici ces fonctions sans jargon :
+      </p>
+
+      <div class="grid">
+        <div class="tile">
+          <h3>1) Repérer les retournements</h3>
+          <p>Quand une aide devient contrôle, quand une règle se retourne contre sa promesse.</p>
+        </div>
+        <div class="tile">
+          <h3>2) Repérer les ruptures</h3>
+          <p>Quand une continuité se brise : seuil, exclusion, effondrement, irréversibilité.</p>
+        </div>
+        <div class="tile">
+          <h3>3) Empêcher la sacralisation</h3>
+          <p>Quand une cohérence devient autorité : “c’est la vérité”, “c’est le bien”, “c’est l’optimal”.</p>
+        </div>
+        <div class="tile">
+          <h3>4) Couper la capture</h3>
+          <p>Quand un récit se referme : interrompre le fil, rouvrir l’espace de reprise.</p>
+        </div>
+        <div class="tile">
+          <h3>5) Maintenir l’habitabilité</h3>
+          <p>Rendre possible de rester : respirer, clarifier, soutenir sans normaliser.</p>
+        </div>
+        <div class="tile">
+          <h3>6) Relancer sans détruire</h3>
+          <p>Au seuil critique : rouvrir une possibilité minimale, sans forcer une “solution totale”.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="synthese" class="content">
+      <div class="section-label">Synthèse courte</div>
+      <h2>Une phrase, sans réduire (et sans fermer)</h2>
+      <p>
+        Si l’on devait retenir une ligne : l’humain demeure humain tant qu’il reste un espace de reprise
+        — intérieur, corporel, relationnel, institutionnel, technique, écologique, cosmique et générationnel —
+        où la vie ne se laisse pas transformer en totalité.
+      </p>
+      <p class="small">
+        Cette synthèse ne remplace pas les niveaux : elle indique seulement leur direction commune.
+      </p>
+    </section>
+
+    <footer class="foot">
+      Anthropologie · cycle complet (1→8) · langage courant · version intégrale.
+    </footer>
+  </main>
+</div>
+</body>
+</html>
