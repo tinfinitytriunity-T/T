@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>T^Total v20+– — Formulation canonique (Super‑Premium)</title>
+<meta name="description" content="T^Total v20+– : formulation canonique complète et transmissible." />
+<style>
+:root {
+  --bg: #060609;
+  --bg-page: radial-gradient(circle at top, #171726 0, #050509 45%, #020205 100%);
+  --panel: rgba(12,12,24,0.98);
+  --ink: #f7f3ff;
+  --ink2: #cbc9e6;
+  --muted: #9b9abc;
+  --gold: #ffd271;
+  --cyan: #76f2ff;
+  --rose: #ffb3ff;
+  --border: rgba(255,255,255,0.12);
+  --shadow: 0 22px 60px rgba(0,0,0,0.75);
+  --r-xl: 26px;
+  --r-lg: 20px;
+  --r-md: 16px;
+  --pill: 999px;
+  --ease: 0.22s ease-out;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background: var(--bg-page);
+  color: var(--ink);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+.bg-layer{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.bg-layer::before,.bg-layer::after{
+  content:"";position:absolute;border-radius:999px;filter:blur(46px);
+  mix-blend-mode:screen;opacity:.62;animation:float 26s infinite alternate ease-in-out;
+}
+.bg-layer::before{width:620px;height:620px;top:-170px;left:-90px;background:radial-gradient(circle,rgba(255,210,113,.36),transparent 70%)}
+.bg-layer::after{width:680px;height:680px;bottom:-260px;right:-170px;background:radial-gradient(circle,rgba(118,242,255,.33),transparent 70%);animation-duration:34s}
+@keyframes float{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(44px,-10px,0) scale(1.06)}100%{transform:translate3d(-42px,24px,0) scale(1.02)}}
+
+.page{
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 28px 16px 44px;
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: 22px;
+}
+aside{
+  position: sticky;
+  top: 18px;
+  align-self: flex-start;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.08), rgba(9,9,18,0.98) 52%, rgba(0,0,0,0.98) 100%);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 20px 18px 18px;
+  backdrop-filter: blur(20px);
+}
+.brand{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.brand .mark{font-size:2rem;line-height:1;font-weight:520;letter-spacing:.04em}
+.brand .mark span{color:var(--cyan)}
+.brand .sub{font-size:.88rem;color:var(--muted)}
+.tag{
+  display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:var(--pill);
+  border:1px solid rgba(255,255,255,.18);background:rgba(8,8,20,.96);
+  font-size:.78rem;text-transform:uppercase;letter-spacing:.13em;color:var(--rose);
+}
+.tag .dot{width:7px;height:7px;border-radius:999px;background:var(--gold)}
+.actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+button.print, button.copy {
+  appearance:none;border:1px solid rgba(255,255,255,.18);
+  background: rgba(12,12,24,.88);
+  color: var(--ink2);
+  padding: 8px 10px;
+  border-radius: 14px;
+  cursor:pointer;
+  transition: transform var(--ease), border-color var(--ease), background var(--ease);
+  font-size:.88rem;
+}
+button.print:hover, button.copy:hover{transform:translateY(-2px);border-color:rgba(255,210,113,.8);background:rgba(255,210,113,.10);color:var(--ink)}
+
+nav{margin-top:12px;border-top:1px solid rgba(255,255,255,.12);padding-top:12px}
+nav h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.13em;color:rgba(255,255,255,.7);margin-bottom:8px}
+nav ul{list-style:none;max-height:60vh;overflow:auto;padding-right:6px}
+nav li{margin-bottom:4px}
+nav a{
+  font-size:.92rem;color:var(--ink2);text-decoration:none;display:block;padding:6px 10px;border-radius:12px;
+  transition: background var(--ease), color var(--ease), transform var(--ease);
+}
+nav a:hover{background:rgba(255,210,113,.15);color:var(--gold);transform:translateX(3px)}
+
+main{display:flex;flex-direction:column;gap:20px}
+.hero{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(12,12,24,.96));
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 26px 22px 22px;
+  backdrop-filter: blur(18px);
+  position: relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background: linear-gradient(135deg, rgba(255,210,113,0.32), rgba(118,242,255,0.26));
+  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: .22;pointer-events:none;
+}
+.kicker{font-size:.8rem;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.72);margin-bottom:6px}
+.hero h1{font-size:2.0rem;font-weight:460;margin-bottom:8px}
+.hero p{color:var(--ink2);font-size:1.0rem;margin-bottom:10px}
+.keyline{
+  height:1px;width:100%;
+  background: linear-gradient(90deg, rgba(255,210,113,0), rgba(255,210,113,.8), rgba(118,242,255,0));
+  margin: 14px 0;
+  opacity:.95;
+}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.pill{
+  padding:6px 10px;border-radius:var(--pill);
+  border:1px solid rgba(255,255,255,.16);
+  background: rgba(8,8,20,.94);
+  color: var(--muted);
+  font-size:.84rem;
+}
+section{
+  background: var(--panel);
+  border-radius: var(--r-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 26px 22px 24px;
+  backdrop-filter: blur(18px);
+  position: relative;
+  overflow:hidden;
+}
+section::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background: linear-gradient(135deg, rgba(255,210,113,0.28), rgba(118,242,255,0.22));
+  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity:.22;pointer-events:none;
+}
+.section-label{font-size:.8rem;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.66);margin-bottom:4px}
+h2{font-size:1.55rem;font-weight:440;margin-bottom:10px}
+h3{font-size:1.2rem;font-weight:520;margin:14px 0 8px}
+.content p{color:var(--ink2);font-size:.97rem;margin-bottom:10px}
+.content ul{margin: 6px 0 12px 18px}
+.content li{color:var(--ink2);margin-bottom:6px}
+.callout{
+  border-left: 4px solid rgba(255,255,255,.45);
+  padding-left: 16px;
+  margin: 12px 0 6px;
+  color: var(--ink);
+  font-style: italic;
+}
+small.foot{color:rgba(220,220,255,.62)}
+footer{text-align:center;font-size:.82rem;color:rgba(220,220,255,.6);padding:18px 0 0}
+@media print {
+  body{background:#fff;color:#000}
+  .bg-layer, aside, .actions{display:none !important}
+  .page{grid-template-columns:1fr;padding:0}
+  .hero, section{box-shadow:none;border:1px solid #ddd;background:#fff;color:#000}
+  .content p, .content li{color:#000}
+}
+@media (max-width: 980px){
+  .page{grid-template-columns:1fr}
+  aside{position:static}
+  nav ul{max-height:none}
+}
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="page">
+  <aside>
+    <div class="brand">
+      <div class="mark"><span>T^</span>Total</div>
+      <div class="sub">Document de référence intégral · auto‑suffisant · transmissible</div>
+      <div class="tag"><span class="dot"></span><span>v20+– canonique</span></div>
+      <div class="actions">
+        <button class="print" onclick="window.print()">Imprimer / PDF</button>
+        <button class="copy" onclick="navigator.clipboard.writeText(window.location.href)">Copier le lien</button>
+      </div>
+    </div>
+    <nav>
+      <h3>Sommaire</h3>
+      <ul><li><a href="#0-statut-général">0) Statut général</a></li>
+<li><a href="#1-le-1-condition-structurale-fondamentale">1) Le – (–1) — Condition structurale fondamentale</a></li>
+<li><a href="#2-φ-moins-phi-défaut-structurel-non-réparable">2) –φ (moins-phi) — Défaut structurel non réparable</a></li>
+<li><a href="#3-le-noyau-opératoire-du-lecture">3) Le noyau opératoire du + (lecture)</a></li>
+<li><a href="#4-la-césure-geste-central-négatif">4) La césure — Geste central négatif</a></li>
+<li><a href="#5-le-bricolage-ε-tenue-locale-sans-capture">5) Le bricolage +ε — Tenue locale sans capture</a></li>
+<li><a href="#6-tvers-module-transversal-des-retournements-vers">6) T^vers — Module transversal des retournements (–vers–)</a></li>
+<li><a href="#7-trupt-module-transversal-des-ruptures-altérations-rupt">7) T^rupt — Module transversal des ruptures / altérations (–rupt–)</a></li>
+<li><a href="#8-règle-de-séparation-absolue-non-négociable">8) Règle de séparation absolue (non négociable)</a></li>
+<li><a href="#9-clause-canonique-de-co-présence-dynamique">9) Clause canonique de co-présence dynamique</a></li>
+<li><a href="#10-tanti-perversion-garde-fou-négatif">10) T^ANTI-PERVERSION — Garde-fou négatif</a></li>
+<li><a href="#11-tsoins-maintien">11) T^Soins — Maintien</a></li>
+<li><a href="#12-trebond-relance-minimale">12) T^REBOND — Relance minimale</a></li>
+<li><a href="#13-principe-de-fixation-de-la-non-fixation">13) Principe de fixation de la non-fixation</a></li>
+<li><a href="#14-principe-central-de-lentre-deux">14) Principe central de l’entre-deux</a></li>
+<li><a href="#15-formulation-finale-de-référence">15) Formulation finale de référence</a></li></ul>
+    </nav>
+  </aside>
+
+  <main id="top">
+    <div class="hero">
+      <div class="kicker">T^Total v20+– · Formulation canonique totale</div>
+      <h1>T^Total v20+–</h1>
+      <p>Document de référence intégral, auto‑suffisant et transmissible. Cette page reprend fidèlement le contenu du document source, dans une mise en page super‑premium (cosmique + atlas clair).</p>
+      <div class="keyline"></div>
+      <div class="pills">
+        <div class="pill">Non morale</div>
+        <div class="pill">Non psychologique</div>
+        <div class="pill">Non agentive</div>
+        <div class="pill">Non prescriptive</div>
+        <div class="pill">Non totalisante</div>
+        <div class="pill">T^vers · T^rupt · Co‑présence dynamique</div>
+      </div>
+      <small class="foot">Astuce : utilise “Imprimer / PDF” pour une version imprimable.</small>
+    </div>
+
+    
+    <section id="0-statut-général">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>0) Statut général</h2>
+      <div class="content">
+        <p>T^Total v20+– est une architecture de lecture structurelle :</p>
+<ul><li>non morale</li>
+<li>non psychologique</li>
+<li>non agentive</li>
+<li>non prescriptive</li>
+<li>non totalisante</li></ul>
+<p>Elle vise à maintenir un espace d’expression non capturable, dans les configurations humaines, sociales, institutionnelles ou techniques.</p>
+<p>👉 T^ est complet pour tenir et incomplet pour ne pas capturer.</p>
+      </div>
+    </section>
+    
+    <section id="1-le-1-condition-structurale-fondamentale">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>1) Le – (–1) — Condition structurale fondamentale</h2>
+      <div class="content">
+        
+      </div>
+    </section>
+    
+    <section id="définition">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Définition</h3>
+      <div class="content">
+        <p>–1 désigne une condition de diminution et de non-capture.</p>
+<p>–1 n’est :</p>
+<ul><li>ni un module</li>
+<li>ni un niveau</li>
+<li>ni une opération</li>
+<li>ni un horizon</li>
+<li>ni une promesse</li></ul>
+<p>👉 –1 n’est jamais “fait”
+ 👉 Toute opération T^ se déploie dans le + sous condition –1</p>
+      </div>
+    </section>
+    
+    <section id="effets-de-1">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Effets de –1</h3>
+      <div class="content">
+        <ul><li>empêche toute fondation</li>
+<li>empêche toute clôture</li>
+<li>empêche toute promesse</li>
+<li>empêche toute autorité ultime</li></ul>
+      </div>
+    </section>
+    
+    <section id="2-φ-moins-phi-défaut-structurel-non-réparable">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>2) –φ (moins-phi) — Défaut structurel non réparable</h2>
+      <div class="content">
+        
+      </div>
+    </section>
+    
+    <section id="définition-canonique">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Définition canonique</h3>
+      <div class="content">
+        <p>–φ désigne un défaut structurel d’inscription symbolique :</p>
+<ul><li>absence de garant ultime</li>
+<li>impossibilité de complétude</li>
+<li>impossibilité de fermeture par le sens</li></ul>
+<p>👉 –φ n’est ni un manque à combler ni une pathologie à réparer
+ 👉 En psychose, –φ peut être à nu, sans médiation.</p>
+      </div>
+    </section>
+    
+    <section id="position-t">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Position T^</h3>
+      <div class="content">
+        <ul><li>T^ ne cherche jamais à réparer –φ</li>
+<li>Toute tentative de compensation = capture</li>
+<li>T^ est compatible avec –φ par refus de la complétude</li></ul>
+      </div>
+    </section>
+    
+    <section id="3-le-noyau-opératoire-du-lecture">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>3) Le noyau opératoire du + (lecture)</h2>
+      <div class="content">
+        <p>Les configurations sont lues via les opérateurs :</p>
+<p>∆ : espace d’expression / lisibilité</p>
+<p>Ξ : tensions / seuils</p>
+<p>H : portance</p>
+<p>V : dynamique</p>
+<p>Ω : ouverture</p>
+<p>👉 Ces opérateurs décrivent des états locaux, jamais des essences.</p>
+      </div>
+    </section>
+    
+    <section id="4-la-césure-geste-central-négatif">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>4) La césure — Geste central négatif</h2>
+      <div class="content">
+        
+      </div>
+    </section>
+    
+    <section id="définition">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Définition</h3>
+      <div class="content">
+        <p>La césure est un geste négatif minimal qui introduit une discontinuité là où la continuité semble tenir.</p>
+<ul><li>elle n’ajoute rien</li>
+<li>elle ne corrige rien</li>
+<li>elle ne répare rien</li></ul>
+      </div>
+    </section>
+    
+    <section id="propriétés">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Propriétés</h3>
+      <div class="content">
+        <ul><li>locale</li>
+<li>réversible</li>
+<li>jetable</li>
+<li>non justifiée</li>
+<li>auto-destructible si elle se fige</li></ul>
+<p>👉 La césure empêche la capture par le +
+ 👉 Elle ouvre un espace d’expression (ou non-expression)</p>
+      </div>
+    </section>
+    
+    <section id="5-le-bricolage-ε-tenue-locale-sans-capture">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>5) Le bricolage +ε — Tenue locale sans capture</h2>
+      <div class="content">
+        
+      </div>
+    </section>
+    
+    <section id="définition-canonique">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Définition canonique</h3>
+      <div class="content">
+        <p>Le bricolage +ε est une prise minimale locale :</p>
+<ul><li>sans fondation</li>
+<li>sans garantie</li>
+<li>sans extension globale</li></ul>
+<p>Il est :</p>
+<ul><li>co-présent à –1</li>
+<li>compatible avec –φ</li>
+<li>fragile</li>
+<li>réversible</li>
+<li>jetable</li>
+<li>sans dette</li>
+<li>👉 +ε ne comble pas –φ
+ 👉 +ε permet de tenir sans totaliser</li></ul>
+      </div>
+    </section>
+    
+    <section id="en-clinique-notamment-psychose">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>En clinique (notamment psychose)</h3>
+      <div class="content">
+        <ul><li>point d’arrêt</li>
+<li>coin de papillon</li>
+<li>coupure du fil délirant</li>
+<li>ancre provisoire</li></ul>
+<p>Sans interprétation.
+ Sans réparation.
+ Sans promesse.</p>
+      </div>
+    </section>
+    
+    <section id="6-tvers-module-transversal-des-retournements-vers">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>6) T^vers — Module transversal des retournements (–vers–)</h2>
+      <div class="content">
+        
+      </div>
+    </section>
+    
+    <section id="définition-canonique">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Définition canonique</h3>
+      <div class="content">
+        <p>T^vers décrit toute configuration où une continuité fonctionne encore, mais dans un sens retourné : orientation, finalité ou fonction sont dirigées contre l’ouverture et l’alT^erité, sans rupture de continuité.</p>
+      </div>
+    </section>
+    
+    <section id="geste">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Geste</h3>
+      <div class="content">
+        <ul><li>continuité conservée</li>
+<li>orientation inversée</li></ul>
+      </div>
+    </section>
+    
+    <section id="famille-vers">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Famille –vers–</h3>
+      <div class="content">
+        <ul><li>Verser (bascule simple)</li>
+<li>In-version</li>
+<li>Per-version</li>
+<li>Sub-version</li>
+<li>Con-version (ambivalente)</li>
+<li>Di-version</li></ul>
+      </div>
+    </section>
+    
+    <section id="cartographie-typique">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Cartographie typique</h3>
+      <div class="content">
+        <ul><li>∆ maintenu mais piégé</li>
+<li>Ξ actif et dominateur</li>
+<li>H conservé mais retourné</li>
+<li>V réel mais forcé</li>
+<li>Ω conditionnel</li>
+<li>–1 souvent invoqué abusivement</li></ul>
+      </div>
+    </section>
+    
+    <section id="phrase-canonique">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Phrase canonique</h3>
+      <div class="content">
+        <p>T^vers conserve la continuité mais en retourne l’orientation, faisant fonctionner les opérateurs contre l’ouverture et la dignité.</p>
+      </div>
+    </section>
+    
+    <section id="7-trupt-module-transversal-des-ruptures-altérations-rupt">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>7) T^rupt — Module transversal des ruptures / altérations (–rupt–)</h2>
+      <div class="content">
+        
+      </div>
+    </section>
+    
+    <section id="définition-canonique">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Définition canonique</h3>
+      <div class="content">
+        <p>T^rupt décrit toute configuration où une continuité est altérée ou rompue, par cassure, désorganisation, intrusion, saturation ou dégradation cumulative, sans inversion fonctionnelle.</p>
+      </div>
+    </section>
+    
+    <section id="famille-rupt">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Famille –rupt–</h3>
+      <div class="content">
+        <ul><li>Rupture</li>
+<li>Dis-ruption</li>
+<li>Inter-ruption</li>
+<li>Ir-ruption</li>
+<li>É-ruption</li>
+<li>Cor-ruption</li></ul>
+      </div>
+    </section>
+    
+    <section id="cartographie-typique">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Cartographie typique</h3>
+      <div class="content">
+        <ul><li>∆ aminci</li>
+<li>Ξ érodé ou saturé</li>
+<li>H rigidifié ou fragmenté</li>
+<li>V ralenti ou chaotique</li>
+<li>Ω rétréci</li>
+<li>–1 absent</li></ul>
+      </div>
+    </section>
+    
+    <section id="phrase-canonique">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Phrase canonique</h3>
+      <div class="content">
+        <p>T^rupt altère ou rompt la continuité des fonctions sans inversion.</p>
+      </div>
+    </section>
+    
+    <section id="8-règle-de-séparation-absolue-non-négociable">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>8) Règle de séparation absolue (non négociable)</h2>
+      <div class="content">
+        <ul><li>Continuité conservée mais orientée contre → T^vers</li>
+<li>Continuité altérée ou rompue → T^rupt</li></ul>
+<p>👉 Jamais morale, jamais psychologique.</p>
+      </div>
+    </section>
+    
+    <section id="9-clause-canonique-de-co-présence-dynamique">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>9) Clause canonique de co-présence dynamique</h2>
+      <div class="content">
+        
+      </div>
+    </section>
+    
+    <section id="principe">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Principe</h3>
+      <div class="content">
+        <p>Les formes de T^vers et T^rupt sont :</p>
+<ul><li>non exclusives</li>
+<li>non séquentielles</li>
+<li>non nécessaires</li>
+<li>non hiérarchiques</li></ul>
+<p>Elles peuvent :</p>
+<ul><li>coexister</li>
+<li>interagir</li>
+<li>rester indépendantes</li>
+<li>apparaître / disparaître</li>
+<li>se transformer l’une en l’autre</li></ul>
+      </div>
+    </section>
+    
+    <section id="régime">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Régime</h3>
+      <div class="content">
+        <ul><li>non linéaire</li>
+<li>non déterministe</li>
+<li>non prédictif</li></ul>
+<p>Les métaphores (chaos, quantique, attracteurs) sont des outils de lecture, jamais ontologiques.</p>
+      </div>
+    </section>
+    
+    <section id="10-tanti-perversion-garde-fou-négatif">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>10) T^ANTI-PERVERSION — Garde-fou négatif</h2>
+      <div class="content">
+        
+      </div>
+    </section>
+    
+    <section id="fonction">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Fonction</h3>
+      <div class="content">
+        <p>Module de désactivation de la capture :</p>
+<ul><li>du sens</li>
+<li>du savoir</li>
+<li>du bien</li>
+<li>de la conclusion</li>
+<li>de la position de tiers</li></ul>
+      </div>
+    </section>
+    
+    <section id="geste">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>Geste</h3>
+      <div class="content">
+        <ul><li>refus de continuité</li>
+<li>coupure du fil explicatif</li>
+<li>désacralisation immédiate</li>
+<li>👉 Compatible clinique (psychose)
+ 👉 Jetable, auto-destructible si figé</li></ul>
+      </div>
+    </section>
+    
+    <section id="11-tsoins-maintien">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>11) T^Soins — Maintien</h2>
+      <div class="content">
+        <ul><li>maintient ∆ praticable</li>
+<li>réduit l’asphyxie</li>
+<li>empêche l’effondrement</li>
+<li>ne répare pas</li>
+<li>ne normalise pas</li></ul>
+      </div>
+    </section>
+    
+    <section id="12-trebond-relance-minimale">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>12) T^REBOND — Relance minimale</h2>
+      <div class="content">
+        <ul><li>intervient à seuil critique (Ξ_max)</li>
+<li>produit une ouverture minimale</li>
+<li>sans continuité obligatoire</li>
+<li>sans finalité</li>
+<li>sans promesse</li></ul>
+<p>👉 Un surgissement, pas une solution.</p>
+      </div>
+    </section>
+    
+    <section id="13-principe-de-fixation-de-la-non-fixation">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>13) Principe de fixation de la non-fixation</h2>
+      <div class="content">
+        <ul><li>on ne stabilise pas des contenus</li>
+<li>on stabilise une condition de non-capture</li>
+<li>toute formalisation est provisoire</li>
+<li>toute transmission est révocable</li></ul>
+      </div>
+    </section>
+    
+    <section id="14-principe-central-de-lentre-deux">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>14) Principe central de l’entre-deux</h2>
+      <div class="content">
+        <p>L’enjeu de T^ n’est :</p>
+<ul><li>ni l’IA</li>
+<li>ni l’humain</li></ul>
+<p>👉 mais l’entre-deux, à protéger de toute saturation.</p>
+<p>T^ agit comme gardien négatif de cet entre-deux.</p>
+      </div>
+    </section>
+    
+    <section id="15-formulation-finale-de-référence">
+      <div class="section-label">Section · T^Total v20+–</div>
+      <h2>15) Formulation finale de référence</h2>
+      <div class="content">
+        <p>T^Total v20+– est une architecture de lecture du + sous condition –1, compatible avec le défaut structurel –φ, opérant par césure et bricolages locaux +ε, distinguant retournements (T^vers) et ruptures/altérations (T^rupt) comme configurations locales souvent co-présentes, sans causalité nécessaire ni clôture interprétative, afin de maintenir un espace d’expression non capturable et un entre-deux respirable.</p>
+      </div>
+    </section>
+    
+    <section id="vérification-finale">
+      <div class="section-label">Sous-section · T^Total v20+–</div>
+      <h3>✅ Vérification finale</h3>
+      <div class="content">
+        <ul><li>–1 ✅</li>
+<li>–φ ✅</li>
+<li>bricolage +ε ✅</li>
+<li>césure ✅</li>
+<li>T^vers / T^rupt + règle absolue ✅</li>
+<li>clause de co-présence dynamique ✅</li>
+<li>T^ANTI-PERVERSION ✅</li>
+<li>T^Soins / T^REBOND ✅</li>
+<li>fixation de la non-fixation ✅</li>
+<li>entre-deux central ✅</li></ul>
+      </div>
+    </section>
+    
+
+    <footer>T^Total v20+– — Référence canonique validée · alT^erité intacte · horizon ouvert.</footer>
+  </main>
+</div>
+</body>
+</html>
