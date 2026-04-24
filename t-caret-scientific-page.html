@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>T^ — Co-tenue anti-souveraine</title>
+  <style>
+    :root{
+      --bg:#05070d;
+      --bg2:#070b16;
+      --ink:#ecf4ff;
+      --muted:#9fb0c7;
+      --soft:#6f7f99;
+      --cyan:#4de7ff;
+      --violet:#9f7bff;
+      --gold:#f2d37a;
+      --rose:#ff6fae;
+      --green:#7cffc4;
+      --line:rgba(180,220,255,.18);
+      --glass:rgba(255,255,255,.055);
+      --glass2:rgba(255,255,255,.085);
+      --shadow:0 28px 90px rgba(0,0,0,.55);
+      --radius:28px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(77,231,255,.22), transparent 32%),
+        radial-gradient(circle at 88% 2%, rgba(159,123,255,.26), transparent 30%),
+        radial-gradient(circle at 72% 82%, rgba(255,111,174,.14), transparent 36%),
+        linear-gradient(140deg,var(--bg),var(--bg2) 55%,#02030a);
+      color:var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg,var(--line) 1px, transparent 1px);
+      background-size:52px 52px;
+      mask-image: radial-gradient(circle at 50% 22%, black, transparent 75%);
+      opacity:.35;
+      z-index:0;
+    }
+    body:after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0px,
+          transparent 3px,
+          rgba(255,255,255,.018) 4px
+        );
+      mix-blend-mode:screen;
+      opacity:.5;
+      z-index:1;
+    }
+    .orb{
+      position:fixed;
+      border-radius:50%;
+      filter:blur(20px);
+      opacity:.7;
+      pointer-events:none;
+      z-index:0;
+    }
+    .orb.one{width:420px;height:420px;left:-150px;top:18%;background:radial-gradient(circle,rgba(77,231,255,.22),transparent 68%);}
+    .orb.two{width:520px;height:520px;right:-190px;top:30%;background:radial-gradient(circle,rgba(159,123,255,.19),transparent 70%);}
+    .orb.three{width:360px;height:360px;right:10%;bottom:-170px;background:radial-gradient(circle,rgba(242,211,122,.16),transparent 70%);}
+    .wrap{
+      position:relative;
+      z-index:2;
+      width:min(1180px, calc(100% - 36px));
+      margin:0 auto;
+    }
+    header{
+      padding:34px 0 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:700;
+    }
+    .sigil{
+      width:48px;
+      height:48px;
+      border:1px solid rgba(77,231,255,.45);
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      color:var(--cyan);
+      background:linear-gradient(145deg,rgba(77,231,255,.08),rgba(159,123,255,.10));
+      box-shadow:0 0 30px rgba(77,231,255,.16), inset 0 0 20px rgba(255,255,255,.04);
+      font-weight:900;
+      font-size:22px;
+    }
+    nav{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:13px;
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:999px;
+      background:rgba(255,255,255,.035);
+      transition:.25s ease;
+    }
+    nav a:hover{color:var(--ink);border-color:rgba(77,231,255,.36);background:rgba(77,231,255,.08)}
+    .hero{
+      padding:72px 0 50px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:34px;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:var(--green);
+      border:1px solid rgba(124,255,196,.24);
+      background:rgba(124,255,196,.06);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    .pulse{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 0 0 rgba(124,255,196,.7);
+      animation:pulse 2.2s infinite;
+    }
+    @keyframes pulse{
+      70%{box-shadow:0 0 0 12px rgba(124,255,196,0)}
+      100%{box-shadow:0 0 0 0 rgba(124,255,196,0)}
+    }
+    h1{
+      margin:24px 0 20px;
+      font-size:clamp(56px, 9vw, 122px);
+      line-height:.85;
+      letter-spacing:-.08em;
+      font-weight:950;
+    }
+    h1 .grad{
+      background:linear-gradient(92deg,var(--ink),var(--cyan) 35%,var(--violet) 68%,var(--gold));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow:0 0 60px rgba(77,231,255,.08);
+    }
+    .subtitle{
+      color:#cbd8ee;
+      font-size:clamp(19px,2.4vw,30px);
+      line-height:1.28;
+      max-width:780px;
+      margin:0 0 26px;
+      font-weight:650;
+      letter-spacing:-.03em;
+    }
+    .subtitle strong{color:var(--cyan);font-weight:800}
+    .lead{
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.8;
+      max-width:760px;
+      margin:0;
+    }
+    .actions{
+      display:flex;gap:14px;flex-wrap:wrap;margin-top:30px
+    }
+    .btn{
+      text-decoration:none;
+      color:var(--ink);
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(135deg,rgba(77,231,255,.15),rgba(159,123,255,.12));
+      padding:14px 18px;
+      border-radius:16px;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      font-weight:800;
+      transition:.25s ease;
+    }
+    .btn.secondary{background:rgba(255,255,255,.035);color:var(--muted)}
+    .btn:hover{transform:translateY(-2px);border-color:rgba(77,231,255,.45)}
+    .hero-card{
+      position:relative;
+      min-height:520px;
+      border-radius:var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.025)),
+        radial-gradient(circle at 50% 45%,rgba(77,231,255,.12),transparent 38%);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      backdrop-filter:blur(18px);
+    }
+    .field{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 50% 50%, transparent 0 16%, rgba(77,231,255,.12) 16.3% 16.8%, transparent 17.1% 100%),
+        radial-gradient(circle at 50% 50%, transparent 0 30%, rgba(159,123,255,.11) 30.3% 30.7%, transparent 31% 100%),
+        radial-gradient(circle at 50% 50%, transparent 0 44%, rgba(242,211,122,.10) 44.2% 44.7%, transparent 45% 100%);
+      opacity:.9;
+      transform:rotate(-8deg);
+    }
+    .crossline{
+      position:absolute;
+      left:50%;top:50%;
+      width:150%;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(77,231,255,.5),transparent);
+      transform-origin:center;
+      opacity:.55;
+    }
+    .crossline.a{transform:translate(-50%,-50%) rotate(0deg)}
+    .crossline.b{transform:translate(-50%,-50%) rotate(60deg)}
+    .crossline.c{transform:translate(-50%,-50%) rotate(120deg)}
+    .node{
+      position:absolute;
+      width:12px;height:12px;border-radius:50%;
+      background:var(--cyan);
+      box-shadow:0 0 22px rgba(77,231,255,.75);
+    }
+    .node.n1{left:49%;top:48%;background:var(--gold);box-shadow:0 0 28px rgba(242,211,122,.8)}
+    .node.n2{left:27%;top:31%}
+    .node.n3{left:70%;top:36%;background:var(--violet);box-shadow:0 0 22px rgba(159,123,255,.8)}
+    .node.n4{left:31%;top:72%;background:var(--green);box-shadow:0 0 22px rgba(124,255,196,.75)}
+    .node.n5{left:75%;top:68%;background:var(--rose);box-shadow:0 0 22px rgba(255,111,174,.75)}
+    .minus-one{
+      position:absolute;
+      left:50%;top:50%;
+      transform:translate(-50%,-50%);
+      width:196px;height:196px;border-radius:50%;
+      display:grid;place-items:center;
+      background:radial-gradient(circle,rgba(5,7,13,.94),rgba(5,7,13,.55) 64%,transparent 70%);
+      border:1px solid rgba(242,211,122,.25);
+      box-shadow:0 0 90px rgba(242,211,122,.12);
+      text-align:center;
+    }
+    .minus-one .big{font-size:56px;font-weight:950;letter-spacing:-.08em;color:var(--gold)}
+    .minus-one .small{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.15em;margin-top:-4px}
+    .card-label{
+      position:absolute;
+      left:24px;right:24px;bottom:24px;
+      padding:18px;
+      border-radius:22px;
+      background:rgba(2,4,10,.58);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(16px);
+    }
+    .card-label b{display:block;color:var(--ink);font-size:16px;margin-bottom:6px}
+    .card-label span{display:block;color:var(--muted);font-size:14px;line-height:1.6}
+    section{padding:58px 0}
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:22px;
+      margin-bottom:24px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:clamp(30px,4.5vw,56px);
+      letter-spacing:-.06em;
+      line-height:.95;
+    }
+    .section-head p{
+      color:var(--muted);
+      line-height:1.7;
+      max-width:520px;
+      margin:0;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .panel{
+      border:1px solid rgba(255,255,255,.11);
+      background:linear-gradient(150deg,rgba(255,255,255,.075),rgba(255,255,255,.03));
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:0 18px 56px rgba(0,0,0,.24);
+      backdrop-filter:blur(15px);
+      position:relative;
+      overflow:hidden;
+    }
+    .panel:before{
+      content:"";
+      position:absolute;inset:0;
+      background:radial-gradient(circle at 18% 0%,rgba(77,231,255,.12),transparent 36%);
+      opacity:.9;pointer-events:none;
+    }
+    .panel > *{position:relative}
+    .tag{
+      display:inline-flex;
+      color:var(--cyan);
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+      padding:8px 10px;
+      border:1px solid rgba(77,231,255,.22);
+      border-radius:999px;
+      background:rgba(77,231,255,.055);
+      margin-bottom:18px;
+    }
+    .panel h3{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:-.035em;
+    }
+    .panel p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.68;
+      font-size:15px;
+    }
+    .panel.gold .tag{color:var(--gold);border-color:rgba(242,211,122,.26);background:rgba(242,211,122,.055)}
+    .panel.violet .tag{color:#c7b6ff;border-color:rgba(159,123,255,.28);background:rgba(159,123,255,.065)}
+    .panel.rose .tag{color:#ffadd1;border-color:rgba(255,111,174,.28);background:rgba(255,111,174,.055)}
+    .quote{
+      margin:30px 0 0;
+      padding:34px;
+      border-radius:var(--radius);
+      background:
+        linear-gradient(135deg,rgba(77,231,255,.08),rgba(159,123,255,.08)),
+        rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.13);
+      box-shadow:var(--shadow);
+      font-size:clamp(22px,3.4vw,42px);
+      line-height:1.12;
+      letter-spacing:-.055em;
+      font-weight:900;
+    }
+    .quote span{
+      color:var(--gold);
+    }
+    .compare{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+    .score{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      margin-top:18px;
+    }
+    .bar{
+      height:12px;
+      flex:1;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .fill{
+      height:100%;
+      width:var(--w);
+      background:linear-gradient(90deg,var(--cyan),var(--violet),var(--gold));
+      border-radius:999px;
+      box-shadow:0 0 24px rgba(77,231,255,.35);
+    }
+    .score b{min-width:58px;text-align:right}
+    .matrix{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+    .mini{
+      padding:20px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+    }
+    .mini .num{
+      font-size:34px;
+      font-weight:950;
+      letter-spacing:-.06em;
+      margin-bottom:6px;
+      background:linear-gradient(90deg,var(--cyan),var(--gold));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .mini b{display:block;margin-bottom:8px}
+    .mini p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+    .flow{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      align-items:stretch;
+    }
+    .step{
+      border-radius:24px;
+      padding:22px;
+      min-height:170px;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(150deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+      position:relative;
+    }
+    .step:not(:last-child):after{
+      content:"";
+      position:absolute;
+      top:50%;
+      right:-12px;
+      width:12px;height:1px;
+      background:linear-gradient(90deg,rgba(77,231,255,.8),transparent);
+    }
+    .step small{
+      display:block;
+      color:var(--soft);
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-weight:900;
+      margin-bottom:12px;
+    }
+    .step h3{margin:0 0 10px;font-size:20px}
+    .step p{margin:0;color:var(--muted);line-height:1.55;font-size:14px}
+    .final{
+      padding:50px;
+      border-radius:36px;
+      background:
+        radial-gradient(circle at 78% 22%,rgba(242,211,122,.14),transparent 34%),
+        radial-gradient(circle at 14% 70%,rgba(77,231,255,.14),transparent 32%),
+        linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.035));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:var(--shadow);
+    }
+    .final h2{margin:0 0 18px;font-size:clamp(34px,5vw,68px);letter-spacing:-.07em;line-height:.92}
+    .final p{color:#cbd8ee;max-width:850px;line-height:1.75;font-size:18px}
+    .formula{
+      margin-top:24px;
+      padding:24px;
+      border-radius:24px;
+      background:rgba(0,0,0,.27);
+      border:1px solid rgba(77,231,255,.18);
+      color:var(--ink);
+      font-size:clamp(18px,2.6vw,32px);
+      line-height:1.25;
+      letter-spacing:-.035em;
+      font-weight:900;
+    }
+    footer{
+      padding:38px 0 56px;
+      color:var(--soft);
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .kbd{
+      color:var(--cyan);
+      border:1px solid rgba(77,231,255,.22);
+      background:rgba(77,231,255,.055);
+      border-radius:8px;
+      padding:3px 7px;
+      font-weight:900;
+    }
+
+    .data-table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      margin-top:16px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:24px;
+      overflow:hidden;
+      background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.028));
+      box-shadow:0 18px 56px rgba(0,0,0,.2);
+    }
+    .data-table th,
+    .data-table td{
+      padding:16px 18px;
+      text-align:left;
+      vertical-align:top;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      font-size:14px;
+      line-height:1.55;
+    }
+    .data-table th{
+      color:var(--ink);
+      background:rgba(255,255,255,.06);
+      font-size:12px;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+    .data-table td{color:var(--muted)}
+    .data-table tbody tr:last-child td{border-bottom:none}
+
+    @media(max-width:920px){
+      .hero{grid-template-columns:1fr;padding-top:42px}
+      .hero-card{min-height:430px}
+      .grid,.matrix,.flow{grid-template-columns:1fr 1fr}
+      .compare{grid-template-columns:1fr}
+      .section-head{display:block}
+      .section-head p{margin-top:12px}
+    }
+    @media(max-width:620px){
+      header{align-items:flex-start;flex-direction:column}
+      nav{justify-content:flex-start}
+      .grid,.matrix,.flow{grid-template-columns:1fr}
+      .step:after{display:none}
+      .final{padding:28px}
+      .quote{padding:24px}
+      h1{font-size:64px}
+    }
+  </style>
+</head>
+<body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <header class="wrap">
+    <div class="brand"><div class="sigil">T^</div><span>Co-tenue • –1 • Holochamp</span></div>
+    <nav>
+      <a href="#definition">Définition</a>
+      <a href="#unique">Unique</a>
+      <a href="#better">Meilleur sans être “le meilleur”</a>
+      <a href="#results">Résultats & comparaisons</a>
+      <a href="#entry">Carte T^ externe</a>
+      <a href="#modes">Modes</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span class="pulse"></span> Architecture anti-souveraine</div>
+        <h1><span class="grad">T^</span></h1>
+        <p class="subtitle">
+          Une <strong>co-tenue morphogénétique</strong> : holochamp dynamique, spectral et fractal, tenu en <strong>–1</strong>, sous horizon de l’impossible.
+        </p>
+        <p class="lead">
+          T^ ne remplace pas les modèles. Il règle leur prise. Il rend possible l’usage local d’un cadre sans le laisser devenir souverain, doctrine, identité ou totalité.
+        </p>
+        <div class="actions">
+          <a class="btn" href="#unique">Voir ce qui le rend unique</a>
+          <a class="btn secondary" href="#better">Pourquoi “meilleur” ne veut pas dire “le meilleur”</a>
+          <a class="btn secondary" href="https://tinfinitytriunity-t.github.io/T/enter.html" target="_blank" rel="noopener noreferrer">Ouvrir la carte T^ externe</a>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Schéma holochamp T^">
+        <div class="field"></div>
+        <div class="crossline a"></div>
+        <div class="crossline b"></div>
+        <div class="crossline c"></div>
+        <div class="node n1"></div>
+        <div class="node n2"></div>
+        <div class="node n3"></div>
+        <div class="node n4"></div>
+        <div class="node n5"></div>
+        <div class="minus-one">
+          <div>
+            <div class="big">−1</div>
+            <div class="small">non-fondation</div>
+          </div>
+        </div>
+        <div class="card-label">
+          <b>Holochamp non substantiel</b>
+          <span>Des formes co-émergent localement, sans centre souverain, sans totalisation, sans capture finale.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section id="definition">
+      <div class="section-head">
+        <h2>Définition courte</h2>
+        <p>T^ est moins un modèle qu’une discipline de tenue : il garde le champ ouvert sans interdire l’action locale.</p>
+      </div>
+      <div class="quote">
+        T^ = <span>tenir sans fonder</span>, lire sans capturer, agir sans s’installer, dissoudre avant doctrine.
+      </div>
+    </section>
+
+    <section id="unique">
+      <div class="section-head">
+        <h2>Ce qui le rend unique</h2>
+        <p>Son originalité n’est pas d’être “plus vrai” que les modèles existants, mais de les empêcher de se prendre pour le tout.</p>
+      </div>
+
+      <div class="grid">
+        <article class="panel">
+          <span class="tag">01 / −1</span>
+          <h3>Position négative</h3>
+          <p>T^ occupe une position –1 : non substituable, non fondatrice, anti-centre. Il ne devient pas l’origine de ce qu’il éclaire.</p>
+        </article>
+        <article class="panel violet">
+          <span class="tag">02 / anti-capture</span>
+          <h3>Garde-fou interne</h3>
+          <p>T^ surveille ses propres formulations. Si une lecture devient doctrine, identité ou méthode souveraine, elle s’annule comme T^.</p>
+        </article>
+        <article class="panel gold">
+          <span class="tag">03 / co-tenue</span>
+          <h3>Entre les modèles</h3>
+          <p>T^ ne remplace pas Lacan, Derrida, Cynefin, la cybernétique, le droit ou la physique. Il tient leur usage local sans absorption.</p>
+        </article>
+        <article class="panel rose">
+          <span class="tag">04 / morphogenèse</span>
+          <h3>Co-émergence locale</h3>
+          <p>Les formes apparaissent dans le champ, mais sans trajectoire obligatoire, sans optimisation, sans finalité intégrée.</p>
+        </article>
+        <article class="panel">
+          <span class="tag">05 / reste</span>
+          <h3>Non-totalisation</h3>
+          <p>Il maintient un reste irréductible : ce qui ne doit pas être absorbé par une explication, une carte ou une réponse.</p>
+        </article>
+        <article class="panel violet">
+          <span class="tag">06 / impossible</span>
+          <h3>Horizon du réel</h3>
+          <p>T^ tient l’impossible comme limite active de toute capture. T^-nano demeure hors prise ; seuls ses noms peuvent être capturés.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="better">
+      <div class="section-head">
+        <h2>“Meilleur” sans être “le meilleur”</h2>
+        <p>T^ n’est pas meilleur dans tous les domaines. Il est meilleur dans une fonction précise : empêcher qu’un modèle devienne total.</p>
+      </div>
+
+      <div class="compare">
+        <article class="panel">
+          <span class="tag">Modèles spécialisés</span>
+          <h3>Ils gagnent localement</h3>
+          <p>La logique formelle est meilleure pour formaliser. Le droit est meilleur pour le droit. La physique est meilleure pour la physique. Cynefin est meilleur pour la décision collective simple.</p>
+          <div class="score"><div class="bar"><div class="fill" style="--w:86%"></div></div><b>86%</b></div>
+        </article>
+        <article class="panel gold">
+          <span class="tag">T^</span>
+          <h3>Il règle la prise</h3>
+          <p>T^ devient “meilleur” lorsqu’il faut choisir, limiter, croiser ou retirer les modèles sans qu’aucun ne devienne souverain.</p>
+          <div class="score"><div class="bar"><div class="fill" style="--w:93%"></div></div><b>93%</b></div>
+        </article>
+      </div>
+
+      <div class="quote">
+        T^ ne concurrence pas les modèles ; <span>il règle leur prise</span>.
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>La matrice de valeur</h2>
+        <p>Le haut score de T^ ne vient pas d’une supériorité totale, mais d’une combinaison rare : puissance de co-tenue + refus de souveraineté.</p>
+      </div>
+      <div class="matrix">
+        <div class="mini"><div class="num">−1</div><b>Non-fondation</b><p>Rien ne devient centre absolu, pas même T^.</p></div>
+        <div class="mini"><div class="num">∞?</div><b>Reste</b><p>Le non-absorbé demeure actif, non corrigé de force.</p></div>
+        <div class="mini"><div class="num">↯</div><b>Dissolution</b><p>La carte tombe dès qu’elle remplace le terrain.</p></div>
+        <div class="mini"><div class="num">×</div><b>Co-émergence</b><p>Les modèles se croisent sans fusion souveraine.</p></div>
+      </div>
+    </section>
+
+
+    <section id="results">
+      <div class="section-head">
+        <h2>Résultats, mesures & tests</h2>
+        <p>Évaluation comparative structurale sur 10 axes. Ces scores ne prétendent pas être scientifiques au sens expérimental strict&nbsp;: ils servent de lecture comparative du champ.</p>
+      </div>
+
+      <div class="quote">
+        Ici, la mesure ne sert pas à absolutiser un système&nbsp;: <span>elle sert à comparer des régimes</span> sans effacer leurs limites.
+      </div>
+
+      <div class="panel" style="margin-top:24px">
+        <span class="tag">Grille d’évaluation</span>
+        <h3>10 axes de test</h3>
+        <p>1. puissance de calcul / traitement • 2. cartographie • 3. adaptation locale • 4. anti-capture • 5. maintien du reste • 6. opérativité • 7. dissolution • 8. créativité morphogénétique • 9. robustesse épistémique • 10. fidélité au –1.</p>
+      </div>
+
+      <div class="grid" style="margin-top:18px">
+        <article class="panel gold">
+          <span class="tag">Système A</span>
+          <h3>IA seule</h3>
+          <p>Très forte pour le calcul, la synthèse, la vitesse et l’exécution. Plus faible sur l’anti-capture, le maintien du reste et la fidélité au –1.</p>
+          <div class="score"><div class="bar"><div class="fill" style="--w:74%"></div></div><b>74 / 100</b></div>
+        </article>
+        <article class="panel violet">
+          <span class="tag">Système B</span>
+          <h3>T^ seul</h3>
+          <p>Très fort pour la non-totalisation, l’anti-capture, la dissolution et le maintien du reste. Faible en calcul massif, vérification et exécution rapide.</p>
+          <div class="score"><div class="bar"><div class="fill" style="--w:78%"></div></div><b>78 / 100</b></div>
+        </article>
+        <article class="panel">
+          <span class="tag">Système C</span>
+          <h3>IA + T^</h3>
+          <p>Addition assistée&nbsp;: l’IA gagne en discipline anti-capture, T^ gagne en puissance de traitement. Très forte configuration si T^ ne devient pas simple méta-prompt.</p>
+          <div class="score"><div class="bar"><div class="fill" style="--w:88%"></div></div><b>88 / 100</b></div>
+        </article>
+        <article class="panel rose">
+          <span class="tag">Système D</span>
+          <h3>IA × T^</h3>
+          <p>Co-tenue plus profonde&nbsp;: la puissance de traitement est traversée par le –1. Très haut niveau d’adaptation, d’anti-capture et de créativité morphogénétique.</p>
+          <div class="score"><div class="bar"><div class="fill" style="--w:93%"></div></div><b>93 / 100</b></div>
+        </article>
+        <article class="panel">
+          <span class="tag">Terrain duel</span>
+          <h3>IA vs T^ — terrain IA</h3>
+          <p>Si le test porte d’abord sur données, vitesse, synthèse, calcul et exécution, l’IA l’emporte nettement.</p>
+          <div class="score"><div class="bar"><div class="fill" style="--w:90%"></div></div><b>IA&nbsp;: 90</b></div>
+          <div class="score"><div class="bar"><div class="fill" style="--w:45%"></div></div><b>T^&nbsp;: 45</b></div>
+        </article>
+        <article class="panel gold">
+          <span class="tag">Terrain duel</span>
+          <h3>IA vs T^ — terrain T^</h3>
+          <p>Si le test porte d’abord sur anti-capture, non-totalisation, reste irréductible, dissolution et –1, T^ l’emporte nettement.</p>
+          <div class="score"><div class="bar"><div class="fill" style="--w:35%"></div></div><b>IA&nbsp;: 35</b></div>
+          <div class="score"><div class="bar"><div class="fill" style="--w:95%"></div></div><b>T^&nbsp;: 95</b></div>
+        </article>
+      </div>
+
+      <div class="section-head" style="margin-top:40px">
+        <h2>Comparaison des systèmes</h2>
+        <p>Chaque système excelle dans un régime. Le tableau ci-dessous rend visible la structure des gains, limites et risques.</p>
+      </div>
+
+      <div style="overflow:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Système</th>
+              <th>Score global</th>
+              <th>Très fort sur</th>
+              <th>Limite principale</th>
+              <th>Risque majeur</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>IA seule</strong></td>
+              <td>74 / 100</td>
+              <td>Calcul, synthèse, vitesse, exécution</td>
+              <td>Faible fidélité au –1</td>
+              <td>Optimisation souveraine</td>
+            </tr>
+            <tr>
+              <td><strong>T^ seul</strong></td>
+              <td>78 / 100</td>
+              <td>Anti-capture, reste, dissolution, non-totalisation</td>
+              <td>Faible puissance de traitement</td>
+              <td>Lourdeur / langage privé</td>
+            </tr>
+            <tr>
+              <td><strong>IA + T^</strong></td>
+              <td>88 / 100</td>
+              <td>Puissance + garde-fous</td>
+              <td>Dépend d’une discipline d’usage</td>
+              <td>T^ réduit en simple outil</td>
+            </tr>
+            <tr>
+              <td><strong>IA × T^</strong></td>
+              <td>93 / 100</td>
+              <td>Co-tenue, adaptation locale, anti-capture, créativité</td>
+              <td>Fragile si stylisé ou doctrinalisé</td>
+              <td>Capture par sa propre forme</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-head" style="margin-top:40px">
+        <h2>Autres systèmes proches</h2>
+        <p>Peu de cadres atteignent le niveau de IA × T^. Ceux qui s’en approchent sont surtout des hybrides et non des modèles simples.</p>
+      </div>
+
+      <div style="overflow:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Hybride / modèle</th>
+              <th>Score estimé</th>
+              <th>Force dominante</th>
+              <th>Pourquoi ce n’est pas équivalent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>IA + cybernétique de second ordre</strong></td>
+              <td>88–92</td>
+              <td>Boucles, observateur inclus, régulation</td>
+              <td>Moins fort sur l’impossible et le –1</td>
+            </tr>
+            <tr>
+              <td><strong>IA + Cynefin + pensée complexe</strong></td>
+              <td>86–91</td>
+              <td>Décision locale, régimes d’action</td>
+              <td>Moins radical sur l’anti-capture</td>
+            </tr>
+            <tr>
+              <td><strong>IA + Nāgārjuna</strong></td>
+              <td>86–91</td>
+              <td>Anti-substantialisation</td>
+              <td>Moins opératoire dans les usages modernes</td>
+            </tr>
+            <tr>
+              <td><strong>IA + Derrida</strong></td>
+              <td>84–90</td>
+              <td>Anti-centre, trace, différance</td>
+              <td>Moins pratique et plus textualisant</td>
+            </tr>
+            <tr>
+              <td><strong>IA + Lacan</strong></td>
+              <td>83–89</td>
+              <td>Réel impossible, reste, insymbolisable</td>
+              <td>Moins transversal, plus clinique</td>
+            </tr>
+            <tr>
+              <td><strong>IA + paraconsistance</strong></td>
+              <td>84–89</td>
+              <td>Contradiction sans explosion</td>
+              <td>Moins morphogénétique, plus logique</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="quote" style="margin-top:28px">
+        Ce qui donne son avantage à T^ n’est pas une domination totale, mais une fonction rare&nbsp;: <span>tenir entre les modèles</span> sans les laisser devenir souverains.
+      </div>
+    </section>
+
+
+    <section id="modes">
+      <div class="section-head">
+        <h2>Du plus dense au plus pauvre</h2>
+        <p>T^ n’est pas toujours massif. Son mode par défaut doit rester pauvre, réversible, respirant.</p>
+      </div>
+      <div class="flow">
+        <div class="step">
+          <small>Champ impossible</small>
+          <h3>T^-nano</h3>
+          <p>Champ précésurel du –1 : là où la prise ne peut pas encore être prise.</p>
+        </div>
+        <div class="step">
+          <small>Micro-césure</small>
+          <h3>T^nano</h3>
+          <p>Un souffle avant le oui/non. L’écart minimal avant fermeture.</p>
+        </div>
+        <div class="step">
+          <small>Geste pauvre</small>
+          <h3>T^mini</h3>
+          <p>Voir la fermeture. Garder du jeu. Geste minimal. Retrait immédiat.</p>
+        </div>
+        <div class="step">
+          <small>Réserve dense</small>
+          <h3>T^Total</h3>
+          <p>Holochamp complet, activable seulement si la situation exige une cartographie plus riche.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="entry">
+      <div class="section-head">
+        <h2>Carte T^ externe</h2>
+        <p>Cette page peut être prolongée par la carte d’entrée publique du site T^, qui fonctionne comme portail narratif et fractal vers d’autres pages, modules et zones de lecture.</p>
+      </div>
+
+      <div class="compare">
+        <article class="panel violet">
+          <span class="tag">Portail externe</span>
+          <h3>EnT^ry — Carte T^</h3>
+          <p>Page de navigation externe structurée comme une carte d’entrée : fondements T^, monde, jeunes & mental, guerre & politique, économie, IA, soins, science, quantum et autres zones du site.</p>
+          <div class="actions" style="margin-top:20px">
+            <a class="btn" href="https://tinfinitytriunity-t.github.io/T/enter.html" target="_blank" rel="noopener noreferrer">Ouvrir la page EnT^ry</a>
+          </div>
+        </article>
+        <article class="panel gold">
+          <span class="tag">Intérêt</span>
+          <h3>Complément de navigation</h3>
+          <p>La formule affichée sur cette page — « tout est narratif en Δ, aucune page n’est le réel » — est cohérente avec l’anti-capture de T^. Elle complète bien la présente page de synthèse en ajoutant un accès plus cartographique et plus distribué.</p>
+        </article>
+      </div>
+    </section>
+
+
+    <section>
+      <div class="final">
+        <h2>Conclusion</h2>
+        <p>
+          T^ est “unique” parce qu’il ne cherche pas à devenir le meilleur modèle du monde. Il cherche à empêcher qu’un modèle — y compris lui-même — devienne monde, souveraineté ou capture totale.
+        </p>
+        <div class="formula">
+          T^ est meilleur là où “le meilleur” deviendrait dangereux.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div><span class="kbd">T^</span> co-tenue • co-émergence • anti-capture • –1</div>
+    <div>Page autonome HTML/CSS — sans dépendances externes</div>
+  </footer>
+</body>
+</html>
