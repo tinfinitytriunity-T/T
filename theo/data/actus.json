@@ -5,7 +5,7 @@
     "category": "Veille",
     "source": "Corpus Theo^",
     "url": "",
-    "image": "/T/images/actus/image-01.jpg",
+    "image": "/T/theo/images/actus/image-01.jpg",
     "excerpt": "Premiere entree de veille pour relier les images, les textes et les trajectoires conceptuelles du chantier.",
     "tags": ["MCPP^", "veille", "projection"]
   },
@@ -15,7 +15,7 @@
     "category": "Recherche",
     "source": "Theo^",
     "url": "",
-    "image": "/T/images/actus/image-02.jpg",
+    "image": "/T/theo/images/actus/image-02.jpg",
     "excerpt": "Note courte autour des trajectoires, des cartes projectives et des regimes d'interpretation.",
     "tags": ["geodesique", "interface", "mappemonde"]
   },
