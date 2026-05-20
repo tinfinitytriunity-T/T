@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">MV Hondius, hantavirus et OMS</title>
+  <desc id="desc">Illustration abstraite sombre montrant un navire, une route sanitaire et des cercles de surveillance.</desc>
+  <defs>
+    <radialGradient id="glow" cx="58%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#6fb6d5" stop-opacity="0.24"/>
+      <stop offset="56%" stop-color="#163653" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#020713" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="signal" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d6b36a" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#d6b36a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="route" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7cd7ff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#d5b46c" stop-opacity="0.84"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#071223"/>
+      <stop offset="100%" stop-color="#030713"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#sea)"/>
+  <rect width="1280" height="720" fill="url(#glow)"/>
+  <g opacity="0.25">
+    <path d="M0 124H1280M0 220H1280M0 316H1280M0 412H1280M0 508H1280M0 604H1280" stroke="#9bd8ff" stroke-opacity="0.22"/>
+    <path d="M120 0V720M240 0V720M360 0V720M480 0V720M600 0V720M720 0V720M840 0V720M960 0V720M1080 0V720M1200 0V720" stroke="#9bd8ff" stroke-opacity="0.18"/>
+  </g>
+  <path d="M120 482C226 420 338 442 444 374C568 294 650 304 784 244C892 196 1010 188 1162 202" fill="none" stroke="url(#route)" stroke-width="7" stroke-linecap="round" opacity="0.86"/>
+  <g opacity="0.92">
+    <path d="M256 464L414 538H858L1002 454L948 510L838 584H356Z" fill="#112b43" stroke="#9bd8ff" stroke-opacity="0.5" stroke-width="4"/>
+    <path d="M406 404H814L892 454H324Z" fill="#091a2b" stroke="#9bd8ff" stroke-opacity="0.34" stroke-width="3"/>
+    <path d="M550 236V404M636 288V404M724 324V404" stroke="#d6b36a" stroke-opacity="0.58" stroke-width="5" stroke-linecap="round"/>
+    <path d="M512 362H782" stroke="#9bd8ff" stroke-opacity="0.24" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="120" cy="482" r="11" fill="#7cd7ff"/>
+    <circle cx="444" cy="374" r="11" fill="#7cd7ff"/>
+    <circle cx="784" cy="244" r="13" fill="#d6b36a"/>
+    <circle cx="1162" cy="202" r="11" fill="#7cd7ff"/>
+    <circle cx="784" cy="244" r="70" fill="url(#signal)" opacity="0.5"/>
+    <circle cx="784" cy="244" r="104" fill="none" stroke="#7cd7ff" stroke-opacity="0.16" stroke-width="3"/>
+    <circle cx="784" cy="244" r="160" fill="none" stroke="#7cd7ff" stroke-opacity="0.10" stroke-width="3"/>
+  </g>
+  <g opacity="0.74">
+    <rect x="884" y="88" width="258" height="116" rx="28" fill="#050b17" stroke="#d6b36a" stroke-opacity="0.28"/>
+    <path d="M924 132H1100M924 166H1048" stroke="#f4efe4" stroke-opacity="0.32" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="1074" cy="166" r="14" fill="#d6b36a" opacity="0.75"/>
+  </g>
+</svg>

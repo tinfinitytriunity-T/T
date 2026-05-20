@@ -3,12 +3,15 @@
     "slug": "hantavirus-hondius-oms",
     "date": "2026-05-18",
     "title": "MV Hondius / Hantavirus / OMS",
-    "category": "Geopolitique sanitaire",
-    "source": "Enquete Theo^",
+    "category": "Géopolitique sanitaire",
+    "source": "Enquête Theo^",
     "url": "",
     "route": "actus/hantavirus-hondius-oms",
-    "image": "",
-    "excerpt": "Un cluster reel, rare et grave devient une scene de legitimation institutionnelle : risque officiellement faible, dispositif maximal, communication rassurante et conversion politique immediate.",
-    "tags": ["OMS", "Hantavirus", "Andes virus", "MV Hondius", "Argentine", "Traite pandemie", "PABS"]
+    "image": "images/actus/hondius-hantavirus-oms.svg",
+    "imageAlt": "Illustration abstraite du dossier MV Hondius, hantavirus et OMS",
+    "excerpt": "Un cluster réel, rare et grave devient une scène de légitimation institutionnelle : risque officiellement faible, dispositif maximal, communication rassurante et conversion politique immédiate.",
+    "tags": ["OMS", "Hantavirus", "Andes virus", "MV Hondius", "Argentine", "Traité pandémie", "PABS"],
+    "badge": "Analyse",
+    "featured": true
   }
 ]
