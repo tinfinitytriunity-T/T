@@ -121,26 +121,6 @@
     ]
   },
   {
-    "src": "/T/theo/favicon.svg",
-    "title": "favicon.svg",
-    "alt": "Favicon Theo",
-    "type": "svg",
-    "usedIn": [
-      {
-        "label": "Site Theo^",
-        "href": "/T/theo/",
-        "context": "icône du site"
-      }
-    ]
-  },
-  {
-    "src": "/T/theo/icons.svg",
-    "title": "icons.svg",
-    "alt": "Sprite d’icônes",
-    "type": "svg",
-    "usedIn": []
-  },
-  {
     "src": "/T/theo/images/gallery/1.png",
     "title": "1.png",
     "alt": "1.png",
