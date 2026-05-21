@@ -1,5 +1,25 @@
 [
   {
+    "slug": "toulon-filicide-suicide-maternel-etude",
+    "date": "2026-05-21",
+    "title": "Toulon, Pontcarral — filicide-suicide, données comparées et lecture mondiale",
+    "category": "Faits de société",
+    "source": "Étude Theo^",
+    "url": "",
+    "route": "actus/toulon-filicide-suicide-maternel-etude",
+    "excerpt": "Étude factuelle et criminologique sur le drame de Toulon du 20 mai 2026, avec données françaises et internationales sur les filicides-suicides.",
+    "tags": [
+      "Toulon",
+      "Pontcarral",
+      "Filicide",
+      "Filicide-suicide",
+      "Criminologie",
+      "Protection de l’enfance"
+    ],
+    "badge": "Étude",
+    "featured": true
+  },
+  {
     "slug": "hantavirus-hondius-oms",
     "date": "2026-05-18",
     "title": "MV Hondius / Hantavirus / OMS",
@@ -10,7 +30,15 @@
     "image": "https://img.youtube.com/vi/T1mOYLM01-Y/hqdefault.jpg",
     "imageAlt": "Miniature de la vidéo source sur MV Hondius, hantavirus et OMS",
     "excerpt": "Un cluster réel, rare et grave devient une scène de légitimation institutionnelle : risque officiellement faible, dispositif maximal, communication rassurante et conversion politique immédiate.",
-    "tags": ["OMS", "Hantavirus", "Andes virus", "MV Hondius", "Argentine", "Traité pandémie", "PABS"],
+    "tags": [
+      "OMS",
+      "Hantavirus",
+      "Andes virus",
+      "MV Hondius",
+      "Argentine",
+      "Traité pandémie",
+      "PABS"
+    ],
     "badge": "Analyse",
     "featured": true
   }
