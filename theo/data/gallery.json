@@ -1,8 +1,185 @@
 [
-  "/T/theo/images/gallery/1.png",
-  "/T/theo/images/gallery/2.png",
-  "/T/theo/images/gallery/3.png",
-  "/T/theo/images/gallery/4.png",
-  "/T/theo/images/gallery/5.png",
-  "/T/theo/images/gallery/6.png"
+  {
+    "src": "https://img.youtube.com/vi/bstGOxKcUGM/hqdefault.jpg",
+    "title": "bstGOxKcUGM-hqdefault.jpg",
+    "alt": "Miniature de l’entretien avec Thomas Römer",
+    "type": "jpg",
+    "usedIn": [
+      {
+        "label": "Accueil",
+        "href": "/T/theo/",
+        "context": "image principale"
+      },
+      {
+        "label": "Explorations — Thomas Römer — Bible, violence, sexualité",
+        "href": "/T/theo/explorations",
+        "context": "image principale"
+      }
+    ]
+  },
+  {
+    "src": "https://img.youtube.com/vi/Rc6obrXJEbY/hqdefault.jpg",
+    "title": "Rc6obrXJEbY-hqdefault.jpg",
+    "alt": "Miniature de l’entretien D’où vient la Bible avec Thomas Römer",
+    "type": "jpg",
+    "usedIn": [
+      {
+        "label": "Accueil",
+        "href": "/T/theo/",
+        "context": "image principale"
+      },
+      {
+        "label": "Explorations — D’où vient la Bible ? — Thomas Römer",
+        "href": "/T/theo/explorations",
+        "context": "image principale"
+      }
+    ]
+  },
+  {
+    "src": "https://img.youtube.com/vi/nDOXud3QqTI/hqdefault.jpg",
+    "title": "nDOXud3QqTI-hqdefault.jpg",
+    "alt": "Miniature de la conférence de Michael Langlois à la BnF",
+    "type": "jpg",
+    "usedIn": [
+      {
+        "label": "Accueil",
+        "href": "/T/theo/",
+        "context": "image principale"
+      },
+      {
+        "label": "Explorations — Michael Langlois — Bible, manuscrits et nouvelles technologies",
+        "href": "/T/theo/explorations",
+        "context": "image principale"
+      }
+    ]
+  },
+  {
+    "src": "/T/theo/images/actus/hondius-hantavirus-oms.svg",
+    "title": "hondius-hantavirus-oms.svg",
+    "alt": "Illustration abstraite du dossier MV Hondius, hantavirus et OMS",
+    "type": "svg",
+    "usedIn": [
+      {
+        "label": "Accueil",
+        "href": "/T/theo/",
+        "context": "image principale"
+      },
+      {
+        "label": "Actus — MV Hondius / Hantavirus / OMS",
+        "href": "/T/theo/actus",
+        "context": "image principale"
+      }
+    ]
+  },
+  {
+    "src": "/T/theo/images/explorations/Kogi%20image.png",
+    "title": "Kogi image.png",
+    "alt": "Paysage mystique Kogi avec montagne, rivière et figures humaines",
+    "type": "png",
+    "usedIn": [
+      {
+        "label": "Accueil",
+        "href": "/T/theo/",
+        "context": "image principale"
+      },
+      {
+        "label": "Explorations — Kogi / Le choix du vivant",
+        "href": "/T/theo/explorations",
+        "context": "image principale"
+      },
+      {
+        "label": "Exploration — Kogi / Le choix du vivant",
+        "href": "/T/theo/explorations/kogi-choix-du-vivant",
+        "context": "image de contenu"
+      }
+    ]
+  },
+  {
+    "src": "/T/theo/images/explorations/Kogi%20synthese.png",
+    "title": "Kogi synthese.png",
+    "alt": "Synthèse visuelle Kogi",
+    "type": "png",
+    "usedIn": [
+      {
+        "label": "Exploration — Kogi / Le choix du vivant",
+        "href": "/T/theo/explorations/kogi-choix-du-vivant",
+        "context": "image de contenu"
+      }
+    ]
+  },
+  {
+    "src": "/T/theo/images/explorations/lois-du-vivant.jpg",
+    "title": "lois-du-vivant.jpg",
+    "alt": "Couverture Lois du vivant",
+    "type": "jpg",
+    "usedIn": [
+      {
+        "label": "Exploration — Kogi / Le choix du vivant",
+        "href": "/T/theo/explorations/kogi-choix-du-vivant",
+        "context": "image de contenu"
+      }
+    ]
+  },
+  {
+    "src": "/T/theo/favicon.svg",
+    "title": "favicon.svg",
+    "alt": "Favicon Theo",
+    "type": "svg",
+    "usedIn": [
+      {
+        "label": "Site Theo^",
+        "href": "/T/theo/",
+        "context": "icône du site"
+      }
+    ]
+  },
+  {
+    "src": "/T/theo/icons.svg",
+    "title": "icons.svg",
+    "alt": "Sprite d’icônes",
+    "type": "svg",
+    "usedIn": []
+  },
+  {
+    "src": "/T/theo/images/gallery/1.png",
+    "title": "1.png",
+    "alt": "1.png",
+    "type": "png",
+    "usedIn": []
+  },
+  {
+    "src": "/T/theo/images/gallery/2.png",
+    "title": "2.png",
+    "alt": "2.png",
+    "type": "png",
+    "usedIn": []
+  },
+  {
+    "src": "/T/theo/images/gallery/3.png",
+    "title": "3.png",
+    "alt": "3.png",
+    "type": "png",
+    "usedIn": []
+  },
+  {
+    "src": "/T/theo/images/gallery/4.png",
+    "title": "4.png",
+    "alt": "4.png",
+    "type": "png",
+    "usedIn": []
+  },
+  {
+    "src": "/T/theo/images/gallery/5.png",
+    "title": "5.png",
+    "alt": "5.png",
+    "type": "png",
+    "usedIn": []
+  },
+  {
+    "src": "/T/theo/images/gallery/6.png",
+    "title": "6.png",
+    "alt": "6.png",
+    "type": "png",
+    "usedIn": []
+  }
 ]
