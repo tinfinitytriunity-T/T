@@ -151,5 +151,31 @@
     "alt": "6.png",
     "type": "png",
     "usedIn": []
+  },
+  {
+    "src": "/T/theo/images/actus/pontcarral-le-matin-lucien-fortunati.jpeg",
+    "title": "pontcarral-le-matin-lucien-fortunati.jpeg",
+    "alt": "Immeuble du quartier de Pontcarral où la tragédie est survenue",
+    "type": "jpeg",
+    "usedIn": [
+      {
+        "label": "Actus — Toulon, Pontcarral",
+        "href": "/T/theo/actus/toulon-filicide-suicide-maternel-etude#documents-sources",
+        "context": "image de contenu"
+      }
+    ]
+  },
+  {
+    "src": "/T/theo/images/actus/pontcarral-depeche-afp-miguel-medina.jpeg",
+    "title": "pontcarral-depeche-afp-miguel-medina.jpeg",
+    "alt": "Cité du quartier de Pontcarral à Toulon",
+    "type": "jpeg",
+    "usedIn": [
+      {
+        "label": "Actus — Toulon, Pontcarral",
+        "href": "/T/theo/actus/toulon-filicide-suicide-maternel-etude#documents-sources",
+        "context": "image de contenu"
+      }
+    ]
   }
 ]
