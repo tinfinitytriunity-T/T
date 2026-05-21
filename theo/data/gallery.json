@@ -72,25 +72,15 @@
     ]
   },
   {
-    "src": "/T/theo/images/explorations/Kogi%20image.png",
-    "title": "Kogi image.png",
-    "alt": "Paysage mystique Kogi avec montagne, rivière et figures humaines",
-    "type": "png",
+    "src": "https://img.youtube.com/vi/mA8P8DpSJIE/hqdefault.jpg",
+    "title": "mA8P8DpSJIE-hqdefault.jpg",
+    "alt": "Miniature de la vid?o Kogi / K?ggaba ? Le choix du vivant",
+    "type": "jpg",
     "usedIn": [
       {
-        "label": "Accueil",
-        "href": "/T/theo/",
-        "context": "image principale"
-      },
-      {
-        "label": "Explorations — Kogi / Le choix du vivant",
-        "href": "/T/theo/explorations",
-        "context": "image principale"
-      },
-      {
-        "label": "Exploration — Kogi / Le choix du vivant",
+        "label": "Exploration ? Kogi / Le choix du vivant",
         "href": "/T/theo/explorations/kogi-choix-du-vivant",
-        "context": "image de contenu"
+        "context": "image principale"
       }
     ]
   },
