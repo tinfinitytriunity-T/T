@@ -1,8 +1,8 @@
-[
+﻿[
   {
     "src": "https://img.youtube.com/vi/bstGOxKcUGM/hqdefault.jpg",
     "title": "bstGOxKcUGM-hqdefault.jpg",
-    "alt": "Miniature de l’entretien avec Thomas Römer",
+    "alt": "Miniature de lâ€™entretien avec Thomas RÃ¶mer",
     "type": "jpg",
     "usedIn": [
       {
@@ -11,7 +11,7 @@
         "context": "image principale"
       },
       {
-        "label": "Explorations — Thomas Römer — Bible, violence, sexualité",
+        "label": "Explorations â€” Thomas RÃ¶mer â€” Bible, violence, sexualitÃ©",
         "href": "/T/theo/explorations",
         "context": "image principale"
       }
@@ -20,7 +20,7 @@
   {
     "src": "https://img.youtube.com/vi/Rc6obrXJEbY/hqdefault.jpg",
     "title": "Rc6obrXJEbY-hqdefault.jpg",
-    "alt": "Miniature de l’entretien D’où vient la Bible avec Thomas Römer",
+    "alt": "Miniature de lâ€™entretien Dâ€™oÃ¹ vient la Bible avec Thomas RÃ¶mer",
     "type": "jpg",
     "usedIn": [
       {
@@ -29,7 +29,7 @@
         "context": "image principale"
       },
       {
-        "label": "Explorations — D’où vient la Bible ? — Thomas Römer",
+        "label": "Explorations â€” Dâ€™oÃ¹ vient la Bible ? â€” Thomas RÃ¶mer",
         "href": "/T/theo/explorations",
         "context": "image principale"
       }
@@ -38,7 +38,7 @@
   {
     "src": "https://img.youtube.com/vi/nDOXud3QqTI/hqdefault.jpg",
     "title": "nDOXud3QqTI-hqdefault.jpg",
-    "alt": "Miniature de la conférence de Michael Langlois à la BnF",
+    "alt": "Miniature de la confÃ©rence de Michael Langlois Ã  la BnF",
     "type": "jpg",
     "usedIn": [
       {
@@ -47,7 +47,7 @@
         "context": "image principale"
       },
       {
-        "label": "Explorations — Michael Langlois — Bible, manuscrits et nouvelles technologies",
+        "label": "Explorations â€” Michael Langlois â€” Bible, manuscrits et nouvelles technologies",
         "href": "/T/theo/explorations",
         "context": "image principale"
       }
@@ -65,7 +65,7 @@
         "context": "image principale"
       },
       {
-        "label": "Actus — MV Hondius / Hantavirus / OMS",
+        "label": "Actus â€” MV Hondius / Hantavirus / OMS",
         "href": "/T/theo/actus",
         "context": "image principale"
       }
@@ -87,11 +87,11 @@
   {
     "src": "/T/theo/images/explorations/Kogi%20synthese.png",
     "title": "Kogi synthese.png",
-    "alt": "Synthèse visuelle Kogi",
+    "alt": "SynthÃ¨se visuelle Kogi",
     "type": "png",
     "usedIn": [
       {
-        "label": "Exploration — Kogi / Le choix du vivant",
+        "label": "Exploration â€” Kogi / Le choix du vivant",
         "href": "/T/theo/explorations/kogi-choix-du-vivant",
         "context": "image de contenu"
       }
@@ -104,7 +104,7 @@
     "type": "jpg",
     "usedIn": [
       {
-        "label": "Exploration — Kogi / Le choix du vivant",
+        "label": "Exploration â€” Kogi / Le choix du vivant",
         "href": "/T/theo/explorations/kogi-choix-du-vivant",
         "context": "image de contenu"
       }
@@ -153,14 +153,32 @@
     "usedIn": []
   },
   {
+    "src": "/T/theo/images/actus/youtube-mayotte-la-1ere-toulon-capture.png",
+    "title": "youtube-mayotte-la-1ere-toulon-capture.png",
+    "alt": "Miniature du reportage Mayotte la 1Ã¨re sur le drame de Toulon",
+    "type": "png",
+    "usedIn": [
+      {
+        "label": "Accueil",
+        "href": "/T/theo/",
+        "context": "image principale"
+      },
+      {
+        "label": "Actus â€” Toulon, Pontcarral",
+        "href": "/T/theo/actus/toulon-pontcarral-mort-parent-enfants#video",
+        "context": "image principale"
+      }
+    ]
+  },
+  {
     "src": "/T/theo/images/actus/pontcarral-le-matin-lucien-fortunati.jpeg",
     "title": "pontcarral-le-matin-lucien-fortunati.jpeg",
-    "alt": "Immeuble du quartier de Pontcarral où la tragédie est survenue",
+    "alt": "Immeuble du quartier de Pontcarral oÃ¹ la tragÃ©die est survenue",
     "type": "jpeg",
     "usedIn": [
       {
-        "label": "Actus — Toulon, Pontcarral",
-        "href": "/T/theo/actus/toulon-filicide-suicide-maternel-etude#documents-sources",
+        "label": "Actus â€” Toulon, Pontcarral",
+        "href": "/T/theo/actus/toulon-pontcarral-mort-parent-enfants#documents-sources",
         "context": "image de contenu"
       }
     ]
@@ -168,14 +186,15 @@
   {
     "src": "/T/theo/images/actus/pontcarral-depeche-afp-miguel-medina.jpeg",
     "title": "pontcarral-depeche-afp-miguel-medina.jpeg",
-    "alt": "Cité du quartier de Pontcarral à Toulon",
+    "alt": "CitÃ© du quartier de Pontcarral Ã  Toulon",
     "type": "jpeg",
     "usedIn": [
       {
-        "label": "Actus — Toulon, Pontcarral",
-        "href": "/T/theo/actus/toulon-filicide-suicide-maternel-etude#documents-sources",
+        "label": "Actus â€” Toulon, Pontcarral",
+        "href": "/T/theo/actus/toulon-pontcarral-mort-parent-enfants#documents-sources",
         "context": "image de contenu"
       }
     ]
   }
 ]
+

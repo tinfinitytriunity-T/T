@@ -1,18 +1,20 @@
 [
   {
-    "slug": "toulon-filicide-suicide-maternel-etude",
+    "slug": "toulon-pontcarral-mort-parent-enfants",
     "date": "2026-05-21",
-    "title": "Toulon, Pontcarral — filicide-suicide, données comparées et lecture mondiale",
+    "title": "Toulon, Pontcarral — mort parent-enfants, données comparées et lecture mondiale",
     "category": "Faits de société",
     "source": "Étude Theo^",
     "url": "",
-    "route": "actus/toulon-filicide-suicide-maternel-etude",
-    "excerpt": "Étude factuelle et criminologique sur le drame de Toulon du 20 mai 2026, avec données françaises et internationales sur les filicides-suicides.",
+    "route": "actus/toulon-pontcarral-mort-parent-enfants",
+    "image": "/T/theo/images/actus/youtube-mayotte-la-1ere-toulon-capture.png",
+    "imageAlt": "Miniature du reportage Mayotte la 1ère sur le drame de Toulon",
+    "excerpt": "Étude factuelle et criminologique sur le drame de Toulon du 20 mai 2026, avec données françaises et internationales sur les morts parent-enfants.",
     "tags": [
       "Toulon",
       "Pontcarral",
-      "Filicide",
-      "Filicide-suicide",
+      "Infanticide",
+      "Mort parent-enfants",
       "Criminologie",
       "Protection de l’enfance"
     ],
