@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "src": "https://img.youtube.com/vi/bstGOxKcUGM/hqdefault.jpg",
     "title": "bstGOxKcUGM-hqdefault.jpg",
@@ -195,6 +195,18 @@
         "context": "image de contenu"
       }
     ]
+  },
+  {
+    "src": "/T/theo/images/irigaray/irigaray-divin-feminin-poster.png",
+    "title": "Luce Irigaray ? f?minin divin et contre-capture",
+    "alt": "Affiche conceptuelle Luce Irigaray, f?minin divin et contre-capture",
+    "type": "png",
+    "usedIn": [
+      {
+        "label": "Exploration ? ?glise la?que vs ?glise cl?ricale / Luce Irigaray",
+        "href": "/T/theo/#/explorations/eglise-laique-vs-eglise-clericale#luce-irigaray",
+        "context": "image de contenu"
+      }
+    ]
   }
 ]
-
