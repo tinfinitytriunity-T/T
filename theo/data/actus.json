@@ -9,6 +9,7 @@
     "route": "actus/toulon-pontcarral-mort-parent-enfants",
     "image": "/T/theo/images/actus/youtube-mayotte-la-1ere-toulon-capture.png",
     "imageAlt": "Miniature du reportage Mayotte la 1ère sur le drame de Toulon",
+    "mediaKind": "video",
     "excerpt": "Étude factuelle et criminologique sur le drame de Toulon du 20 mai 2026, avec données françaises et internationales sur les morts parent-enfants.",
     "tags": [
       "Toulon",
