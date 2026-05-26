@@ -2,30 +2,327 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/T/theo/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Theo^ est un corpus de recherche morphogénétique, théologique et conceptuel : explorations, actus, images, labo, textes et mappemonde."
-    />
-    <meta property="og:title" content="Theo^ — Corpus de recherche" />
-    <meta
-      property="og:description"
-      content="Explorations, actus, images et matériaux de recherche autour des formes, seuils, textes et champs symboliques du projet Theo^."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/T/theo/images/explorations/infographie_pentecote_michee_Q_web.webp" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Theo^ — Corpus de recherche" />
-    <meta
-      name="twitter:description"
-      content="Corpus morphogénétique, théologique et conceptuel : explorations, actus, images, labo et textes."
-    />
-    <title>Theo^ — Corpus de recherche</title>
-    <script type="module" crossorigin src="/T/theo/assets/index-CZmaeN9B.js"></script>
-    <link rel="stylesheet" crossorigin href="/T/theo/assets/index-BPVY_QI4.css">
+    <meta name="description" content="Page d'accueil générale du corpus T : accès à l'espace T^ et au corpus Theo." />
+    <title>T^ — Seuil d'entrée</title>
+    <style>
+  :root {
+    color-scheme: dark;
+    font-family: Calibri, "Segoe UI", Arial, Helvetica, sans-serif;
+    background: #04050a;
+    color: #f6e8c2;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-height: 100%;
+    background: #05070d;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    background:
+      radial-gradient(ellipse at 50% 28%, rgba(219, 178, 91, 0.16), transparent 28%),
+      radial-gradient(circle at 16% 12%, rgba(119, 92, 46, 0.16), transparent 30%),
+      radial-gradient(circle at 82% 18%, rgba(74, 104, 134, 0.10), transparent 34%),
+      linear-gradient(rgba(246, 232, 194, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(246, 232, 194, 0.016) 1px, transparent 1px),
+      #04050a;
+    background-size: auto, auto, auto, 76px 76px, 76px 76px, auto;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 39%, rgba(219, 178, 91, 0.18), transparent 18%),
+      conic-gradient(from 90deg at 50% 50%, transparent, rgba(219, 178, 91, 0.07), transparent, rgba(96, 115, 132, 0.045), transparent);
+    filter: blur(38px);
+    opacity: 0.72;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    width: min(100% - 2rem, 1180px);
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: clamp(1.2rem, 4vw, 2.4rem) 0;
+    display: grid;
+    align-items: center;
+  }
+
+  .shell {
+    width: 100%;
+    border: 1px solid rgba(219, 178, 91, 0.24);
+    border-radius: clamp(24px, 4vw, 42px);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(219, 178, 91, 0.10), transparent 30%),
+      linear-gradient(135deg, rgba(255, 244, 211, 0.048), rgba(255, 255, 255, 0.012)),
+      rgba(7, 8, 13, 0.84);
+    box-shadow: 0 34px 120px rgba(0, 0, 0, 0.56), inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+  }
+
+  .topline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: clamp(1rem, 3vw, 1.4rem) clamp(1.1rem, 4vw, 2rem);
+    border-bottom: 1px solid rgba(219, 178, 91, 0.16);
+    color: rgba(246, 232, 194, 0.66);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .hero {
+    position: relative;
+    padding: clamp(2rem, 6vw, 4.2rem) clamp(1.2rem, 5vw, 4rem) clamp(1.35rem, 4vw, 2.4rem);
+    text-align: center;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 48%;
+    width: min(58vw, 520px);
+    aspect-ratio: 1 / 1.28;
+    border: 1px solid rgba(219, 178, 91, 0.18);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse at center, rgba(219, 178, 91, 0.13), transparent 62%);
+    pointer-events: none;
+  }
+
+  h1 {
+    position: relative;
+    margin: 0;
+    color: rgba(246, 232, 194, 0.98);
+    font-size: clamp(4.2rem, 14vw, 9rem);
+    line-height: 0.82;
+    letter-spacing: 0.015em;
+    text-shadow: 0 0 42px rgba(219, 178, 91, 0.26);
+  }
+
+  .subtitle {
+    position: relative;
+    max-width: 760px;
+    margin: clamp(1rem, 3vw, 1.5rem) auto 0;
+    color: rgba(246, 232, 194, 0.78);
+    font-size: clamp(1.05rem, 2vw, 1.26rem);
+    line-height: 1.72;
+  }
+
+  .entry-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 3vw, 2rem);
+    padding: 0 clamp(1.2rem, 5vw, 4rem) clamp(1.4rem, 5vw, 3.2rem);
+  }
+
+  @media (min-width: 780px) {
+    .entry-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .entry-card {
+    position: relative;
+    min-width: 0;
+    min-height: 410px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.2rem;
+    padding: clamp(1.35rem, 4vw, 2.5rem);
+    border: 1px solid rgba(219, 178, 91, 0.26);
+    border-radius: 28px 28px 34px 34px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(246, 232, 194, 0.12), transparent 30%),
+      linear-gradient(145deg, rgba(92, 66, 31, 0.34), rgba(13, 14, 19, 0.82) 42%, rgba(5, 6, 10, 0.92)),
+      rgba(255, 255, 255, 0.035);
+    color: inherit;
+    text-decoration: none;
+    overflow: hidden;
+    clip-path: polygon(12% 0, 88% 0, 100% 10%, 100% 100%, 0 100%, 0 10%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.035),
+      inset 0 36px 80px rgba(219, 178, 91, 0.055),
+      0 22px 60px rgba(0, 0, 0, 0.34);
+    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  }
+
+  .entry-card::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(219, 178, 91, 0.18);
+    border-radius: 18px 18px 24px 24px;
+    clip-path: polygon(10% 0, 90% 0, 100% 9%, 100% 100%, 0 100%, 0 9%);
+    pointer-events: none;
+  }
+
+  .entry-card::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 47%;
+    width: min(44%, 190px);
+    aspect-ratio: 1 / 1;
+    border: 1px solid rgba(219, 178, 91, 0.16);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(219, 178, 91, 0.12), transparent 66%);
+    transform: translate(-50%, -50%);
+    opacity: 0.72;
+    pointer-events: none;
+  }
+
+  .entry-card:hover,
+  .entry-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(246, 211, 132, 0.72);
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(246, 232, 194, 0.16), transparent 32%),
+      linear-gradient(145deg, rgba(112, 80, 38, 0.42), rgba(13, 14, 19, 0.80) 42%, rgba(5, 6, 10, 0.92));
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 0 44px rgba(219, 178, 91, 0.18),
+      0 28px 76px rgba(0, 0, 0, 0.42);
+    outline: none;
+  }
+
+  .entry-card:focus-visible {
+    box-shadow: 0 0 0 3px rgba(219, 178, 91, 0.30), 0 0 44px rgba(219, 178, 91, 0.18);
+  }
+
+  .entry-kicker {
+    position: relative;
+    z-index: 1;
+    color: #e4bc68;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+  }
+
+  .entry-title {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 0.85rem;
+    color: rgba(246, 232, 194, 0.98);
+    font-size: clamp(3.2rem, 9vw, 6rem);
+    line-height: 0.95;
+    text-shadow: 0 0 28px rgba(219, 178, 91, 0.20);
+  }
+
+  .entry-description {
+    position: relative;
+    z-index: 1;
+    max-width: 44ch;
+    color: rgba(246, 232, 194, 0.75);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .entry-cta {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.6rem;
+    color: rgba(246, 232, 194, 0.94);
+    font-size: 0.88rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .footer {
+    padding: 1rem clamp(1.2rem, 5vw, 4rem) 1.35rem;
+    border-top: 1px solid rgba(219, 178, 91, 0.14);
+    color: rgba(246, 232, 194, 0.54);
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 640px) {
+    main {
+      width: min(100% - 1rem, 1120px);
+      align-items: start;
+    }
+
+    .shell {
+      border-radius: 24px;
+    }
+
+    .topline {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .entry-card {
+      min-height: 330px;
+      border-radius: 22px;
+    }
+  }
+</style>
   </head>
   <body>
-    <div id="root"></div>
+    <main>
+      <section class="shell" aria-labelledby="page-title">
+        <header class="topline">
+          <span>nephesh.ch / T</span>
+          <span>seuil d'entrée</span>
+        </header>
+
+        <div class="hero">
+          <h1 id="page-title">T^</h1>
+          <p class="subtitle">
+            Page d'accueil générale du corpus. Deux entrées sont ouvertes :
+            l'espace T^ et le corpus Theo.
+          </p>
+        </div>
+
+        <div class="entry-grid" aria-label="Entrées du corpus">
+          <a class="entry-card" href="./T/">
+            <span>
+              <span class="entry-kicker">Espace structurel</span>
+              <strong class="entry-title">T^</strong>
+            </span>
+            <span class="entry-description">
+              Accéder au seuil T^ : architectures, modules, cartes, noyau général et espace de co-présence.
+            </span>
+            <span class="entry-cta">Entrer dans T^ →</span>
+          </a>
+
+          <a class="entry-card" href="./theo/">
+            <span>
+              <span class="entry-kicker">Corpus théologique</span>
+              <strong class="entry-title">Theo</strong>
+            </span>
+            <span class="entry-description">
+              Accéder aux recherches Theo : explorations, articles, images, cartographies et pages d'étude.
+            </span>
+            <span class="entry-cta">Entrer dans Theo →</span>
+          </a>
+        </div>
+
+        <footer class="footer">www.nephesh.ch/T/</footer>
+      </section>
+    </main>
   </body>
 </html>
