@@ -1,2 +1,8 @@
 <?php
-declare(strict_types=1);require dirname(__DIR__,2).'/inc/edge.php';$marker=(string)($_SERVER['HTTP_X_TAI_LAB_ACCESS']??'');if($marker!=='TAI'&&!tai_lab_open())tai_json_response(['error'=>'LAB_MARKER_REQUIRED'],403);tai_rate_limit('lab_models',60,60);$r=tai_http_json($apiBase.'/api/nephesh/lab/models','GET',null,['x-tai-lab-access'=>'TAI'],7);if($r['ok'])tai_json_response($r['data']);$health=tai_http_json($stableApiBase.'/api/health','GET',null,[],5);$portances=[];if($health['ok']&&!empty($health['data']['gemini_configured']))$portances[]=['id'=>'legacy_gemini','label'=>'Gemini 3.6 Flash','family'=>'gemini','provider'=>'google','model'=>$health['data']['gemini_model']??'gemini-3.6-flash','transport'=>'M4_STABLE_FALLBACK','available_free'=>true,'inference_ready'=>true,'ref'=>['kind'=>'legacy_gemini']];tai_json_response(['surface'=>'NEPHESH_LAB_EDGE_FALLBACK','field_backend_deployed'=>false,'portances'=>$portances,'winner'=>null,'vote'=>null,'global_score'=>null]);
+require dirname(__DIR__, 2) . '/inc/edge.php';
+$marker = isset($_SERVER['HTTP_X_TAI_LAB_ACCESS']) ? (string)$_SERVER['HTTP_X_TAI_LAB_ACCESS'] : '';
+if ($marker !== 'TAI' && !tai_lab_open()) tai_json_response(array('error'=>'LAB_MARKER_REQUIRED'), 403);
+tai_rate_limit('lab_models', 60, 60);
+$r = tai_http_json($apiBase . '/api/nephesh/lab/models', 'GET', null, array('x-tai-lab-access'=>'TAI'), 10);
+if ($r['ok']) tai_json_response($r['data'], 200);
+$f = tai_field_models(); tai_json_response($f['data'], 200);

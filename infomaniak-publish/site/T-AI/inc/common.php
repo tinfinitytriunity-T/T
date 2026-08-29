@@ -1,10 +1,10 @@
 <?php
-declare(strict_types=1);
 $config = require dirname(__DIR__) . '/config.php';
-$apiBase = rtrim((string)$config['api_base'], '/');
-$stableApiBase = rtrim((string)($config['stable_api_base'] ?? $apiBase), '/');
-$apiHost = parse_url($apiBase, PHP_URL_HOST) ?: 't-ai-field-preview.vercel.app';
-function tai_headers(string $apiBase, bool $lab=false): void {
+$apiBase = rtrim(isset($config['api_base']) ? (string)$config['api_base'] : 'https://t-ai-field-preview.vercel.app', '/');
+$stableApiBase = rtrim(isset($config['stable_api_base']) ? (string)$config['stable_api_base'] : 'https://taibridge.vercel.app', '/');
+$apiHost = parse_url($apiBase, PHP_URL_HOST);
+if (!$apiHost) $apiHost = 't-ai-field-preview.vercel.app';
+function tai_headers($apiBase, $lab) {
   header('X-Content-Type-Options: nosniff');
   header('X-Frame-Options: DENY');
   header('Referrer-Policy: no-referrer');
@@ -12,4 +12,4 @@ function tai_headers(string $apiBase, bool $lab=false): void {
   if ($lab) header('Cache-Control: no-store, private, max-age=0');
   header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'");
 }
-function tai_h(string $v): string { return htmlspecialchars($v, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
+function tai_h($v) { return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8'); }

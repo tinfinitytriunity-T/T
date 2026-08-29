@@ -1,6 +1,27 @@
 <?php
-declare(strict_types=1);require dirname(__DIR__).'/inc/edge.php';tai_rate_limit('status',40,60);
-$health=tai_http_json($apiBase.'/api/health','GET',null,[],4);$usingField=$health['ok'];if(!$usingField)$health=tai_http_json($stableApiBase.'/api/health','GET',null,[],4);$h=$health['data']??[];$fieldModels=$usingField?tai_http_json($apiBase.'/api/public/models','GET',null,[],4):['ok'=>false,'status'=>0,'data'=>[]];
-$live=[];if($health['ok']&&isset($h['live_active_count'],$h['models'])){$providers=is_array($h['providers']??null)?$h['providers']:[];foreach((array)$h['models'] as $i=>$model)$live[]=['provider'=>$providers[$i]??'unknown','model'=>$model];}elseif($health['ok']&&!empty($h['gemini_configured']))$live[]=['provider'=>'google','model'=>$h['gemini_model']??'gemini-3.6-flash'];
-$fieldReady=[];if($fieldModels['ok'])foreach(($fieldModels['data']['portances']??[]) as $p)if(($p['inference_ready']??false)===true)$fieldReady[]=$p;
-tai_json_response(['status'=>'ok','surface'=>'NEPHESH_EDGE_STATUS','checked_at'=>gmdate('c'),'mode'=>$usingField?'FIELD_CANARY':'M4_STABLE_FALLBACK','reachable'=>$health['ok'],'live'=>$live,'field'=>['backend_deployed'=>$fieldModels['ok'],'ready_count'=>count($fieldReady),'ready_portances'=>$fieldReady],'counts'=>['live_active'=>count($live),'field_ready'=>count($fieldReady)],'winner'=>null,'vote'=>null,'global_score'=>null]);
+require dirname(__DIR__) . '/inc/edge.php';
+tai_rate_limit('status', 30, 60);
+$health = tai_effective_health();
+$models = tai_field_models();
+$h = $health['data'];
+$live = array();
+if ($health['ok'] && isset($h['live_active_count']) && isset($h['models']) && is_array($h['models'])) {
+  $providers = (isset($h['providers']) && is_array($h['providers'])) ? $h['providers'] : array();
+  foreach ($h['models'] as $i=>$model) $live[] = array('provider'=>isset($providers[$i])?$providers[$i]:'unknown','model'=>$model,'path'=>isset($h['milestone'])?$h['milestone']:'FIELD');
+} elseif ($health['ok'] && !empty($h['gemini_configured'])) {
+  $live[] = array('provider'=>'google','model'=>isset($h['gemini_model'])?$h['gemini_model']:'gemini-3.6-flash','path'=>'M4_STABLE');
+}
+$backend = !empty($models['data']['field_backend_deployed']);
+$ready = array();
+if ($backend && isset($models['data']['portances']) && is_array($models['data']['portances'])) {
+  foreach ($models['data']['portances'] as $p) if (!empty($p['inference_ready']) || !empty($p['available_free'])) $ready[] = $p;
+}
+tai_json_response(array(
+  'status'=>'ok',
+  'surface'=>'NEPHESH_EDGE_STATUS',
+  'checked_at'=>gmdate('c'),
+  'production'=>array('reachable'=>$health['ok'],'milestone'=>isset($h['milestone'])?$h['milestone']:null,'live_active_count'=>count($live),'live_active'=>$live,'edge_fallback'=>!empty($h['edge_fallback'])),
+  'field'=>array('backend_deployed'=>$backend,'ready_count'=>count($ready),'ready_portances'=>$ready),
+  'counts'=>array('live_active'=>count($live),'field_ready'=>count($ready)),
+  'winner'=>null,'vote'=>null,'global_score'=>null,'automatic_optimization'=>false
+), 200);
