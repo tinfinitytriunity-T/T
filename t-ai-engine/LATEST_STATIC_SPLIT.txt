@@ -1,0 +1,9 @@
+T^AI M4.3.5 STATIC SPLIT
+
+Nephesh: static HTML/CSS/JS visual surface only.
+Vercel: T^AI runtime engine and credentials.
+GitHub: source/versioning/publication bridge.
+
+Frontend bundle SHA-256: ed03d64403e0043af749961b8a53a8a04f5abd9e6fb938c9d65525d19b37e679
+Nephesh static upload SHA-256: ead2dd3fcdcb60add42d85a4817e5592571ce59168602430c5f726ef755401a6
+Engine source snapshot SHA-256: 0b7f763581397077127d1cb2a0a8e275d1e67e98a0aee12827529d5b631af230
