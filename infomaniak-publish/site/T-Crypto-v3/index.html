@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <title>T^Crypto-v3 α — Live Field</title>
-  <link rel="stylesheet" href="./style.css?v=0.3.1">
+  <link rel="stylesheet" href="./style.css?v=0.3.2">
 </head>
 <body>
   <div class="shell">
@@ -58,6 +58,21 @@
 
     <main>
       <section id="view-now" class="view active">
+        <section id="t-indicators-panel" class="tind-panel" style="margin:0 0 16px;border:1px solid #3a4d67;border-radius:22px;padding:18px;background:#0d1520;color:#f4f7fb">
+          <div class="tind-head">
+            <div>
+              <div class="tind-kicker" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#6ed7ff;font-weight:800">T^ · indicateurs séparés</div>
+              <div class="tind-title" style="font-size:22px;font-weight:850;margin-top:3px">INDICATEURS T^</div>
+            </div>
+            <div class="tind-note" style="font-size:11px;color:#8895a7">Chaque indicateur conserve son propre régime. Aucun score global.</div>
+          </div>
+          <div id="tind-grid" class="tind-grid" style="margin-top:14px">
+            <div class="tind-card" style="border:1px solid #29384b;border-radius:16px;padding:14px;background:#0b1119">
+              <div class="tind-name" style="font-size:10px;color:#8b99ab;text-transform:uppercase;letter-spacing:.13em">Chargement</div>
+              <div class="tind-value" style="font-size:17px;font-weight:830;margin-top:7px">Lecture du champ…</div>
+            </div>
+          </div>
+        </section>
         <div id="assets" class="assets"></div>
       </section>
 
@@ -136,7 +151,7 @@
 
     <footer><span>T^Crypto-v3 α 0.3 · T-GPT · observation publique cloisonnée</span><span id="footerStamp">aucune donnée reçue</span></footer>
   </div>
-  <script src="./app.js?v=0.3.1" defer></script>
-  <script src="./t-indicators.js?v=0.3.1" defer></script>
+  <script src="./app.js?v=0.3.2" defer></script>
+  <script src="./t-indicators.js?v=0.3.2" defer></script>
 </body>
 </html>
