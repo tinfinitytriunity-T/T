@@ -17,39 +17,41 @@ concurrency:
 
 jobs:
   deploy:
-    name: FTPS deploy
+    name: FTPS deploy to isolated T-GPT
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    environment: infomaniak-production
     env:
-      FTP_HOST: ${{ secrets.INFOMANIAK_FTP_HOST }}
-      FTP_USER: ${{ secrets.INFOMANIAK_FTP_USER }}
+      FTP_HOST: ngw.ftp.infomaniak.com
+      FTP_USER: ngw_GPT-PUBLISH
       FTP_PASSWORD: ${{ secrets.INFOMANIAK_FTP_PASSWORD }}
-      REMOTE_DIR: ${{ secrets.INFOMANIAK_REMOTE_DIR }}
-      FTP_JAILED_ROOT: ${{ secrets.INFOMANIAK_FTP_JAILED_ROOT }}
+      REMOTE_DIR: /
+      FTP_JAILED_ROOT: "true"
       LOCAL_DIR: infomaniak-publish/site
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate configuration
+      - name: Validate isolated deployment configuration
         shell: bash
         run: |
           set -euo pipefail
-          test -n "$FTP_HOST" || { echo "Missing INFOMANIAK_FTP_HOST"; exit 1; }
-          test -n "$FTP_USER" || { echo "Missing INFOMANIAK_FTP_USER"; exit 1; }
-          test -n "$FTP_PASSWORD" || { echo "Missing INFOMANIAK_FTP_PASSWORD"; exit 1; }
-          test -n "$REMOTE_DIR" || { echo "Missing INFOMANIAK_REMOTE_DIR"; exit 1; }
+          test -n "$FTP_HOST" || { echo "Missing FTP host"; exit 1; }
+          test -n "$FTP_USER" || { echo "Missing FTP user"; exit 1; }
+          test -n "$FTP_PASSWORD" || { echo "Missing INFOMANIAK_FTP_PASSWORD repository secret"; exit 1; }
           test -d "$LOCAL_DIR" || { echo "Missing local publish directory"; exit 1; }
 
           if [ "$REMOTE_DIR" = "/" ] || [ "$REMOTE_DIR" = "." ]; then
-            if [ "$FTP_JAILED_ROOT" != "true" ]; then
-              echo "Refusing FTP root deployment unless INFOMANIAK_FTP_JAILED_ROOT=true."
+            test "$FTP_JAILED_ROOT" = "true" || {
+              echo "Refusing FTP root deployment: account is not declared isolated."
               exit 1
-            fi
-            echo "FTP root deployment allowed because account is declared jailed to the dedicated publish directory."
+            }
           fi
+
+          test "$FTP_USER" = "ngw_GPT-PUBLISH" || {
+            echo "Refusing unexpected FTP user."
+            exit 1
+          }
 
       - name: Install FTPS client
         shell: bash
@@ -69,7 +71,6 @@ jobs:
           set ftp:ssl-protect-data true
           set ssl:verify-certificate true
           open -u "$FTP_USER","$FTP_PASSWORD" "$FTP_HOST"
-          mkdir -p "$REMOTE_DIR"
           mirror --reverse --verbose --parallel=4 "$LOCAL_DIR" "$REMOTE_DIR"
           bye
           EOF
@@ -78,5 +79,6 @@ jobs:
         shell: bash
         run: |
           echo "Infomaniak publication completed."
+          echo "FTP account: $FTP_USER"
           echo "Source: $LOCAL_DIR"
-          echo "Remote directory: $REMOTE_DIR"
+          echo "Remote root: isolated /web/T-GPT"
