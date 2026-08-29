@@ -5,53 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <title>T^Crypto-v3 α — Live Field</title>
-  <style>
-    :root{
-      --bg:#07090c;--panel:#0d1117;--panel2:#111722;--line:#242c38;--muted:#8895a7;--text:#f4f7fb;
-      --soft:#c8d1dc;--good:#7ee2a8;--warn:#f4c96b;--bad:#ff8b8b;--cyan:#6ed7ff;--violet:#ae91ff;
-      --radius:20px;--shadow:0 26px 90px rgba(0,0,0,.34)
-    }
-    *{box-sizing:border-box}
-    html{background:var(--bg);scroll-behavior:smooth}
-    body{margin:0;background:
-      radial-gradient(circle at 15% -10%,rgba(79,122,255,.13),transparent 30%),
-      radial-gradient(circle at 100% 0%,rgba(111,215,255,.08),transparent 28%),var(--bg);
-      color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    button,a{font:inherit}
-    a{color:inherit;text-decoration:none}
-    .shell{width:min(1480px,calc(100% - 28px));margin:0 auto;padding:18px 0 70px}
-    header{position:sticky;top:0;z-index:20;margin-bottom:18px;padding:14px 0;background:linear-gradient(to bottom,rgba(7,9,12,.95),rgba(7,9,12,.72),transparent);backdrop-filter:blur(12px)}
-    .bar{display:flex;align-items:center;gap:12px;justify-content:space-between;border:1px solid var(--line);background:rgba(13,17,23,.84);border-radius:18px;padding:11px 13px;box-shadow:var(--shadow)}
-    .brand{display:flex;align-items:center;gap:12px;min-width:0}
-    .mark{width:38px;height:38px;border-radius:12px;border:1px solid #334054;display:grid;place-items:center;background:linear-gradient(145deg,#111a26,#0b0f15);font-weight:800;letter-spacing:-.06em}
-    .brand-text{min-width:0}.brand-title{font-size:16px;font-weight:750;white-space:nowrap}.brand-sub{font-size:11px;color:var(--muted);letter-spacing:.11em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-    .btn,.chip{border:1px solid var(--line);background:#101620;color:var(--soft);border-radius:999px;padding:8px 11px;display:inline-flex;gap:7px;align-items:center}
-    .btn{cursor:pointer}.btn:hover{border-color:#3c495b;color:white}.btn:disabled{opacity:.5;cursor:wait}
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}.dot.good{background:var(--good);box-shadow:0 0 12px rgba(126,226,168,.6)}.dot.warn{background:var(--warn)}.dot.bad{background:var(--bad)}
-    .hero{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.7fr);gap:14px;margin-bottom:14px}
-    .hero-main,.hero-side,.panel,.asset{border:1px solid var(--line);background:linear-gradient(180deg,rgba(17,23,34,.94),rgba(11,15,21,.96));border-radius:var(--radius);box-shadow:var(--shadow)}
-    .hero-main{padding:28px}.eyebrow{color:var(--cyan);letter-spacing:.16em;text-transform:uppercase;font-size:11px;font-weight:700}.hero h1{font-size:clamp(34px,5vw,72px);line-height:.93;letter-spacing:-.06em;margin:10px 0 18px}.hero p{margin:0;color:var(--soft);max-width:850px;font-size:16px}.guard{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.guard .chip{font-size:12px}
-    .hero-side{padding:20px;display:grid;gap:14px;align-content:start}.metric .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}.metric .value{font-size:24px;font-weight:750;margin-top:3px;word-break:break-word}.metric .small{font-size:12px;color:var(--muted);margin-top:2px}
-    .tabs{display:flex;gap:8px;margin:18px 0 14px;overflow:auto;padding-bottom:2px}.tab{border:1px solid var(--line);background:#0d121a;color:var(--muted);padding:9px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}.tab.active{background:#182130;color:white;border-color:#38465a}
-    .view{display:none}.view.active{display:block}
-    .assets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.asset{padding:18px;min-width:0}.asset-top{display:flex;align-items:start;justify-content:space-between;gap:12px}.symbol{font-size:18px;font-weight:800}.pair{font-size:11px;color:var(--muted);margin-top:1px}.price{text-align:right;font-variant-numeric:tabular-nums}.price strong{font-size:26px;letter-spacing:-.035em}.change{font-size:12px;margin-top:2px}.up{color:var(--good)}.down{color:var(--bad)}.flat{color:var(--muted)}
-    .spark{height:78px;margin:16px -4px 10px}.spark svg{width:100%;height:100%;overflow:visible}.spark .grid{stroke:#202936;stroke-width:1}.spark .line{fill:none;stroke:var(--cyan);stroke-width:2.2;vector-effect:non-scaling-stroke}.spark .last{fill:var(--cyan)}
-    .ticker-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.mini{padding:9px;border:1px solid #202936;border-radius:12px;background:#0b1017;min-width:0}.mini .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.mini .v{margin-top:3px;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .tf{margin-top:14px;display:grid;gap:8px}.tf-row{display:grid;grid-template-columns:38px minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:center}.tf-name{font-weight:750;color:#dce4ef}.state{border:1px solid #263141;border-radius:11px;padding:8px 9px;min-width:0;background:#0b1017}.state .slabel{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.state .svalue{font-size:11px;font-weight:700;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.state.good .svalue{color:var(--good)}.state.bad .svalue{color:var(--bad)}.state.warn .svalue{color:var(--warn)}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{padding:19px}.panel h2{font-size:16px;margin:0 0 4px}.panel .sub{color:var(--muted);font-size:12px;margin-bottom:14px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}.tag{font-size:10px;padding:5px 8px;border-radius:999px;border:1px solid #2b3645;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-    table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;border-bottom:1px solid #1f2733;padding:9px 6px;vertical-align:top}th{color:var(--muted);font-weight:600}td strong{font-size:11px}.status-coherent{color:var(--good)}.status-partial{color:var(--warn)}.status-divergent{color:var(--bad)}.status-unresolved{color:var(--muted)}
-    .rel{display:grid;gap:9px}.rel-row{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr);gap:10px;padding:10px;border:1px solid #202936;border-radius:12px;background:#0b1017}.rel-k{color:var(--muted);font-size:11px}.rel-v{font-weight:700;font-size:12px;word-break:break-word}
-    .trace{display:grid;gap:9px}.trace-item{display:grid;grid-template-columns:90px minmax(0,1fr);gap:10px;padding:10px;border-left:2px solid #2e3b4d;background:#0b1017;border-radius:0 11px 11px 0}.trace-time{color:var(--muted);font-size:11px}.trace-body{font-size:12px}.trace-body strong{display:block;margin-bottom:2px}.muted{color:var(--muted)}
-    .arch{display:grid;gap:8px}.arch-line{padding:10px 12px;border:1px solid #202936;border-radius:12px;background:#0b1017;color:var(--soft);font-size:12px}.arch-line b{color:white}.arrow{text-align:center;color:#526277;font-size:18px;line-height:.6}
-    .prov-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.prov{padding:12px;border:1px solid #202936;border-radius:13px;background:#0b1017}.prov .p1{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.prov .p2{font-weight:700;margin-top:4px;font-size:12px}.prov .p3{font-size:11px;color:var(--muted);margin-top:3px;word-break:break-word}
-    .notice{margin-top:14px;padding:12px 13px;border:1px dashed #334054;border-radius:14px;color:var(--muted);font-size:12px;background:rgba(11,16,23,.6)}
-    details{margin-top:12px;border:1px solid #202936;border-radius:12px;background:#0b1017}summary{cursor:pointer;padding:11px 12px;color:var(--soft);font-size:12px}pre{margin:0;padding:0 12px 12px;max-height:420px;overflow:auto;color:#b9c5d4;font-size:11px;white-space:pre-wrap;word-break:break-word}
-    footer{margin-top:18px;color:#647185;font-size:11px;display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;padding:0 4px}
-    .error{display:none;margin-bottom:14px;border:1px solid rgba(255,139,139,.4);background:rgba(255,139,139,.08);color:#ffd2d2;padding:12px 14px;border-radius:14px}.error.show{display:block}
-    @media(max-width:1050px){.assets{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}.asset{padding:16px}.spark{height:92px}}
-    @media(max-width:640px){.shell{width:min(100% - 16px,1480px)}header{padding-top:8px}.bar{align-items:flex-start}.brand-sub{max-width:180px}.actions .chip{display:none}.hero-main{padding:21px}.hero-side{grid-template-columns:1fr 1fr}.hero h1{font-size:42px}.ticker-grid{grid-template-columns:1fr 1fr 1fr}.tf-row{grid-template-columns:34px 1fr}.tf-row .state:nth-child(3){grid-column:2}.prov-grid{grid-template-columns:1fr}.rel-row{grid-template-columns:1fr}.trace-item{grid-template-columns:70px 1fr}}
-  </style>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <div class="shell">
@@ -61,7 +15,7 @@
           <div class="mark">T^</div>
           <div class="brand-text">
             <div class="brand-title">T^Crypto-v3 <span style="color:var(--cyan)">α</span></div>
-            <div class="brand-sub">PAGE → SOURCE → CALCUL → ÉTAT → CHAMP</div>
+            <div class="brand-sub">SOURCE → ÉTAT → TRAJECTOIRE → TRACE</div>
           </div>
         </div>
         <div class="actions">
@@ -75,26 +29,29 @@
 
     <section class="hero">
       <div class="hero-main">
-        <div class="eyebrow">T^Crypto · Live Field · Alpha 0.1</div>
-        <h1>Voir le champ,<br>sans le réduire.</h1>
-        <p>Lecture publique de BTC, ETH et ADA depuis le bridge T^Crypto-Bybit. Bougie courante et bougie clôturée restent séparées ; les rubans EMA sont signalés comme recalculs ; les divergences multi-timeframes restent visibles sans score global.</p>
+        <div class="eyebrow">T^Crypto · Live Field · Alpha 0.2</div>
+        <h1>Voir le champ,<br>et le vol.</h1>
+        <p>Marché public, structures multi-timeframes et Libellules^ restent séparés mais co-présents. Une Libellule non partie apparaît explicitement <b>NOT_LAUNCHED</b>. Dès qu’un nouveau vol BTC ou ETH est matérialisé par l’observer read-only, son heure réelle de décollage, ses checkpoints, trajectoires, actions, positions, PnL, césures, phases et réconciliations deviennent visibles automatiquement.</p>
         <div class="guard">
-          <span class="chip">READ_ONLY</span>
-          <span class="chip">NO_GLOBAL_SCORE</span>
+          <span class="chip">STRICT_READ_ONLY</span>
+          <span class="chip">NO SECRET</span>
+          <span class="chip">NO_EXECUTION_ENDPOINT</span>
+          <span class="chip">NOT_LAUNCHED ≠ UNRESOLVED</span>
           <span class="chip">CURRENT ≠ CLOSED</span>
-          <span class="chip">[SOURCE] Bybit</span>
-          <span class="chip">[RECALC] EMA 7/14/28</span>
+          <span class="chip">NO_GLOBAL_SCORE</span>
         </div>
       </div>
       <aside class="hero-side">
+        <div class="metric"><div class="label">Libellules v3</div><div id="flightsHero" class="value">BTC — · ETH —</div><div class="small">observer strictement read-only</div></div>
         <div class="metric"><div class="label">Champ relationnel</div><div id="relationHero" class="value">UNRESOLVED</div><div class="small">RIBBON^TRADE · simulation-only</div></div>
-        <div class="metric"><div class="label">Fraîcheur</div><div id="freshHero" class="value">—</div><div id="timeHero" class="small">aucun snapshot reçu</div></div>
-        <div class="metric"><div class="label">Exécution</div><div id="execHero" class="value">READ ONLY</div><div id="execSmall" class="small">aucune route privée exposée</div></div>
+        <div class="metric"><div class="label">Fraîcheur marché</div><div id="freshHero" class="value">—</div><div id="timeHero" class="small">aucun snapshot reçu</div></div>
+        <div class="metric"><div class="label">Exécution depuis cette page</div><div id="execHero" class="value">READ ONLY</div><div id="execSmall" class="small">aucune route privée exposée</div></div>
       </aside>
     </section>
 
     <nav class="tabs" aria-label="Vues T^Crypto-v3">
       <button class="tab active" data-view="now">Maintenant</button>
+      <button class="tab" data-view="flights">Libellules^</button>
       <button class="tab" data-view="field">Champ</button>
       <button class="tab" data-view="lab">Lab / Trace</button>
     </nav>
@@ -102,6 +59,11 @@
     <main>
       <section id="view-now" class="view active">
         <div id="assets" class="assets"></div>
+      </section>
+
+      <section id="view-flights" class="view">
+        <div id="observerStrip" class="observer-strip"></div>
+        <div id="flightCards" class="flight-grid"></div>
       </section>
 
       <section id="view-field" class="view">
@@ -128,163 +90,52 @@
       <section id="view-lab" class="view">
         <div class="grid2">
           <section class="panel">
-            <div class="section-title"><div><h2>Libellule^ observer</h2><div class="sub">Surface read-only. Les routes privées d’exécution ne sont jamais embarquées dans cette page.</div></div><span class="tag">NO SECRET</span></div>
+            <div class="section-title"><div><h2>Libellule^ALGO</h2><div class="sub">Trajectoire et intercept sont observés sans transformer l’observer en organe d’action.</div></div><span class="tag">READ_ONLY</span></div>
             <div class="arch">
-              <div class="arch-line"><b>TARGET / OBJECT^STATE</b><br><span class="muted">prix, direction locale, historique, incertitude</span></div>
+              <div class="arch-line"><b>TARGET / OBJECT^STATE</b><br><span class="muted">position, direction, historique, accélération éventuelle, incertitude</span></div>
               <div class="arrow">↓</div>
-              <div class="arch-line"><b>TARGET^TRAJECTORY</b> × <b>SELF^REACHABLE-FIELD</b></div>
+              <div class="arch-line"><b>TARGET^TRAJECTORY</b> / faisceau de trajectoires possibles</div>
+              <div class="arrow">×</div>
+              <div class="arch-line"><b>SELF^STATE + SELF^REACHABLE-FIELD</b></div>
               <div class="arrow">↓</div>
-              <div class="arch-line"><b>INTERCEPT^FIELD</b><br><span class="muted">zone de rencontre future possible, pas point fixe</span></div>
+              <div class="arch-line"><b>INTERCEPT^FIELD</b><br><span class="muted">zone de rencontre future possible, jamais point fixe souverain</span></div>
               <div class="arrow">↓</div>
-              <div class="arch-line"><b>CÉSURE</b> → relecture locale → trace</div>
+              <div class="arch-line"><b>CÉSURE</b> · attendu ↔ observé → relecture locale → correction / NONACT → TRACE</div>
             </div>
-            <div class="notice">L’observer public des épisodes de vol n’est pas encore raccordé à cette v3. Aucun faux statut de vol n’est produit : tant qu’un canal public borné n’existe pas, l’état reste <b>UNRESOLVED / PRIVATE</b>.</div>
+            <div class="notice">Le Flight Observer est maintenant raccordé. Il n’embarque ni credential Bybit, ni mutation, ni endpoint d’exécution. Les anciens vols sont conservés comme <b>historique</b> ; une frontière temporelle v3 empêche de les confondre avec les prochaines Libellules.</div>
           </section>
+
           <section class="panel">
-            <div class="section-title"><div><h2>Provenance</h2><div class="sub">Séparation explicite entre source, recalcul et interprétation locale.</div></div><span class="tag">TRACE</span></div>
+            <div class="section-title"><div><h2>Provenance</h2><div class="sub">Source, recalcul, plan de génération et observer sont identifiés séparément.</div></div><span class="tag">TRACE</span></div>
             <div id="provenance" class="prov-grid"></div>
           </section>
+
           <section class="panel">
-            <div class="section-title"><div><h2>Architecture v3 α</h2><div class="sub">Une surface de lecture ; pas une nouvelle autorité sur T^Crypto.</div></div><span class="tag">ALPHA</span></div>
+            <div class="section-title"><div><h2>Architecture v3 α</h2><div class="sub">Une surface de lecture, pas une nouvelle autorité sur T^Crypto.</div></div><span class="tag">ALPHA 0.2</span></div>
             <div class="arch">
-              <div class="arch-line"><b>SOURCES</b> · Bybit V5 mainnet spot</div><div class="arrow">↓</div>
-              <div class="arch-line"><b>DATA</b> · ticker + klines 1H / 4H / 1D</div><div class="arrow">↓</div>
-              <div class="arch-line"><b>CALC</b> · EMA 7 / 14 / 28 + relations locales</div><div class="arrow">↓</div>
-              <div class="arch-line"><b>FIELD</b> · consistency TF + césures + inter-actifs</div><div class="arrow">↓</div>
-              <div class="arch-line"><b>TRACE / REPLAY</b> · à étendre avec observer de vol borné</div>
+              <div class="arch-line"><b>MARKET SOURCE</b> · Bybit V5 public</div><div class="arrow">↓</div>
+              <div class="arch-line"><b>STRUCTURE</b> · ticker + 1H / 4H / 1D + EMA 7/14/28</div><div class="arrow">↘</div>
+              <div class="arch-line"><b>FLIGHT OBSERVER</b> · D1 persisted traces · strict read-only</div><div class="arrow">↓</div>
+              <div class="arch-line"><b>CO-PRÉSENCE</b> · marché / trajectoire / action observée / trace / restes</div><div class="arrow">↓</div>
+              <div class="arch-line"><b>REPLAY</b> · historique séparé du vol courant</div>
             </div>
           </section>
+
           <section class="panel">
-            <div class="section-title"><div><h2>Données brutes</h2><div class="sub">Pour audit rapide de la réponse réellement reçue.</div></div><span class="tag">DEBUG</span></div>
-            <details><summary>Snapshot marché</summary><pre id="rawMarket">—</pre></details>
-            <details><summary>Snapshot RIBBON^TRADE</summary><pre id="rawRibbon">—</pre></details>
+            <div class="section-title"><div><h2>Données brutes</h2><div class="sub">Audit des réponses effectivement reçues par le navigateur.</div></div><span class="tag">DEBUG</span></div>
+            <div class="raw-grid">
+              <details><summary>Snapshot marché</summary><pre id="rawMarket">—</pre></details>
+              <details><summary>RIBBON^TRADE</summary><pre id="rawRibbon">—</pre></details>
+              <details><summary>Flight Observer</summary><pre id="rawObserver">—</pre></details>
+              <details><summary>Plan Libellules v3</summary><pre id="rawPlan">—</pre></details>
+            </div>
           </section>
         </div>
       </section>
     </main>
 
-    <footer><span>T^Crypto-v3 α 0.1 · surface expérimentale dans T-GPT</span><span id="footerStamp">aucune donnée reçue</span></footer>
+    <footer><span>T^Crypto-v3 α 0.2 · T-GPT · observation publique cloisonnée</span><span id="footerStamp">aucune donnée reçue</span></footer>
   </div>
-
-<script>
-(() => {
-  'use strict';
-  const MARKET_URL='https://t-crypto-bybit.com-0c9.workers.dev/market/tcrypto';
-  const RIBBON_URL='https://t-crypto-bybit.com-0c9.workers.dev/market/ribbon-trade';
-  const $=s=>document.querySelector(s);
-  const $$=s=>[...document.querySelectorAll(s)];
-  const state={market:null,ribbon:null,loading:false,lastClientFetch:null};
-  const tfKeys=[['h1','1H'],['h4','4H'],['d1','1D']];
-
-  function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
-  function num(v,d=2){const n=Number(v);return Number.isFinite(n)?n.toLocaleString('fr-CH',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';}
-  function price(v,symbol){const n=Number(v);if(!Number.isFinite(n))return '—';const d=symbol==='ADAUSDT'?4:2;return n.toLocaleString('fr-CH',{minimumFractionDigits:d,maximumFractionDigits:d});}
-  function pct(v){const n=Number(v);if(!Number.isFinite(n))return {text:'—',cls:'flat'};const p=n*100;return {text:`${p>=0?'+':''}${p.toFixed(2)}%`,cls:p>0?'up':p<0?'down':'flat'};}
-  function iso(ms){const n=Number(ms);return Number.isFinite(n)?new Date(n).toLocaleString('fr-CH',{dateStyle:'short',timeStyle:'medium'}):'—';}
-  function age(ms){const n=Number(ms);if(!Number.isFinite(n))return {label:'UNKNOWN',cls:'bad'};const a=Date.now()-n;if(a<0||a>5*60e3)return {label:`STALE ${Math.round(Math.abs(a)/1000)}s`,cls:'bad'};if(a>120e3)return {label:`RECENT ${Math.round(a/1000)}s`,cls:'warn'};return {label:`LIVE ${Math.max(0,Math.round(a/1000))}s`,cls:'good'};}
-  function orderClass(o){if(o==='BULL_ORDERED')return 'good';if(o==='BEAR_ORDERED')return 'bad';return 'warn';}
-  function relationClass(o){if(String(o).includes('ABOVE'))return 'good';if(String(o).includes('BELOW'))return 'bad';return 'warn';}
-  function shortOrder(o){return o==='BULL_ORDERED'?'BULL':o==='BEAR_ORDERED'?'BEAR':o==='MIXED'?'MIXED':'UNKNOWN';}
-
-  function sparkline(asset){
-    const tf=asset?.timeframes?.h1;const closed=[...(tf?.recentClosed||[])].reverse();const pts=closed.map(x=>Number(x.close)).filter(Number.isFinite);const cur=Number(tf?.current?.close);if(Number.isFinite(cur))pts.push(cur);
-    if(pts.length<2)return '<div class="muted" style="padding:24px 0">sparkline indisponible</div>';
-    const min=Math.min(...pts),max=Math.max(...pts),span=(max-min)||1,w=320,h=70,p=5;
-    const xy=pts.map((v,i)=>[p+i*(w-2*p)/(pts.length-1),h-p-(v-min)*(h-2*p)/span]);
-    const path=xy.map((q,i)=>`${i?'L':'M'}${q[0].toFixed(1)},${q[1].toFixed(1)}`).join(' ');const last=xy.at(-1);
-    return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true"><line class="grid" x1="0" y1="${h/2}" x2="${w}" y2="${h/2}"/><path class="line" d="${path}"/><circle class="last" cx="${last[0]}" cy="${last[1]}" r="3.2"/></svg>`;
-  }
-
-  function assetCard(a){
-    const ch=pct(a?.ticker?.price24hPcnt);const spread=Number(a?.ticker?.ask1Price)-Number(a?.ticker?.bid1Price);
-    const tfHtml=tfKeys.map(([k,label])=>{
-      const tf=a?.timeframes?.[k];const closed=tf?.ribbon?.lastClosed||{};const current=tf?.ribbon?.current||{};
-      return `<div class="tf-row"><div class="tf-name">${label}</div>
-        <div class="state ${orderClass(closed.order)}"><div class="slabel">CLOSED · structure</div><div class="svalue">${esc(shortOrder(closed.order))} · ${esc(closed.priceRelation||'UNKNOWN')}</div></div>
-        <div class="state ${orderClass(current.order)}"><div class="slabel">CURRENT · provisoire</div><div class="svalue">${esc(shortOrder(current.order))} · ${esc(current.priceRelation||'UNKNOWN')}</div></div></div>`;
-    }).join('');
-    return `<article class="asset">
-      <div class="asset-top"><div><div class="symbol">${esc(a.symbol.replace('USDT',''))}</div><div class="pair">${esc(a.symbol)} · SPOT · [SOURCE]</div></div><div class="price"><strong>${price(a?.ticker?.lastPrice,a.symbol)}</strong><div class="change ${ch.cls}">${ch.text} · 24h</div></div></div>
-      <div class="spark">${sparkline(a)}</div>
-      <div class="ticker-grid"><div class="mini"><div class="l">24h bas</div><div class="v">${price(a?.ticker?.low24h,a.symbol)}</div></div><div class="mini"><div class="l">24h haut</div><div class="v">${price(a?.ticker?.high24h,a.symbol)}</div></div><div class="mini"><div class="l">spread</div><div class="v">${Number.isFinite(spread)?num(spread,a.symbol==='ADAUSDT'?5:2):'—'}</div></div></div>
-      <div class="tf">${tfHtml}</div>
-    </article>`;
-  }
-
-  function pairConsistency(a,b){
-    if(!a||!b||a==='UNKNOWN'||b==='UNKNOWN')return {state:'UNRESOLVED',glue:'UNRESOLVED'};
-    if(a===b&&a!=='MIXED')return {state:'COHERENT',glue:'GLUABLE'};
-    if(a===b||a==='MIXED'||b==='MIXED')return {state:'PARTIAL',glue:'CONDITIONALLY_GLUABLE'};
-    return {state:'DIVERGENT',glue:'NON_GLUABLE'};
-  }
-  function consistencyFor(asset){
-    const o={};for(const [k] of tfKeys)o[k]=asset?.timeframes?.[k]?.ribbon?.lastClosed?.order||'UNKNOWN';
-    const pairs=[['1H↔4H','h1','h4'],['1H↔1D','h1','d1'],['4H↔1D','h4','d1']].map(([n,a,b])=>({name:n,left:o[a],right:o[b],...pairConsistency(o[a],o[b])}));
-    const states=pairs.map(p=>p.state);let global='PARTIAL_SECTION';if(states.every(x=>x==='COHERENT'))global='FULL_SECTION';else if(states.includes('DIVERGENT'))global='NO_GLOBAL_SECTION';else if(states.every(x=>x==='UNRESOLVED'))global='UNRESOLVED';
-    return {pairs,global};
-  }
-  function statusClass(s){return s==='COHERENT'||s==='FULL_SECTION'?'status-coherent':s==='PARTIAL'||s==='PARTIAL_SECTION'?'status-partial':s==='DIVERGENT'||s==='NO_GLOBAL_SECTION'?'status-divergent':'status-unresolved';}
-  function renderConsistency(){
-    const assets=state.market?.assets||[];
-    $('#consistency').innerHTML=assets.map(a=>{const c=consistencyFor(a);return `<div style="margin-bottom:18px"><div style="display:flex;justify-content:space-between;gap:8px;margin-bottom:7px"><strong>${esc(a.symbol)}</strong><span class="${statusClass(c.global)}">${c.global}</span></div><table><thead><tr><th>Couple</th><th>État</th><th>Gluing</th><th>Ordres</th></tr></thead><tbody>${c.pairs.map(p=>`<tr><td>${p.name}</td><td class="${statusClass(p.state)}"><strong>${p.state}</strong></td><td>${p.glue}</td><td>${shortOrder(p.left)} ↔ ${shortOrder(p.right)}</td></tr>`).join('')}</tbody></table></div>`}).join('')||'<div class="muted">UNRESOLVED</div>';
-  }
-
-  function renderRibbon(){
-    const r=state.ribbon;if(!r?.ok){$('#ribbonRel').innerHTML='<div class="muted">RIBBON^TRADE indisponible.</div>';return;}
-    const rows=[['Champ',r.relational?.state||'UNRESOLVED'],['Mode',r.mode||'—'],['Ordres',r.execution?.orderEmission||'FORBIDDEN'],['Trigger',r.semantics?.trigger||'1H_CLOSED_CANDLE'],['Structure',r.semantics?.structure||'4H_CLOSED_CANDLE'],['Contexte',r.semantics?.context||'1D_CLOSED_CANDLE']];
-    $('#ribbonRel').innerHTML=rows.map(([k,v])=>`<div class="rel-row"><div class="rel-k">${esc(k)}</div><div class="rel-v">${esc(v)}</div></div>`).join('');
-    $('#relationHero').textContent=r.relational?.state||'UNRESOLVED';
-  }
-
-  function renderCesure(){
-    const assets=state.market?.assets||[];const events=[];
-    for(const a of assets){for(const [k,label] of tfKeys){const tf=a?.timeframes?.[k],cl=tf?.ribbon?.lastClosed||{},cu=tf?.ribbon?.current||{};const dif=[];if(cl.order&&cu.order&&cl.order!==cu.order)dif.push(`ordre ${shortOrder(cl.order)} → ${shortOrder(cu.order)}`);if(cl.priceRelation&&cu.priceRelation&&cl.priceRelation!==cu.priceRelation)dif.push(`${cl.priceRelation} → ${cu.priceRelation}`);for(const x of cu.crossEvents||[])dif.push(x);if(dif.length)events.push({asset:a.symbol,tf:label,body:dif.join(' · ')});}}
-    $('#cesure').innerHTML=events.length?events.map(e=>`<div class="trace-item"><div class="trace-time">${e.asset}<br>${e.tf}</div><div class="trace-body"><strong>CÉSURE locale</strong>${esc(e.body)}</div></div>`).join(''):'<div class="trace-item"><div class="trace-time">NOW</div><div class="trace-body"><strong>Aucune césure locale détectée dans les champs exposés</strong><span class="muted">Cela ne vaut pas absence de changement hors des relations actuellement calculées.</span></div></div>';
-  }
-
-  function renderInterAsset(){
-    const r=state.ribbon;const rows=[];
-    for(const p of r?.relational?.pairwise||[])rows.push([p.pair,p.state,`${p.left} ↔ ${p.right}`]);
-    if(!rows.length){const assets=state.market?.assets||[];for(let i=0;i<assets.length;i++)for(let j=i+1;j<assets.length;j++){const A=assets[i],B=assets[j];const ca=consistencyFor(A).global,cb=consistencyFor(B).global;rows.push([`${A.symbol}×${B.symbol}`,'UNRESOLVED',`${ca} ↔ ${cb}`]);}}
-    $('#interAsset').innerHTML=(rows.length?rows:[['—','UNRESOLVED','aucune relation disponible']]).map(([k,s,d])=>`<div class="rel-row"><div class="rel-k">${esc(k)}</div><div class="rel-v"><span class="${statusClass(s)}">${esc(s)}</span><br><span class="muted">${esc(d)}</span></div></div>`).join('');
-  }
-
-  function renderProvenance(){
-    const m=state.market;const cards=[];
-    cards.push(['[SOURCE]','T^Crypto-Bybit public bridge',MARKET_URL]);
-    cards.push(['[SOURCE]','Bybit V5 mainnet spot',m?.sourcePolicy?.primary||'source non reçue']);
-    cards.push(['[RECALC]','EMA ribbon 7 / 14 / 28',m?.indicators?.localRibbon?.profile?.id||'profil non reçu']);
-    cards.push(['[UNKNOWN]','XTF anchors',m?.indicators?.xtfAnchors?.status||'MUST_RECALCULATE']);
-    $('#provenance').innerHTML=cards.map(([a,b,c])=>`<div class="prov"><div class="p1">${esc(a)}</div><div class="p2">${esc(b)}</div><div class="p3">${esc(c)}</div></div>`).join('');
-  }
-
-  function renderMeta(){
-    const m=state.market;const ag=age(m?.generatedAt);$('#freshHero').textContent=ag.label;$('#freshHero').style.color=ag.cls==='good'?'var(--good)':ag.cls==='warn'?'var(--warn)':'var(--bad)';$('#timeHero').textContent=m?.generatedAt?`source ${iso(m.generatedAt)}`:'aucun snapshot reçu';
-    $('#liveDot').className=`dot ${ag.cls}`;$('#liveLabel').textContent=ag.label;$('#footerStamp').textContent=state.lastClientFetch?`lecture navigateur ${new Date(state.lastClientFetch).toLocaleTimeString('fr-CH')}`:'aucune donnée reçue';
-    const ex=m?.executionIsolation;if(ex){$('#execHero').textContent=ex.tradingEnabled?'DEMO UNLOCKED':'READ ONLY';$('#execSmall').textContent=`env=${ex.environment} · trading=${ex.tradingEnabled} · dryRun=${ex.dryRun}`;}
-  }
-
-  function render(){
-    const assets=state.market?.assets||[];$('#assets').innerHTML=assets.map(assetCard).join('')||'<section class="panel"><h2>UNRESOLVED</h2><div class="sub">Aucune donnée marché n’a été reçue. Aucun prix de secours n’est inventé.</div></section>';
-    renderConsistency();renderRibbon();renderCesure();renderInterAsset();renderProvenance();renderMeta();
-    $('#rawMarket').textContent=state.market?JSON.stringify(state.market,null,2):'—';$('#rawRibbon').textContent=state.ribbon?JSON.stringify(state.ribbon,null,2):'—';
-  }
-
-  async function load(){
-    if(state.loading)return;state.loading=true;$('#refreshBtn').disabled=true;$('#errorBox').classList.remove('show');
-    try{
-      const [mRes,rRes]=await Promise.all([fetch(MARKET_URL,{cache:'no-store'}),fetch(RIBBON_URL,{cache:'no-store'})]);
-      if(!mRes.ok)throw new Error(`Market HTTP ${mRes.status}`);state.market=await mRes.json();
-      state.ribbon=rRes.ok?await rRes.json():{ok:false,error:`Ribbon HTTP ${rRes.status}`};state.lastClientFetch=Date.now();
-      if(!state.market?.ok)throw new Error(state.market?.error||'Market snapshot not ok');
-    }catch(err){$('#errorBox').textContent=`Flux public indisponible : ${err?.message||err}. Les dernières valeurs reçues, s’il y en a, restent affichées sans être présentées comme fraîches.`;$('#errorBox').classList.add('show');}
-    finally{state.loading=false;$('#refreshBtn').disabled=false;render();}
-  }
-
-  $$('.tab').forEach(t=>t.addEventListener('click',()=>{$$('.tab').forEach(x=>x.classList.toggle('active',x===t));$$('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${t.dataset.view}`));}));
-  $('#refreshBtn').addEventListener('click',load);
-  load();setInterval(()=>{renderMeta();if(!state.loading)load();},60000);
-})();
-</script>
+  <script src="./app.js" defer></script>
 </body>
 </html>
