@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <title>T^Crypto-v3 α — Live Field</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=0.3.1">
 </head>
 <body>
   <div class="shell">
@@ -29,14 +29,14 @@
 
     <section class="hero">
       <div class="hero-main">
-        <div class="eyebrow">T^Crypto · Live Field · Alpha 0.2</div>
+        <div class="eyebrow">T^Crypto · Live Field · Alpha 0.3</div>
         <h1>Voir le champ,<br>et le vol.</h1>
-        <p>Marché public, structures multi-timeframes et Libellules^ restent séparés mais co-présents. Une Libellule non partie apparaît explicitement <b>NOT_LAUNCHED</b>. Dès qu’un nouveau vol BTC ou ETH est matérialisé par l’observer read-only, son heure réelle de décollage, ses checkpoints, trajectoires, actions, positions, PnL, césures, phases et réconciliations deviennent visibles automatiquement.</p>
+        <p>Marché public, structures multi-timeframes, indicateurs T^ et Libellules^ restent séparés mais co-présents. Une Libellule non partie apparaît explicitement <b>NOT_LAUNCHED</b>. Dès qu’un nouveau vol BTC ou ETH est matérialisé par l’observer read-only, son heure réelle de décollage, ses checkpoints, trajectoires, actions, positions, PnL, césures, phases et réconciliations deviennent visibles automatiquement.</p>
         <div class="guard">
           <span class="chip">STRICT_READ_ONLY</span>
+          <span class="chip">INDICATEURS T^ SÉPARÉS</span>
           <span class="chip">NO SECRET</span>
           <span class="chip">NO_EXECUTION_ENDPOINT</span>
-          <span class="chip">NOT_LAUNCHED ≠ UNRESOLVED</span>
           <span class="chip">CURRENT ≠ CLOSED</span>
           <span class="chip">NO_GLOBAL_SCORE</span>
         </div>
@@ -102,7 +102,7 @@
               <div class="arrow">↓</div>
               <div class="arch-line"><b>CÉSURE</b> · attendu ↔ observé → relecture locale → correction / NONACT → TRACE</div>
             </div>
-            <div class="notice">Le Flight Observer est maintenant raccordé. Il n’embarque ni credential Bybit, ni mutation, ni endpoint d’exécution. Les anciens vols sont conservés comme <b>historique</b> ; une frontière temporelle v3 empêche de les confondre avec les prochaines Libellules.</div>
+            <div class="notice">Le Flight Observer est raccordé en lecture seule. Les anciens vols sont conservés comme <b>historique</b> ; une frontière temporelle v3 empêche de les confondre avec les prochaines Libellules.</div>
           </section>
 
           <section class="panel">
@@ -111,7 +111,7 @@
           </section>
 
           <section class="panel">
-            <div class="section-title"><div><h2>Architecture v3 α</h2><div class="sub">Une surface de lecture, pas une nouvelle autorité sur T^Crypto.</div></div><span class="tag">ALPHA 0.2</span></div>
+            <div class="section-title"><div><h2>Architecture v3 α</h2><div class="sub">Une surface de lecture, pas une nouvelle autorité sur T^Crypto.</div></div><span class="tag">ALPHA 0.3</span></div>
             <div class="arch">
               <div class="arch-line"><b>MARKET SOURCE</b> · Bybit V5 public</div><div class="arrow">↓</div>
               <div class="arch-line"><b>STRUCTURE</b> · ticker + 1H / 4H / 1D + EMA 7/14/28</div><div class="arrow">↘</div>
@@ -134,8 +134,9 @@
       </section>
     </main>
 
-    <footer><span>T^Crypto-v3 α 0.2 · T-GPT · observation publique cloisonnée</span><span id="footerStamp">aucune donnée reçue</span></footer>
+    <footer><span>T^Crypto-v3 α 0.3 · T-GPT · observation publique cloisonnée</span><span id="footerStamp">aucune donnée reçue</span></footer>
   </div>
-  <script src="./app.js" defer></script>
+  <script src="./app.js?v=0.3.1" defer></script>
+  <script src="./t-indicators.js?v=0.3.1" defer></script>
 </body>
 </html>
