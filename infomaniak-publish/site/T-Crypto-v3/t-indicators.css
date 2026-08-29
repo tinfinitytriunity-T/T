@@ -1,0 +1,142 @@
+.tind-panel{
+  margin:0 0 18px !important;
+  border:1px solid #36506f !important;
+  border-radius:22px !important;
+  padding:18px !important;
+  background:linear-gradient(180deg,rgba(14,25,39,.98),rgba(8,14,22,.99)) !important;
+  color:#f4f7fb !important;
+  box-shadow:0 22px 70px rgba(0,0,0,.34) !important;
+  overflow:hidden;
+}
+.tind-head{
+  display:flex !important;
+  align-items:flex-end !important;
+  justify-content:space-between !important;
+  gap:14px !important;
+  margin-bottom:14px !important;
+}
+.tind-kicker{
+  font-size:10px !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+  color:#6ed7ff !important;
+  font-weight:800 !important;
+}
+.tind-title{
+  font-size:22px !important;
+  line-height:1.05 !important;
+  font-weight:850 !important;
+  letter-spacing:-.03em !important;
+  margin-top:4px !important;
+}
+.tind-note{
+  font-size:11px !important;
+  line-height:1.45 !important;
+  color:#8895a7 !important;
+  max-width:560px !important;
+  text-align:right !important;
+}
+.tind-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:11px !important;
+  margin-top:14px !important;
+}
+.tind-card{
+  position:relative !important;
+  display:block !important;
+  min-width:0 !important;
+  min-height:164px !important;
+  padding:15px 15px 14px 17px !important;
+  border:1px solid #29384b !important;
+  border-radius:16px !important;
+  background:linear-gradient(180deg,#0d151f,#0a1018) !important;
+  overflow:hidden !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.02) !important;
+}
+.tind-card:before{
+  content:"";
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:#51657f;
+}
+.tind-card.good:before{background:#7ee2a8}.tind-card.warn:before{background:#f4c96b}.tind-card.bad:before{background:#ff8b8b}.tind-card.violet:before{background:#ae91ff}.tind-card.cyan:before{background:#6ed7ff}
+.tind-name{
+  display:block !important;
+  font-size:10px !important;
+  color:#8b99ab !important;
+  text-transform:uppercase !important;
+  letter-spacing:.13em !important;
+  font-weight:750 !important;
+  margin-bottom:7px !important;
+}
+.tind-value{
+  display:block !important;
+  font-size:17px !important;
+  line-height:1.18 !important;
+  font-weight:830 !important;
+  letter-spacing:-.015em !important;
+  color:#f4f7fb !important;
+  margin:0 0 9px !important;
+  overflow-wrap:anywhere !important;
+}
+.tind-detail{
+  display:block !important;
+  font-size:11px !important;
+  line-height:1.48 !important;
+  color:#9ba8b9 !important;
+  margin-bottom:9px !important;
+}
+.tind-rows{
+  display:grid !important;
+  gap:0 !important;
+  margin-top:9px !important;
+}
+.tind-row{
+  display:grid !important;
+  grid-template-columns:minmax(54px,.55fr) minmax(0,1.45fr) !important;
+  gap:9px !important;
+  align-items:start !important;
+  border-top:1px solid #1e2936 !important;
+  padding:7px 0 0 !important;
+  margin-top:7px !important;
+  font-size:10px !important;
+  line-height:1.35 !important;
+}
+.tind-row span:first-child{
+  color:#7f8d9f !important;
+  min-width:0 !important;
+}
+.tind-row span:last-child{
+  color:#dbe4ee !important;
+  font-weight:700 !important;
+  text-align:right !important;
+  min-width:0 !important;
+  overflow-wrap:anywhere !important;
+}
+.tind-prov{
+  display:block !important;
+  margin-top:11px !important;
+  padding-top:8px !important;
+  border-top:1px dashed #223043 !important;
+  font-size:9px !important;
+  line-height:1.4 !important;
+  color:#647286 !important;
+  text-transform:uppercase !important;
+  letter-spacing:.07em !important;
+  overflow-wrap:anywhere !important;
+}
+.tind-stealth{color:#ae91ff !important}.tind-good{color:#7ee2a8 !important}.tind-warn{color:#f4c96b !important}.tind-bad{color:#ff8b8b !important}.tind-muted{color:#8795a6 !important}
+@media(max-width:1050px){
+  .tind-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+}
+@media(max-width:640px){
+  .tind-panel{padding:15px !important;border-radius:20px !important}
+  .tind-head{align-items:flex-start !important;flex-direction:column !important;margin-bottom:13px !important}
+  .tind-note{text-align:left !important;max-width:none !important}
+  .tind-grid{grid-template-columns:1fr !important;gap:10px !important}
+  .tind-card{min-height:0 !important;padding:14px 14px 13px 16px !important}
+  .tind-value{font-size:16px !important}
+  .tind-row{grid-template-columns:76px minmax(0,1fr) !important}
+}
