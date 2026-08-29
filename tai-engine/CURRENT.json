@@ -1,0 +1,23 @@
+{
+  "milestone": "M4_3_6_RESILIENT_FIELD",
+  "status": "PREVIEW_SOURCE_NOT_DEPLOYED",
+  "runtime": "Vercel",
+  "vercel_project": "t_ai_bridge",
+  "production_baseline": "M4_STABLE + YT_NATIVE_v1",
+  "engine_source_zip_sha256": "55b837bca07b87bcfe1784cec81ea8f7acc8d6767e5a1e5c7bfcd4080b99cb02",
+  "nephesh_static_zip_sha256": "23d1822d7f3117738b790b5f78ba47ace8dbda6150e5f0946a0cad5b714d2f32",
+  "complete_bundle_sha256": "96cf84a536e19d904ffb845b73aad8c4eabb95b556e2b7f612247698e3e94129",
+  "runtime_contract": {
+    "health_first_negotiation": true,
+    "generative_post_auto_retry": false,
+    "client_post_timeout_ms": 90000,
+    "public_provider_timeout_ms": 65000,
+    "lab_provider_timeout_ms": 75000
+  },
+  "invariants": {
+    "winner": null,
+    "vote": null,
+    "global_score": null,
+    "automatic_optimization": false
+  }
+}
