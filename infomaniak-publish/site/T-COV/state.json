@@ -4,8 +4,9 @@
   "mirror": {
     "url": "https://www.nephesh.ch/T-GPT/T-COV/",
     "target": "/web/T-GPT/T-COV/",
-    "mode": "sanitized-technical-mirror",
-    "privateDataIncluded": false
+    "mode": "sanitized-technical-access-hub",
+    "privateDataIncluded": false,
+    "persoMirrored": false
   },
   "production": {
     "project": "t-cov-mirror",
@@ -26,7 +27,7 @@
   },
   "github": {
     "repository": "tinfinitytriunity-T/T-COV-Perso",
-    "documentedHead": "5d082c64deb368e2a5851416e4c0bb8ea0c327ba",
+    "documentedHead": "a0c13edd8264411fc0e15bf7e889ebcac8aad881",
     "latestDriveSyncBeforeDocs": "d324bead9a8910c9c833bb6e45212c99b8429ced",
     "latestValidatedFunctionalCommit": "25e53f4ee922331cf6e148418bdc16e52760bdb6"
   },
@@ -37,10 +38,24 @@
     "githubChangeIsNotProductionChange": true,
     "historicalZipIsNotCurrentState": true
   },
-  "routes": {
-    "tcov": "https://t-cov-mirror.vercel.app/T-COV/",
-    "perso": "https://t-cov-mirror.vercel.app/T-COV/perso/",
-    "tecr": "https://t-cov-mirror.vercel.app/T-ECR/cours/",
-    "tinf": "https://t-cov-mirror.vercel.app/T-INF/"
+  "tgptPages": {
+    "admin": {
+      "mirror": "https://www.nephesh.ch/T-GPT/T-COV/Admin/",
+      "canonical": "https://t-cov-mirror.vercel.app/T-COV/admin/",
+      "verifiedStatus": 401,
+      "protected": true
+    },
+    "tinf": {
+      "mirror": "https://www.nephesh.ch/T-GPT/T-COV/T-INF/",
+      "canonical": "https://t-cov-mirror.vercel.app/T-INF/",
+      "verifiedStatus": 200,
+      "protected": false
+    },
+    "tecr": {
+      "mirror": "https://www.nephesh.ch/T-GPT/T-COV/T-ECR/",
+      "canonical": "https://t-cov-mirror.vercel.app/T-ECR/cours/",
+      "verifiedStatus": 200,
+      "protected": false
+    }
   }
 }
