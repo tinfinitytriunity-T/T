@@ -1,0 +1,25 @@
+{
+  "schema": "TCRYPTO_V3_LIBELLULE_PLAN_V1",
+  "preparedAtUtc": "2026-08-29T17:17:03Z",
+  "preparedAtLocal": "2026-08-29T19:17:03+02:00",
+  "timezone": "Europe/Zurich",
+  "observerUrl": "https://t-crypto-flight-observer.com-0c9.workers.dev/observer/current",
+  "libellules": {
+    "BTCUSDT": {
+      "generation": "T^Crypto-v3",
+      "currentState": "NOT_LAUNCHED",
+      "epochStartUtc": "2026-08-29T17:17:03Z",
+      "plannedTakeoffUtc": null,
+      "environment": "BYBIT_DEMO",
+      "note": "Nouvelle Libellule BTC : pas encore décollée à l'ouverture de la génération v3. Toute session observer dont startedAt >= epochStartUtc devient le vol courant."
+    },
+    "ETHUSDT": {
+      "generation": "T^Crypto-v3",
+      "currentState": "NOT_LAUNCHED",
+      "epochStartUtc": "2026-08-29T17:17:03Z",
+      "plannedTakeoffUtc": null,
+      "environment": "BYBIT_DEMO",
+      "note": "Nouvelle Libellule ETH : pas encore décollée à l'ouverture de la génération v3. Toute session observer dont startedAt >= epochStartUtc devient le vol courant."
+    }
+  }
+}
