@@ -26,6 +26,7 @@ jobs:
       FTP_USER: ${{ secrets.INFOMANIAK_FTP_USER }}
       FTP_PASSWORD: ${{ secrets.INFOMANIAK_FTP_PASSWORD }}
       REMOTE_DIR: ${{ secrets.INFOMANIAK_REMOTE_DIR }}
+      FTP_JAILED_ROOT: ${{ secrets.INFOMANIAK_FTP_JAILED_ROOT }}
       LOCAL_DIR: infomaniak-publish/site
 
     steps:
@@ -41,9 +42,13 @@ jobs:
           test -n "$FTP_PASSWORD" || { echo "Missing INFOMANIAK_FTP_PASSWORD"; exit 1; }
           test -n "$REMOTE_DIR" || { echo "Missing INFOMANIAK_REMOTE_DIR"; exit 1; }
           test -d "$LOCAL_DIR" || { echo "Missing local publish directory"; exit 1; }
+
           if [ "$REMOTE_DIR" = "/" ] || [ "$REMOTE_DIR" = "." ]; then
-            echo "Refusing unsafe REMOTE_DIR=$REMOTE_DIR. Use a dedicated Infomaniak subdirectory."
-            exit 1
+            if [ "$FTP_JAILED_ROOT" != "true" ]; then
+              echo "Refusing FTP root deployment unless INFOMANIAK_FTP_JAILED_ROOT=true."
+              exit 1
+            fi
+            echo "FTP root deployment allowed because account is declared jailed to the dedicated publish directory."
           fi
 
       - name: Install FTPS client
