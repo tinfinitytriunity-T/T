@@ -1,0 +1,77 @@
+name: Publish to Infomaniak
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "infomaniak-publish/site/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: infomaniak-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: FTPS deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: infomaniak-production
+    env:
+      FTP_HOST: ${{ secrets.INFOMANIAK_FTP_HOST }}
+      FTP_USER: ${{ secrets.INFOMANIAK_FTP_USER }}
+      FTP_PASSWORD: ${{ secrets.INFOMANIAK_FTP_PASSWORD }}
+      REMOTE_DIR: ${{ secrets.INFOMANIAK_REMOTE_DIR }}
+      LOCAL_DIR: infomaniak-publish/site
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$FTP_HOST" || { echo "Missing INFOMANIAK_FTP_HOST"; exit 1; }
+          test -n "$FTP_USER" || { echo "Missing INFOMANIAK_FTP_USER"; exit 1; }
+          test -n "$FTP_PASSWORD" || { echo "Missing INFOMANIAK_FTP_PASSWORD"; exit 1; }
+          test -n "$REMOTE_DIR" || { echo "Missing INFOMANIAK_REMOTE_DIR"; exit 1; }
+          test -d "$LOCAL_DIR" || { echo "Missing local publish directory"; exit 1; }
+          if [ "$REMOTE_DIR" = "/" ] || [ "$REMOTE_DIR" = "." ]; then
+            echo "Refusing unsafe REMOTE_DIR=$REMOTE_DIR. Use a dedicated Infomaniak subdirectory."
+            exit 1
+          fi
+
+      - name: Install FTPS client
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+
+      - name: Publish over explicit FTPS
+        shell: bash
+        run: |
+          set -euo pipefail
+          lftp <<EOF
+          set cmd:fail-exit true
+          set net:max-retries 2
+          set net:timeout 20
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate true
+          open -u "$FTP_USER","$FTP_PASSWORD" "$FTP_HOST"
+          mkdir -p "$REMOTE_DIR"
+          mirror --reverse --verbose --parallel=4 "$LOCAL_DIR" "$REMOTE_DIR"
+          bye
+          EOF
+
+      - name: Deployment summary
+        shell: bash
+        run: |
+          echo "Infomaniak publication completed."
+          echo "Source: $LOCAL_DIR"
+          echo "Remote directory: $REMOTE_DIR"
