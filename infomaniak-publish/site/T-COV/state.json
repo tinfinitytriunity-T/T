@@ -1,0 +1,46 @@
+{
+  "project": "T-COV",
+  "generatedAt": "2026-08-29",
+  "mirror": {
+    "url": "https://www.nephesh.ch/T-GPT/T-COV/",
+    "target": "/web/T-GPT/T-COV/",
+    "mode": "sanitized-technical-mirror",
+    "privateDataIncluded": false
+  },
+  "production": {
+    "project": "t-cov-mirror",
+    "deployment": "dpl_7tm1pTatVm5ys6P9A6kVBHSFhz3z",
+    "status": "READY",
+    "alias": "https://t-cov-mirror.vercel.app",
+    "verifiedBuild": {
+      "teachingClasses": 29,
+      "coClasses": 36,
+      "documentsAtBuild": 7
+    }
+  },
+  "preview": {
+    "deployment": "dpl_6c5QdvUXxw3Y2jP1VqXjBx1vkZjg",
+    "status": "READY",
+    "promotedToProduction": false,
+    "functionalCommit": "25e53f4ee922331cf6e148418bdc16e52760bdb6"
+  },
+  "github": {
+    "repository": "tinfinitytriunity-T/T-COV-Perso",
+    "documentedHead": "5d082c64deb368e2a5851416e4c0bb8ea0c327ba",
+    "latestDriveSyncBeforeDocs": "d324bead9a8910c9c833bb6e45212c99b8429ced",
+    "latestValidatedFunctionalCommit": "25e53f4ee922331cf6e148418bdc16e52760bdb6"
+  },
+  "invariants": {
+    "teachingClasses": 29,
+    "coClasses": 36,
+    "productionIsNotPreview": true,
+    "githubChangeIsNotProductionChange": true,
+    "historicalZipIsNotCurrentState": true
+  },
+  "routes": {
+    "tcov": "https://t-cov-mirror.vercel.app/T-COV/",
+    "perso": "https://t-cov-mirror.vercel.app/T-COV/perso/",
+    "tecr": "https://t-cov-mirror.vercel.app/T-ECR/cours/",
+    "tinf": "https://t-cov-mirror.vercel.app/T-INF/"
+  }
+}
