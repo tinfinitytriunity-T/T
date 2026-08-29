@@ -35,7 +35,7 @@ function tai_rate_limit(string $scope,int $limit,int $window=60): array {
 }
 function tai_http_json(string $url,string $method='GET',?array $payload=null,array $headers=[],int $timeout=18): array {
   $baseHeaders=['Accept: application/json'];if($payload!==null)$baseHeaders[]='Content-Type: application/json';foreach($headers as $k=>$v)$baseHeaders[]=$k.': '.$v;
-  if(function_exists('curl_init')){$ch=curl_init($url);curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_FOLLOWLOCATION=>false,CURLOPT_CONNECTTIMEOUT=>5,CURLOPT_TIMEOUT=>$timeout,CURLOPT_CUSTOMREQUEST=>$method,CURLOPT_HTTPHEADER=>$baseHeaders,CURLOPT_USERAGENT=>'T-AI-Nephesh-Edge/4.3.5']);if($payload!==null)curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($payload,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE));$raw=curl_exec($ch);$status=(int)curl_getinfo($ch,CURLINFO_RESPONSE_CODE);$error=curl_error($ch);curl_close($ch);if($raw===false)return ['ok'=>false,'status'=>0,'data'=>['error'=>'UPSTREAM_UNAVAILABLE','detail'=>$error]];$data=json_decode($raw,true);if(!is_array($data))$data=['raw'=>substr((string)$raw,0,1200)];return ['ok'=>$status>=200&&$status<300,'status'=>$status,'data'=>$data];}
+  if(function_exists('curl_init')){$ch=curl_init($url);curl_setopt_array($ch,[CURLOPT_RETURNTRANSFER=>true,CURLOPT_FOLLOWLOCATION=>false,CURLOPT_CONNECTTIMEOUT=>5,CURLOPT_TIMEOUT=>$timeout,CURLOPT_CUSTOMREQUEST=>$method,CURLOPT_HTTPHEADER=>$baseHeaders,CURLOPT_USERAGENT=>'T-AI-Nephesh-Edge/4.3.8']);if($payload!==null)curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($payload,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE));$raw=curl_exec($ch);$status=(int)curl_getinfo($ch,CURLINFO_RESPONSE_CODE);$error=curl_error($ch);curl_close($ch);if($raw===false)return ['ok'=>false,'status'=>0,'data'=>['error'=>'UPSTREAM_UNAVAILABLE','detail'=>$error]];$data=json_decode($raw,true);if(!is_array($data))$data=['raw'=>substr((string)$raw,0,1200)];return ['ok'=>$status>=200&&$status<300,'status'=>$status,'data'=>$data];}
   $opts=['http'=>['method'=>$method,'timeout'=>$timeout,'ignore_errors'=>true,'header'=>implode("\r\n",$baseHeaders)]];if($payload!==null)$opts['http']['content']=json_encode($payload,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);$raw=@file_get_contents($url,false,stream_context_create($opts));$status=0;foreach($http_response_header??[] as $h)if(preg_match('~^HTTP/\S+\s+(\d{3})~',$h,$m))$status=(int)$m[1];$data=json_decode($raw?:'',true);if(!is_array($data))$data=['raw'=>substr((string)($raw?:''),0,1200)];return ['ok'=>$status>=200&&$status<300,'status'=>$status,'data'=>$data];
 }
 function tai_public_data_guard(string $text): void {
@@ -43,8 +43,19 @@ function tai_public_data_guard(string $text): void {
   foreach($patterns as $p)if(preg_match($p,$text))tai_json_response(['error'=>'PUBLIC_DATA_ONLY_SECRET_PATTERN','fail_closed'=>true],400);
 }
 function tai_is_free_chat_model(array $m): bool {
-  $tags=array_map('strtolower',array_map('strval',$m['tags']??[]));$pricing=$m['pricing']??[];$type=strtolower((string)($m['type']??''));$in=array_map('strtolower',array_map('strval',$m['modalities']['input']??[]));$out=array_map('strtolower',array_map('strval',$m['modalities']['output']??[]));
-  return in_array('free',$tags,true)&&isset($pricing['input'],$pricing['output'])&&(float)$pricing['input']===0.0&&(float)$pricing['output']===0.0&&$type==='language'&&in_array('text',$in,true)&&in_array('text',$out,true);
+  $tags=array_map('strtolower',array_map('strval',$m['tags']??[]));
+  $pricing=is_array($m['pricing']??null)?$m['pricing']:[];
+  $type=strtolower((string)($m['type']??''));
+  $in=array_map('strtolower',array_map('strval',$m['modalities']['input']??[]));
+  $out=array_map('strtolower',array_map('strval',$m['modalities']['output']??[]));
+  if($type!=='language'||!in_array('text',$in,true)||!in_array('text',$out,true))return false;
+  $id=strtolower((string)($m['id']??''));$name=strtolower((string)($m['name']??$m['display_name']??''));
+  $tagFree=in_array('free',$tags,true);
+  $identityFree=(bool)preg_match('~(?:^|[-_/])free(?:$|[-_/])~',$id)||(bool)preg_match('~(?:^|\s|\()free(?:$|\s|\))~',$name);
+  if(!$tagFree&&!$identityFree)return false;
+  $zeroPair=isset($pricing['input'],$pricing['output'])&&(float)$pricing['input']===0.0&&(float)$pricing['output']===0.0;
+  $taggedUnpriced=$tagFree&&count($pricing)===0;
+  return $zeroPair||$taggedUnpriced;
 }
 function tai_gateway_free_models(int $max=24): array {
   global $config; $catalogBase=rtrim((string)($config['gateway_catalog_base']??'https://ai-gateway.vercel.sh/v1'),'/');
