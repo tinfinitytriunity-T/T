@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <title>T^Crypto-v3 α — Live Field</title>
-  <link rel="stylesheet" href="./style.css?v=0.3.2">
+  <link rel="stylesheet" href="./style.css?v=0.3.4">
+  <link rel="stylesheet" href="./t-indicators.css?v=0.3.4">
 </head>
 <body>
   <div class="shell">
@@ -29,7 +30,7 @@
 
     <section class="hero">
       <div class="hero-main">
-        <div class="eyebrow">T^Crypto · Live Field · Alpha 0.3</div>
+        <div class="eyebrow">T^Crypto · Live Field · Alpha 0.3.4</div>
         <h1>Voir le champ,<br>et le vol.</h1>
         <p>Marché public, structures multi-timeframes, indicateurs T^ et Libellules^ restent séparés mais co-présents. Une Libellule non partie apparaît explicitement <b>NOT_LAUNCHED</b>. Dès qu’un nouveau vol BTC ou ETH est matérialisé par l’observer read-only, son heure réelle de décollage, ses checkpoints, trajectoires, actions, positions, PnL, césures, phases et réconciliations deviennent visibles automatiquement.</p>
         <div class="guard">
@@ -58,18 +59,19 @@
 
     <main>
       <section id="view-now" class="view active">
-        <section id="t-indicators-panel" class="tind-panel" style="margin:0 0 16px;border:1px solid #3a4d67;border-radius:22px;padding:18px;background:#0d1520;color:#f4f7fb">
+        <section id="t-indicators-panel" class="tind-panel">
           <div class="tind-head">
             <div>
-              <div class="tind-kicker" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#6ed7ff;font-weight:800">T^ · indicateurs séparés</div>
-              <div class="tind-title" style="font-size:22px;font-weight:850;margin-top:3px">INDICATEURS T^</div>
+              <div class="tind-kicker">T^ · indicateurs séparés</div>
+              <div class="tind-title">INDICATEURS T^</div>
             </div>
-            <div class="tind-note" style="font-size:11px;color:#8895a7">Chaque indicateur conserve son propre régime. Aucun score global.</div>
+            <div class="tind-note">Chaque indicateur conserve son propre régime. Aucun score global.</div>
           </div>
-          <div id="tind-grid" class="tind-grid" style="margin-top:14px">
-            <div class="tind-card" style="border:1px solid #29384b;border-radius:16px;padding:14px;background:#0b1119">
-              <div class="tind-name" style="font-size:10px;color:#8b99ab;text-transform:uppercase;letter-spacing:.13em">Chargement</div>
-              <div class="tind-value" style="font-size:17px;font-weight:830;margin-top:7px">Lecture du champ…</div>
+          <div id="tind-grid" class="tind-grid">
+            <div class="tind-card cyan">
+              <div class="tind-name">Chargement</div>
+              <div class="tind-value">Lecture du champ…</div>
+              <div class="tind-detail">Les cartes T^ se mettent à jour indépendamment des autres vues.</div>
             </div>
           </div>
         </section>
@@ -126,7 +128,7 @@
           </section>
 
           <section class="panel">
-            <div class="section-title"><div><h2>Architecture v3 α</h2><div class="sub">Une surface de lecture, pas une nouvelle autorité sur T^Crypto.</div></div><span class="tag">ALPHA 0.3</span></div>
+            <div class="section-title"><div><h2>Architecture v3 α</h2><div class="sub">Une surface de lecture, pas une nouvelle autorité sur T^Crypto.</div></div><span class="tag">ALPHA 0.3.4</span></div>
             <div class="arch">
               <div class="arch-line"><b>MARKET SOURCE</b> · Bybit V5 public</div><div class="arrow">↓</div>
               <div class="arch-line"><b>STRUCTURE</b> · ticker + 1H / 4H / 1D + EMA 7/14/28</div><div class="arrow">↘</div>
@@ -149,9 +151,9 @@
       </section>
     </main>
 
-    <footer><span>T^Crypto-v3 α 0.3 · T-GPT · observation publique cloisonnée</span><span id="footerStamp">aucune donnée reçue</span></footer>
+    <footer><span>T^Crypto-v3 α 0.3.4 · T-GPT · observation publique cloisonnée</span><span id="footerStamp">aucune donnée reçue</span></footer>
   </div>
-  <script src="./app.js?v=0.3.2" defer></script>
-  <script src="./t-indicators.js?v=0.3.2" defer></script>
+  <script src="./app.js?v=0.3.4" defer></script>
+  <script src="./t-indicators.js?v=0.3.4" defer></script>
 </body>
 </html>
