@@ -1,0 +1,8 @@
+{
+  "status": "success",
+  "timestamp_utc": "2026-08-29T16:58:46Z",
+  "source_commit": "193e0507de61940fb7ca5cbf51c3437ea7767cb4",
+  "run_id": "33264384825",
+  "target": "/web/T-GPT",
+  "ftp_user": "ngw_GPT-PUBLISH"
+}
