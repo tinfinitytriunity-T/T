@@ -24,12 +24,27 @@
     observer.observe(document.body, { subtree: true, childList: true, characterData: true });
   }
 
-  function loadCore() {
+  function loadScript(src, onload, onerror) {
     const script = document.createElement('script');
-    script.src = './app-core.js?v=0.2.1';
-    script.onload = startStealthOverlay;
-    script.onerror = () => console.error('T^Crypto-v3 core script unavailable');
+    script.src = src;
+    if (onload) script.onload = onload;
+    if (onerror) script.onerror = onerror;
     document.head.appendChild(script);
+  }
+
+  function loadIndicators() {
+    loadScript('./t-indicators.js?v=0.3.0', null, () => console.error('T^ indicators unavailable'));
+  }
+
+  function loadCore() {
+    loadScript(
+      './app-core.js?v=0.2.1',
+      () => {
+        startStealthOverlay();
+        loadIndicators();
+      },
+      () => console.error('T^Crypto-v3 core script unavailable')
+    );
   }
 
   if (document.readyState === 'loading') {
