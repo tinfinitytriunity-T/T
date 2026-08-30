@@ -1,8 +1,8 @@
 {
   "status": "failure",
-  "timestamp_utc": "2026-08-30T08:29:15Z",
-  "source_commit": "b0b2aca81872767abfeccb76d55bd46d7bddc3c8",
-  "run_id": "33301670616",
+  "timestamp_utc": "2026-08-30T08:31:40Z",
+  "source_commit": "b59ac8638ce6ad179788669c87e6ee19749c2dff",
+  "run_id": "33301768354",
   "target": "/web/T-GPT",
   "ftp_user": "ngw_GPT-PUBLISH"
 }
