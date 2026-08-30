@@ -26,7 +26,7 @@ function tai_client_ip() {
   $vals = array(
     isset($_SERVER['HTTP_CF_CONNECTING_IP']) ? $_SERVER['HTTP_CF_CONNECTING_IP'] : '',
     isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : '',
-    isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDS'] : ''
+    isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : ''
   );
   foreach ($vals as $v) {
     $parts = explode(',', (string)$v);
@@ -70,7 +70,7 @@ function tai_http_json($url, $method, $payload, $headers, $timeout) {
     curl_setopt($ch, CURLOPT_TIMEOUT, (int)$timeout);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $baseHeaders);
-    curl_setopt($ch, CURLOPT_USERAGENT, 'T-AI-Nephesh-Edge/4.3.10.3');
+    curl_setopt($ch, CURLOPT_USERAGENT, 'T-AI-Nephesh-Edge/4.3.10.5');
     if ($payload !== null) curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
     $raw = curl_exec($ch);
     $status = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
