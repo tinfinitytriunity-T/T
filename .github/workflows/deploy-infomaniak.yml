@@ -40,18 +40,10 @@ jobs:
           test -n "$FTP_USER" || { echo "Missing FTP user"; exit 1; }
           test -n "$FTP_PASSWORD" || { echo "Missing INFOMANIAK_FTP_PASSWORD repository secret"; exit 1; }
           test -d "$LOCAL_DIR" || { echo "Missing local publish directory"; exit 1; }
-
           if [ "$REMOTE_DIR" = "/" ] || [ "$REMOTE_DIR" = "." ]; then
-            test "$FTP_JAILED_ROOT" = "true" || {
-              echo "Refusing FTP root deployment: account is not declared isolated."
-              exit 1
-            }
+            test "$FTP_JAILED_ROOT" = "true" || { echo "Refusing FTP root deployment: account is not declared isolated."; exit 1; }
           fi
-
-          test "$FTP_USER" = "ngw_GPT-PUBLISH" || {
-            echo "Refusing unexpected FTP user."
-            exit 1
-          }
+          test "$FTP_USER" = "ngw_GPT-PUBLISH" || { echo "Refusing unexpected FTP user."; exit 1; }
 
       - name: Install FTPS client
         shell: bash
@@ -86,38 +78,51 @@ jobs:
           curl -fsS --max-time 20 "$BASE/api/status.php" -o /tmp/tai-status.json
           python3 - <<'PY'
           import json
-          h=json.load(open('/tmp/tai-health.json'))
-          m=json.load(open('/tmp/tai-models.json'))
-          s=json.load(open('/tmp/tai-status.json'))
+          h=json.load(open('/tmp/tai-health.json')); m=json.load(open('/tmp/tai-models.json')); s=json.load(open('/tmp/tai-status.json'))
           ports=m.get('portances') or []
           step=next((p for p in ports if p.get('id')=='step_37'), None)
           assert h.get('status')=='ok', h
           assert len(ports) >= 3, ports
-          assert step is not None, ports
-          assert step.get('inference_ready') is True, step
+          assert step is not None and step.get('inference_ready') is True, ports
           assert (s.get('field') or {}).get('ready_count',0) >= 3, s
           assert s.get('winner') is None and s.get('vote') is None and s.get('global_score') is None, s
           print('T^AI smoke: 3+ ready portances; Step 3.7 registered and ready')
           PY
-          # One real Step generation. Capacity exhaustion is reported but does not
-          # invalidate the deployment; any malformed/non-JSON edge path does.
+
           HTTP=$(curl -sS --max-time 45 -o /tmp/tai-step.json -w '%{http_code}' \
             -H 'Content-Type: application/json' \
             -d '{"q":"Réponds seulement STEP_OK.","regime":"SINGLE","portances":["step_37"],"t_delta":"none","context":{"conversation_id":"deploy-smoke-step","history":[]}}' \
             "$BASE/api/field.php")
           python3 - "$HTTP" <<'PY'
           import json,sys
-          code=int(sys.argv[1])
-          d=json.load(open('/tmp/tai-step.json'))
-          voices=d.get('voices') or []
+          code=int(sys.argv[1]); d=json.load(open('/tmp/tai-step.json')); voices=d.get('voices') or []
           step=next((v for v in voices if v.get('id')=='step_37'), None)
           assert step is not None, d
-          if code==200 and step.get('status')=='OK':
-              print('T^AI smoke: Step 3.7 generation OK')
+          if code==200 and step.get('status')=='OK': print('T^AI smoke: Step 3.7 generation OK')
           else:
               assert step.get('status')=='ERROR', d
               print('T^AI smoke: Step route OK; free capacity temporarily unavailable:', step.get('error'))
           assert d.get('winner') is None and d.get('vote') is None and d.get('global_score') is None, d
+          PY
+
+          curl -fsS --max-time 20 -H 'Content-Type: application/json' \
+            -d '{"q":"Il y a actuellement combien d IA dans le champ ici ?","regime":"SINGLE","portances":["gemini_36"],"context":{"conversation_id":"deploy-registry","history":[]}}' \
+            "$BASE/api/field.php" -o /tmp/tai-registry.json
+          curl -fsS --max-time 20 -H 'Content-Type: application/json' \
+            -d '{"q":"Je peux parler à Anthropic ?","regime":"SINGLE","portances":["gemini_36"],"context":{"conversation_id":"deploy-anthropic","history":[]}}' \
+            "$BASE/api/field.php" -o /tmp/tai-anthropic.json
+          python3 - <<'PY'
+          import json,re
+          r=json.load(open('/tmp/tai-registry.json')); a=json.load(open('/tmp/tai-anthropic.json'))
+          assert r.get('origin')=='SERVER_REGISTRY', r
+          assert (r.get('registry') or {}).get('connected_count',0) >= 3, r
+          assert all(x in (r.get('answer') or '') for x in ('Gemini','Mistral','Step')), r
+          assert a.get('origin')=='SERVER_REGISTRY' and a.get('reason')=='TARGET_NOT_CONNECTED', a
+          assert (a.get('requested_target') or {}).get('id')=='anthropic', a
+          assert not re.search(r'(?im)^\s*(\*\*)?anthropic\s*(\*\*)?\s*:', a.get('answer') or ''), a
+          ans=(a.get('answer') or '').lower()
+          assert ('pas connecté' in ans) or ('n’est pas connecté' in ans), a
+          print('T^AI smoke: registry authoritative; Anthropic impersonation blocked')
           PY
 
       - name: Deployment summary
