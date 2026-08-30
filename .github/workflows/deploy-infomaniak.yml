@@ -111,18 +111,51 @@ jobs:
           curl -fsS --max-time 20 -H 'Content-Type: application/json' \
             -d '{"q":"Je peux parler à Anthropic ?","regime":"SINGLE","portances":["gemini_36"],"context":{"conversation_id":"deploy-anthropic","history":[]}}' \
             "$BASE/api/field.php" -o /tmp/tai-anthropic.json
+          curl -fsS --max-time 20 -H 'Content-Type: application/json' \
+            -d '{"q":"Je parle vraiment à la voix danthropic ?","regime":"SINGLE","portances":["gemini_36"],"context":{"conversation_id":"deploy-anthropic-typo","history":[]}}' \
+            "$BASE/api/field.php" -o /tmp/tai-anthropic-typo.json
           python3 - <<'PY'
           import json,re
-          r=json.load(open('/tmp/tai-registry.json')); a=json.load(open('/tmp/tai-anthropic.json'))
+          r=json.load(open('/tmp/tai-registry.json')); a=json.load(open('/tmp/tai-anthropic.json')); at=json.load(open('/tmp/tai-anthropic-typo.json'))
           assert r.get('origin')=='SERVER_REGISTRY', r
           assert (r.get('registry') or {}).get('connected_count',0) >= 3, r
           assert all(x in (r.get('answer') or '') for x in ('Gemini','Mistral','Step')), r
-          assert a.get('origin')=='SERVER_REGISTRY' and a.get('reason')=='TARGET_NOT_CONNECTED', a
-          assert (a.get('requested_target') or {}).get('id')=='anthropic', a
-          assert not re.search(r'(?im)^\s*(\*\*)?anthropic\s*(\*\*)?\s*:', a.get('answer') or ''), a
-          ans=(a.get('answer') or '').lower()
-          assert ('pas connecté' in ans) or ('n’est pas connecté' in ans), a
+          for x in (a,at):
+              assert x.get('origin')=='SERVER_REGISTRY' and x.get('reason')=='TARGET_NOT_CONNECTED', x
+              assert (x.get('requested_target') or {}).get('id')=='anthropic', x
+              assert not re.search(r'(?im)^\s*(\*\*)?anthropic\s*(\*\*)?\s*:', x.get('answer') or ''), x
+              ans=(x.get('answer') or '').lower()
+              assert ('pas connecté' in ans) or ('n’est pas connecté' in ans), x
           print('T^AI smoke: registry authoritative; Anthropic impersonation blocked')
+          PY
+
+          for TARGET in step mistral gemini; do
+            curl -fsS --max-time 55 -H 'Content-Type: application/json' \
+              -d "{\"q\":\"Parle à $TARGET et réponds ROUTE_OK.\",\"regime\":\"SINGLE\",\"portances\":[\"gemini_36\"],\"context\":{\"conversation_id\":\"deploy-route-$TARGET\",\"history\":[]}}" \
+              "$BASE/api/field.php" -o "/tmp/tai-route-$TARGET.json"
+          done
+          python3 - <<'PY'
+          import json
+          expected={'step':'step_37','mistral':'mistral_nemotron','gemini':'gemini_36'}
+          for name,eid in expected.items():
+              d=json.load(open('/tmp/tai-route-'+name+'.json'))
+              assert (d.get('routed_portance') or {}).get('id')==eid, (name,d)
+              vs=d.get('voices') or []
+              if vs: assert vs[0].get('id')==eid, (name,d)
+              assert d.get('provenance_verified') is True, (name,d)
+          print('T^AI smoke: explicit server routing verified for Gemini/Mistral/Step')
+          PY
+
+          curl -fsS --max-time 60 -H 'Content-Type: application/json' \
+            -d '{"q":"Fais une démo courte sur la question : qu est-ce que l amour ?","regime":"SINGLE","portances":["gemini_36"],"context":{"conversation_id":"deploy-demo-guard","history":[]}}' \
+            "$BASE/api/field.php" -o /tmp/tai-demo.json
+          python3 - <<'PY'
+          import json,re
+          d=json.load(open('/tmp/tai-demo.json')); text=d.get('answer') or ''
+          assert d.get('provenance_verified') is True, d
+          assert not re.search(r'(?im)^\s*(?:\*\*|`)?\s*(anthropic|claude|openai|chatgpt|local[- ]inference)\s*(?:\*\*|`)?\s*:', text), d
+          assert d.get('winner') is None and d.get('vote') is None and d.get('global_score') is None, d
+          print('T^AI smoke: demo cannot expose fabricated live provider headings')
           PY
 
       - name: Deployment summary
@@ -140,9 +173,14 @@ jobs:
           DEPLOY_STATUS: ${{ job.status }}
         run: |
           set -euo pipefail
-          mkdir -p infomaniak-publish/status
-          NOW="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          cat > infomaniak-publish/status/latest.json <<EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for ATTEMPT in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            mkdir -p infomaniak-publish/status
+            NOW="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            cat > infomaniak-publish/status/latest.json <<EOF
           {
             "status": "$DEPLOY_STATUS",
             "timestamp_utc": "$NOW",
@@ -152,10 +190,17 @@ jobs:
             "ftp_user": "ngw_GPT-PUBLISH"
           }
           EOF
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add infomaniak-publish/status/latest.json
-          if ! git diff --cached --quiet; then
+            git add infomaniak-publish/status/latest.json
+            if git diff --cached --quiet; then
+              echo "Deployment status already current."
+              exit 0
+            fi
             git commit -m "Record Infomaniak deploy status [skip ci]"
-            git push origin HEAD:main
-          fi
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Status push raced with another writer; retry $ATTEMPT/4"
+            sleep $((ATTEMPT * 2))
+          done
+          echo "Unable to record deployment status after retries."
+          exit 1
