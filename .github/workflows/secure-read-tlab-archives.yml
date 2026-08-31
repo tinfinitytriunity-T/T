@@ -1,0 +1,168 @@
+name: Secure read T-LAB archives
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/secure-read-tlab-archives.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  FTP_HOST: ngw.ftp.infomaniak.com
+  FTP_USER: ngw_GPT-PUBLISH
+  FTP_PASSWORD: ${{ secrets.INFOMANIAK_FTP_PASSWORD }}
+
+jobs:
+  read-archives:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read T-LAB DossiersArchives through ephemeral same-host probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$FTP_PASSWORD"
+          mkdir -p /tmp/tlab-secure
+          cat > /tmp/tlab-secure/public.crt <<'CERT'
+          -----BEGIN CERTIFICATE-----
+          MIIEITCCAomgAwIBAgIUfrV7LNCJVnpqAG8v2HOZG/gZ3L4wDQYJKoZIhvcNAQEL
+          BQAwIDEeMBwGA1UEAwwVVC1MQUIgQXJjaGl2ZSBTZXNzaW9uMB4XDTI2MDgzMTE4
+          MDQyOFoXDTI2MDkwMjE4MDQyOFowIDEeMBwGA1UEAwwVVC1MQUIgQXJjaGl2ZSBT
+          ZXNzaW9uMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAvayfCoVIqy25
+          HUwKnwB0ZXWY4GueHPrgZtyQXTt06wSw4ddsBRmTTKoSzN5SqqtYnpc9EmV+aqBP
+          urrkW9pC3gOmDjF7JK40WZB4WmAoGP9cqpk4KCoM1O/7P7nVPYkdaCOAbkkRjQHD
+          zmvdjeWON6HBYRGtBhsGuh7MkW8uXOetHbVSjipNZO9cXMp13nY97MOTGzO0T9uG
+          cRTeP2jSq2YfwPLBSs+J6GA9CNVcGVEVDcQX4/6Qk1R68KKQK1kN4Otz23ExGYde
+          4gHWfJ6BunNDvDwsuz8gPXUv60OVyOvLpnq60SK5IhPy0N1tvzo+r6CP/7DtwD0T
+          OwTVIA4DsBYABn8fA0k8k9B/T8lgPkhAnWT7JDwtL9LlcJRHRr48X7X5guDlqPml
+          3gS08a5qp44eQDvgTU5onojZosV2wgk0oGmVSU6Ej7qLDaBmywhQ9u2ybMR/75Lt
+          O8j7aOtcKlpyHvE4kRsp8Xilo4Ai0yKpVQem/iN7VsFdjbsnQfKJAgMBAAGjUzBR
+          MB0GA1UdDgQWBBQ4Ll6NoTcA9O8xw6LuCic+ADnPtzAfBgNVHSMEGDAWgBQ4Ll6N
+          oTcA9O8xw6LuCic+ADnPtzAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUA
+          A4IBgQATJDbawZythvm4ggk07qhqORiZwKaO23MbdKQB/JkZT6h4g/FzMJJqK5nq
+          +gS+dcvt7FIKNSePrYijL00fh2taU+WqHtUT+x9A7oEccCxJm53780BgV/K0FK6A
+          RtLUrZgX5qGKEtv31fEQV7dUIJs3/dMHfdZs43CT6BMNXwTQ4oe7GPjSsi6IGjDo
+          usJxRFT/59DRo+eiMhDdaQRYXsgp89/rFefuORRg+NRnvB5OPOYVWVQcaxU74m2W
+          +OxaxS9gFVaedko3dMGfUf0+iphNBYzeVXr0i3zavLZu0t2yIlgI9Cl99ga60MK2
+          eR5FhLhcjwyk1u7PM57M1yZfsSlMMzDtnYcOAYbay6oQrQ4gVE5785B+UNgY5Q9Y
+          z4bsaZP+LPkMJzUqPPhPkg+InbDaS/8F6zkBIHUvz6wkVpq6bBmDMuOVK7mwCt3I
+          Ajw0yfouTwsjiV+4kLLpXYGoUvDDC7c86qHTo7t/KsrJL9lnyqQVsigT9XBNdQ7m
+          RvBl4H4=
+          -----END CERTIFICATE-----
+          CERT
+
+          python3 - <<'PY'
+          import os, ssl, json, secrets, ftplib, urllib.request, urllib.parse, pathlib, tarfile, subprocess, sys
+
+          host=os.environ['FTP_HOST']; user=os.environ['FTP_USER']; password=os.environ['FTP_PASSWORD']
+          token=secrets.token_hex(32)
+          probe=f"__t_archive_probe_{os.environ.get('GITHUB_RUN_ID','run')}_{secrets.token_hex(6)}.php"
+          remote='/' + probe
+          base_url='https://www.nephesh.ch/T-GPT/' + urllib.parse.quote(probe)
+          work=pathlib.Path('/tmp/tlab-secure')
+          bundle=work/'bundle'; bundle.mkdir(parents=True, exist_ok=True)
+
+          php = r'''<?php
+          @ini_set('display_errors','0');
+          header('X-Robots-Tag: noindex, nofollow, noarchive');
+          header('Cache-Control: no-store, max-age=0');
+          $expected='__TOKEN__';
+          $provided=isset($_GET['token']) ? (string)$_GET['token'] : '';
+          if (!hash_equals($expected,$provided)) { http_response_code(404); exit; }
+          $root=rtrim((string)$_SERVER['DOCUMENT_ROOT'],'/') . '/T-LAB/DossiersArchives';
+          $realRoot=realpath($root);
+          if ($realRoot===false || !is_dir($realRoot) || !is_readable($realRoot)) {
+            header('Content-Type: application/json; charset=utf-8');
+            http_response_code(500);
+            echo json_encode(['ok'=>false,'error'=>'ARCHIVE_ROOT_UNREADABLE']); exit;
+          }
+          $mode=isset($_GET['mode']) ? (string)$_GET['mode'] : 'list';
+          if ($mode==='list') {
+            $items=[];
+            $it=new RecursiveIteratorIterator(new RecursiveDirectoryIterator($realRoot, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
+            foreach ($it as $f) {
+              $p=$f->getPathname(); $rel=ltrim(substr($p,strlen($realRoot)),'/');
+              if ($rel==='') continue;
+              $items[]=['path'=>$rel,'type'=>$f->isDir()?'dir':'file','size'=>$f->isFile()?$f->getSize():null,'mtime'=>$f->getMTime()];
+            }
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['ok'=>true,'items'=>$items], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE); exit;
+          }
+          if ($mode==='get') {
+            $rel=isset($_GET['path']) ? (string)$_GET['path'] : '';
+            if ($rel==='' || strpos($rel,"\0")!==false) { http_response_code(400); exit; }
+            $candidate=realpath($realRoot . '/' . $rel);
+            if ($candidate===false || !is_file($candidate) || !is_readable($candidate)) { http_response_code(404); exit; }
+            $prefix=rtrim($realRoot,DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+            if (strncmp($candidate,$prefix,strlen($prefix))!==0) { http_response_code(403); exit; }
+            header('Content-Type: application/octet-stream');
+            header('Content-Length: '.filesize($candidate));
+            readfile($candidate); exit;
+          }
+          http_response_code(400);
+          ?>'''.replace('__TOKEN__', token)
+
+          ftp=None
+          try:
+              ftp=ftplib.FTP_TLS(timeout=25)
+              ftp.connect(host,21); ftp.login(user,password); ftp.prot_p()
+              from io import BytesIO
+              ftp.storbinary('STOR '+remote, BytesIO(php.encode('utf-8')))
+              ctx=ssl.create_default_context()
+              list_url=base_url+'?'+urllib.parse.urlencode({'token':token,'mode':'list'})
+              with urllib.request.urlopen(list_url, context=ctx, timeout=30) as r:
+                  inv=json.loads(r.read().decode('utf-8'))
+              if not inv.get('ok'):
+                  raise RuntimeError('archive inventory unavailable')
+              files=[x for x in inv.get('items',[]) if x.get('type')=='file']
+              total=0
+              manifest=[]
+              root_local=bundle.resolve()
+              for row in files:
+                  rel=str(row.get('path',''))
+                  parts=pathlib.PurePosixPath(rel).parts
+                  if not rel or any(p in ('','..') for p in parts) or pathlib.PurePosixPath(rel).is_absolute():
+                      raise RuntimeError('unsafe relative path')
+                  dest=bundle.joinpath(*parts)
+                  dest.parent.mkdir(parents=True, exist_ok=True)
+                  if root_local not in dest.parent.resolve().parents and dest.parent.resolve()!=root_local:
+                      raise RuntimeError('unsafe local destination')
+                  get_url=base_url+'?'+urllib.parse.urlencode({'token':token,'mode':'get','path':rel})
+                  with urllib.request.urlopen(get_url, context=ctx, timeout=90) as r, open(dest,'wb') as f:
+                      while True:
+                          chunk=r.read(1024*1024)
+                          if not chunk: break
+                          f.write(chunk); total+=len(chunk)
+                  manifest.append({'path':rel,'size':dest.stat().st_size,'mtime':row.get('mtime')})
+              with open(bundle/'_manifest.json','w',encoding='utf-8') as f:
+                  json.dump({'file_count':len(manifest),'total_bytes':total,'files':manifest},f,ensure_ascii=False,indent=2)
+              archive=work/'TLAB_DossiersArchives.tar.gz'
+              with tarfile.open(archive,'w:gz') as tf:
+                  tf.add(bundle,arcname='DossiersArchives')
+              encrypted=work/'TLAB_DossiersArchives.p7m'
+              subprocess.run(['openssl','cms','-encrypt','-binary','-aes-256-cbc','-in',str(archive),'-outform','DER','-out',str(encrypted),str(work/'public.crt')],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+              archive.unlink(missing_ok=True)
+              print(f"Secure archive prepared: {len(manifest)} file(s), {total} byte(s).")
+          except Exception:
+              print('Secure archive read failed before plaintext export.', file=sys.stderr)
+              raise
+          finally:
+              if ftp is not None:
+                  try: ftp.delete(remote)
+                  except Exception: pass
+                  try: ftp.quit()
+                  except Exception: pass
+          PY
+
+      - name: Upload encrypted archive artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tlab-dossiersarchives-encrypted
+          path: /tmp/tlab-secure/TLAB_DossiersArchives.p7m
+          if-no-files-found: error
+          retention-days: 1
