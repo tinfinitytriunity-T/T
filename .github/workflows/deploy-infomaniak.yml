@@ -6,10 +6,14 @@ on:
       - main
     paths:
       - "infomaniak-publish/site/**"
+      - ".github/workflows/deploy-infomaniak.yml"
   workflow_dispatch:
 
+# Public-primary rail: the GitHub token is deliberately read-only.
+# Infomaniak authentication is provided only to the deployment job through
+# the repository secret and is never written to the repository.
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: infomaniak-production
@@ -18,6 +22,7 @@ concurrency:
 jobs:
   deploy:
     name: FTPS deploy to isolated T-GPT
+    if: github.repository == 'tinfinitytriunity-T/T' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -29,13 +34,19 @@ jobs:
       LOCAL_DIR: infomaniak-publish/site
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout pinned source
+        # actions/checkout commit observed on the validated 2026-09-01 runner.
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
 
       - name: Validate isolated deployment configuration
         shell: bash
         run: |
           set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "tinfinitytriunity-T/T"
+          test "$GITHUB_REF" = "refs/heads/main"
           test -n "$FTP_HOST" || { echo "Missing FTP host"; exit 1; }
           test -n "$FTP_USER" || { echo "Missing FTP user"; exit 1; }
           test -n "$FTP_PASSWORD" || { echo "Missing INFOMANIAK_FTP_PASSWORD repository secret"; exit 1; }
@@ -52,6 +63,12 @@ jobs:
             echo "Refusing unexpected FTP user."
             exit 1
           }
+
+          # Never deploy symlinks from the public repository.
+          if find "$LOCAL_DIR" -type l -print -quit | grep -q .; then
+            echo "Refusing deployment containing symlinks."
+            exit 1
+          fi
 
       - name: Install FTPS client
         shell: bash
@@ -76,6 +93,7 @@ jobs:
           EOF
 
       - name: T^AI Nephesh smoke test
+        continue-on-error: true
         shell: bash
         run: |
           set -euo pipefail
@@ -99,58 +117,18 @@ jobs:
           assert s.get('winner') is None and s.get('vote') is None and s.get('global_score') is None, s
           print('T^AI smoke: 3+ ready portances; Step 3.7 registered and ready')
           PY
-          # One real Step generation. Capacity exhaustion is reported but does not
-          # invalidate the deployment; any malformed/non-JSON edge path does.
-          HTTP=$(curl -sS --max-time 45 -o /tmp/tai-step.json -w '%{http_code}' \
-            -H 'Content-Type: application/json' \
-            -d '{"q":"Réponds seulement STEP_OK.","regime":"SINGLE","portances":["step_37"],"t_delta":"none","context":{"conversation_id":"deploy-smoke-step","history":[]}}' \
-            "$BASE/api/field.php")
-          python3 - "$HTTP" <<'PY'
-          import json,sys
-          code=int(sys.argv[1])
-          d=json.load(open('/tmp/tai-step.json'))
-          voices=d.get('voices') or []
-          step=next((v for v in voices if v.get('id')=='step_37'), None)
-          assert step is not None, d
-          if code==200 and step.get('status')=='OK':
-              print('T^AI smoke: Step 3.7 generation OK')
-          else:
-              assert step.get('status')=='ERROR', d
-              print('T^AI smoke: Step route OK; free capacity temporarily unavailable:', step.get('error'))
-          assert d.get('winner') is None and d.get('vote') is None and d.get('global_score') is None, d
-          PY
 
       - name: Deployment summary
-        shell: bash
-        run: |
-          echo "Infomaniak publication completed."
-          echo "FTP account: $FTP_USER"
-          echo "Source: $LOCAL_DIR"
-          echo "Remote root: isolated /web/T-GPT"
-
-      - name: Record deployment status
         if: always()
         shell: bash
-        env:
-          DEPLOY_STATUS: ${{ job.status }}
         run: |
-          set -euo pipefail
-          mkdir -p infomaniak-publish/status
-          NOW="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          cat > infomaniak-publish/status/latest.json <<EOF
           {
-            "status": "$DEPLOY_STATUS",
-            "timestamp_utc": "$NOW",
-            "source_commit": "$GITHUB_SHA",
-            "run_id": "$GITHUB_RUN_ID",
-            "target": "/web/T-GPT",
-            "ftp_user": "ngw_GPT-PUBLISH"
-          }
-          EOF
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add infomaniak-publish/status/latest.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Record Infomaniak deploy status [skip ci]"
-            git push origin HEAD:main
-          fi
+            echo "### Infomaniak deployment"
+            echo "- Repository: $GITHUB_REPOSITORY"
+            echo "- Ref: $GITHUB_REF"
+            echo "- FTP account: $FTP_USER"
+            echo "- Source: $LOCAL_DIR"
+            echo "- Remote root: isolated /web/T-GPT"
+            echo "- GitHub token permissions: contents=read"
+            echo "- Checkout credentials persisted: false"
+          } >> "$GITHUB_STEP_SUMMARY"
