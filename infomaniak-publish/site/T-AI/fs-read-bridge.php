@@ -16,6 +16,19 @@ Xtt6ljYwaJwpa+Bye3axoGVvVBdAQ8P6LEMKA/cMRN2epGB6tsclxPYjqj8uhdRk
 lYUhmd7H43jqVgnKu04ho1yvi6rUrcyk59pW8RM4quolAgMBAAE=
 -----END PUBLIC KEY-----
 PEM;
+$MCP_PUBKEY=<<<'PEM'
+-----BEGIN PUBLIC KEY-----
+MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA5CmPSmAC2gB9tb9ZOO6X
+6XgLOWW50PZmXMwqGJgoq2cKos0oXF/mrT8jcINbGdreNFRoBZ32pDiLEB6GN+Hb
+k5Dc6bSM00n8kk/j31II2ExeJAPxQPdUsj0vdvp4nz9jnIoIeoSpjMQb1SEO9rD2
+k1x640SUz61kJqGwhbve50bfKCfNNz5FneRsq58wjtioco4GkYgbj4+aOlD2/P/z
+rUcgpGeMcsqH1G95NHL2ZJLS9xOPn/zxtRNN5GZKMgxZ/IzFQyalplj8h6so+c15
+wKZxgam7T754O0giOJkKhIKWfSN+GOLXuylsk09WYcJ5xvBE3X+dUlFxN0yZ7crh
+g2NE0xW+ChQEyHMSfW2jfqhmFLoRhE2GVgpCnBni0ELVVIAoRSQFIiioPYx4WVD4
+v+bDWPZ1Gbaimlkj2ouglrWzaZyMpvDwub3BNtdKCSN/lVHCq+XXRbfWBlmDbb+1
+WWF3VSRDMEcElhewWgbtlXym9okyj9pNu8OK/ZOLPDX1AgMBAAE=
+-----END PUBLIC KEY-----
+PEM;
 $MAX_WRITE=4000000;
 function j($c,$o){http_response_code($c);header('Content-Type: application/json; charset=utf-8');echo json_encode($o,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);exit;}
 function d64($s){if(!is_string($s)||$s===''||!preg_match('/^[A-Za-z0-9_-]+$/',$s))return false;$p=strlen($s)%4;if($p)$s.=str_repeat('=',4-$p);return base64_decode(strtr($s,'-_','+/'),true);}
@@ -32,12 +45,12 @@ $method=strtoupper(isset($_SERVER['REQUEST_METHOD'])?$_SERVER['REQUEST_METHOD']:
 $body=file_get_contents('php://input');if($body===false)$body='';if(strlen($body)>$MAX_WRITE)j(413,array('ok'=>false,'error'=>'body_too_large'));
 $q=isset($_GET['q'])?$_GET['q']:'';$sig=d64(isset($_GET['sig'])?$_GET['sig']:'');$raw=d64($q);if($sig===false||$raw===false)j(401,array('ok'=>false,'error'=>'auth_required'));
 $a=json_decode($raw,true);if(!is_array($a))j(401,array('ok'=>false,'error'=>'bad_payload'));
-$canon="TBRIDGE1\n".$q."\n".hash('sha256',$body);$pk=@openssl_pkey_get_public($PUBKEY);if($pk===false||openssl_verify($canon,$sig,$pk,OPENSSL_ALGO_SHA256)!==1)j(401,array('ok'=>false,'error'=>'bad_signature'));
+$canon="TBRIDGE1\n".$q."\n".hash('sha256',$body);$kid=isset($a['kid'])?$a['kid']:'gpt';if($kid==='gpt')$verifyKey=$PUBKEY;elseif($kid==='mcp-v1')$verifyKey=$MCP_PUBKEY;else j(401,array('ok'=>false,'error'=>'unknown_kid'));$pk=@openssl_pkey_get_public($verifyKey);if($pk===false||openssl_verify($canon,$sig,$pk,OPENSSL_ALGO_SHA256)!==1)j(401,array('ok'=>false,'error'=>'bad_signature'));
 if(!isset($a['v'])||(int)$a['v']!==2||!isset($a['ts'])||abs(time()-(int)$a['ts'])>180)j(401,array('ok'=>false,'error'=>'expired_or_version'));
 if(!isset($a['method'])||strtoupper($a['method'])!==$method)j(400,array('ok'=>false,'error'=>'method'));
 $n=isset($a['nonce'])?$a['nonce']:'';if(!is_string($n)||!preg_match('/^[A-Za-z0-9_-]{16,96}$/',$n))j(400,array('ok'=>false,'error'=>'nonce'));
 $op=isset($a['op'])?$a['op']:'';$rel=nr(isset($a['path'])?$a['path']:'');if($rel===false)j(400,array('ok'=>false,'error'=>'path'));$p=sj($root,$rel);if($p===false)j(403,array('ok'=>false,'error'=>'unsafe_path'));
-if($op==='ping'){if($method!=='GET')j(405,array('ok'=>false,'error'=>'method'));j(200,array('ok'=>true,'bridge'=>'T-LAB_FS_BRIDGE','version'=>2,'scope'=>'/web/T-LAB/','ops'=>array('list','stat','read','download','mkdir','write'),'max_write_bytes'=>$MAX_WRITE,'destructive_ops'=>false));}
+if($op==='ping'){if($method!=='GET')j(405,array('ok'=>false,'error'=>'method'));j(200,array('ok'=>true,'bridge'=>'T-LAB_FS_BRIDGE','version'=>2,'scope'=>'/web/T-LAB/','ops'=>array('list','stat','read','download','mkdir','write'),'max_write_bytes'=>$MAX_WRITE,'destructive_ops'=>false,'kid'=>$kid));}
 if($op==='list'){if($method!=='GET')j(405,array('ok'=>false,'error'=>'method'));if(!is_dir($p)||!is_readable($p))j(404,array('ok'=>false,'error'=>'not_directory'));$e=array();$rec=!empty($a['recursive']);$depth=isset($a['depth'])?max(0,min(8,(int)$a['depth'])):2;$limit=isset($a['limit'])?max(1,min(5000,(int)$a['limit'])):1000;walk($p,$rel,$rec,$depth,$limit,$e,0);j(200,array('ok'=>true,'path'=>$rel,'count'=>count($e),'entries'=>$e));}
 if($op==='stat'){if($method!=='GET')j(405,array('ok'=>false,'error'=>'method'));if(!file_exists($p)||is_link($p))j(404,array('ok'=>false,'error'=>'not_found'));$m=meta($p,$rel);if(is_file($p)){$m['sha256']=@hash_file('sha256',$p);$m['mime']=mimeof($p);}j(200,array('ok'=>true,'item'=>$m));}
 if($op==='read'){if($method!=='GET')j(405,array('ok'=>false,'error'=>'method'));if(!is_file($p)||is_link($p)||!is_readable($p))j(404,array('ok'=>false,'error'=>'not_file'));$size=@filesize($p)?:0;$off=isset($a['offset'])?max(0,(int)$a['offset']):0;$max=isset($a['max_bytes'])?max(1,min(8388608,(int)$a['max_bytes'])):1048576;if($off>$size)$off=$size;$f=@fopen($p,'rb');if(!$f)j(500,array('ok'=>false,'error'=>'open_failed'));if($off)fseek($f,$off);$b=fread($f,$max);fclose($f);if($b===false)$b='';$l=strlen($b);j(200,array('ok'=>true,'path'=>$rel,'mime'=>mimeof($p),'size'=>$size,'sha256'=>@hash_file('sha256',$p),'offset'=>$off,'length'=>$l,'eof'=>($off+$l>=$size),'content_b64'=>base64_encode($b)));}
