@@ -1,0 +1,23 @@
+name: One-time native MCP cleanup
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/tmp-cleanup-tlab-fs-mcp.yml']
+permissions:
+  contents: read
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Remove native MCP self-test artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS --max-time 20 'https://www.nephesh.ch/T-GPT/T-AI/__cleanup_tlab_fs_mcp_selftest.php' -o /tmp/cleanup.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open('/tmp/cleanup.json'))
+          assert d.get('ok') is True, d
+          print('Native MCP self-test cleanup OK')
+          PY
