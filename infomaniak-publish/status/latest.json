@@ -1,8 +1,8 @@
 {
-  "status": "failure",
-  "timestamp_utc": "2026-09-01T04:03:36Z",
-  "source_commit": "a5dda8070e11e1104f5743aa43e9ecd2a05f131b",
-  "run_id": "33468404981",
+  "status": "deprecated",
+  "reason": "Public deployment workflow no longer writes repository status files; GITHUB_TOKEN is read-only by design.",
+  "reference": "GitHub Actions run history",
+  "architecture": "PUBLIC^RUN primary / PRIVATE^CONTROL secondary",
   "target": "/web/T-GPT",
   "ftp_user": "ngw_GPT-PUBLISH"
 }
