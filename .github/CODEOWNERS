@@ -1,0 +1,6 @@
+# Deployment and server-side executable surfaces
+/.github/workflows/ @tinfinitytriunity-T
+/infomaniak-publish/site/**/*.php @tinfinitytriunity-T
+/infomaniak-publish/site/.htaccess @tinfinitytriunity-T
+/infomaniak-publish/site/**/.htaccess @tinfinitytriunity-T
+/infomaniak-publish/SECURITY_ARCHITECTURE.md @tinfinitytriunity-T
