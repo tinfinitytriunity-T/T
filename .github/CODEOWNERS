@@ -1,6 +1,8 @@
 # Deployment and server-side executable surfaces
 /.github/CODEOWNERS @tinfinitytriunity-T
 /.github/workflows/ @tinfinitytriunity-T
+/infomaniak-publish/site/T-AI/ @tinfinitytriunity-T
+/infomaniak-publish/site/*.php @tinfinitytriunity-T
 /infomaniak-publish/site/**/*.php @tinfinitytriunity-T
 /infomaniak-publish/site/.htaccess @tinfinitytriunity-T
 /infomaniak-publish/site/**/.htaccess @tinfinitytriunity-T
