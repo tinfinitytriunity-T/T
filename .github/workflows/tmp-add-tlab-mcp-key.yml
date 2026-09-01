@@ -1,0 +1,57 @@
+name: One-time T-LAB MCP key patch
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/tmp-add-tlab-mcp-key.yml']
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: Add dedicated MCP public key and kid selection
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('infomaniak-publish/site/T-AI/fs-read-bridge.php')
+          s=p.read_text()
+          if '$MCP_PUBKEY=' not in s:
+              marker="-----END PUBLIC KEY-----\nPEM;\n$MAX_WRITE=4000000;"
+              repl="""-----END PUBLIC KEY-----
+PEM;
+$MCP_PUBKEY=<<<'PEM'
+-----BEGIN PUBLIC KEY-----
+MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEA5CmPSmAC2gB9tb9ZOO6X
+6XgLOWW50PZmXMwqGJgoq2cKos0oXF/mrT8jcINbGdreNFRoBZ32pDiLEB6GN+Hb
+k5Dc6bSM00n8kk/j31II2ExeJAPxQPdUsj0vdvp4nz9jnIoIeoSpjMQb1SEO9rD2
+k1x640SUz61kJqGwhbve50bfKCfNNz5FneRsq58wjtioco4GkYgbj4+aOlD2/P/z
+rUcgpGeMcsqH1G95NHL2ZJLS9xOPn/zxtRNN5GZKMgxZ/IzFQyalplj8h6so+c15
+wKZxgam7T754O0giOJkKhIKWfSN+GOLXuylsk09WYcJ5xvBE3X+dUlFxN0yZ7crh
+g2NE0xW+ChQEyHMSfW2jfqhmFLoRhE2GVgpCnBni0ELVVIAoRSQFIiioPYx4WVD4
+v+bDWPZ1Gbaimlkj2ouglrWzaZyMpvDwub3BNtdKCSN/lVHCq+XXRbfWBlmDbb+1
+WWF3VSRDMEcElhewWgbtlXym9okyj9pNu8OK/ZOLPDX1AgMBAAE=
+-----END PUBLIC KEY-----
+PEM;
+$MAX_WRITE=4000000;"""
+              if marker not in s: raise SystemExit('public-key marker not found')
+              s=s.replace(marker,repl,1)
+          old="$canon=\"TBRIDGE1\\n\".$q.\"\\n\".hash('sha256',$body);$pk=@openssl_pkey_get_public($PUBKEY);if($pk===false||openssl_verify($canon,$sig,$pk,OPENSSL_ALGO_SHA256)!==1)j(401,array('ok'=>false,'error'=>'bad_signature'));"
+          new="$canon=\"TBRIDGE1\\n\".$q.\"\\n\".hash('sha256',$body);$kid=isset($a['kid'])?$a['kid']:'gpt';if($kid==='gpt')$verifyKey=$PUBKEY;elseif($kid==='mcp-v1')$verifyKey=$MCP_PUBKEY;else j(401,array('ok'=>false,'error'=>'unknown_kid'));$pk=@openssl_pkey_get_public($verifyKey);if($pk===false||openssl_verify($canon,$sig,$pk,OPENSSL_ALGO_SHA256)!==1)j(401,array('ok'=>false,'error'=>'bad_signature'));"
+          if old in s:
+              s=s.replace(old,new,1)
+          elif "unknown_kid" not in s:
+              raise SystemExit('signature marker not found')
+          p.write_text(s)
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add infomaniak-publish/site/T-AI/fs-read-bridge.php
+          git commit -m "Authorize limited T-LAB MCP signing key" || exit 0
+          git push origin HEAD:main
