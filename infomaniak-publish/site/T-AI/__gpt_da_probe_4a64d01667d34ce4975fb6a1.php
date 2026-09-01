@@ -1,69 +1,88 @@
 <?php
-declare(strict_types=1);
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 header('X-Robots-Tag: noindex, nofollow, noarchive');
-register_shutdown_function(static function (): void {
+register_shutdown_function(function () {
     @unlink(__FILE__);
 });
 
-$webRoot = dirname(__DIR__, 2);
+$webRoot = dirname(dirname(__DIR__));
 $target = $webRoot . '/T-LAB/DossiersArchives';
-$out = [
+$out = array(
     'ok' => false,
     'target' => '/web/T-LAB/DossiersArchives/',
     'count' => 0,
-    'entries' => [],
-];
+    'entries' => array()
+);
+
+function scan_da_tree($base, $dir, &$entries, $limit) {
+    $items = @scandir($dir);
+    if ($items === false) {
+        return false;
+    }
+    foreach ($items as $name) {
+        if ($name === '.' || $name === '..') {
+            continue;
+        }
+        $path = $dir . DIRECTORY_SEPARATOR . $name;
+        $rel = substr($path, strlen(rtrim($base, DIRECTORY_SEPARATOR)) + 1);
+        if (is_dir($path)) {
+            $entries[] = array(
+                'path' => str_replace(DIRECTORY_SEPARATOR, '/', $rel),
+                'type' => 'dir',
+                'mtime' => @filemtime($path)
+            );
+            if (count($entries) >= $limit) {
+                return true;
+            }
+            if (!scan_da_tree($base, $path, $entries, $limit)) {
+                return false;
+            }
+        } elseif (is_file($path)) {
+            $entries[] = array(
+                'path' => str_replace(DIRECTORY_SEPARATOR, '/', $rel),
+                'type' => 'file',
+                'mtime' => @filemtime($path),
+                'size' => @filesize($path)
+            );
+            if (count($entries) >= $limit) {
+                return true;
+            }
+        } else {
+            $entries[] = array(
+                'path' => str_replace(DIRECTORY_SEPARATOR, '/', $rel),
+                'type' => 'other',
+                'mtime' => @filemtime($path)
+            );
+        }
+    }
+    return true;
+}
 
 if (!is_dir($target)) {
-    http_response_code(404);
     $out['error'] = 'target_not_directory';
-    echo json_encode($out, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    echo json_encode($out);
     exit;
 }
 if (!is_readable($target)) {
-    http_response_code(403);
     $out['error'] = 'target_not_readable';
-    echo json_encode($out, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    echo json_encode($out);
     exit;
 }
 
-try {
-    $baseLen = strlen(rtrim($target, DIRECTORY_SEPARATOR)) + 1;
-    $it = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($target, FilesystemIterator::SKIP_DOTS),
-        RecursiveIteratorIterator::SELF_FIRST
-    );
-    foreach ($it as $info) {
-        $path = $info->getPathname();
-        $rel = substr($path, $baseLen);
-        if ($rel === false || $rel === '') {
-            continue;
-        }
-        $type = $info->isDir() ? 'dir' : ($info->isFile() ? 'file' : 'other');
-        $entry = [
-            'path' => str_replace(DIRECTORY_SEPARATOR, '/', $rel),
-            'type' => $type,
-            'mtime' => $info->getMTime(),
-        ];
-        if ($info->isFile()) {
-            $entry['size'] = $info->getSize();
-        }
-        $out['entries'][] = $entry;
-        if (count($out['entries']) >= 5000) {
-            $out['truncated'] = true;
-            break;
-        }
-    }
-    usort($out['entries'], static fn(array $a, array $b): int => strcmp($a['path'], $b['path']));
-    $out['count'] = count($out['entries']);
-    $out['ok'] = true;
-} catch (Throwable $e) {
-    http_response_code(500);
-    $out['error'] = 'scan_failed';
-    $out['error_class'] = get_class($e);
+$entries = array();
+$ok = scan_da_tree($target, $target, $entries, 5000);
+usort($entries, function ($a, $b) {
+    return strcmp($a['path'], $b['path']);
+});
+$out['entries'] = $entries;
+$out['count'] = count($entries);
+$out['ok'] = $ok;
+if (count($entries) >= 5000) {
+    $out['truncated'] = true;
 }
-
-echo json_encode($out, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+if (!$ok) {
+    $out['error'] = 'scan_failed';
+}
+echo json_encode($out);
