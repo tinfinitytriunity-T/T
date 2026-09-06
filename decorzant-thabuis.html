@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DECORZANT^THABUIS — Comment vous désenprisonner</title>
+  <meta name="description" content="DECORZANT^THABUIS — essai critique sur les formes ordinaires d’enfermement et les conditions concrètes de déprise : institutions, relations, langage, dépendances, habitudes et pouvoir intériorisé." />
+  <meta name="keywords" content="désenprisonnement, déprise, enfermement, pouvoir, institutions, relations, Foucault, Goffman, Bourdieu, Hirschman, autonomie" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="DECORZANT^THABUIS — Comment vous désenprisonner" />
+  <meta property="og:description" content="Une lecture rigoureuse des prisons sans murs et des conditions concrètes de déprise." />
+  <meta property="og:url" content="https://tinfinitytriunity-t.github.io/T/decorzant-thabuis.html" />
+  <meta name="theme-color" content="#f1eee5" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Comment vous désenprisonner",
+    "alternativeHeadline": "DECORZANT^THABUIS — Essai sur les formes ordinaires d’enfermement et les conditions de déprise",
+    "inLanguage": "fr",
+    "author": {"@type":"Organization","name":"DECORZANT^THABUIS · T^"},
+    "isPartOf": {"@type":"WebSite","name":"T^","url":"https://tinfinitytriunity-t.github.io/T/"},
+    "about": ["enfermement", "déprise", "pouvoir", "institutions", "relations", "autonomie", "contrainte", "dépendance"]
+  }
+  </script>
+
+  <style>
+    :root{
+      --paper:#f2efe6;
+      --paper-deep:#e9e4d8;
+      --ink:#171715;
+      --muted:#645f56;
+      --rule:#b8b0a1;
+      --rule-soft:#d2cabd;
+      --oxblood:#6d1f24;
+      --oxblood-dark:#4e1519;
+      --note:#e7e2d7;
+      --max:1180px;
+    }
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      margin:0;
+      background:
+        linear-gradient(rgba(255,255,255,.22),rgba(255,255,255,.22)),
+        var(--paper);
+      color:var(--ink);
+      font-family:Georgia,"Times New Roman",Times,serif;
+      line-height:1.7;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:var(--oxblood-dark);text-decoration-thickness:1px;text-underline-offset:3px;}
+    a:hover{color:var(--oxblood);}
+
+    .topbar{
+      border-bottom:1px solid var(--rule);
+      background:rgba(242,239,230,.95);
+      position:sticky;
+      top:0;
+      z-index:10;
+      backdrop-filter:blur(8px);
+    }
+    .topbar-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:.75rem 2rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.72rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .topbar a{text-decoration:none;color:inherit;}
+    .series{font-weight:700;color:var(--oxblood-dark);}
+
+    .masthead{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:5.2rem 2rem 3.3rem;
+      border-bottom:1px solid var(--rule);
+    }
+    .kicker{
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.72rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:var(--oxblood-dark);
+      margin-bottom:1.15rem;
+      font-weight:700;
+    }
+    h1{
+      margin:0;
+      max-width:980px;
+      font-size:clamp(2.7rem,6vw,5.75rem);
+      line-height:.98;
+      font-weight:400;
+      letter-spacing:-.035em;
+    }
+    .subtitle{
+      max-width:780px;
+      margin:1.7rem 0 0;
+      font-size:clamp(1.08rem,2vw,1.42rem);
+      line-height:1.5;
+      color:#38352f;
+      font-style:italic;
+    }
+    .meta{
+      margin-top:2.4rem;
+      display:flex;
+      flex-wrap:wrap;
+      gap:.65rem 1.7rem;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.72rem;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .layout{
+      max-width:var(--max);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 260px;
+      gap:4.4rem;
+      padding:3.5rem 2rem 5rem;
+      align-items:start;
+    }
+    article{min-width:0;}
+    aside{
+      position:sticky;
+      top:5.2rem;
+      border-left:1px solid var(--rule);
+      padding-left:1.3rem;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--muted);
+      font-size:.78rem;
+      line-height:1.55;
+    }
+    aside h2{
+      font-family:Arial,Helvetica,sans-serif;
+      margin:0 0 .75rem;
+      font-size:.68rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--ink);
+    }
+    aside ol{margin:0;padding-left:1.2rem;}
+    aside li{margin:0 0 .55rem;}
+    aside a{text-decoration:none;color:var(--muted);}
+    aside a:hover{color:var(--oxblood-dark);}
+
+    .abstract{
+      border-top:2px solid var(--ink);
+      border-bottom:1px solid var(--rule);
+      padding:1.5rem 0 1.65rem;
+      margin-bottom:3.2rem;
+    }
+    .abstract-label,
+    .section-label{
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.68rem;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:var(--oxblood-dark);
+      font-weight:700;
+    }
+    .abstract p{
+      margin:.65rem 0 0;
+      font-size:1.08rem;
+      line-height:1.72;
+    }
+    .keywords{
+      margin-top:1rem;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.74rem;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    section{margin:0 0 3.7rem;scroll-margin-top:6rem;}
+    section h2{
+      margin:.28rem 0 1.15rem;
+      font-size:clamp(1.65rem,3vw,2.35rem);
+      font-weight:400;
+      line-height:1.12;
+      letter-spacing:-.02em;
+    }
+    section h3{
+      margin:2rem 0 .6rem;
+      font-size:1.18rem;
+      font-weight:600;
+    }
+    p{margin:.75rem 0;font-size:1.01rem;}
+    .lead:first-letter{
+      float:left;
+      font-size:4.35rem;
+      line-height:.78;
+      padding:.14rem .52rem 0 0;
+      color:var(--oxblood-dark);
+    }
+    blockquote{
+      margin:2.1rem 0;
+      padding:1.3rem 1.6rem 1.35rem;
+      border-left:3px solid var(--oxblood-dark);
+      background:rgba(231,226,215,.6);
+      font-size:1.16rem;
+      line-height:1.55;
+      font-style:italic;
+    }
+    blockquote footer{
+      margin-top:.65rem;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.7rem;
+      line-height:1.4;
+      font-style:normal;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.09em;
+    }
+
+    .vignette{
+      margin:1.5rem 0;
+      padding:1.25rem 1.4rem;
+      border-top:1px solid var(--rule);
+      border-bottom:1px solid var(--rule);
+      background:rgba(255,255,255,.16);
+    }
+    .vignette-title{
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.69rem;
+      text-transform:uppercase;
+      letter-spacing:.17em;
+      color:var(--muted);
+      margin-bottom:.45rem;
+      font-weight:700;
+    }
+    .vignette p{margin:.35rem 0;font-size:.96rem;}
+
+    .test-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:1px;
+      background:var(--rule);
+      border:1px solid var(--rule);
+      margin:1.55rem 0 1.8rem;
+    }
+    .test{
+      background:var(--paper);
+      padding:1.15rem 1.2rem;
+    }
+    .test strong{
+      display:block;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.72rem;
+      text-transform:uppercase;
+      letter-spacing:.11em;
+      color:var(--oxblood-dark);
+      margin-bottom:.35rem;
+    }
+    .test span{font-size:.94rem;line-height:1.55;display:block;}
+
+    .margin-note{
+      margin:1.8rem 0;
+      padding:1rem 1.2rem;
+      background:var(--note);
+      border:1px solid var(--rule-soft);
+      font-size:.92rem;
+    }
+    .margin-note strong{
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.7rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--oxblood-dark);
+    }
+
+    .steps{
+      counter-reset:step;
+      margin:1.7rem 0 0;
+      border-top:1px solid var(--rule);
+    }
+    .step{
+      counter-increment:step;
+      display:grid;
+      grid-template-columns:70px 1fr;
+      gap:1rem;
+      padding:1.3rem 0;
+      border-bottom:1px solid var(--rule);
+    }
+    .step::before{
+      content:counter(step, decimal-leading-zero);
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.72rem;
+      letter-spacing:.08em;
+      color:var(--oxblood-dark);
+      font-weight:700;
+      padding-top:.2rem;
+    }
+    .step h3{margin:0 0 .35rem;font-size:1.08rem;}
+    .step p{margin:0;font-size:.96rem;}
+
+    .references{
+      border-top:2px solid var(--ink);
+      padding-top:1.4rem;
+    }
+    .references ol{
+      padding-left:1.4rem;
+      margin:1rem 0 0;
+    }
+    .references li{
+      margin:0 0 .85rem;
+      padding-left:.35rem;
+      font-size:.9rem;
+      line-height:1.55;
+    }
+
+    .closing{
+      margin-top:3.2rem;
+      padding:2.3rem 0 0;
+      border-top:1px solid var(--rule);
+      font-size:1.13rem;
+    }
+    .closing strong{color:var(--oxblood-dark);font-weight:600;}
+
+    .footer{
+      border-top:1px solid var(--rule);
+      background:var(--paper-deep);
+    }
+    .footer-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:1.5rem 2rem 2.2rem;
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:.7rem;
+      color:var(--muted);
+      letter-spacing:.05em;
+    }
+
+    @media(max-width:900px){
+      .layout{grid-template-columns:1fr;gap:2.5rem;}
+      aside{position:static;border-left:0;border-top:1px solid var(--rule);padding:1.2rem 0 0;order:-1;}
+      aside ol{columns:2;column-gap:2rem;}
+    }
+    @media(max-width:640px){
+      .topbar-inner{padding:.7rem 1rem;}
+      .topbar-inner span:last-child{display:none;}
+      .masthead{padding:3.4rem 1.1rem 2.3rem;}
+      .layout{padding:2.5rem 1.1rem 3.7rem;}
+      h1{font-size:2.75rem;}
+      aside ol{columns:1;}
+      .test-grid{grid-template-columns:1fr;}
+      .step{grid-template-columns:48px 1fr;}
+      .footer-inner{padding:1.3rem 1.1rem 1.8rem;}
+    }
+    @media print{
+      .topbar,aside{display:none;}
+      .masthead,.layout,.footer-inner{max-width:none;}
+      .layout{display:block;padding-top:2rem;}
+      body{background:white;}
+      a{color:inherit;text-decoration:none;}
+    }
+  </style>
+</head>
+<body>
+  <nav class="topbar" aria-label="Navigation principale">
+    <div class="topbar-inner">
+      <a href="index.html" class="series">T^ · Working Papers</a>
+      <span>DECORZANT^THABUIS · Critical Structures</span>
+      <a href="entrees.html">Entrées</a>
+    </div>
+  </nav>
+
+  <header class="masthead">
+    <div class="kicker">DECORZANT^THABUIS · Essay I</div>
+    <h1>Comment vous<br>désenprisonner</h1>
+    <p class="subtitle">Essai sur les prisons sans murs, les mécanismes de capture ordinaires et les conditions concrètes d’une déprise qui reste habitable.</p>
+    <div class="meta">
+      <span>Working paper</span>
+      <span>Édition 2026</span>
+      <span>Lecture critique · sociologie · philosophie politique</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <article>
+      <div class="abstract" id="abstract">
+        <div class="abstract-label">Abstract</div>
+        <p>Une prison sociale ou psychique se reconnaît moins à la présence de murs qu’à la réduction progressive des possibles : certains gestes deviennent impraticables, certaines paroles deviennent trop coûteuses, certains rôles paraissent irrévocables, certaines interprétations de soi finissent par précéder toute expérience. Cet essai propose une lecture rigoureuse du désenprisonnement comme travail de déprise. Il s’agit de rendre de nouveau visibles les contraintes, de distinguer leurs registres, de recréer des intervalles de décision, de réintroduire des témoins extérieurs et d’ouvrir des alternatives réelles. La liberté apparaît ici comme une capacité située : retrouver assez d’espace pour que plusieurs gestes redeviennent possibles.</p>
+        <div class="keywords"><strong>Mots-clés :</strong> enfermement ordinaire · déprise · institution · dépendance · rôle · surveillance · relation · autonomie située · sortie · voix</div>
+      </div>
+
+      <section id="probleme">
+        <div class="section-label">I · Position du problème</div>
+        <h2>Les prisons qui n’ont pas besoin de murs</h2>
+        <p class="lead">Une prison peut être une architecture matérielle. Elle peut aussi être un rapport social devenu si stable que l’on ne voit plus l’effort nécessaire pour le maintenir. Un emploi, une famille, un couple, une dette, une réputation, une institution, un dispositif numérique ou une manière de se parler à soi-même peuvent acquérir une structure carcérale lorsqu’ils réduisent durablement l’espace du refus, du déplacement et de la réinterprétation.</p>
+        <p>Le point décisif n’est pas l’inconfort. Toute vie comporte contraintes, engagements et dépendances. L’enfermement commence lorsqu’une contrainte devient difficile à nommer, lorsqu’une dépendance devient impossible à renégocier, lorsqu’un rôle absorbe la personne qui l’occupe, ou lorsque le coût d’un simple désaccord devient disproportionné.</p>
+        <p>Dans ces situations, la question « pourquoi ne partez-vous pas ? » manque souvent la structure du problème. Sortir suppose des ressources, des relais, du temps, une autre narration de la situation et parfois une protection. Une porte physique peut exister tout en restant socialement, économiquement ou psychiquement impraticable.</p>
+
+        <div class="vignette">
+          <div class="vignette-title">Observation</div>
+          <p>Un agenda peut devenir une cellule lorsqu’il ne contient plus aucun temps dont la justification n’est due à personne. Une famille peut devenir une cellule lorsqu’un rôle ancien survit à toutes les transformations de celui qui le porte. Une relation peut devenir une cellule lorsque chaque geste doit être anticipé en fonction de la réaction de l’autre. Une institution peut devenir une cellule lorsque toute exception est immédiatement traduite en faute. Un écran peut devenir une cellule lorsque l’attention se déplace avant même qu’une intention ait eu le temps de se former.</p>
+        </div>
+      </section>
+
+      <section id="architecture">
+        <div class="section-label">II · Architecture</div>
+        <h2>Une cellule tient souvent par plusieurs forces à la fois</h2>
+        <p>Les travaux de Michel Foucault sur la discipline, d’Erving Goffman sur les institutions totales, de Pierre Bourdieu sur la violence symbolique et d’Albert O. Hirschman sur les rapports entre sortie, prise de parole et loyauté permettent de comprendre un même phénomène depuis des angles différents : une contrainte devient d’autant plus forte qu’elle se répartit entre plusieurs registres et finit par paraître naturelle.</p>
+        <p>Une personne peut ainsi disposer juridiquement du droit de partir, dépendre financièrement du système qu’elle voudrait quitter, redouter la sanction relationnelle du départ, avoir incorporé l’idée que ce départ serait une faute, puis manquer d’interlocuteurs capables de confirmer que sa perception est recevable. La prison tient alors par superposition.</p>
+
+        <div class="test-grid" aria-label="Quatre dimensions de l'enfermement">
+          <div class="test"><strong>Contrainte</strong><span>Ce qui peut être imposé, interdit, surveillé ou sanctionné de l’extérieur.</span></div>
+          <div class="test"><strong>Dépendance</strong><span>Ce dont la perte rend la sortie matériellement, socialement ou affectivement coûteuse.</span></div>
+          <div class="test"><strong>Interprétation</strong><span>Le cadre qui décide à l’avance ce que vos gestes signifient et réduit la pluralité de leurs sens.</span></div>
+          <div class="test"><strong>Intériorisation</strong><span>Le moment où la règle externe continue d’opérer sans présence du surveillant.</span></div>
+        </div>
+
+        <blockquote>
+          Le pouvoir le plus économique est souvent celui qui obtient que la règle continue d’être exécutée après le départ de celui qui l’énonçait.
+          <footer>Formulation de synthèse · DECORZANT^THABUIS</footer>
+        </blockquote>
+      </section>
+
+      <section id="diagnostic">
+        <div class="section-label">III · Lecture</div>
+        <h2>Reconnaître l’enfermement sans transformer toute limite en prison</h2>
+        <p>Le terme « prison » perd sa force s’il devient synonyme de toute frustration. Une lecture sérieuse observe plutôt des transformations précises : rétrécissement des comportements possibles, augmentation du prix du refus, disparition des témoins extérieurs, concentration des ressources, captation du langage et difficulté croissante à imaginer une alternative crédible.</p>
+        <p>Trois questions donnent souvent davantage d’information qu’un jugement général. Qu’est-ce qui devient concrètement impossible ? Quel est le coût réel d’un refus ? Qui dispose du pouvoir d’interpréter la situation lorsque les récits divergent ? À ces trois questions s’ajoute une quatrième, souvent décisive : quelles ressources sont aujourd’hui contrôlées par le système dont on cherche à se dégager ?</p>
+        <p>Cette lecture évite deux erreurs fréquentes. La première consiste à psychologiser une structure matérielle : demander à quelqu’un de « changer son regard » alors que son logement, son revenu, son statut ou sa sécurité sont effectivement contrôlés. La seconde consiste à externaliser entièrement une contrainte déjà incorporée : changer de lieu sans modifier la règle intérieure qui reconstruit ailleurs la même géométrie.</p>
+      </section>
+
+      <section id="intervalle">
+        <div class="section-label">IV · Déprise</div>
+        <h2>Le premier geste consiste souvent à produire un intervalle</h2>
+        <p>Le désenprisonnement spectaculaire fascine parce qu’il possède une date, un avant et un après. Les sorties réelles sont fréquemment plus discrètes. Elles commencent par l’apparition d’un intervalle entre la sollicitation et la réponse, entre l’accusation et la justification, entre la règle et son exécution, entre la peur anticipée et le geste effectivement possible.</p>
+        <p>Cet intervalle peut être temporel : ne pas répondre immédiatement. Spatial : disposer d’un lieu auquel l’autre n’a pas accès. Social : parler avec quelqu’un qui n’appartient pas au système. Économique : conserver une ressource autonome. Linguistique : décrire une situation avec des mots qui n’ont pas été fournis par celui qui la contrôle. Documentaire : écrire les faits avant qu’ils soient réinterprétés.</p>
+
+        <div class="margin-note"><strong>Point de méthode.</strong> L’intervalle n’est pas une solution magique. Il rend une décision à nouveau possible. C’est déjà une modification structurelle : un système qui exige l’immédiateté perd une partie de son pouvoir dès que le temps redevient disponible.</div>
+      </section>
+
+      <section id="gestes">
+        <div class="section-label">V · Conditions pratiques</div>
+        <h2>Six gestes de désenprisonnement</h2>
+        <div class="steps">
+          <div class="step">
+            <div>
+              <h3>Nommer les faits avant de nommer la personne</h3>
+              <p>Décrire les actes observables, les sanctions, les dépendances, les accès et les répétitions. Cette précision résiste mieux aux récits concurrents qu’une étiquette globale.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Reconstituer des témoins extérieurs</h3>
+              <p>L’enfermement se renforce dans les systèmes où une seule interprétation circule. Un tiers crédible réintroduit une pluralité de lecture et permet de vérifier ce qui semblait devenu évident.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Desserrer les dépendances une par une</h3>
+              <p>Une sortie devient plus réelle lorsqu’un revenu, un accès, un document, un moyen de transport, un contact, une compétence ou un espace cessent d’être monopolisés par le même centre.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Tester de petits refus</h3>
+              <p>Un refus limité fournit une information essentielle : le système tolère-t-il la différence, négocie-t-il, culpabilise-t-il, punit-il, menace-t-il ou augmente-t-il la surveillance ? La réaction renseigne sur la structure plus sûrement que son discours.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Préparer des alternatives avant la rupture</h3>
+              <p>Une alternative crédible transforme le rapport de force même lorsqu’elle n’est pas utilisée. La possibilité d’un autre lieu, d’un autre interlocuteur ou d’un autre revenu modifie la signification de la loyauté.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Vérifier ce que vous transportez avec vous</h3>
+              <p>Après une sortie, certaines règles continuent d’opérer sous forme d’anticipation, de honte, de surjustification ou de peur de l’erreur. Les reconnaître évite que l’ancienne cellule soit reconstruite dans un nouveau décor.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="danger">
+        <div class="section-label">VI · Asymétrie et danger</div>
+        <h2>Certaines prisons punissent la tentative de sortie</h2>
+        <p>Le conseil général « affirmez-vous » devient inadéquat dès qu’une structure comporte violence, menace, surveillance coercitive, dépendance économique forte, contrôle des documents, isolement ou risque de représailles. Dans ces contextes, la sortie relève aussi de la sécurité. Une confrontation frontale peut accroître le danger.</p>
+        <p>La déprise prend alors une forme plus matérielle : conserver des preuves accessibles, identifier des relais extérieurs, sécuriser des documents, préparer une destination, organiser des ressources indépendantes et choisir le moment de l’action. Le courage n’est pas mesuré par la visibilité du geste. Une sortie discrète peut être plus lucide qu’un affrontement public.</p>
+        <div class="margin-note"><strong>Réserve.</strong> Cette page propose une grille intellectuelle générale. Une situation comportant violence, coercition, menace, séquestration, abus ou danger immédiat appelle une aide spécialisée et adaptée au contexte local.</div>
+      </section>
+
+      <section id="apres">
+        <div class="section-label">VII · Après la sortie</div>
+        <h2>Sortir ne suffit pas toujours à être sorti</h2>
+        <p>Une institution peut cesser d’exercer son autorité tout en demeurant présente sous forme de réflexes. Une famille peut perdre son pouvoir direct tout en continuant d’habiter la manière dont une personne se juge. Une relation peut prendre fin alors que chaque décision reste encore calibrée sur une réaction qui ne viendra plus.</p>
+        <p>Le désenprisonnement devient alors un travail de réouverture : réapprendre qu’une décision peut rester partiellement indéterminée, qu’une erreur peut avoir une portée locale, qu’un désaccord peut rester un désaccord, qu’un silence peut simplement être un silence, qu’une journée peut contenir du temps sans fonction assignée.</p>
+        <p>L’enjeu n’est pas de devenir invulnérable. Une autonomie adulte reste traversée de liens, d’obligations et de dépendances choisies. La différence tient à la possibilité de les rendre discutables, révisables et pluralisés.</p>
+      </section>
+
+      <section id="critere">
+        <div class="section-label">VIII · Critère</div>
+        <h2>À quoi reconnaît-on une déprise réelle ?</h2>
+        <p>Un désenprisonnement devient perceptible lorsque plusieurs possibles redeviennent simultanément crédibles. Vous pouvez parler sans préparer toute la défense de votre parole. Vous pouvez différer une réponse. Vous pouvez demander un avis extérieur. Vous pouvez conserver une part de ressources propres. Vous pouvez imaginer une autre organisation sans que cette imagination soit déjà vécue comme une trahison.</p>
+        <p>La liberté n’apparaît donc pas comme un état absolu. Elle se mesure localement à l’élargissement du champ des gestes réellement praticables. Une personne désenprisonnée conserve des contraintes ; elle retrouve surtout la capacité de les voir, de les discuter, de les déplacer et, parfois, de les quitter.</p>
+
+        <div class="closing"><strong>Formule de clôture.</strong> Vous ne sortez pas seulement lorsque la porte s’ouvre. Vous sortez lorsque la porte cesse d’être l’unique forme sous laquelle vous pouvez imaginer le dehors.</div>
+      </section>
+
+      <section class="references" id="references">
+        <div class="section-label">Références</div>
+        <h2>Bibliographie sélective</h2>
+        <ol>
+          <li>Bourdieu, Pierre. <em>Pascalian Meditations</em>. Stanford University Press, 2000 [éd. fr. 1997].</li>
+          <li>Foucault, Michel. <em>Discipline and Punish: The Birth of the Prison</em>. Trans. Alan Sheridan. Pantheon, 1977 [éd. fr. 1975].</li>
+          <li>Goffman, Erving. <em>Asylums: Essays on the Social Situation of Mental Patients and Other Inmates</em>. Anchor Books, 1961.</li>
+          <li>Herman, Judith Lewis. <em>Trauma and Recovery</em>. Basic Books, 1992.</li>
+          <li>Hirschman, Albert O. <em>Exit, Voice, and Loyalty: Responses to Decline in Firms, Organizations, and States</em>. Harvard University Press, 1970.</li>
+          <li>Scott, James C. <em>Domination and the Arts of Resistance: Hidden Transcripts</em>. Yale University Press, 1990.</li>
+          <li>Sen, Amartya. <em>Development as Freedom</em>. Oxford University Press, 1999.</li>
+          <li>Young, Iris Marion. <em>Responsibility for Justice</em>. Oxford University Press, 2011.</li>
+        </ol>
+      </section>
+    </article>
+
+    <aside aria-label="Sommaire">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#probleme">Prisons sans murs</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#diagnostic">Reconnaître l’enfermement</a></li>
+        <li><a href="#intervalle">Produire un intervalle</a></li>
+        <li><a href="#gestes">Six gestes</a></li>
+        <li><a href="#danger">Asymétrie et danger</a></li>
+        <li><a href="#apres">Après la sortie</a></li>
+        <li><a href="#critere">Critère de déprise</a></li>
+        <li><a href="#references">Références</a></li>
+      </ol>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>DECORZANT^THABUIS · T^ · Working Paper Series</span>
+      <span>Texte exploratoire · révision ouverte</span>
+    </div>
+  </footer>
+</body>
+</html>
