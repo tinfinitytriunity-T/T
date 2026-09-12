@@ -1,0 +1,47 @@
+name: Public commit privacy guard
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: public-commit-privacy-guard
+  cancel-in-progress: false
+
+jobs:
+  sanitize-tip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Replace public commit email with no-reply identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          author_email="$(git log -1 --format='%ae')"
+          committer_email="$(git log -1 --format='%ce')"
+
+          case "$author_email|$committer_email" in
+            *@users.noreply.github.com\|*@users.noreply.github.com)
+              echo "Public commit already uses no-reply identities."
+              exit 0
+              ;;
+          esac
+
+          public_name="T^ public"
+          public_email="41898282+github-actions[bot]@users.noreply.github.com"
+
+          git config user.name "$public_name"
+          git config user.email "$public_email"
+          GIT_COMMITTER_NAME="$public_name" \
+          GIT_COMMITTER_EMAIL="$public_email" \
+            git commit --amend --no-edit --author="$public_name <$public_email>"
+
+          git push --force-with-lease origin HEAD:main
