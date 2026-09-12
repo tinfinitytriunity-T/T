@@ -1,8 +1,0 @@
-{
-  "status": "deprecated",
-  "reason": "Public deployment workflow no longer writes repository status files; GITHUB_TOKEN is read-only by design.",
-  "reference": "GitHub Actions run history",
-  "architecture": "PUBLIC^RUN primary / PRIVATE^CONTROL secondary",
-  "target": "/web/T-GPT",
-  "ftp_user": "ngw_GPT-PUBLISH"
-}
