@@ -1,1 +1,0 @@
-Temporary public bootstrap sources for DIRECT_COMMON_1 MTHA activation. Contains public verification material and bridge code only; no private key or credential.
